@@ -15,15 +15,13 @@ document.getElementById("status").innerText = "Converting...";
 
 try{
 
-const convertedBlob = await heic2any({
-
+const resultBlob = await heic2any({
 blob: file,
 toType: "image/jpeg",
 quality: 0.9
-
 });
 
-const url = URL.createObjectURL(convertedBlob);
+const url = URL.createObjectURL(resultBlob);
 
 const link = document.getElementById("downloadLink");
 
@@ -38,7 +36,8 @@ document.getElementById("status").innerText = "Conversion complete.";
 
 catch(error){
 
-document.getElementById("status").innerText = "Conversion failed.";
+console.error(error);
+document.getElementById("status").innerText = "Conversion failed. Make sure the file is HEIC.";
 
 }
 
