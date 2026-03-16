@@ -1,6 +1,6 @@
 async function convertImage(){
 
-const input = document.getElementById("fileInput");
+const input = document.getElementById("heicInput");
 
 if(!input.files.length){
 
