@@ -3,6 +3,8 @@
 
 <head>
 
+<script src="https://cdn.jsdelivr.net/npm/heic2any/dist/heic2any.min.js"></script>  
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -23,12 +25,20 @@
 
 <main>
 
+<input type="file" id="heicInput" accept=".heic,.heif">
+
+<br><br>
+
+<button onclick="convertImage()">Convert to JPG</button>
+
+<br><br>
+
+<a id="downloadLink" style="display:none">Download JPG</a>
+
 <h2>Popular Tools</h2>
 
 <div class="tools-list">
-
 <a href="/heic-to-jpg">HEIC to JPG Converter</a>
-
 </div>
 
 </main>
@@ -37,7 +47,6 @@
 <p>© InkTools – Free Online Tools</p>
 </footer>
 
-<script src="https://unpkg.com/heic2any/dist/heic2any.min.js"></script>
 <script src="/script.js"></script>
 
 </body>
