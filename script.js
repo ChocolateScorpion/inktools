@@ -1,4 +1,8 @@
+console.log("script loaded");
+
 async function convertImage(){
+
+console.log("convertImage triggered");
 
 const input = document.getElementById("heicInput");
 
