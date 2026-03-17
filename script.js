@@ -1,12 +1,20 @@
 console.log("script loaded");
 
+document.addEventListener("DOMContentLoaded", () => {
+
+const button = document.getElementById("convertBtn");
+
+button.addEventListener("click", convertImage);
+
+});
+
 async function convertImage(){
 
 console.log("convertImage triggered");
 
 const input = document.getElementById("heicInput");
 
-if(!input.files.length){
+if(!input || !input.files.length){
 
 document.getElementById("status").innerText = "Please select a HEIC file.";
 return;
