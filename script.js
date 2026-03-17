@@ -6,6 +6,11 @@ console.log("convertImage triggered");
 
 const input = document.getElementById("heicInput");
 
+if (!input) {
+console.log("heicInput not found on this page");
+return;
+}
+
 if(!input.files || !input.files[0]){
 
 document.getElementById("status").innerText = "Please select a HEIC file.";
