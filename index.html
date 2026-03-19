@@ -277,8 +277,9 @@ async function convert() {
 
       // 🔥 fallback iPhone
       if (isIOS) {
+        btn.innerText = "Opening image...";
         const url = URL.createObjectURL(file);
-        window.open(url, "_blank");
+        window.location.href = url;
 
         btn.disabled = false;
         btn.innerText = "Convert";
@@ -297,7 +298,8 @@ async function convert() {
     const url = URL.createObjectURL(outputBlob);
 
     if (isIOS) {
-      window.open(url, "_blank");
+      btn.innerText = "Opening image...";
+      window.location.href = url;
     } else {
       const a = document.createElement("a");
       a.href = url;
