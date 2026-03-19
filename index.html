@@ -245,17 +245,18 @@ function handleFile(f) {
   }
 }
 
-
 async function convert() {
   if (!file) {
     alert("Upload a file first");
     return;
   }
 
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  
 const type = file.type ? file.type.toLowerCase() : "";
 const name = file.name ? file.name.toLowerCase() : "";
 
-if (!type.startsWith("image/") && !name) {
+if (!file) {
   alert("Invalid file");
   return;
 }
@@ -292,13 +293,21 @@ try {
 } catch (err) {
   console.error("HEIC conversion failed:", err);
 
-  alert("This image cannot be converted on your device. Try another image or browser.");
+  // 🔥 fallback inteligente para iPhone
+  if (isIOS) {
+    const url = URL.createObjectURL(file);
+    window.open(url, "_blank");
+    return;
+  }
 
+  alert("Conversion failed. Try another image.");
   btn.disabled = false;
   btn.innerText = "Convert";
   showLoader(false);
   return;
 }
+
+    
     const url = URL.createObjectURL(outputBlob);
 
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
