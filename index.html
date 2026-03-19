@@ -252,24 +252,6 @@ async function convert() {
   }
 
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  
-const type = file.type ? file.type.toLowerCase() : "";
-const name = file.name ? file.name.toLowerCase() : "";
-
-if (!file) {
-  alert("Invalid file");
-  return;
-}
-
-const isLikelyHeic =
-  type.includes("heic") ||
-  type.includes("heif") ||
-  name.endsWith(".heic") ||
-  name.endsWith(".heif");
-
-if (!isLikelyHeic) {
-  console.warn("File may not be HEIC/HEIF, attempting conversion anyway...");
-}
 
   const btn = document.getElementById("convertBtn");
 
@@ -282,35 +264,37 @@ if (!isLikelyHeic) {
 
     let outputBlob;
 
-try {
-  const result = await heic2any({
-    blob: file,
-    toType: format
-  });
+    try {
+      const result = await heic2any({
+        blob: file,
+        toType: format
+      });
 
-  outputBlob = Array.isArray(result) ? result[0] : result;
+      outputBlob = Array.isArray(result) ? result[0] : result;
 
-} catch (err) {
-  console.error("HEIC conversion failed:", err);
+    } catch (err) {
+      console.error("HEIC conversion failed:", err);
 
-  // 🔥 fallback inteligente para iPhone
-  if (isIOS) {
-    const url = URL.createObjectURL(file);
-    window.open(url, "_blank");
-    return;
-  }
+      // 🔥 fallback iPhone
+      if (isIOS) {
+        const url = URL.createObjectURL(file);
+        window.open(url, "_blank");
 
-  alert("Conversion failed. Try another image.");
-  btn.disabled = false;
-  btn.innerText = "Convert";
-  showLoader(false);
-  return;
-}
+        btn.disabled = false;
+        btn.innerText = "Convert";
+        showLoader(false);
 
-    
+        return;
+      }
+
+      alert("Conversion failed. Try another image.");
+      btn.disabled = false;
+      btn.innerText = "Convert";
+      showLoader(false);
+      return;
+    }
+
     const url = URL.createObjectURL(outputBlob);
-
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     if (isIOS) {
       window.open(url, "_blank");
