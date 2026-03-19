@@ -206,7 +206,7 @@ No upload required.
 
   let file;
 
-  dropZone.onclick = () => input.click();
+  dropZone.addEventListener("click", () => input.click());
 
   input.onchange = (e) => handleFile(e.target.files[0]);
 
