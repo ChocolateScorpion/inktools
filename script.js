@@ -44,37 +44,5 @@ async function convert() {
   // 🔒 Estado de carga
   btn.disabled = true;
   btn.innerText = "Converting...";
-  showLoader(true);
-
-  try {
-    const format = document.getElementById("format").value;
-
-    const blob = await heic2any({
-      blob: file,
-      toType: format
-    });
-
-   const outputBlob = Array.isArray(blob) ? blob[0] : blob;
-    const url = URL.createObjectURL(outputBlob);
-
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-    if (isIOS) {
-      window.open(url, "_blank");
-    } else {
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "converted";
-      a.click();
-    }
-
-  } catch (error) {
-    alert("Error converting image");
-  }
-
-  // 🔓 Volver a estado normal
-  btn.disabled = false;
-  btn.innerText = "Convert";
-  showLoader(false);
-}
+  
 </script>
