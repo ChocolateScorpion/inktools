@@ -246,11 +246,15 @@ async function convert() {
     return;
   }
 
-  if (!file.type.includes("heic") && !file.name.toLowerCase().endsWith(".heic")) {
-    alert("Please upload a HEIC image");
-    return;
-  }
+const name = file.name.toLowerCase();
 
+if (
+  !name.endsWith(".heic") &&
+  !name.endsWith(".heif")
+) {
+  alert("Please upload a HEIC or HEIF image");
+  return;
+}
   const btn = document.getElementById("convertBtn");
 
   btn.disabled = true;
