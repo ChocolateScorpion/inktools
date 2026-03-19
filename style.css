@@ -77,3 +77,10 @@ opacity:0.7;
   color: #aaa;
   font-size: 13px;
 }
+
+#preview {
+  display: none;
+  max-width: 150px;
+  margin-top: 15px;
+  border-radius: 8px;
+}
