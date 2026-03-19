@@ -232,6 +232,12 @@ async function convert() {
     return;
   }
 
+  // 
+  if (!file.type.includes("heic") && !file.name.toLowerCase().endsWith(".heic")) {
+    alert("Please upload a HEIC image");
+    return;
+  }
+
   const btn = document.getElementById("convertBtn");
 
   btn.disabled = true;
@@ -241,13 +247,26 @@ async function convert() {
   try {
     const format = document.getElementById("format").value;
 
-    const result = await heic2any({
-      blob: file,
-      toType: format
-    });
+    let outputBlob;
 
-    // 🔥 FIX IMPORTANTE
-    const outputBlob = Array.isArray(result) ? result[0] : result;
+try {
+  const result = await heic2any({
+    blob: file,
+    toType: format
+  });
+
+  outputBlob = Array.isArray(result) ? result[0] : result;
+
+} catch (err) {
+  console.error("HEIC conversion failed:", err);
+
+  alert("This image cannot be converted on your device. Try another image or browser.");
+
+  btn.disabled = false;
+  btn.innerText = "Convert";
+  showLoader(false);
+  return;
+}
     const url = URL.createObjectURL(outputBlob);
 
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -257,7 +276,7 @@ async function convert() {
     } else {
       const a = document.createElement("a");
       a.href = url;
-      a.download = "converted";
+      a.download = "converted." + (format === "image/png" ? "png" : "jpg");
       a.click();
     }
 
