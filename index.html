@@ -222,11 +222,14 @@ No upload required.
   }
 
   async function convert() {
-    if (!file) {
-      alert("Upload a file first");
-      return;
-    }
+  if (!file) {
+    alert("Upload a file first");
+    return;
+  }
 
+  showLoader(true);
+
+  try {
     const format = document.getElementById("format").value;
 
     const blob = await heic2any({
@@ -236,11 +239,25 @@ No upload required.
 
     const url = URL.createObjectURL(blob);
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "converted";
-    a.click();
+    // Detectar iPhone / Safari
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isIOS) {
+      // Abrir en nueva pestaña (fallback iOS)
+      window.open(url, "_blank");
+    } else {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "converted";
+      a.click();
+    }
+
+  } catch (error) {
+    alert("Error converting image");
   }
+
+  showLoader(false);
+}
 </script>
 
 </body>
