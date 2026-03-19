@@ -19,29 +19,22 @@ document.addEventListener("DOMContentLoaded", function () {
     preview.src = URL.createObjectURL(file);
   }
 
-  // 👉 CLICK
-  dropZone.addEventListener("click", () => {
-    input.click();
-  });
+  dropZone.addEventListener("click", () => input.click());
 
-  // 👉 INPUT
   input.addEventListener("change", (e) => {
     handleFile(e.target.files[0]);
   });
 
-  // 👉 DRAG OVER
   dropZone.addEventListener("dragover", (e) => {
     e.preventDefault();
     dropZone.style.borderColor = "#fff";
   });
 
-  // 👉 DROP
   dropZone.addEventListener("drop", (e) => {
     e.preventDefault();
     handleFile(e.dataTransfer.files[0]);
   });
 
-  // 👉 CONVERT (GLOBAL)
   window.convert = async function () {
     if (!file) {
       alert("Upload a file first");
