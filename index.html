@@ -225,7 +225,8 @@ No upload required.
     preview.src = URL.createObjectURL(file);
   }
 
-  async function convert() {
+
+async function convert() {
   if (!file) {
     alert("Upload a file first");
     return;
@@ -233,7 +234,6 @@ No upload required.
 
   const btn = document.getElementById("convertBtn");
 
-  // 🔒 Estado de carga
   btn.disabled = true;
   btn.innerText = "Converting...";
   showLoader(true);
@@ -241,12 +241,14 @@ No upload required.
   try {
     const format = document.getElementById("format").value;
 
-    const blob = await heic2any({
+    const result = await heic2any({
       blob: file,
       toType: format
     });
 
-    const url = URL.createObjectURL(blob);
+    // 🔥 FIX IMPORTANTE
+    const outputBlob = Array.isArray(result) ? result[0] : result;
+    const url = URL.createObjectURL(outputBlob);
 
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
@@ -260,14 +262,15 @@ No upload required.
     }
 
   } catch (error) {
+    console.error(error);
     alert("Error converting image");
   }
 
-  // 🔓 Volver a estado normal
   btn.disabled = false;
   btn.innerText = "Convert";
   showLoader(false);
 }
+
 
   function showLoader(state) {
   const loader = document.getElementById("loader");
