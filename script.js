@@ -54,7 +54,8 @@ async function convert() {
       toType: format
     });
 
-    const url = URL.createObjectURL(blob);
+   const outputBlob = Array.isArray(blob) ? blob[0] : blob;
+    const url = URL.createObjectURL(outputBlob);
 
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
