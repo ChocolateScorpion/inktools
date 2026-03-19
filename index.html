@@ -220,10 +220,24 @@ No upload required.
     handleFile(e.dataTransfer.files[0]);
   };
 
-  function handleFile(f) {
-    file = f;
-    preview.src = URL.createObjectURL(file);
+function handleFile(f) {
+  if (!f) return;
+
+  file = f;
+
+  const isPreviewSupported =
+    f.type.startsWith("image/") &&
+    !f.type.includes("heic") &&
+    !f.type.includes("heif");
+
+  if (isPreviewSupported) {
+    const url = URL.createObjectURL(file);
+    preview.src = url;
+    preview.style.display = "block";
+  } else {
+    preview.style.display = "none";
   }
+}
 
 
 async function convert() {
@@ -232,7 +246,6 @@ async function convert() {
     return;
   }
 
-  // 
   if (!file.type.includes("heic") && !file.name.toLowerCase().endsWith(".heic")) {
     alert("Please upload a HEIC image");
     return;
