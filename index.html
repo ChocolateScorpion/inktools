@@ -293,7 +293,6 @@ async function convert() {
       }
 
       alert("Conversion failed. Try another image.");
-      btn.disabled = false;
       btn.innerText = "Convert";
       showLoader(false);
       return;
@@ -305,8 +304,6 @@ async function convert() {
       btn.style.display = "block";
       btn.innerText = "Opening image...";
       window.location.href = url;
-    }
-    
     } else {
       const a = document.createElement("a");
       a.href = url;
@@ -325,9 +322,9 @@ async function convert() {
     alert("Error converting image");
   }
 
-  btn.disabled = false;
-  btn.innerText = "Convert";
-  showLoader(false);
+btn.style.display = "block";
+btn.innerText = "Convert";
+showLoader(false);
 }
 
 
