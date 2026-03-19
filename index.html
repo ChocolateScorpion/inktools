@@ -227,6 +227,11 @@ No registration required.
   };
 
 function handleFile(f) {
+const btn = document.getElementById("convertBtn");
+btn.style.display = "block";
+btn.innerText = "Convert";
+showLoader(false);
+  
   if (!f) return;
 
   file = f;
@@ -276,6 +281,7 @@ async function convert() {
 
       // 🔥 fallback iPhone
       if (isIOS) {
+        btn.style.display = "block";
         btn.innerText = "Opening image...";
         const url = URL.createObjectURL(file);
         window.location.href = url;
@@ -296,13 +302,22 @@ async function convert() {
     const url = URL.createObjectURL(outputBlob);
 
     if (isIOS) {
+      btn.style.display = "block";
       btn.innerText = "Opening image...";
       window.location.href = url;
+    }
+    
     } else {
       const a = document.createElement("a");
       a.href = url;
       a.download = "converted." + (format === "image/png" ? "png" : "jpg");
       a.click();
+      
+  setTimeout(() => {
+    btn.style.display = "block";
+    btn.innerText = "Convert";
+    showLoader(false);
+}, 500);
     }
 
   } catch (error) {
@@ -320,6 +335,13 @@ async function convert() {
   const loader = document.getElementById("loader");
   loader.style.display = state ? "block" : "none";
   }
+
+window.addEventListener("pageshow", () => {
+  const btn = document.getElementById("convertBtn");
+  btn.style.display = "block";
+  btn.innerText = "Convert";
+  showLoader(false);
+});
    
 </script>
 
