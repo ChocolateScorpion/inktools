@@ -255,9 +255,8 @@ async function convert() {
 
   const btn = document.getElementById("convertBtn");
 
-  btn.disabled = true;
-  btn.innerText = "Converting...";
-  showLoader(true);
+        btn.style.display = "none"; 
+        showLoader(true);
 
   try {
     const format = document.getElementById("format").value;
@@ -281,8 +280,7 @@ async function convert() {
         const url = URL.createObjectURL(file);
         window.location.href = url;
 
-        btn.disabled = false;
-        btn.innerText = "Convert";
+        btn.style.display = "block";
         showLoader(false);
 
         return;
