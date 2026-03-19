@@ -1,51 +1,79 @@
-console.log("script loaded");
+<script>
+const dropZone = document.getElementById("dropZone");
+const input = document.getElementById("fileInput");
+const preview = document.getElementById("preview");
 
-async function convertImage(){
+let file;
 
-console.log("convertImage triggered");
-
-const input = document.getElementById("heicInput");
-
-if (!input) {
-console.log("heicInput not found on this page");
-return;
+// 👉 Loader control
+function showLoader(state) {
+  const loader = document.getElementById("loader");
+  loader.style.display = state ? "block" : "none";
 }
 
-if(!input.files || !input.files[0]){
+// 👉 Eventos
+dropZone.onclick = () => input.click();
 
-document.getElementById("status").innerText = "Please select a HEIC file.";
-return;
+input.onchange = (e) => handleFile(e.target.files[0]);
 
+dropZone.ondragover = (e) => {
+  e.preventDefault();
+  dropZone.style.borderColor = "#fff";
+};
+
+dropZone.ondrop = (e) => {
+  e.preventDefault();
+  handleFile(e.dataTransfer.files[0]);
+};
+
+// 👉 Manejo de archivo
+function handleFile(f) {
+  file = f;
+  preview.src = URL.createObjectURL(file);
 }
 
-const file = input.files[0];
+// 👉 FUNCIÓN PRINCIPAL (CON UX + iPHONE FIX)
+async function convert() {
+  if (!file) {
+    alert("Upload a file first");
+    return;
+  }
 
-document.getElementById("status").innerText = "Converting...";
+  const btn = document.getElementById("convertBtn");
 
-try{
+  // 🔒 Estado de carga
+  btn.disabled = true;
+  btn.innerText = "Converting...";
+  showLoader(true);
 
-const resultBlob = await heic2any({
-blob: file,
-toType: "image/jpeg",
-quality: 0.9
-});
+  try {
+    const format = document.getElementById("format").value;
 
-const url = URL.createObjectURL(resultBlob);
+    const blob = await heic2any({
+      blob: file,
+      toType: format
+    });
 
-const link = document.getElementById("downloadLink");
+    const url = URL.createObjectURL(blob);
 
-link.href = url;
-link.download = "converted.jpg";
-link.innerText = "Download JPG";
-link.style.display = "block";
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-document.getElementById("status").innerText = "Conversion complete.";
+    if (isIOS) {
+      window.open(url, "_blank");
+    } else {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "converted";
+      a.click();
+    }
 
-}catch(error){
+  } catch (error) {
+    alert("Error converting image");
+  }
 
-console.error(error);
-document.getElementById("status").innerText = "Conversion failed.";
-
+  // 🔓 Volver a estado normal
+  btn.disabled = false;
+  btn.innerText = "Convert";
+  showLoader(false);
 }
-
-}
+</script>
