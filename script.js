@@ -15,8 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function handleFile(f) {
     if (!f) return;
+    
     file = f;
-    preview.src = URL.createObjectURL(file);
+
+      const url = URL.createObjectURL(file);
+      preview.src = url;
+      preview.style.display = "block"; //
   }
 
   dropZone.addEventListener("click", () => input.click());
