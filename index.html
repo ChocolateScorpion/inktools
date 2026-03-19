@@ -151,9 +151,13 @@
     <option value="image/png">PNG</option>
   </select>
 
-  <button onclick="convert()">Convert</button>
+<button id="convertBtn" onclick="convert()">Convert</button>
 </div>
 
+<div id="loader" style="display:none; margin-top:15px;">
+  ⏳ Converting image...
+</div>  
+  
  <!-- Ad debajo del botón -->
 <ins class="adsbygoogle"
      style="display:block; margin-top:20px;"
