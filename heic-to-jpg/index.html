@@ -1,59 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta name="google-adsense-account" content="ca-pub-7189936182708078">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <title>HEIC to JPG Converter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-<script src="https://cdn.jsdelivr.net/npm/heic2any/dist/heic2any.min.js"></script>  
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    body {
+      margin: 0;
+      background: #0f0f0f;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-<title>Convert HEIC to JPG Online Free | InkTools</title>
-  
-<meta name="description" content="Free HEIC to JPG converter. Convert iPhone HEIC images to JPG instantly online. No upload required. Fast and secure.">
+    header {
+      padding: 30px 20px;
+      font-size: 24px;
+      font-weight: 600;
+    }
 
-<link rel="stylesheet" href="/style.css">
+    .container {
+      background: #1a1a1a;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
 
-</head>  
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 500;
+    }
 
-  
+    p {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .drop-zone {
+      border: 2px dashed #444;
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .drop-zone:hover {
+      border-color: #888;
+      background: #222;
+    }
+
+    img {
+      max-width: 150px;
+      margin-top: 15px;
+      border-radius: 8px;
+    }
+
+    select {
+      margin-top: 15px;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      background: #222;
+      color: white;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      background: white;
+      color: black;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      opacity: 0.85;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .ad-space {
+      margin-top: 30px;
+      width: 100%;
+      max-width: 400px;
+      height: 90px;
+      background: #222;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 12px;
+    }
+
+  </style>
+</head>
+
 <body>
 
-<header>
-<h1>HEIC to JPG Converter</h1>
-<p>Convert HEIC images from iPhone into JPG instantly.</p>
-</header>
+<header>InkTools</header>
 
- <p>
-1. Upload your HEIC image  
-2. Click Convert  
-3. Download the JPG file
-</p>
+<ins class="adsbygoogle"
+     style="display:block; margin-bottom:20px;"
+     data-ad-client="ca-pub-7189936182708078"
+     data-ad-slot="3707669770"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
   
-<main>
+  
+<div class="container">
+  <h1>HEIC to JPG Converter</h1>
+  <p>Convert HEIC / HEIF to JPG  instantly</p>
 
-<input type="file" id="heicInput" accept=".heic,.heif">
+  <div class="drop-zone" id="dropZone">
+    Drop image here or click
+   <input type="file" id="fileInput" hidden>
+  </div>
 
-<button onclick="convertImage()">Convert to JPG</button>
+  <img id="preview" />
 
-<p id="status"></p>
+  <select id="format">
+    <option value="image/jpeg">JPG</option>
+  </select>
 
-<a id="downloadLink" style="display:none">Download JPG</a>
-
-<h2>Popular Tools</h2>
-
-<div class="tools-list">
-<a href="/heic-to-jpg">HEIC to JPG Converter</a>
+<button id="convertBtn" onclick="convert()">Convert</button>
 </div>
 
-</main>
+<div id="loader" style="display:none; margin-top:15px;">
+  ⏳ Converting image...
+</div>  
+  
+ <!-- Ad debajo del botón -->
+<ins class="adsbygoogle"
+     style="display:block; margin-top:20px;"
+     data-ad-client="ca-pub-7189936182708078"
+     data-ad-slot="1181011532"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
 
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> 
+
+  
+<p>
+Free online HEIC / HEIF to JPG and PNG converter. 
+Convert iPhone photos instantly without uploading files. 
+Fast, secure and works directly in your browser. 
+Supports HEIC and HEIF formats with high quality output.
+</p>  
+
+<p style="margin-top:15px; font-size:13px; color:#888;">
+This free HEIC / HEIF converter lets you easily convert HEIC / HEIF to JPG or PNG online. 
+Perfect for opening iPhone images on Windows, Android, or any browser.
+No registration required.
+</p>
+
+<div style="margin-top:40px;">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-7189936182708078"
+       data-ad-slot="8603238385"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+</div>
+
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>  
+
+  
 <footer>
-<p>© InkTools – Free Online Tools</p>
+  © 2026 InkTools |
+  <a href="/privacy.html">Privacy Policy</a>
 </footer>
+  
+<script src="https://unpkg.com/heic2any/dist/heic2any.min.js"></script>
 
-<script src="/script.js"></script>
+<script>
+  const dropZone = document.getElementById("dropZone");
+  const input = document.getElementById("fileInput");
+  const preview = document.getElementById("preview");
+
+  let file;
+
+  dropZone.addEventListener("click", () => input.click());
+
+  input.onchange = (e) => handleFile(e.target.files[0]);
+
+  dropZone.ondragover = (e) => {
+    e.preventDefault();
+    dropZone.style.borderColor = "#fff";
+  };
+
+  dropZone.ondrop = (e) => {
+    e.preventDefault();
+    handleFile(e.dataTransfer.files[0]);
+  };
+
+function handleFile(f) {
+const btn = document.getElementById("convertBtn");
+btn.style.display = "block";
+btn.innerText = "Convert";
+showLoader(false);
+  
+  if (!f) return;
+
+  file = f;
+
+  const isPreviewSupported =
+    f.type.startsWith("image/") &&
+    !f.type.includes("heic") &&
+    !f.type.includes("heif");
+
+  if (isPreviewSupported) {
+    const url = URL.createObjectURL(file);
+    preview.src = url;
+    preview.style.display = "block";
+  } else {
+    preview.style.display = "none";
+  }
+}
+
+async function convert() {
+  if (!file) {
+    alert("Upload a file first");
+    return;
+  }
+
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  const btn = document.getElementById("convertBtn");
+
+        btn.style.display = "none"; 
+        showLoader(true);
+
+  try {
+    const format = document.getElementById("format").value;
+
+    let outputBlob;
+
+    try {
+      const result = await heic2any({
+        blob: file,
+        toType: format
+      });
+
+      outputBlob = Array.isArray(result) ? result[0] : result;
+
+    } catch (err) {
+      console.error("HEIC conversion failed:", err);
+
+      // 🔥 fallback iPhone
+      if (isIOS) {
+        btn.style.display = "block";
+        btn.innerText = "Opening image...";
+        const url = URL.createObjectURL(file);
+        window.location.href = url;
+
+        btn.style.display = "block";
+        showLoader(false);
+
+        return;
+      }
+
+      alert("Conversion failed. Try another image.");
+      btn.innerText = "Convert";
+      showLoader(false);
+      return;
+    }
+
+    const url = URL.createObjectURL(outputBlob);
+
+    if (isIOS) {
+      btn.style.display = "block";
+      btn.innerText = "Opening image...";
+      window.location.href = url;
+    } else {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "converted." + (format === "image/png" ? "png" : "jpg");
+      a.click();
+      
+  setTimeout(() => {
+    btn.style.display = "block";
+    btn.innerText = "Convert";
+    showLoader(false);
+}, 500);
+    }
+
+  } catch (error) {
+    console.error(error);
+    alert("Error converting image");
+  }
+
+btn.style.display = "block";
+btn.innerText = "Convert";
+showLoader(false);
+}
+
+
+  function showLoader(state) {
+  const loader = document.getElementById("loader");
+  loader.style.display = state ? "block" : "none";
+  }
+
+window.addEventListener("pageshow", () => {
+  const btn = document.getElementById("convertBtn");
+  btn.style.display = "block";
+  btn.innerText = "Convert";
+  showLoader(false);
+});
+   
+</script>
 
 </body>
-
 </html>
