@@ -270,6 +270,15 @@ showLoader(false);
   }
 }
 
+const qualitySlider = document.getElementById("quality");
+const qualityValue = document.getElementById("qualityValue");
+
+if (qualitySlider && qualityValue) {
+  qualitySlider.addEventListener("input", () => {
+    qualityValue.textContent = qualitySlider.value;
+  });
+}
+
 async function convert() {
   if (!file) {
     alert("Upload a file first");
@@ -305,7 +314,8 @@ async function convert() {
         
         ctx.drawImage(img, 0, 0);
         
-        const quality = document.getElementById("quality").value;
+        const qualityElement = document.getElementById("quality");
+        const quality = qualityElement ? qualityElement.value : 0.6;
                 
         const outputBlob = await new Promise((resolve) => {
           canvas.toBlob(resolve, "image/jpeg", quality);
