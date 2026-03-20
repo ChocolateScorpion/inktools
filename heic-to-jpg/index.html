@@ -137,7 +137,7 @@
   
 <div class="container">
   <h1>HEIC to JPG Converter</h1>
-  <p>Convert HEIC / HEIF to JPG  instantly</p>
+  <p>Convert HEIC / HEIF images to JPG  instantly</p>
 
   <div class="drop-zone" id="dropZone">
     Drop image here or click
@@ -145,10 +145,6 @@
   </div>
 
   <img id="preview" />
-
-  <select id="format">
-    <option value="image/jpeg">JPG</option>
-  </select>
 
 <button id="convertBtn" onclick="convert()">Convert</button>
 </div>
@@ -171,14 +167,14 @@
 
   
 <p>
-Free online HEIC / HEIF to JPG and PNG converter. 
+Free online HEIC / HEIF to JPG converter. 
 Convert iPhone photos instantly without uploading files. 
 Fast, secure and works directly in your browser. 
 Supports HEIC and HEIF formats with high quality output.
 </p>  
 
 <p style="margin-top:15px; font-size:13px; color:#888;">
-This free HEIC / HEIF converter lets you easily convert HEIC / HEIF to JPG or PNG online. 
+This free HEIC / HEIF converter lets you easily convert HEIC / HEIF to JPG online. 
 Perfect for opening iPhone images on Windows, Android, or any browser.
 No registration required.
 </p>
@@ -263,7 +259,7 @@ async function convert() {
         showLoader(true);
 
   try {
-    const format = document.getElementById("format").value;
+    const format = "image/jpg";
 
     let outputBlob;
 
@@ -306,7 +302,7 @@ async function convert() {
     } else {
       const a = document.createElement("a");
       a.href = url;
-      a.download = "converted." + (format === "image/png" ? "png" : "jpg");
+      a.download = file.name.replace(/\.(heic|heif)$/i, ".jpg");
       a.click();
       
   setTimeout(() => {
