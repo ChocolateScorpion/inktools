@@ -293,7 +293,6 @@ async function convert() {
         showLoader(true);
 
   try {
-    const format = document.getElementById("format").value;
 
     let outputBlob;
 
@@ -317,13 +316,13 @@ async function convert() {
         const qualityElement = document.getElementById("quality");
         const quality = qualityElement ? qualityElement.value : 0.6;
                 
-        const outputBlob = await new Promise((resolve) => {
+        outputBlob = await new Promise((resolve) => {
           canvas.toBlob(resolve, "image/jpeg", quality);
         });
       
       
     } catch (err) {
-      console.error("HEIC conversion failed:", err);
+      console.error("Compression failed:", err);
 
       // 🔥 fallback iPhone
       if (isIOS) {
