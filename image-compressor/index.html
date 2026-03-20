@@ -270,14 +270,16 @@ showLoader(false);
   }
 }
 
-const qualitySlider = document.getElementById("quality");
-const qualityValue = document.getElementById("qualityValue");
+document.addEventListener("DOMContentLoaded", () => {
+  const qualitySlider = document.getElementById("quality");
+  const qualityValue = document.getElementById("qualityValue");
 
-if (qualitySlider && qualityValue) {
-  qualitySlider.addEventListener("input", () => {
-    qualityValue.textContent = qualitySlider.value;
-  });
-}
+  if (qualitySlider && qualityValue) {
+    qualitySlider.addEventListener("input", () => {
+      qualityValue.textContent = qualitySlider.value;
+    });
+  }
+});
 
 async function convert() {
   if (!file) {
@@ -292,6 +294,15 @@ async function convert() {
         btn.style.display = "none"; 
         showLoader(true);
 
+  const qualityElement = document.getElementById("quality");
+
+    if (!qualityElement) {
+      console.warn("Quality slider not found");
+      return;
+    }
+
+  const quality = qualityElement.value;
+  
   try {
 
     let outputBlob;
