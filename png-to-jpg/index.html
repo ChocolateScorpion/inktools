@@ -5,7 +5,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078"
      crossorigin="anonymous"></script>
   <meta charset="UTF-8">
-  <title>InkTools - PNG / JPG Converter</title>
+  <title>PNG to JPG Converter - Free Online Tool | InkTools</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -146,10 +146,6 @@
 
   <img id="preview" />
 
-  <select id="format">
-    <option value="image/jpeg">JPG</option>
-    <option value="image/png">PNG</option>
-  </select>
 
 <button id="convertBtn" onclick="convert()">Convert to JPG</button>
 </div>
@@ -172,17 +168,26 @@
 
   
 <p>
-Free online HEIC / HEIF to JPG and PNG converter. 
-Convert iPhone photos instantly without uploading files. 
-Fast, secure and works directly in your browser. 
-Supports HEIC and HEIF formats with high quality output.
+Free online PNG to JPG converter. Convert PNG images to JPG instantly with high quality. 
+Fast, secure and works directly in your browser without uploading files.
+</p>
+
+<p>
+Convertidor gratuito en línea de PNG a JPG. Convierte imágenes PNG a JPG al instante y con alta calidad.
+Rápido, seguro y funciona directamente en tu navegador sin necesidad de subir archivos.  
+</p>
+
+<p style="margin-top:15px; font-size:13px; color:#888;">
+Reduce PNG file size by converting to JPG for better performance on websites, email and social media. 
+No registration required. Your files are processed locally and remain private.
 </p>  
 
 <p style="margin-top:15px; font-size:13px; color:#888;">
-This free HEIC / HEIF converter lets you easily convert HEIC / HEIF to JPG or PNG online. 
-Perfect for opening iPhone images on Windows, Android, or any browser.
-No registration required.
+Reduce el tamaño de los archivos PNG convirtiéndolos a JPG para mejorar el rendimiento en sitios web, correo electrónico y redes sociales.
+No es necesario registrarse. Tus archivos se procesan localmente y se mantienen privados.
 </p>
+
+  
 
 <div style="margin-top:40px;">
   <ins class="adsbygoogle"
@@ -202,9 +207,8 @@ No registration required.
   © 2026 InkTools |
   <a href="/privacy.html">Privacy Policy</a>
 </footer>
-  
-<script src="https://unpkg.com/heic2any/dist/heic2any.min.js"></script>
 
+  
 <script>
   const dropZone = document.getElementById("dropZone");
   const input = document.getElementById("fileInput");
@@ -229,7 +233,7 @@ No registration required.
 function handleFile(f) {
 const btn = document.getElementById("convertBtn");
 btn.style.display = "block";
-btn.innerText = "Convert";
+btn.innerText = "Convert to JPG";
 showLoader(false);
   
   if (!f) return;
@@ -264,20 +268,30 @@ async function convert() {
         showLoader(true);
 
   try {
-    const format = "image/jpeg";
-
+    
     let outputBlob;
 
     try {
-      const result = await heic2any({
-        blob: file,
-        toType: format
-      });
-
-      outputBlob = Array.isArray(result) ? result[0] : result;
-
+          const img = new Image();
+          img.src = URL.createObjectURL(file);
+          
+          await new Promise((resolve) => {
+            img.onload = resolve;
+          });
+          
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          
+          canvas.width = img.width;
+          canvas.height = img.height;
+          
+          ctx.drawImage(img, 0, 0);
+          
+          outputBlob = await new Promise((resolve) => {
+            canvas.toBlob(resolve, "image/jpeg", 1.0);
+          });
     } catch (err) {
-      console.error("HEIC conversion failed:", err);
+      console.error("Conversion failed:", err);
 
       // 🔥 fallback iPhone
       if (isIOS) {
