@@ -135,3 +135,7 @@ opacity:0.7;
   border-color: #3a3a3a;
   transform: translateY(-1px);
 }
+
+a {
+  color: red !important;
+}
