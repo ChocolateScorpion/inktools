@@ -109,3 +109,29 @@ opacity:0.7;
   max-height: 100%;
   object-fit: contain;
 }
+
+
+.tools {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 25px;
+}
+
+.tools a {
+  text-decoration: none;
+  padding: 14px;
+  background: #1c1c1c;
+  color: #f1f1f1;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.tools a:hover {
+  background: #2a2a2a;
+  border-color: #3a3a3a;
+  transform: translateY(-1px);
+}
