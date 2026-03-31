@@ -26,43 +26,52 @@ function setupTool(config) {
     handleFile(e.dataTransfer.files[0]);
   };
 
-  async function handleFile(f) {
-    if (!f) return;
+ async function handleFile(f) {
+  if (!f) return;
 
-    file = f;
-    btn.style.display = "block";
-    btn.innerText = "Convert";
-    showLoader(false);
+  file = f;
 
-    try {
-      let previewBlob;
+  const btn = document.getElementById("convertBtn");
+
+  btn.style.display = "block";
+  btn.innerText = "Convert";
+  showLoader(false);
+
+  try {
+    let previewBlob;
 
     const type = f.type || "";
-const name = f.name.toLowerCase();
+    const name = f.name.toLowerCase();
 
-const isHEIC =
-  type.includes("heic") ||
-  type.includes("heif") ||
-  name.endsWith(".heic") ||
-  name.endsWith(".heif");
+    const isHEIC =
+      type.includes("heic") ||
+      type.includes("heif") ||
+      name.endsWith(".heic") ||
+      name.endsWith(".heif");
 
-if (config.previewFromHEIC && isHEIC) {
-  previewBlob = await heic2any({
-    blob: f,
-    toType: "image/jpeg"
-  });
-  previewBlob = Array.isArray(previewBlob) ? previewBlob[0] : previewBlob;
-} else {
-  previewBlob = f;
-}
-      const url = URL.createObjectURL(previewBlob);
-      preview.src = url;
-      preview.style.display = "block";
+    if (config.previewFromHEIC && isHEIC) {
+      btn.innerText = "Processing..."; //
 
-    } catch {
-      preview.style.display = "none";
+      previewBlob = await heic2any({
+        blob: f,
+        toType: "image/jpeg"
+      });
+
+      previewBlob = Array.isArray(previewBlob) ? previewBlob[0] : previewBlob;
+
+      btn.innerText = "Convert"; 
+    } else {
+      previewBlob = f;
     }
+
+    const url = URL.createObjectURL(previewBlob);
+    preview.src = url;
+    preview.style.display = "block";
+
+  } catch {
+    preview.style.display = "none";
   }
+}
 
   async function convert() {
     if (!file) {
