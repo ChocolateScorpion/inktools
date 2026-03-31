@@ -1,85 +1,93 @@
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  let file = null;
-
+function setupTool(config) {
   const dropZone = document.getElementById("dropZone");
   const input = document.getElementById("fileInput");
   const preview = document.getElementById("preview");
   const btn = document.getElementById("convertBtn");
+  const loader = document.getElementById("loader");
 
-  function showLoader(state) {
-    const loader = document.getElementById("loader");
-    loader.style.display = state ? "block" : "none";
-  }
-
-  function handleFile(f) {
-    if (!f) return;
-    
-    file = f;
-
-      const url = URL.createObjectURL(file);
-      preview.src = url;
-      preview.style.display = "block"; //
-  }
+  let file;
 
   dropZone.addEventListener("click", () => input.click());
 
-  input.addEventListener("change", (e) => {
-    handleFile(e.target.files[0]);
-  });
+  input.onchange = (e) => handleFile(e.target.files[0]);
 
-  dropZone.addEventListener("dragover", (e) => {
+  dropZone.ondragover = (e) => {
     e.preventDefault();
-    dropZone.style.borderColor = "#fff";
-  });
+    dropZone.classList.add("active");
+  };
 
-  dropZone.addEventListener("drop", (e) => {
+  dropZone.ondragleave = () => {
+    dropZone.classList.remove("active");
+  };
+
+  dropZone.ondrop = (e) => {
     e.preventDefault();
+    dropZone.classList.remove("active");
     handleFile(e.dataTransfer.files[0]);
-  });
+  };
 
-  window.convert = async function () {
+  async function handleFile(f) {
+    if (!f) return;
+
+    file = f;
+    btn.style.display = "block";
+    btn.innerText = "Convert";
+    showLoader(false);
+
+    try {
+      let previewBlob;
+
+      if (config.previewFromHEIC && (f.type.includes("heic") || f.type.includes("heif"))) {
+        previewBlob = await heic2any({
+          blob: f,
+          toType: "image/jpeg"
+        });
+        previewBlob = Array.isArray(previewBlob) ? previewBlob[0] : previewBlob;
+      } else {
+        previewBlob = f;
+      }
+
+      const url = URL.createObjectURL(previewBlob);
+      preview.src = url;
+      preview.style.display = "block";
+
+    } catch {
+      preview.style.display = "none";
+    }
+  }
+
+  async function convert() {
     if (!file) {
       alert("Upload a file first");
       return;
     }
 
-    btn.disabled = true;
-    btn.innerText = "Converting...";
+    btn.style.display = "none";
     showLoader(true);
 
     try {
-      const format = document.getElementById("format").value;
+      const result = await config.convert(file);
 
-      const result = await heic2any({
-        blob: file,
-        toType: format
-      });
+      const url = URL.createObjectURL(result);
 
-      const outputBlob = Array.isArray(result) ? result[0] : result;
-      const url = URL.createObjectURL(outputBlob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = config.getFileName(file.name);
+      a.click();
 
-      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-      if (isIOS) {
-        window.open(url, "_blank");
-      } else {
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "converted";
-        a.click();
-      }
-
-    } catch (error) {
-      console.error(error);
-      alert("Error converting image");
+    } catch (err) {
+      console.error(err);
+      alert("Conversion failed");
     }
 
-    btn.disabled = false;
+    btn.style.display = "block";
     btn.innerText = "Convert";
     showLoader(false);
-  };
+  }
 
-});
-</script>
+  function showLoader(state) {
+    loader.style.display = state ? "block" : "none";
+  }
+
+  window.convert = convert;
+}
