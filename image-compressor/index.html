@@ -247,177 +247,31 @@ Rápido, seguro y compatible con cualquier dispositivo.
   <a href="/privacy.html">Privacy Policy</a>
 </footer>
   
+<script src="/script.js"></script>
+
 <script>
-  const dropZone = document.getElementById("dropZone");
-  const input = document.getElementById("fileInput");
-  const preview = document.getElementById("preview");
+setupTool({
+  previewFromHEIC: false,
 
-  let file;
+  async convert(file) {
+    const img = await createImageBitmap(file);
+    const canvas = document.createElement("canvas");
 
-  dropZone.addEventListener("click", () => input.click());
+    canvas.width = img.width * 0.7;
+    canvas.height = img.height * 0.7;
 
-  input.onchange = (e) => handleFile(e.target.files[0]);
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  dropZone.ondragover = (e) => {
-    e.preventDefault();
-    dropZone.style.borderColor = "#fff";
-  };
+    return await new Promise(resolve =>
+      canvas.toBlob(resolve, "image/jpeg", 0.6)
+    );
+  },
 
-  dropZone.ondrop = (e) => {
-    e.preventDefault();
-    handleFile(e.dataTransfer.files[0]);
-  };
-
-function handleFile(f) {
-const btn = document.getElementById("convertBtn");
-btn.style.display = "block";
-btn.innerText = "Convert";
-showLoader(false);
-  
-  if (!f) return;
-
-  file = f;
-
-  const isPreviewSupported =
-    f.type.startsWith("image/") &&
-    !f.type.includes("heic") &&
-    !f.type.includes("heif");
-
-  if (isPreviewSupported) {
-    const url = URL.createObjectURL(file);
-    preview.src = url;
-    preview.style.display = "block";
-  } else {
-    preview.style.display = "none";
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const qualitySlider = document.getElementById("quality");
-  const qualityValue = document.getElementById("qualityValue");
-
-  if (qualitySlider && qualityValue) {
-    qualitySlider.addEventListener("input", () => {
-      qualityValue.textContent = qualitySlider.value;
-    });
+  getFileName(name) {
+    return "compressed_" + name;
   }
 });
-
-async function convert() {
-  if (!file) {
-    alert("Upload a file first");
-    return;
-  }
-
-  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  const btn = document.getElementById("convertBtn");
-
-        btn.style.display = "none"; 
-        showLoader(true);
-
-  const qualityElement = document.getElementById("quality");
-
-    if (!qualityElement) {
-      console.warn("Quality slider not found");
-      return;
-    }
-
-  const quality = qualityElement.value;
-  
-  try {
-
-    let outputBlob;
-
-    try {
-      
-        const img = new Image();
-        img.src = URL.createObjectURL(file);
-        
-        await new Promise((resolve) => {
-          img.onload = resolve;
-        });
-        
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        
-        canvas.width = img.width;
-        canvas.height = img.height;
-        
-        ctx.drawImage(img, 0, 0);
-        
-        const qualityElement = document.getElementById("quality");
-        const quality = qualityElement ? qualityElement.value : 0.6;
-                
-        outputBlob = await new Promise((resolve) => {
-          canvas.toBlob(resolve, "image/jpeg", quality);
-        });
-      
-      
-    } catch (err) {
-      console.error("Compression failed:", err);
-
-      // 🔥 fallback iPhone
-      if (isIOS) {
-        btn.style.display = "block";
-        btn.innerText = "Opening image...";
-        const url = URL.createObjectURL(file);
-        window.location.href = url;
-
-        btn.style.display = "block";
-        showLoader(false);
-
-        return;
-      }
-
-      alert("Conversion failed. Try another image.");
-      btn.innerText = "Convert";
-      showLoader(false);
-      return;
-    }
-
-    const url = URL.createObjectURL(outputBlob);
-
-    if (isIOS) {
-      btn.style.display = "block";
-      btn.innerText = "Opening image...";
-      window.location.href = url;
-    } else {
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = file.name.replace(/\.(png|jpg|jpeg|webp)$/i, "-compressed.jpg");
-      a.click();
-      
-  setTimeout(() => {
-    btn.style.display = "block";
-    btn.innerText = "Convert";
-    showLoader(false);
-}, 500);
-    }
-
-  } catch (error) {
-    console.error(error);
-    alert("Error converting image");
-  }
-
-btn.style.display = "block";
-btn.innerText = "Convert";
-showLoader(false);
-}
-
-
-  function showLoader(state) {
-  const loader = document.getElementById("loader");
-  loader.style.display = state ? "block" : "none";
-  }
-
-window.addEventListener("pageshow", () => {
-  const btn = document.getElementById("convertBtn");
-  btn.style.display = "block";
-  btn.innerText = "Convert";
-  showLoader(false);
-});
-   
 </script>
 
 </body>
