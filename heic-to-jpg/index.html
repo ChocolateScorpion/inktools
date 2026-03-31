@@ -229,142 +229,25 @@ No es necesario registrarse. 100 % privado y procesado localmente en tu disposit
 </footer>
   
 <script src="https://unpkg.com/heic2any/dist/heic2any.min.js"></script>
+<script src="/script.js"></script>
 
 <script>
-  const dropZone = document.getElementById("dropZone");
-  const input = document.getElementById("fileInput");
-  const preview = document.getElementById("preview");
+setupTool({
+  previewFromHEIC: true,
 
-  let file;
+  async convert(file) {
+    const result = await heic2any({
+      blob: file,
+      toType: "image/jpeg"
+    });
 
-  dropZone.addEventListener("click", () => input.click());
+    return Array.isArray(result) ? result[0] : result;
+  },
 
-  input.onchange = (e) => handleFile(e.target.files[0]);
-
-  dropZone.ondragover = (e) => {
-    e.preventDefault();
-    dropZone.style.borderColor = "#fff";
-  };
-
-  dropZone.ondrop = (e) => {
-    e.preventDefault();
-    handleFile(e.dataTransfer.files[0]);
-  };
-
-function handleFile(f) {
-const btn = document.getElementById("convertBtn");
-btn.style.display = "block";
-btn.innerText = "Convert";
-showLoader(false);
-  
-  if (!f) return;
-
-  file = f;
-
-  const isPreviewSupported =
-    f.type.startsWith("image/") &&
-    !f.type.includes("heic") &&
-    !f.type.includes("heif");
-
-  if (isPreviewSupported) {
-    const url = URL.createObjectURL(file);
-    preview.src = url;
-    preview.style.display = "block";
-  } else {
-    preview.style.display = "none";
+  getFileName(name) {
+    return name.replace(/\.(heic|heif)$/i, ".jpg");
   }
-}
-
-async function convert() {
-  if (!file) {
-    alert("Upload a file first");
-    return;
-  }
-
-  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  const btn = document.getElementById("convertBtn");
-
-        btn.style.display = "none"; 
-        showLoader(true);
-
-  try {
-    const format = "image/jpg";
-
-    let outputBlob;
-
-    try {
-      const result = await heic2any({
-        blob: file,
-        toType: format
-      });
-
-      outputBlob = Array.isArray(result) ? result[0] : result;
-
-    } catch (err) {
-      console.error("HEIC conversion failed:", err);
-
-      // 🔥 fallback iPhone
-      if (isIOS) {
-        btn.style.display = "block";
-        btn.innerText = "Opening image...";
-        const url = URL.createObjectURL(file);
-        window.location.href = url;
-
-        btn.style.display = "block";
-        showLoader(false);
-
-        return;
-      }
-
-      alert("Conversion failed. Try another image.");
-      btn.innerText = "Convert";
-      showLoader(false);
-      return;
-    }
-
-    const url = URL.createObjectURL(outputBlob);
-
-    if (isIOS) {
-      btn.style.display = "block";
-      btn.innerText = "Opening image...";
-      window.location.href = url;
-    } else {
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = file.name.replace(/\.(heic|heif)$/i, ".jpg");
-      a.click();
-      
-  setTimeout(() => {
-    btn.style.display = "block";
-    btn.innerText = "Convert";
-    showLoader(false);
-}, 500);
-    }
-
-  } catch (error) {
-    console.error(error);
-    alert("Error converting image");
-  }
-
-btn.style.display = "block";
-btn.innerText = "Convert";
-showLoader(false);
-}
-
-
-  function showLoader(state) {
-  const loader = document.getElementById("loader");
-  loader.style.display = state ? "block" : "none";
-  }
-
-window.addEventListener("pageshow", () => {
-  const btn = document.getElementById("convertBtn");
-  btn.style.display = "block";
-  btn.innerText = "Convert";
-  showLoader(false);
 });
-   
 </script>
 
 </body>
