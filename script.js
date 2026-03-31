@@ -37,16 +37,24 @@ function setupTool(config) {
     try {
       let previewBlob;
 
-      if (config.previewFromHEIC && (f.type.includes("heic") || f.type.includes("heif"))) {
-        previewBlob = await heic2any({
-          blob: f,
-          toType: "image/jpeg"
-        });
-        previewBlob = Array.isArray(previewBlob) ? previewBlob[0] : previewBlob;
-      } else {
-        previewBlob = f;
-      }
+    const type = f.type || "";
+const name = f.name.toLowerCase();
 
+const isHEIC =
+  type.includes("heic") ||
+  type.includes("heif") ||
+  name.endsWith(".heic") ||
+  name.endsWith(".heif");
+
+if (config.previewFromHEIC && isHEIC) {
+  previewBlob = await heic2any({
+    blob: f,
+    toType: "image/jpeg"
+  });
+  previewBlob = Array.isArray(previewBlob) ? previewBlob[0] : previewBlob;
+} else {
+  previewBlob = f;
+}
       const url = URL.createObjectURL(previewBlob);
       preview.src = url;
       preview.style.display = "block";
