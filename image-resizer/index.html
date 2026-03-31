@@ -245,166 +245,32 @@ No es necesario registrarse. Todos los archivos se procesan localmente en tu dis
   <a href="/privacy.html">Privacy Policy</a>
 </footer>
 
-  
+<script src="/script.js"></script>
+
 <script>
-  const dropZone = document.getElementById("dropZone");
-  const input = document.getElementById("fileInput");
-  const preview = document.getElementById("preview");
+setupTool({
+  previewFromHEIC: false,
 
-  let file;
+  async convert(file) {
+    const img = await createImageBitmap(file);
+    const canvas = document.createElement("canvas");
 
-  dropZone.addEventListener("click", () => input.click());
+    const scale = 0.5; // luego lo hacemos dinámico
+    canvas.width = img.width * scale;
+    canvas.height = img.height * scale;
 
-  input.onchange = (e) => handleFile(e.target.files[0]);
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  dropZone.ondragover = (e) => {
-    e.preventDefault();
-    dropZone.style.borderColor = "#fff";
-  };
+    return await new Promise(resolve =>
+      canvas.toBlob(resolve, "image/jpeg", 0.9)
+    );
+  },
 
-  dropZone.ondrop = (e) => {
-    e.preventDefault();
-    handleFile(e.dataTransfer.files[0]);
-  };
-
-function handleFile(f) {
-const btn = document.getElementById("convertBtn");
-btn.style.display = "block";
-btn.innerText = "Resize Image";
-showLoader(false);
-  
-  if (!f) return;
-
-  file = f;
-
-  const img = new Image();
-  img.src = URL.createObjectURL(file);
-
-  img.onload = () => {
-    document.getElementById("width").value = img.width;
-    document.getElementById("height").value = img.height;
-  };
-
-  const isPreviewSupported =
-    f.type.startsWith("image/") &&
-    !f.type.includes("heic") &&
-    !f.type.includes("heif");
-
-  if (isPreviewSupported) {
-    const url = URL.createObjectURL(file);
-    preview.src = url;
-    preview.style.display = "block";
-  } else {
-    preview.style.display = "none";
+  getFileName(name) {
+    return "resized_" + name;
   }
-}
-
-async function convert() {
-  if (!file) {
-    alert("Upload a file first");
-    return;
-  }
-
-  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  const btn = document.getElementById("convertBtn");
-
-        btn.style.display = "none"; 
-        showLoader(true);
-
-  try {
-    
-    let outputBlob;
-
-    try {
-          const img = new Image();
-          img.src = URL.createObjectURL(file);
-          
-          await new Promise((resolve) => {
-            img.onload = resolve;
-          });
-          
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-          
-          const widthInput = document.getElementById("width").value;
-          const heightInput = document.getElementById("height").value;
-          
-          const newWidth = widthInput || img.width;
-          const newHeight = heightInput || img.height;
-          
-          canvas.width = newWidth;
-          canvas.height = newHeight;
-          
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          
-          outputBlob = await new Promise((resolve) => {
-            canvas.toBlob(resolve, "image/jpeg", 0.9);
-          });
-    } catch (err) {
-      console.error("Conversion failed:", err);
-
-      // 🔥 fallback iPhone
-      if (isIOS) {
-        btn.style.display = "block";
-        btn.innerText = "Opening image...";
-        const url = URL.createObjectURL(file);
-        window.location.href = url;
-
-        btn.style.display = "block";
-        showLoader(false);
-
-        return;
-      }
-
-      alert("Conversion failed. Try another image.");
-      btn.innerText = "Convert";
-      showLoader(false);
-      return;
-    }
-
-    const url = URL.createObjectURL(outputBlob);
-
-    if (isIOS) {
-      btn.style.display = "block";
-      btn.innerText = "Opening image...";
-      window.location.href = url;
-    } else {
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = file.name.replace(/\.(png|jpg|jpeg|webp)$/i, "-resized.jpg");
-      a.click();
-      
-  setTimeout(() => {
-    btn.style.display = "block";
-    btn.innerText = "Convert";
-    showLoader(false);
-}, 500);
-    }
-
-  } catch (error) {
-    console.error(error);
-    alert("Error converting image");
-  }
-
-btn.style.display = "block";
-btn.innerText = "Convert";
-showLoader(false);
-}
-
-
-  function showLoader(state) {
-  const loader = document.getElementById("loader");
-  loader.style.display = state ? "block" : "none";
-  }
-
-window.addEventListener("pageshow", () => {
-  const btn = document.getElementById("convertBtn");
-  btn.style.display = "block";
-  btn.innerText = "Convert";
-  showLoader(false);
 });
-   
 </script>
 
 </body>
