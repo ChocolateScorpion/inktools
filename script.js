@@ -1,3 +1,34 @@
+async function normalizeFile(file) {
+  const type = file.type || "";
+  const name = file.name.toLowerCase();
+
+  const isHEIC =
+    type.includes("heic") ||
+    type.includes("heif") ||
+    name.endsWith(".heic") ||
+    name.endsWith(".heif");
+
+  if (isHEIC) {
+    const convertedBlob = await heic2any({
+      blob: file,
+      toType: "image/jpeg",
+      quality: 0.9
+    });
+
+    const blob = Array.isArray(convertedBlob)
+      ? convertedBlob[0]
+      : convertedBlob;
+
+    return new File(
+      [blob],
+      file.name.replace(/\.(heic|heif)$/i, ".jpg"),
+      { type: "image/jpeg" }
+    );
+  }
+
+  return file;
+}
+
 function setupTool(config) {
   const dropZone = document.getElementById("dropZone");
   const input = document.getElementById("fileInput");
@@ -26,52 +57,34 @@ function setupTool(config) {
     handleFile(e.dataTransfer.files[0]);
   };
 
- async function handleFile(f) {
-  if (!f) return;
+  async function handleFile(f) {
+    if (!f) return;
+  
+    const btn = document.getElementById("convertBtn");
+  
+    btn.style.display = "block";
+    btn.innerText = "Processing...";
+    showLoader(false);
+  
+    try {
 
-  file = f;
+      const normalizedFile = await normalizeFile(f);
+  
 
-  const btn = document.getElementById("convertBtn");
+      file = normalizedFile;
+  
 
-  btn.style.display = "block";
-  btn.innerText = "Convert";
-  showLoader(false);
-
-  try {
-    let previewBlob;
-
-    const type = f.type || "";
-    const name = f.name.toLowerCase();
-
-    const isHEIC =
-      type.includes("heic") ||
-      type.includes("heif") ||
-      name.endsWith(".heic") ||
-      name.endsWith(".heif");
-
-    if (config.previewFromHEIC && isHEIC) {
-      btn.innerText = "Processing..."; //
-
-      previewBlob = await heic2any({
-        blob: f,
-        toType: "image/jpeg"
-      });
-
-      previewBlob = Array.isArray(previewBlob) ? previewBlob[0] : previewBlob;
-
-      btn.innerText = "Convert"; 
-    } else {
-      previewBlob = f;
+      const url = URL.createObjectURL(normalizedFile);
+      preview.src = url;
+      preview.style.display = "block";
+  
+      btn.innerText = "Convert";
+    } catch (err) {
+      console.error(err);
+      preview.style.display = "none";
+      btn.innerText = "Error";
     }
-
-    const url = URL.createObjectURL(previewBlob);
-    preview.src = url;
-    preview.style.display = "block";
-
-  } catch {
-    preview.style.display = "none";
   }
-}
 
   async function convert() {
     if (!file) {
