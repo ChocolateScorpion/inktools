@@ -13,7 +13,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HEIC to JPG Converter Online Free | InkTools</title>
   <link rel="icon" href="/favicon.ico">
-  
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
@@ -21,20 +20,12 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-R4568JEMSW');
   </script>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
   <!-- Styles -->
   <style>
-    
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+    * { box-sizing: border-box; font-family: Arial, sans-serif; }
 
     body {
       margin: 0;
@@ -61,61 +52,29 @@
       max-width: 400px;
     }
 
-    h1 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 500;
-    }
-
-    p {
-      font-size: 14px;
-      color: #aaa;
-    }
-
     .drop-zone {
       border: 2px dashed #444;
       border-radius: 12px;
       padding: 30px;
       margin-top: 20px;
       cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .drop-zone:hover {
-      border-color: #888;
-      background: #222;
-    }
-
-    img {
-      max-width: 150px;
-      margin-top: 15px;
-      border-radius: 8px;
-    }
-
-    select {
-      margin-top: 15px;
-      padding: 8px;
-      border-radius: 8px;
-      border: none;
-      background: #222;
-      color: white;
     }
 
     button {
       margin-top: 20px;
       padding: 12px;
       width: 100%;
-      border: none;
       border-radius: 10px;
+      border: none;
       background: white;
-      color: black;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.2s;
     }
 
-    button:hover {
-      opacity: 0.85;
+    #preview {
+      max-width: 150px;
+      margin-top: 15px;
+      display: none;
     }
 
     footer {
@@ -124,21 +83,25 @@
       color: #666;
     }
 
-    .ad-space {
-      margin-top: 30px;
-      width: 100%;
-      max-width: 400px;
-      height: 90px;
-      background: #222;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      font-size: 12px;
+    .tool-content {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: left;
+      line-height: 1.7;
     }
 
+    .tool-content h2 {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .tool-content ul,
+    .tool-content ol {
+      padding-left: 20px;
+    }
   </style>
+
 </head>
 
 <body>
@@ -148,116 +111,93 @@
 <ins class="adsbygoogle"
      style="display:block; margin-bottom:20px;"
      data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="3707669770"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="3707669770"></ins>
 
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-  
-  
+
 <div class="container">
   <h1>HEIC to JPG Converter</h1>
   <p>Convert HEIC / HEIF images to JPG instantly</p>
 
   <div class="drop-zone" id="dropZone">
     Drop image here or click
-   <input type="file" id="fileInput" hidden>
+    <input type="file" id="fileInput" hidden>
   </div>
 
-  <img id="preview" />
+  <img id="preview">
 
-<button id="convertBtn" onclick="convert()">Convert</button>
+  <button id="convertBtn" onclick="convert()">Convert</button>
 </div>
 
 <div id="loader" style="display:none; margin-top:15px;">
   ⏳ Converting image...
-</div>  
-  
- <!-- Ad debajo del botón -->
+</div>
+
+<!-- Ad -->
 <ins class="adsbygoogle"
      style="display:block; margin-top:20px;"
      data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="1181011532"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="1181011532"></ins>
 
 <script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script> 
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
-<div class="container">  
-  <section class="tool-content">
-  
+<!-- SEO CONTENT -->
+<div class="tool-content">
+
   <h2>What this tool does</h2>
   <p>
-    This tool allows you to convert HEIC images into JPG format directly in your browser. 
-    HEIC is commonly used by iPhones, but it is not always supported on all devices or platforms. 
-    With this converter, you can quickly transform your images into a widely compatible format without installing any software.
+    This tool converts HEIC images into JPG format directly in your browser.
+    JPG is widely supported across devices and platforms, making it perfect
+    for sharing, uploading, and everyday use.
   </p>
 
   <h2>How to use</h2>
   <ol>
-    <li>Upload or drag and drop your HEIC file</li>
-    <li>Wait for the preview to appear</li>
-    <li>Click the convert button</li>
-    <li>Download your JPG image instantly</li>
+    <li>Upload or drag your HEIC file</li>
+    <li>Wait for preview</li>
+    <li>Click convert</li>
+    <li>Download JPG instantly</li>
   </ol>
 
-  </section>
-</div>
-
-  
   <h2>Benefits</h2>
   <ul>
-    <li>No uploads required (processed locally)</li>
-    <li>Fast and simple conversion</li>
-    <li>Supports iPhone HEIC images</li>
-    <li>High-quality JPG output</li>
+    <li>Compatible with all devices</li>
+    <li>No uploads required</li>
+    <li>Fast conversion</li>
+    <li>Optimized JPG output</li>
   </ul>
 
-  <h2>Frequently Asked Questions</h2>
+  <h2>FAQ</h2>
 
   <h3>Why convert HEIC to JPG?</h3>
-  <p>
-    JPG is a widely supported format that works across devices, browsers, and platforms, making it easier to share and use your images.
-  </p>
+  <p>JPG works everywhere — phones, browsers, and apps.</p>
 
-  <h3>Is this tool secure?</h3>
-  <p>
-    Yes. Your files are processed locally in your browser whenever possible, which means they are not uploaded or stored on any server.
-  </p>
+  <h3>Is this secure?</h3>
+  <p>Your files are processed locally.</p>
 
-  <h3>Will I lose quality?</h3>
-  <p>
-    JPG uses compression, but this tool maintains high image quality during the conversion process.
-  </p>
-
-</section>
-  
-
-<div style="margin-top:40px;">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-7189936182708078"
-       data-ad-slot="8603238385"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
 </div>
 
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>  
+<!-- Ad -->
+<ins class="adsbygoogle"
+     style="display:block; margin-top:40px;"
+     data-ad-client="ca-pub-7189936182708078"
+     data-ad-slot="8603238385"></ins>
 
-  
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <footer>
   © 2026 InkTools |
   <a href="/about.html">About</a> |
   <a href="/contact.html">Contact</a> |
-  <a href="/privacy.html">Privacy Policy</a>
+  <a href="/privacy.html">Privacy</a>
 </footer>
-  
+
 <script src="https://unpkg.com/heic2any/dist/heic2any.min.js"></script>
 <script src="/script.js"></script>
 
@@ -267,19 +207,17 @@ setupTool({
 
   async convert(file) {
 
-  // 🔒 VALIDACIÓN CLAVE
-  if (!file.type.includes("heic") && !file.type.includes("heif")) {
-    // Si ya es JPG/PNG → solo devolverlo
-    return file;
-  }
+    if (!file.type.includes("heic") && !file.type.includes("heif")) {
+      return file;
+    }
 
-  const result = await heic2any({
-    blob: file,
-    toType: "image/jpeg"
-  });
+    const result = await heic2any({
+      blob: file,
+      toType: "image/jpeg"
+    });
 
-  return Array.isArray(result) ? result[0] : result;
-},
+    return Array.isArray(result) ? result[0] : result;
+  },
 
   getFileName(name) {
     return name.replace(/\.(heic|heif)$/i, ".jpg");
