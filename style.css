@@ -170,3 +170,7 @@ a {
   padding: 0 20px;
   width: 100%;
 }
+
+.tool-content {
+  align-self: center;
+}
