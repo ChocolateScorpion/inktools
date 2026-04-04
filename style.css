@@ -145,9 +145,12 @@ a {
   background: #2a2a2a;
 }
 
-
-.tool-content {
-  margin-top: 40px;
+.tool-content,
+.seo-content {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px;
+  width: 100%;
   text-align: left;
   line-height: 1.6;
 }
@@ -163,14 +166,16 @@ a {
   color: #bbb;
 }
 
-.seo-content,
-.tool-content {
+.tool-content,
+.seo-content {
   max-width: 700px;
   margin: 40px auto;
   padding: 0 20px;
   width: 100%;
+  text-align: left;
+  display: block;
 }
 
-.tool-content {
-  align-self: center;
+h1 {
+  font-size: 32px;
 }
