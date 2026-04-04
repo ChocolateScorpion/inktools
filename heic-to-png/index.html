@@ -11,7 +11,8 @@
   <!-- Meta -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HEIC / HEIF to PNG Converter</title>
+  <title>HEIC to PNG Converter Online Free | InkTools</title>
+  <link rel="icon" href="/favicon.ico">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
@@ -19,21 +20,12 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-R4568JEMSW');
   </script>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
   <!-- Styles -->
   <style>
-
-    
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+    * { box-sizing: border-box; font-family: Arial, sans-serif; }
 
     body {
       margin: 0;
@@ -60,61 +52,29 @@
       max-width: 400px;
     }
 
-    h1 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 500;
-    }
-
-    p {
-      font-size: 14px;
-      color: #aaa;
-    }
-
     .drop-zone {
       border: 2px dashed #444;
       border-radius: 12px;
       padding: 30px;
       margin-top: 20px;
       cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .drop-zone:hover {
-      border-color: #888;
-      background: #222;
-    }
-
-    img {
-      max-width: 150px;
-      margin-top: 15px;
-      border-radius: 8px;
-    }
-
-    select {
-      margin-top: 15px;
-      padding: 8px;
-      border-radius: 8px;
-      border: none;
-      background: #222;
-      color: white;
     }
 
     button {
       margin-top: 20px;
       padding: 12px;
       width: 100%;
-      border: none;
       border-radius: 10px;
+      border: none;
       background: white;
-      color: black;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.2s;
     }
 
-    button:hover {
-      opacity: 0.85;
+    #preview {
+      max-width: 150px;
+      margin-top: 15px;
+      display: none;
     }
 
     footer {
@@ -123,18 +83,22 @@
       color: #666;
     }
 
-    .ad-space {
-      margin-top: 30px;
-      width: 100%;
-      max-width: 400px;
-      height: 90px;
-      background: #222;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      font-size: 12px;
+    .tool-content {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: left;
+      line-height: 1.7;
+    }
+
+    .tool-content h2 {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .tool-content ul,
+    .tool-content ol {
+      padding-left: 20px;
     }
 
   </style>
@@ -147,96 +111,107 @@
 <ins class="adsbygoogle"
      style="display:block; margin-bottom:20px;"
      data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="3707669770"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="3707669770"></ins>
 
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-  
-  
+
 <div class="container">
-  <h1>HEIC / HEIF to PNG Converter</h1>
+  <h1>HEIC to PNG Converter</h1>
   <p>Convert HEIC / HEIF images to PNG instantly</p>
 
   <div class="drop-zone" id="dropZone">
     Drop image here or click
-   <input type="file" id="fileInput" hidden>
+    <input type="file" id="fileInput" hidden>
   </div>
 
-  <img id="preview" />
+  <img id="preview">
 
-<button id="convertBtn" onclick="convert()">Convert</button>
+  <button id="convertBtn" onclick="convert()">Convert</button>
 </div>
 
 <div id="loader" style="display:none; margin-top:15px;">
   ⏳ Converting image...
-</div>  
-  
- <!-- Ad debajo del botón -->
+</div>
+
+<!-- Ad -->
 <ins class="adsbygoogle"
      style="display:block; margin-top:20px;"
      data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="1181011532"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="1181011532"></ins>
 
 <script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script> 
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
-  
-<p>
-Free online HEIC / HEIF to PNG converter. Convert HEIC and HEIF images to high-quality PNG instantly without uploading files. 
-Fast, secure and works directly in your browser.
-</p>  
+<!-- SEO CONTENT -->
+<div class="tool-content">
 
-<p>
-Convertidor online gratuito de HEIC / HEIF a PNG. Convierte imágenes HEIC y HEIF a PNG de alta calidad al instante sin necesidad de subir archivos.
-Rápido, seguro y funciona directamente en tu navegador.
-</p>
+  <h2>What this tool does</h2>
+  <p>
+    This tool converts HEIC images into PNG format directly in your browser.
+    PNG is ideal when you need higher quality images or transparency support,
+    making it useful for design, editing, and web usage.
+  </p>
 
-<p style="margin-top:15px; font-size:13px; color:#888;">
-Easily convert iPhone HEIC / HEIF photos to PNG format for better compatibility with Windows, Android and web platforms. 
-No registration required. 100% private and processed locally on your device.
-</p>
+  <h2>How to use</h2>
+  <ol>
+    <li>Upload or drag your HEIC file</li>
+    <li>Wait for preview</li>
+    <li>Click convert</li>
+    <li>Download PNG instantly</li>
+  </ol>
 
-<p>
-Convierte fácilmente las fotos HEIC / HEIF de tu iPhone al formato PNG para disfrutar de una mayor compatibilidad con Windows, Android y plataformas web.
-No es necesario registrarse. 100 % privado y procesado localmente en tu dispositivo.
-</p>
-  
+  <h2>Benefits</h2>
+  <ul>
+    <li>Supports transparency (PNG)</li>
+    <li>No uploads required</li>
+    <li>Fast conversion</li>
+    <li>High-quality output</li>
+  </ul>
 
-<div style="margin-top:40px;">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-7189936182708078"
-       data-ad-slot="8603238385"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
+  <h2>FAQ</h2>
+
+  <h3>Why convert HEIC to PNG?</h3>
+  <p>PNG supports transparency and higher detail than JPG.</p>
+
+  <h3>Is this secure?</h3>
+  <p>Your files are processed locally.</p>
+
 </div>
 
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>  
+<!-- Ad -->
+<ins class="adsbygoogle"
+     style="display:block; margin-top:40px;"
+     data-ad-client="ca-pub-7189936182708078"
+     data-ad-slot="8603238385"></ins>
 
-  
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <footer>
   © 2026 InkTools |
   <a href="/about.html">About</a> |
   <a href="/contact.html">Contact</a> |
-  <a href="/privacy.html">Privacy Policy</a>
+  <a href="/privacy.html">Privacy</a>
 </footer>
-  
+
 <script src="https://unpkg.com/heic2any/dist/heic2any.min.js"></script>
 <script src="/script.js"></script>
 
 <script>
 setupTool({
-  previewFromHEIC: true,
+  previewFromHEIC: false,
 
   async convert(file) {
+
+    // 🔒 evita error de “already browser readable”
+    if (!file.type.includes("heic") && !file.type.includes("heif")) {
+      return file;
+    }
+
     const result = await heic2any({
       blob: file,
       toType: "image/png"
