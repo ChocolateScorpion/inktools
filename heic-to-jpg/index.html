@@ -13,6 +13,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HEIC to JPG Converter Online Free | InkTools</title>
 
+    <link rel="icon" href="/favicon.ico">
+  
+
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
   <script>
@@ -262,10 +265,20 @@ setupTool({
   previewFromHEIC: false,
 
   async convert(file) {
-    const result = await heic2any({
-      blob: file,
-      toType: "image/jpeg"
-    });
+
+  // 🔒 VALIDACIÓN CLAVE
+  if (!file.type.includes("heic") && !file.type.includes("heif")) {
+    // Si ya es JPG/PNG → solo devolverlo
+    return file;
+  }
+
+  const result = await heic2any({
+    blob: file,
+    toType: "image/jpeg"
+  });
+
+  return Array.isArray(result) ? result[0] : result;
+}
 
     return Array.isArray(result) ? result[0] : result;
   },
