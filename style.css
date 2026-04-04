@@ -166,6 +166,7 @@ a {
 .seo-content,
 .tool-content {
   max-width: 700px;
-  margin: 40px auto 0 auto;
-  padding: 0 10px;
+  margin: 40px auto;
+  padding: 0 20px;
+  width: 100%;
 }
