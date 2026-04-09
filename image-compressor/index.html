@@ -125,7 +125,7 @@
   <p>No upload • 100% private • Works in your browser</p>
 
   <div class="drop-zone" id="dropZone">
-    Drop your image here or click o upload
+    Drop your image here or click to upload
     <small>Supports iPhone photos</small>
     <input type="file" id="fileInput" hidden>
   </div>
@@ -245,7 +245,7 @@ async convert(file) {
   return await new Promise(resolve =>
     canvas.toBlob(resolve, "image/jpeg", quality)
   );
-}   
+},   
 
   getFileName(name) {
     return "compressed_" + name;
