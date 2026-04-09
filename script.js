@@ -121,3 +121,14 @@ function setupTool(config) {
 
   window.convert = convert;
 }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const qualityInput = document.getElementById("quality");
+    const qualityValue = document.getElementById("qualityValue");
+  
+    if (qualityInput && qualityValue) {
+      qualityInput.addEventListener("input", () => {
+        qualityValue.innerText = qualityInput.value;
+      });
+    }
+  });
