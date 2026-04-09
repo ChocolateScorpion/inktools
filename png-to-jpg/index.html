@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
   <!-- Google AdSense -->
@@ -11,7 +10,8 @@
   <!-- Meta -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PNG to JPG Converter</title>
+  <title>PNG to JPG | InkTools</title>
+  <link rel="icon" href="/favicon.ico">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
@@ -19,20 +19,12 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-R4568JEMSW');
   </script>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
   <!-- Styles -->
   <style>
-    
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+    * { box-sizing: border-box; font-family: Arial, sans-serif; }
 
     body {
       margin: 0;
@@ -59,61 +51,29 @@
       max-width: 400px;
     }
 
-    h1 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 500;
-    }
-
-    p {
-      font-size: 14px;
-      color: #aaa;
-    }
-
     .drop-zone {
       border: 2px dashed #444;
       border-radius: 12px;
       padding: 30px;
       margin-top: 20px;
       cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .drop-zone:hover {
-      border-color: #888;
-      background: #222;
-    }
-
-    img {
-      max-width: 150px;
-      margin-top: 15px;
-      border-radius: 8px;
-    }
-
-    select {
-      margin-top: 15px;
-      padding: 8px;
-      border-radius: 8px;
-      border: none;
-      background: #222;
-      color: white;
     }
 
     button {
       margin-top: 20px;
       padding: 12px;
       width: 100%;
-      border: none;
       border-radius: 10px;
+      border: none;
       background: white;
-      color: black;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.2s;
     }
 
-    button:hover {
-      opacity: 0.85;
+    #preview {
+      max-width: 150px;
+      margin-top: 15px;
+      display: none;
     }
 
     footer {
@@ -122,21 +82,25 @@
       color: #666;
     }
 
-    .ad-space {
-      margin-top: 30px;
-      width: 100%;
-      max-width: 400px;
-      height: 90px;
-      background: #222;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      font-size: 12px;
+    .tool-content {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: left;
+      line-height: 1.7;
     }
 
+    .tool-content h2 {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .tool-content ul,
+    .tool-content ol {
+      padding-left: 20px;
+    }
   </style>
+
 </head>
 
 <body>
@@ -145,103 +109,116 @@
   <a href="/" style="color:white; text-decoration:none;">InkTools</a>
 </header>
 
+<!-- Top Ad -->
 <ins class="adsbygoogle"
      style="display:block; margin-bottom:20px;"
      data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="3707669770"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="3707669770"></ins>
 
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-  
-  
+
 <div class="container">
+
   <h1>Convert PNG to JPG instantly</h1>
   <p>No upload • 100% private • Works in your browser</p>
 
   <div class="drop-zone" id="dropZone">
     Drop your PNG file here or click to upload
     <small>Supports iPhone photos</small>
-   <input type="file" id="fileInput" accept="image/*" hidden>
+    <input type="file" id="fileInput" hidden>
   </div>
 
-  <img id="preview" />
+  <img id="preview">
 
+  <!-- OPTIONAL CONTROLS (ej: slider, inputs, etc) -->
 
-<button id="convertBtn" onclick="convert()">Convert to JPG</button>
+  <button id="convertBtn" onclick="convert()">
+    Convert to JPG
+  </button>
+
 </div>
 
 <div id="loader" style="display:none; margin-top:15px;">
-  ⏳ Converting image...
-</div>  
-  
- <!-- Ad debajo del botón -->
+  ⏳ Processing...
+</div>
+
+<!-- Mid Ad -->
 <ins class="adsbygoogle"
      style="display:block; margin-top:20px;"
      data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="1181011532"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="1181011532"></ins>
 
 <script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script> 
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
+<!-- SEO CONTENT -->
+<div class="tool-content">
+
+  <h2>What this tool does</h2>
+  <p>
+    This tool converts PNG images into JPG format instantly. 
+    JPG files are smaller and widely supported across devices.
+  </p>
+
+  <h2>How to use</h2>
+  <ol>
+    <li>Upload or drag your PNG file</li>
+    <li>Click "Convert to JPG"</li>
+    <li>Download your JPG instantly</li>
+  </ol>
+
+  <h2>Benefits</h2>
+  <ul>
+    <li>Reduce file size</li>
+    <li>Compatible with all devices</li>
+    <li>No uploads required</li>
+    <li>Fast conversion</li>
+  </ul>
+
+  <h2>FAQ</h2>
+  <h3>Will I lose transparency?</h3>
+    <p>Yes. JPG does not support transparency.</p>
   
-<p>
-Free online PNG to JPG converter. Convert PNG images to JPG instantly with high quality. 
-Fast, secure and works directly in your browser without uploading files.
-</p>
+  <h3>Is this tool secure?</h3>
+    <p>Your files stay on your device.</p>
+ 
 
-<p>
-Convertidor gratuito en línea de PNG a JPG. Convierte imágenes PNG a JPG al instante y con alta calidad.
-Rápido, seguro y funciona directamente en tu navegador sin necesidad de subir archivos.  
-</p>
-
-<p style="margin-top:15px; font-size:13px; color:#888;">
-Reduce PNG file size by converting to JPG for better performance on websites, email and social media. 
-No registration required. Your files are processed locally and remain private.
-</p>  
-
-<p style="margin-top:15px; font-size:13px; color:#888;">
-Reduce el tamaño de los archivos PNG convirtiéndolos a JPG para mejorar el rendimiento en sitios web, correo electrónico y redes sociales.
-No es necesario registrarse. Tus archivos se procesan localmente y se mantienen privados.
-</p>
-
-  
-
-<div style="margin-top:40px;">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-7189936182708078"
-       data-ad-slot="8603238385"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
 </div>
 
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>  
+<!-- Bottom Ad -->
+<ins class="adsbygoogle"
+     style="display:block; margin-top:40px;"
+     data-ad-client="ca-pub-7189936182708078"
+     data-ad-slot="8603238385"></ins>
 
-  
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <footer>
   © 2026 InkTools |
   <a href="/about.html">About</a> |
   <a href="/contact.html">Contact</a> |
-  <a href="/privacy.html">Privacy Policy</a>
+  <a href="/privacy.html">Privacy</a>
 </footer>
 
 <script src="/script.js"></script>
 
+<!-- OPTIONAL LIBRARIES -->
+
 <script>
 setupTool({
+
   previewFromHEIC: false,
 
   async convert(file) {
+
     const img = await createImageBitmap(file);
     const canvas = document.createElement("canvas");
+
     canvas.width = img.width;
     canvas.height = img.height;
 
@@ -251,13 +228,14 @@ setupTool({
     return await new Promise(resolve =>
       canvas.toBlob(resolve, "image/jpeg", 0.9)
     );
-  },
+  }, 
 
   getFileName(name) {
-    return name.replace(".png", ".jpg");
+    return name.replace(/\.png$/i, ".jpg");
   }
+
 });
 </script>
- 
+
 </body>
 </html>
