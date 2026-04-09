@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
   <!-- Google AdSense -->
@@ -11,7 +10,8 @@
   <!-- Meta -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Resizer</title>
+  <title>Image resizer | InkTools</title>
+  <link rel="icon" href="/favicon.ico">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
@@ -19,20 +19,12 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-R4568JEMSW');
   </script>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
   <!-- Styles -->
   <style>
-    
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+    * { box-sizing: border-box; font-family: Arial, sans-serif; }
 
     body {
       margin: 0;
@@ -59,61 +51,29 @@
       max-width: 400px;
     }
 
-    h1 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 500;
-    }
-
-    p {
-      font-size: 14px;
-      color: #aaa;
-    }
-
     .drop-zone {
       border: 2px dashed #444;
       border-radius: 12px;
       padding: 30px;
       margin-top: 20px;
       cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .drop-zone:hover {
-      border-color: #888;
-      background: #222;
-    }
-
-    img {
-      max-width: 150px;
-      margin-top: 15px;
-      border-radius: 8px;
-    }
-
-    select {
-      margin-top: 15px;
-      padding: 8px;
-      border-radius: 8px;
-      border: none;
-      background: #222;
-      color: white;
     }
 
     button {
       margin-top: 20px;
       padding: 12px;
       width: 100%;
-      border: none;
       border-radius: 10px;
+      border: none;
       background: white;
-      color: black;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.2s;
     }
 
-    button:hover {
-      opacity: 0.85;
+    #preview {
+      max-width: 150px;
+      margin-top: 15px;
+      display: none;
     }
 
     footer {
@@ -122,21 +82,25 @@
       color: #666;
     }
 
-    .ad-space {
-      margin-top: 30px;
-      width: 100%;
-      max-width: 400px;
-      height: 90px;
-      background: #222;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      font-size: 12px;
+    .tool-content {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: left;
+      line-height: 1.7;
     }
 
+    .tool-content h2 {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .tool-content ul,
+    .tool-content ol {
+      padding-left: 20px;
+    }
   </style>
+
 </head>
 
 <body>
@@ -145,138 +109,151 @@
   <a href="/" style="color:white; text-decoration:none;">InkTools</a>
 </header>
 
+<!-- Top Ad -->
 <ins class="adsbygoogle"
      style="display:block; margin-bottom:20px;"
      data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="3707669770"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="3707669770"></ins>
 
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-  
-  
+
 <div class="container">
+
   <h1>Resize images instantly</h1>
-  <p>Resize images instantly to any dimensions / No upload • 100% private • Works in your browser</p>
-<div class="drop-zone" id="dropZone">
+  <p>No upload • 100% private • Works in your browser</p>
+
+  <div class="drop-zone" id="dropZone">
     Drop your image here or click to upload
     <small>Supports iPhone photos</small>
-   <input type="file" id="fileInput" accept="image/*" hidden>
-</div>
+    <input type="file" id="fileInput" hidden>
+  </div>
 
-  <div class="preview-container">
-  <img id="preview" />
-</div>
+  <img id="preview">
+
+  <div style="margin-top:15px;">
+    <input 
+      type="number" 
+      id="width" 
+      placeholder="Width (px)" 
+      style="width:48%; padding:10px; border-radius:10px; border:none; margin-right:2%;"
+    >
   
-<div style="margin-top:15px;">
-  <input 
-    type="number" 
-    id="width" 
-    placeholder="Width (px)" 
-    style="width:48%; padding:8px; border-radius:8px; border:none; margin-right:2%;"
-  >
+    <input 
+      type="number" 
+      id="height" 
+      placeholder="Height (px)" 
+      style="width:48%; padding:10px; border-radius:10px; border:none;"
+    >
+  </div>
+  
+  <button id="convertBtn" onclick="convert()">
+    Resize image
+  </button>
 
-  <input 
-    type="number" 
-    id="height" 
-    placeholder="Height (px)" 
-    style="width:48%; padding:8px; border-radius:8px; border:none;"
-  >
-</div>
-
-
-<button id="convertBtn" onclick="convert()">Resize Image</button>
 </div>
 
 <div id="loader" style="display:none; margin-top:15px;">
-  ⏳ Converting image...
-</div>  
-  
- <!-- Ad debajo del botón -->
+  ⏳ Processing...
+</div>
+
+<!-- Mid Ad -->
 <ins class="adsbygoogle"
      style="display:block; margin-top:20px;"
      data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="1181011532"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="1181011532"></ins>
 
 <script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script> 
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
+<!-- SEO CONTENT -->
+<div class="tool-content">
+
+  <h2>What this tool does</h2>
+  <p>
+    This tool resizes images to any dimensions directly in your browser. 
+    It helps you adjust width and height for websites, social media or documents instantly.
+  </p>
+
+  <h2>How to use</h2>
+  <ol>
+    <li>Upload or drag your image</li>
+    <li>Enter desired width and height</li>
+    <li>Click "Resize Image"</li>
+    <li>Download the resized image instantly</li>
+  </ol>
   
-<p>
-Free online image resizer. Resize images to any dimensions instantly. 
-Fast, secure and works directly in your browser without uploading files.
-</p>
+  <h2>Benefits</h2>
+  <ul>
+    <li>Resize images to exact dimensions</li>
+    <li>No uploads required (100% private)</li>
+    <li>Fast processing in your browser</li>
+    <li>Works on all devices</li>
+  </ul>
 
-<p>
-Herramienta gratuita en línea para cambiar el tamaño de imágenes. Cambia el tamaño de las imágenes al instante a cualquier dimensión.
-Rápida, segura y funciona directamente en tu navegador sin necesidad de subir archivos.
-</p>
+  <h2>FAQ</h2>
 
-<p style="margin-top:15px; font-size:13px; color:#888;">
-Change image width and height in seconds for websites, social media or documents. 
-No registration required. All files are processed locally on your device.
-</p>
-
-<p>
-Cambia el ancho y la altura de las imágenes en cuestión de segundos para sitios web, redes sociales o documentos.
-No es necesario registrarse. Todos los archivos se procesan localmente en tu dispositivo.
-</p>
-
-<div style="margin-top:40px;">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-7189936182708078"
-       data-ad-slot="8603238385"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
+  <h3>Will resizing reduce quality?</h3>
+    <p>Resizing may slightly affect quality depending on the dimensions, but results are optimized.</p>
+  
+  <h3>Is this tool secure?</h3>
+    <p>Yes. Your images never leave your device.</p>
 </div>
 
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>  
+<!-- Bottom Ad -->
+<ins class="adsbygoogle"
+     style="display:block; margin-top:40px;"
+     data-ad-client="ca-pub-7189936182708078"
+     data-ad-slot="8603238385"></ins>
 
-  
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <footer>
   © 2026 InkTools |
   <a href="/about.html">About</a> |
   <a href="/contact.html">Contact</a> |
-  <a href="/privacy.html">Privacy Policy</a>
+  <a href="/privacy.html">Privacy</a>
 </footer>
 
 <script src="/script.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/heic2any/dist/heic2any.min.js"></script>
+<!-- OPTIONAL LIBRARIES -->
 
-<script src="script.js"></script>
-  
 <script>
 setupTool({
-  previewFromHEIC: true,
+
+  previewFromHEIC: false,
 
   async convert(file) {
-    const img = await createImageBitmap(file);
-    const canvas = document.createElement("canvas");
 
-    const scale = 0.5; // luego lo hacemos dinámico
-    canvas.width = img.width * scale;
-    canvas.height = img.height * scale;
+  const widthInput = document.getElementById("width").value;
+  const heightInput = document.getElementById("height").value;
 
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  const img = await createImageBitmap(file);
+  const canvas = document.createElement("canvas");
 
-    return await new Promise(resolve =>
-      canvas.toBlob(resolve, "image/jpeg", 0.9)
-    );
+  canvas.width = widthInput || img.width;
+  canvas.height = heightInput || img.height;
+
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+  return await new Promise(resolve =>
+    canvas.toBlob(resolve, "image/jpeg", 0.9)
+  );
+}
+ 
+    return file;
   },
 
   getFileName(name) {
     return "resized_" + name;
   }
+
 });
 </script>
 
