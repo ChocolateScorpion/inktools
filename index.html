@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
   <!-- Google AdSense -->
@@ -12,6 +11,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Online Image Tools | InkTools</title>
+  <link rel="icon" href="/favicon.ico">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
@@ -19,20 +19,12 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-R4568JEMSW');
   </script>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
   <!-- Styles -->
   <style>
-    
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+    * { box-sizing: border-box; font-family: Arial, sans-serif; }
 
     body {
       margin: 0;
@@ -49,71 +41,41 @@
       font-weight: 600;
     }
 
-    .container {
-      background: #1a1a1a;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    .hero {
       text-align: center;
-      width: 90%;
-      max-width: 400px;
+      margin-top: 40px;
+      padding: 0 20px;
     }
 
-    h1 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 500;
+    .hero h1 {
+      margin-bottom: 10px;
     }
 
-    p {
-      font-size: 14px;
+    .hero p {
       color: #aaa;
     }
 
-    .drop-zone {
-      border: 2px dashed #444;
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 15px;
+      width: 90%;
+      max-width: 600px;
+      margin-top: 30px;
+    }
+
+    .tool-card {
+      background: #1a1a1a;
+      padding: 20px;
       border-radius: 12px;
-      padding: 30px;
-      margin-top: 20px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .drop-zone:hover {
-      border-color: #888;
-      background: #222;
-    }
-
-    img {
-      max-width: 150px;
-      margin-top: 15px;
-      border-radius: 8px;
-    }
-
-    select {
-      margin-top: 15px;
-      padding: 8px;
-      border-radius: 8px;
-      border: none;
-      background: #222;
+      text-align: center;
+      text-decoration: none;
       color: white;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 12px;
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      background: white;
-      color: black;
-      font-weight: 600;
-      cursor: pointer;
       transition: 0.2s;
     }
 
-    button:hover {
-      opacity: 0.85;
+    .tool-card:hover {
+      background: #2a2a2a;
     }
 
     footer {
@@ -122,291 +84,102 @@
       color: #666;
     }
 
-    .ad-space {
-      margin-top: 30px;
-      width: 100%;
-      max-width: 400px;
-      height: 90px;
-      background: #222;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      font-size: 12px;
+    .tool-content {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: left;
+      line-height: 1.7;
     }
 
-    .tools {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 25px;
-    }
-
-    .tools a {
-      text-decoration: none;
-      padding: 14px;
-      background: #1c1c1c;
-      color: #f1f1f1;
+    .tool-content h2 {
       text-align: center;
-      border-radius: 12px;
-      border: 1px solid #2a2a2a;
-      transition: all 0.2s ease;
-      font-size: 14px;
-    }
-
-    .tools a:hover {
-      background: #2a2a2a;
-      border-color: #3a3a3a;
-      transform: translateY(-1px);
+      margin-top: 40px;
     }
 
   </style>
+
 </head>
 
 <body>
 
 <header>
-  <strong>InkTools</strong> – Free Image Tools
+  <a href="/" style="color:white; text-decoration:none;">InkTools</a>
 </header>
 
+<!-- Top Ad -->
 <ins class="adsbygoogle"
      style="display:block; margin-bottom:20px;"
      data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="3707669770"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="3707669770"></ins>
 
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-  
-  
-<div class="container">
-  
+
+<!-- HERO -->
+<div class="hero">
   <h1>Free Online Image Tools</h1>
-
-  <p>
-    Convert, compress and optimize your images instantly with simple, fast and private tools. 
-    No uploads required. Select a tool below to get started.
-  </p>
-
-  <h2 style="margin-top:30px;">Choose a tool</h2>
-
-  
-<div class="tools">
-  <a href="/heic-to-jpg">HEIC → JPG</a>
-  <a href="/heic-to-png">HEIC → PNG</a>
-  <a href="/image-compressor">Compress Image</a>
-  <a href="/png-to-jpg">PNG → JPG</a>
-  <a href="/jpg-to-png">JPG → PNG</a>
-  <a href="/image-resizer">Resize Image</a>
+  <p>Convert, compress and resize images instantly — no upload required</p>
 </div>
 
+<!-- TOOLS GRID -->
+<div class="tools-grid">
 
-<section class="seo-content">
-  <h2>Fast and Private Image Tools for Everyday Use</h2>
+  <a href="/heic-to-jpg.html" class="tool-card">HEIC to JPG</a>
+  <a href="/heic-to-png.html" class="tool-card">HEIC to PNG</a>
+  <a href="/compressor.html" class="tool-card">Image Compressor</a>
+  <a href="/resizer.html" class="tool-card">Image Resizer</a>
+  <a href="/jpg-to-png.html" class="tool-card">JPG to PNG</a>
+  <a href="/png-to-jpg.html" class="tool-card">PNG to JPG</a>
 
-  <p>
-    InkTools was created to solve a simple problem: most online tools are either slow, full of ads, or require uploading your files to external servers. We wanted something different — tools that work instantly, directly in your browser, and respect your privacy.
-  </p>
-
-  <p>
-    Whether you need to convert HEIC images to JPG or PNG, compress files for faster uploads, or resize images for specific platforms, InkTools gives you a clean and efficient experience without unnecessary steps.
-  </p>
-
-  <p>
-    All tools are designed to run locally in your browser whenever possible. This means your files stay on your device and are never uploaded unless explicitly stated. It's faster, safer, and more reliable.
-  </p>
-
-  <h3>What can you do with InkTools?</h3>
-  <ul>
-    <li>Convert HEIC to JPG or PNG instantly</li>
-    <li>Compress images to reduce file size</li>
-    <li>Resize images for social media or web use</li>
-    <li>Work directly in your browser without uploads</li>
-  </ul>
-
-  <h3>Why choose InkTools?</h3>
-  <ul>
-    <li>No uploads required (privacy-first approach)</li>
-    <li>Fast processing directly in your browser</li>
-    <li>Simple and clean interface</li>
-    <li>Free to use with no hidden steps</li>
-  </ul>
-
-  <p>
-    InkTools is constantly evolving with new features and improvements focused on usability, speed, and real-world needs. Our goal is to provide practical tools that just work — no friction, no complexity.
-  </p>
-</section>
-
- 
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script> 
-
-  
-<div style="margin-top:40px;">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-7189936182708078"
-       data-ad-slot="8603238385"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
 </div>
 
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>  
+<!-- Mid Ad -->
+<ins class="adsbygoogle"
+     style="display:block; margin-top:30px;"
+     data-ad-client="ca-pub-7189936182708078"
+     data-ad-slot="1181011532"></ins>
 
-  
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- SEO CONTENT -->
+<div class="tool-content">
+
+  <h2>All-in-one image tools</h2>
+  <p>
+    InkTools provides free online tools to convert, compress and resize images instantly.
+    Everything works directly in your browser — no uploads required.
+  </p>
+
+  <h2>Why use InkTools?</h2>
+  <ul>
+    <li>Fast and easy to use</li>
+    <li>100% private processing</li>
+    <li>No installation required</li>
+    <li>Works on all devices</li>
+  </ul>
+
+</div>
+
+<!-- Bottom Ad -->
+<ins class="adsbygoogle"
+     style="display:block; margin-top:40px;"
+     data-ad-client="ca-pub-7189936182708078"
+     data-ad-slot="8603238385"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <footer>
   © 2026 InkTools |
-  <a href="/privacy.html">Privacy</a> |
   <a href="/about.html">About</a> |
-  <a href="/contact.html">Contact</a>
+  <a href="/contact.html">Contact</a> |
+  <a href="/privacy.html">Privacy</a>
 </footer>
-  
-<script src="https://unpkg.com/heic2any/dist/heic2any.min.js"></script>
-  
-<script>
-  const dropZone = document.getElementById("dropZone");
-  const input = document.getElementById("fileInput");
-  const preview = document.getElementById("preview");
-
-  let file;
-
-  dropZone.addEventListener("click", () => input.click());
-
-  input.onchange = (e) => handleFile(e.target.files[0]);
-
-  dropZone.ondragover = (e) => {
-    e.preventDefault();
-    dropZone.style.borderColor = "#fff";
-  };
-
-  dropZone.ondrop = (e) => {
-    e.preventDefault();
-    handleFile(e.dataTransfer.files[0]);
-  };
-
-function handleFile(f) {
-const btn = document.getElementById("convertBtn");
-btn.style.display = "block";
-btn.innerText = "Convert";
-showLoader(false);
-  
-  if (!f) return;
-
-  file = f;
-
-  const isPreviewSupported =
-    f.type.startsWith("image/") &&
-    !f.type.includes("heic") &&
-    !f.type.includes("heif");
-
-  if (isPreviewSupported) {
-    const url = URL.createObjectURL(file);
-    preview.src = url;
-    preview.style.display = "block";
-  } else {
-    preview.style.display = "none";
-  }
-}
-
-async function convert() {
-  if (!file) {
-    alert("Upload a file first");
-    return;
-  }
-
-  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  const btn = document.getElementById("convertBtn");
-
-        btn.style.display = "none"; 
-        showLoader(true);
-
-  try {
-    const format = document.getElementById("format").value;
-
-    let outputBlob;
-
-    try {
-      const result = await heic2any({
-        blob: file,
-        toType: format
-      });
-
-      outputBlob = Array.isArray(result) ? result[0] : result;
-
-    } catch (err) {
-      console.error("HEIC conversion failed:", err);
-
-      // 🔥 fallback iPhone
-      if (isIOS) {
-        btn.style.display = "block";
-        btn.innerText = "Opening image...";
-        const url = URL.createObjectURL(file);
-        window.location.href = url;
-
-        btn.style.display = "block";
-        showLoader(false);
-
-        return;
-      }
-
-      alert("Conversion failed. Try another image.");
-      btn.innerText = "Convert";
-      showLoader(false);
-      return;
-    }
-
-    const url = URL.createObjectURL(outputBlob);
-
-    if (isIOS) {
-      btn.style.display = "block";
-      btn.innerText = "Opening image...";
-      window.location.href = url;
-    } else {
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "converted." + (format === "image/png" ? "png" : "jpg");
-      a.click();
-      
-  setTimeout(() => {
-    btn.style.display = "block";
-    btn.innerText = "Convert";
-    showLoader(false);
-}, 500);
-    }
-
-  } catch (error) {
-    console.error(error);
-    alert("Error converting image");
-  }
-
-btn.style.display = "block";
-btn.innerText = "Convert";
-showLoader(false);
-}
-
-
-  function showLoader(state) {
-  const loader = document.getElementById("loader");
-  loader.style.display = state ? "block" : "none";
-  }
-
-window.addEventListener("pageshow", () => {
-  const btn = document.getElementById("convertBtn");
-  btn.style.display = "block";
-  btn.innerText = "Convert";
-  showLoader(false);
-});
-   
-</script>
 
 </body>
 </html>
-
-By Roder-ink
