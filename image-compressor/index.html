@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
   <!-- Google AdSense -->
@@ -11,7 +10,8 @@
   <!-- Meta -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Compressor</title>
+  <title>Image Compressor | InkTools</title>
+  <link rel="icon" href="/favicon.ico">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
@@ -19,20 +19,12 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-R4568JEMSW');
   </script>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
   <!-- Styles -->
   <style>
-    
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+    * { box-sizing: border-box; font-family: Arial, sans-serif; }
 
     body {
       margin: 0;
@@ -59,61 +51,29 @@
       max-width: 400px;
     }
 
-    h1 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 500;
-    }
-
-    p {
-      font-size: 14px;
-      color: #aaa;
-    }
-
     .drop-zone {
       border: 2px dashed #444;
       border-radius: 12px;
       padding: 30px;
       margin-top: 20px;
       cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .drop-zone:hover {
-      border-color: #888;
-      background: #222;
-    }
-
-    img {
-      max-width: 150px;
-      margin-top: 15px;
-      border-radius: 8px;
-    }
-
-    select {
-      margin-top: 15px;
-      padding: 8px;
-      border-radius: 8px;
-      border: none;
-      background: #222;
-      color: white;
     }
 
     button {
       margin-top: 20px;
       padding: 12px;
       width: 100%;
-      border: none;
       border-radius: 10px;
+      border: none;
       background: white;
-      color: black;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.2s;
     }
 
-    button:hover {
-      opacity: 0.85;
+    #preview {
+      max-width: 150px;
+      margin-top: 15px;
+      display: none;
     }
 
     footer {
@@ -122,21 +82,25 @@
       color: #666;
     }
 
-    .ad-space {
-      margin-top: 30px;
-      width: 100%;
-      max-width: 400px;
-      height: 90px;
-      background: #222;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      font-size: 12px;
+    .tool-content {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: left;
+      line-height: 1.7;
     }
 
+    .tool-content h2 {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .tool-content ul,
+    .tool-content ol {
+      padding-left: 20px;
+    }
   </style>
+
 </head>
 
 <body>
@@ -145,142 +109,148 @@
   <a href="/" style="color:white; text-decoration:none;">InkTools</a>
 </header>
 
+<!-- Top Ad -->
 <ins class="adsbygoogle"
      style="display:block; margin-bottom:20px;"
      data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="3707669770"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="3707669770"></ins>
 
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-  
-  
+
 <div class="container">
-  <h1>Compress your images instantly</h1>
+
+  <h1>Compress images instantly</h1>
   <p>No upload • 100% private • Works in your browser</p>
 
   <div class="drop-zone" id="dropZone">
-    Drop your image here or click to upload
+    Drop your image here or click o upload
     <small>Supports iPhone photos</small>
-    <input type="file" id="fileInput" accept="image/*" hidden>
+    <input type="file" id="fileInput" hidden>
   </div>
 
-  <img id="preview" />
+  <img id="preview">
 
   <label style="display:block; margin-top:15px; font-size:13px; color:#aaa;">
     Compression Level
   </label>
 
-<input 
-  type="range" 
-  id="quality" 
-  min="0.1" 
-  max="1" 
-  step="0.1" 
-  value="0.6"
-  style="width:100%; margin-top:5px;"
->
-
-<div style="font-size:12px; color:#888; margin-top:5px;">
-  Quality: <span id="qualityValue">0.6</span>
-</div>
+  <input 
+    type="range" 
+    id="quality" 
+    min="0.1" 
+    max="1" 
+    step="0.1" 
+    value="0.6"
+    style="width:100%; margin-top:5px;"
+  >
   
-<button id="convertBtn" onclick="convert()">Convert</button>
+  <div style="font-size:12px; color:#888; margin-top:5px;">
+    Quality: <span id="qualityValue">0.6</span>
+  </div>
+  
+  <button id="convertBtn" onclick="convert()">
+    Compress image
+  </button>
+
 </div>
 
 <div id="loader" style="display:none; margin-top:15px;">
-  ⏳ Converting image...
-</div>  
-  
- <!-- Ad debajo del botón -->
+  ⏳ Processing...
+</div>
+
+<!-- Mid Ad -->
 <ins class="adsbygoogle"
      style="display:block; margin-top:20px;"
      data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="1181011532"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+     data-ad-slot="1181011532"></ins>
 
 <script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script> 
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
+<!-- SEO CONTENT -->
+<div class="tool-content">
+
+  <h2>What this tool does</h2>
+  <p>This tool compresses images directly in your browser to reduce file size without noticeable quality loss. 
+  It supports JPG, PNG and WebP, making it perfect for websites, email and social media.</p>
+
+  <h2>How to use</h2>
+  <ol>
+    <li>Upload or drag your image file</li>
+    <li>Adjust the compression level</li>
+    <li>Click "Compress Image"</li>
+    <li>Download the optimized image instantly</li>
+  </ol>
+
+  <h2>Benefits</h2>
+  <ul>
+    <li>Reduce image file size quickly</li>
+    <li>No uploads required (100% private)</li>
+    <li>Works on all devices and browsers</li>
+    <li>Optimized balance between quality and size</li>
+  </ul>
+
+  <h2>FAQ</h2>
+
+  <h3>Does compression reduce quality?</h3>
+    <p>The tool reduces file size while keeping visual quality as high as possible.</p>
   
-<p>
-Free online image compressor. Reduce image file size without losing quality. 
-Supports JPG, PNG and WebP. Fast, secure and works directly in your browser.
-</p>  
+  <h3>Is this tool safe?</h3>
+    <p>Yes. Your images are processed locally in your browser and never uploaded.</p>
 
-<p>
-Compresor de imágenes en línea gratuito. Reduce el tamaño de los archivos de imagen sin perder calidad.
-Compatible con JPG, PNG y WebP. Rápido, seguro y funciona directamente en tu navegador.
-</p> 
-
-<p style="margin-top:15px; font-size:13px; color:#888;">
-Compress images for websites, email or social media in seconds. 
-Improve loading speed and save storage space with high-quality compression. 
-No upload required, your files stay private on your device.
-</p>
-
-<p style="margin-top:10px; font-size:13px; color:#777;">
-Convierte imágenes HEIC a PNG gratis y sin subir archivos. 
-Rápido, seguro y compatible con cualquier dispositivo.
-</p>
-  
-
-<div style="margin-top:40px;">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-7189936182708078"
-       data-ad-slot="8603238385"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
 </div>
 
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>  
+<!-- Bottom Ad -->
+<ins class="adsbygoogle"
+     style="display:block; margin-top:40px;"
+     data-ad-client="ca-pub-7189936182708078"
+     data-ad-slot="8603238385"></ins>
 
-  
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <footer>
   © 2026 InkTools |
   <a href="/about.html">About</a> |
   <a href="/contact.html">Contact</a> |
-  <a href="/privacy.html">Privacy Policy</a>
+  <a href="/privacy.html">Privacy</a>
 </footer>
-  
+
 <script src="/script.js"></script>
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/heic2any/dist/heic2any.min.js"></script>
 
-<script src="script.js"></script>  
-  
-  
 <script>
 setupTool({
-  previewFromHEIC: true,
 
-  async convert(file) {
-    const img = await createImageBitmap(file);
-    const canvas = document.createElement("canvas");
+  previewFromHEIC: false,
 
-    canvas.width = img.width * 0.7;
-    canvas.height = img.height * 0.7;
+async convert(file) {
 
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  const quality = parseFloat(document.getElementById("quality").value);
 
-    return await new Promise(resolve =>
-      canvas.toBlob(resolve, "image/jpeg", 0.6)
-    );
-  },
+  const img = await createImageBitmap(file);
+  const canvas = document.createElement("canvas");
+
+  canvas.width = img.width;
+  canvas.height = img.height;
+
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+
+  return await new Promise(resolve =>
+    canvas.toBlob(resolve, "image/jpeg", quality)
+  );
+}   
 
   getFileName(name) {
     return "compressed_" + name;
   }
+
 });
 </script>
 
