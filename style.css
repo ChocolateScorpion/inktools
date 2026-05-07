@@ -210,3 +210,27 @@ h1 {
   margin-top: 10px;
   padding-left: 20px;
 }
+
+#previewContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.preview-item {
+  background: #222;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.preview-item img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.preview-item p {
+  font-size: 12px;
+  margin-top: 8px;
+  word-break: break-word;
+}
