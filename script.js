@@ -32,15 +32,15 @@ async function normalizeFile(file) {
 function setupTool(config) {
   const dropZone = document.getElementById("dropZone");
   const input = document.getElementById("fileInput");
-  const preview = document.getElementById("preview");
+  const previewContainer = document.getElementById("previewContainer");
   const btn = document.getElementById("convertBtn");
   const loader = document.getElementById("loader");
 
-  let file;
+  let files = [];
 
   dropZone.addEventListener("click", () => input.click());
 
-  input.onchange = (e) => handleFile(e.target.files[0]);
+  input.onchange = (e) => handleFiles(e.target.files);
 
   dropZone.ondragover = (e) => {
     e.preventDefault();
@@ -54,66 +54,98 @@ function setupTool(config) {
   dropZone.ondrop = (e) => {
     e.preventDefault();
     dropZone.classList.remove("active");
-    handleFile(e.dataTransfer.files[0]);
+    handleFiles(e.dataTransfer.files);
   };
 
-  async function handleFile(f) {
-    if (!f) return;
-  
-    const btn = document.getElementById("convertBtn");
-  
-    btn.style.display = "block";
-    btn.innerText = "Processing...";
-    showLoader(false);
-  
-    try {
+
+async function handleFiles(fileList) {
+
+  if (!fileList.length) return;
+
+  files = [];
+
+  previewContainer.innerHTML = "";
+
+  btn.style.display = "block";
+  btn.innerText = "Processing...";
+
+  showLoader(true);
+
+  try {
+
+    for (const f of fileList) {
 
       const normalizedFile = await normalizeFile(f);
-  
 
-      file = normalizedFile;
-  
+      files.push(normalizedFile);
 
       const url = URL.createObjectURL(normalizedFile);
-      preview.src = url;
-      preview.style.display = "block";
-  
-      btn.innerText = "Convert";
-    } catch (err) {
-      console.error(err);
-      preview.style.display = "none";
-      btn.innerText = "Error";
+
+      const item = document.createElement("div");
+      item.className = "preview-item";
+
+      item.innerHTML = `
+        <img src="${url}">
+        <p>${normalizedFile.name}</p>
+      `;
+
+      previewContainer.appendChild(item);
     }
+
+    btn.innerText = `Convert ${files.length} file(s)`;
+
+  } catch (err) {
+
+    console.error(err);
+
+    btn.innerText = "Error";
   }
 
-  async function convert() {
-    if (!file) {
-      alert("Upload a file first");
-      return;
-    }
+  showLoader(false);
+}
 
-    btn.style.display = "none";
-    showLoader(true);
+  
+async function convert() {
 
-    try {
+  if (!files.length) {
+    alert("Upload files first");
+    return;
+  }
+
+  btn.style.display = "none";
+
+  showLoader(true);
+
+  try {
+
+    for (const file of files) {
+
       const result = await config.convert(file);
 
       const url = URL.createObjectURL(result);
 
       const a = document.createElement("a");
-      a.href = url;
-      a.download = config.getFileName(file.name);
-      a.click();
 
-    } catch (err) {
-      console.error(err);
-      alert("Conversion failed");
+      a.href = url;
+
+      a.download = config.getFileName(file.name);
+
+      a.click();
     }
 
-    btn.style.display = "block";
-    btn.innerText = "Convert";
-    showLoader(false);
+  } catch (err) {
+
+    console.error(err);
+
+    alert("Conversion failed");
   }
+
+  btn.style.display = "block";
+
+  btn.innerText = `Convert ${files.length} file(s)`;
+
+  showLoader(false);
+}
 
   function showLoader(state) {
     loader.style.display = state ? "block" : "none";
