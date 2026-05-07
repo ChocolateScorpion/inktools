@@ -71,7 +71,7 @@
       cursor: pointer;
     }
 
-    #preview {
+    # {
       max-width: 150px;
       margin-top: 15px;
       display: none;
@@ -128,10 +128,10 @@
   <div class="drop-zone" id="dropZone">
     Drop your HEIC file here or click to upload  
     <small>Supports iPhone photos</small>
-    <input type="file" id="fileInput" hidden>
+    <input type="file" id="fileInput" hidden multiple>
   </div>
 
-  <img id="preview">
+  <div id="previewContainer"></div>
 
   <button id="convertBtn" onclick="convert()">Convert to JPG</button>
 </div>
@@ -163,7 +163,7 @@
   <h2>How to use</h2>
   <ol>
     <li>Upload or drag your HEIC file</li>
-    <li>Wait for preview</li>
+    <li>Wait for </li>
     <li>Click convert</li>
     <li>Download JPG instantly</li>
   </ol>
@@ -209,7 +209,7 @@
 
 <script>
 setupTool({
-  previewFromHEIC: false,
+  FromHEIC: false,
 
   async convert(file) {
 
