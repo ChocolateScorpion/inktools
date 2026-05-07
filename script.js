@@ -1,4 +1,5 @@
 async function normalizeFile(file) {
+
   const type = file.type || "";
   const name = file.name.toLowerCase();
 
@@ -9,6 +10,7 @@ async function normalizeFile(file) {
     name.endsWith(".heif");
 
   if (isHEIC) {
+
     const convertedBlob = await heic2any({
       blob: file,
       toType: "image/jpeg",
@@ -30,6 +32,7 @@ async function normalizeFile(file) {
 }
 
 function setupTool(config) {
+
   const dropZone = document.getElementById("dropZone");
   const input = document.getElementById("fileInput");
   const previewContainer = document.getElementById("previewContainer");
@@ -57,95 +60,116 @@ function setupTool(config) {
     handleFiles(e.dataTransfer.files);
   };
 
+  async function handleFiles(fileList) {
 
-async function handleFiles(fileList) {
+    if (!fileList.length) return;
 
-  if (!fileList.length) return;
+    files = [];
 
-  files = [];
+    previewContainer.innerHTML = "";
 
-  previewContainer.innerHTML = "";
+    btn.style.display = "block";
+    btn.innerText = "Processing...";
 
-  btn.style.display = "block";
-  btn.innerText = "Processing...";
+    showLoader(true);
 
-  showLoader(true);
+    try {
 
-  try {
+      for (const f of fileList) {
 
-    for (const f of fileList) {
+        const processedFile = config.previewFromHEIC
+          ? await normalizeFile(f)
+          : f;
 
-      const normalizedFile = await normalizeFile(f);
+        files.push(processedFile);
 
-      files.push(normalizedFile);
+        const item = document.createElement("div");
 
-      const url = URL.createObjectURL(normalizedFile);
+        item.className = "preview-item";
 
-      const item = document.createElement("div");
-      item.className = "preview-item";
+        // Detectar si es HEIC
+        const isHEIC =
+          processedFile.type.includes("heic") ||
+          processedFile.type.includes("heif") ||
+          processedFile.name.toLowerCase().endsWith(".heic") ||
+          processedFile.name.toLowerCase().endsWith(".heif");
 
-      item.innerHTML = `
-        <img src="${url}">
-        <p>${normalizedFile.name}</p>
-      `;
+        // Si es HEIC y preview está desactivado
+        if (isHEIC && !config.previewFromHEIC) {
 
-      previewContainer.appendChild(item);
+          item.innerHTML = `
+            <div class="heic-placeholder">
+              HEIC File
+            </div>
+            <p>${processedFile.name}</p>
+          `;
+
+        } else {
+
+          const url = URL.createObjectURL(processedFile);
+
+          item.innerHTML = `
+            <img src="${url}">
+            <p>${processedFile.name}</p>
+          `;
+        }
+
+        previewContainer.appendChild(item);
+      }
+
+      btn.innerText = `Convert ${files.length} file(s)`;
+
+    } catch (err) {
+
+      console.error(err);
+
+      btn.innerText = "Error";
     }
+
+    showLoader(false);
+  }
+
+  async function convert() {
+
+    if (!files.length) {
+      alert("Upload files first");
+      return;
+    }
+
+    btn.style.display = "none";
+
+    showLoader(true);
+
+    try {
+
+      for (const file of files) {
+
+        const result = await config.convert(file);
+
+        const url = URL.createObjectURL(result);
+
+        const a = document.createElement("a");
+
+        a.href = url;
+
+        a.download = config.getFileName(file.name);
+
+        a.click();
+      }
+
+    } catch (err) {
+
+      console.error(err);
+
+      alert("Conversion failed");
+    }
+
+    btn.style.display = "block";
 
     btn.innerText = `Convert ${files.length} file(s)`;
 
-  } catch (err) {
-
-    console.error(err);
-
-    btn.innerText = "Error";
+    showLoader(false);
   }
-
-  showLoader(false);
-}
-
-  
-async function convert() {
-
-  if (!files.length) {
-    alert("Upload files first");
-    return;
-  }
-
-  btn.style.display = "none";
-
-  showLoader(true);
-
-  try {
-
-    for (const file of files) {
-
-      const result = await config.convert(file);
-
-      const url = URL.createObjectURL(result);
-
-      const a = document.createElement("a");
-
-      a.href = url;
-
-      a.download = config.getFileName(file.name);
-
-      a.click();
-    }
-
-  } catch (err) {
-
-    console.error(err);
-
-    alert("Conversion failed");
-  }
-
-  btn.style.display = "block";
-
-  btn.innerText = `Convert ${files.length} file(s)`;
-
-  showLoader(false);
-}
 
   function showLoader(state) {
     loader.style.display = state ? "block" : "none";
@@ -154,13 +178,15 @@ async function convert() {
   window.convert = convert;
 }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const qualityInput = document.getElementById("quality");
-    const qualityValue = document.getElementById("qualityValue");
-  
-    if (qualityInput && qualityValue) {
-      qualityInput.addEventListener("input", () => {
-        qualityValue.innerText = qualityInput.value;
-      });
-    }
-  });
+document.addEventListener("DOMContentLoaded", () => {
+
+  const qualityInput = document.getElementById("quality");
+  const qualityValue = document.getElementById("qualityValue");
+
+  if (qualityInput && qualityValue) {
+
+    qualityInput.addEventListener("input", () => {
+      qualityValue.innerText = qualityInput.value;
+    });
+  }
+});
