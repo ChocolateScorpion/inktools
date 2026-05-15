@@ -12,7 +12,11 @@
   <title>Free Online Image Tools | InkTools</title>
   <meta name="description" content="Convert, compress and resize images instantly in your browser. No upload required — 100% private. HEIC to JPG, PNG, image compressor and more.">
   <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/styles.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
@@ -23,29 +27,270 @@
     gtag('config', 'G-R4568JEMSW');
   </script>
 
+  <style>
+    :root {
+      --gold:        #B8862A;
+      --gold-light:  #EF9F27;
+      --gold-subtle: rgba(184,134,42,0.09);
+      --gold-border: rgba(184,134,42,0.22);
+      --bg:          #0C0C0B;
+      --surface:     #161614;
+      --surface2:    #1E1E1B;
+      --border:      rgba(255,255,255,0.07);
+      --cream:       #E8E4DC;
+      --muted:       #8C8880;
+      --faint:       #47453F;
+      --max-w:       860px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; color: inherit; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', Arial, sans-serif;
+      /* Fondo fijo — no se mueve al hacer scroll */
+      background-color: var(--bg);
+      background-image: radial-gradient(ellipse 70% 45% at 50% 0%, rgba(184,134,42,0.06) 0%, transparent 65%);
+      background-attachment: fixed;
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      width: 100%;
+      max-width: var(--max-w);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .site-logo { display: flex; align-items: center; gap: 9px; }
+
+    .logo-ink {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--cream);
+      -webkit-text-stroke: 0.5px var(--gold);
+      text-transform: uppercase;
+    }
+
+    .logo-tools {
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 2.5px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .site-nav { display: flex; gap: 22px; }
+    .site-nav a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .site-nav a:hover { color: var(--cream); }
+
+    /* ── HERO ── */
+    .hero {
+      width: 100%;
+      max-width: var(--max-w);
+      text-align: center;
+      padding: 56px 24px 44px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--gold-subtle);
+      border: 0.5px solid var(--gold-border);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      color: #C9973A;
+      margin-bottom: 20px;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold-light);
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.18;
+      letter-spacing: -0.3px;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span { color: var(--gold); }
+
+    .hero p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* ── TOOLS ── */
+    .tools-section { width: 100%; max-width: var(--max-w); padding: 0 24px; }
+
+    .tools-label {
+      font-size: 11px;
+      color: var(--faint);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 48px;
+    }
+
+    .tool-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .tool-card:hover {
+      border-color: var(--gold-border);
+      background: var(--surface2);
+    }
+
+    .tool-icon {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .tool-name  { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 4px; }
+    .tool-desc  { font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+    .ic-gold   { background: rgba(184,134,42,0.13); color: #C9973A; }
+    .ic-purple { background: rgba(139,92,246,0.12);  color: #a78bfa; }
+    .ic-teal   { background: rgba(20,184,166,0.12);  color: #2dd4bf; }
+    .ic-coral  { background: rgba(239,100,80,0.12);  color: #f87171; }
+    .ic-green  { background: rgba(34,197,94,0.11);   color: #4ade80; }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      width: 100%; max-width: var(--max-w);
+      padding: 20px 24px;
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+    .trust-item svg { color: var(--gold); flex-shrink: 0; }
+
+    /* ── HOW IT WORKS ── */
+    .how-section { width: 100%; max-width: var(--max-w); padding: 0 24px 52px; }
+
+    .section-title { font-size: 16px; font-weight: 500; color: var(--cream); margin-bottom: 22px; }
+
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+
+    .step { text-align: center; padding: 16px 10px; }
+
+    .step-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      border: 0.5px solid var(--gold-border);
+      background: var(--gold-subtle);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: #C9973A; font-weight: 500;
+      margin: 0 auto 10px;
+    }
+
+    .step-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* ── SEO ── */
+    .seo-section { width: 100%; max-width: 680px; padding: 0 24px 52px; text-align: left; }
+
+    .seo-section h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 22px; font-weight: 400; color: var(--cream);
+      text-align: center; margin: 40px 0 14px;
+    }
+
+    .seo-section h3 { font-size: 14px; font-weight: 500; color: var(--cream); margin: 18px 0 5px; }
+    .seo-section p  { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
+    .seo-section ul, .seo-section ol { padding-left: 18px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+
+    /* ── ADS ── */
+    .ad-slot { width: 100%; max-width: var(--max-w); padding: 0 24px; margin: 16px 0; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      width: 100%; max-width: var(--max-w);
+      padding: 24px; margin-top: auto;
+      border-top: 0.5px solid var(--border);
+      display: flex; align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap; gap: 10px;
+    }
+
+    .footer-copy { font-size: 12px; color: var(--faint); }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .tools-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .trust-bar  { gap: 16px; }
+      .site-nav   { display: none; }
+      .site-footer { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 380px) {
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
 </head>
 <body>
 
-<!-- ── HEADER ── -->
+<!-- HEADER -->
 <header class="site-header">
   <a href="/" class="site-logo">
-    <!-- Needle icon with gold glow -->
-    <svg width="22" height="34" viewBox="0 0 22 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="needle-glow" x="-80%" y="-40%" width="260%" height="180%">
-          <feGaussianBlur stdDeviation="2.5" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <rect x="1" y="1" width="10" height="10" rx="2" fill="#B8862A" opacity="0.18" filter="url(#needle-glow)"/>
-      <rect x="7" y="1" width="8" height="20" rx="4" fill="#0C0C0B" stroke="#B8862A" stroke-width="0.9"/>
-      <rect x="7" y="1" width="8" height="20" rx="4" fill="#B8862A" opacity="0.12" filter="url(#needle-glow)"/>
-      <polygon points="11,21 8,30 11,28 14,30" fill="#B8862A" filter="url(#needle-glow)"/>
-      <ellipse cx="11" cy="32" rx="2.8" ry="1.4" fill="#B8862A" opacity="0.35"/>
+    <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="1" width="8" height="17" rx="4" fill="#0C0C0B" stroke="#B8862A" stroke-width="1"/>
+      <polygon points="8,18 5.5,26 8,24 10.5,26" fill="#B8862A"/>
+      <ellipse cx="8" cy="27.2" rx="2.2" ry="1.1" fill="#B8862A" opacity="0.38"/>
     </svg>
-    <div class="logo-wordmark">
-      <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
-    </div>
+    <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
   </a>
   <nav class="site-nav">
     <a href="/about.html">About</a>
@@ -53,89 +298,68 @@
   </nav>
 </header>
 
-<!-- ── TOP AD ── -->
+<!-- TOP AD -->
 <div class="ad-slot">
   <ins class="adsbygoogle" style="display:block;"
-    data-ad-client="ca-pub-7189936182708078"
-    data-ad-slot="3707669770"></ins>
+    data-ad-client="ca-pub-7189936182708078" data-ad-slot="3707669770"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <div class="hero">
-  <div class="badge">
-    <span class="badge-dot"></span>
-    No uploads &nbsp;·&nbsp; 100% private
-  </div>
+  <div class="badge"><span class="badge-dot"></span>No uploads &nbsp;·&nbsp; 100% private</div>
   <h1>Image tools that work<br>right in your <span>browser</span></h1>
   <p>Convert, compress, and resize images instantly — everything runs on your device, nothing leaves it.</p>
 </div>
 
-<!-- ── TOOLS GRID ── -->
+<!-- TOOLS GRID -->
 <div class="tools-section">
   <div class="tools-label">6 free tools</div>
   <div class="tools-grid">
 
     <a href="/heic-to-jpg/" class="tool-card">
-      <div class="tool-icon icon-gold">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-          <line x1="9" y1="15" x2="15" y2="15"/>
-        </svg>
+      <div class="tool-icon ic-gold">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
       </div>
       <div class="tool-name">HEIC to JPG</div>
       <div class="tool-desc">Convert iPhone photos to universal JPG format</div>
     </a>
 
     <a href="/heic-to-png/" class="tool-card">
-      <div class="tool-icon icon-purple">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-          <circle cx="12" cy="15" r="2"/>
-        </svg>
+      <div class="tool-icon ic-purple">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="12" cy="15" r="2"/></svg>
       </div>
       <div class="tool-name">HEIC to PNG</div>
-      <div class="tool-desc">Lossless PNG output from HEIC files</div>
+      <div class="tool-desc">Lossless PNG output with transparency support</div>
     </a>
 
     <a href="/image-compressor/" class="tool-card">
-      <div class="tool-icon icon-teal">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/>
-          <line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/>
-        </svg>
+      <div class="tool-icon ic-teal">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
       </div>
       <div class="tool-name">Image Compressor</div>
       <div class="tool-desc">Reduce file size without visible quality loss</div>
     </a>
 
     <a href="/image-resizer/" class="tool-card">
-      <div class="tool-icon icon-gold">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-        </svg>
+      <div class="tool-icon ic-gold">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
       </div>
       <div class="tool-name">Image Resizer</div>
-      <div class="tool-desc">Set exact dimensions for any image</div>
+      <div class="tool-desc">Set exact pixel dimensions for any image</div>
     </a>
 
     <a href="/jpg-to-png/" class="tool-card">
-      <div class="tool-icon icon-coral">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
-          <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
-        </svg>
+      <div class="tool-icon ic-coral">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
       </div>
       <div class="tool-name">JPG to PNG</div>
       <div class="tool-desc">Add transparency support to JPG images</div>
     </a>
 
     <a href="/png-to-jpg/" class="tool-card">
-      <div class="tool-icon icon-green">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
+      <div class="tool-icon ic-green">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
       </div>
       <div class="tool-name">PNG to JPG</div>
       <div class="tool-desc">Smaller files for sharing and web use</div>
@@ -144,67 +368,50 @@
   </div>
 </div>
 
-<!-- ── TRUST BAR ── -->
+<!-- TRUST BAR -->
 <div class="trust-bar">
   <div class="trust-item">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     Files never leave your device
   </div>
   <div class="trust-item">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
     Instant processing
   </div>
   <div class="trust-item">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
     Works on mobile
   </div>
   <div class="trust-item">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
     Always free
   </div>
 </div>
 
-<!-- ── MID AD ── -->
+<!-- MID AD -->
 <div class="ad-slot">
   <ins class="adsbygoogle" style="display:block;"
-    data-ad-client="ca-pub-7189936182708078"
-    data-ad-slot="1181011532"></ins>
+    data-ad-client="ca-pub-7189936182708078" data-ad-slot="1181011532"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<!-- ── HOW IT WORKS ── -->
+<!-- HOW IT WORKS -->
 <div class="how-section">
   <div class="section-title">How it works</div>
   <div class="steps-grid">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-text">Drop or upload your image file</div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-text">Pick your tool or output format</div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-text">Processing happens instantly in browser</div>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-text">Download your optimized image</div>
-    </div>
+    <div class="step"><div class="step-num">1</div><div class="step-text">Drop or upload your image file</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Pick your tool or output format</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">Processing happens instantly in browser</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text">Download your optimized image</div></div>
   </div>
 </div>
 
-<!-- ── SEO CONTENT ── -->
+<!-- SEO CONTENT -->
 <section class="seo-section">
 
   <h2>What is InkTools?</h2>
-  <p>
-    InkTools is a collection of free online image utilities designed to help you convert, compress, and resize images directly in your browser. No account, no upload, no waiting.
-  </p>
-  <p>
-    All processing happens locally on your device, ensuring fast performance and complete privacy.
-  </p>
+  <p>InkTools is a collection of free online image utilities designed to help you convert, compress, and resize images directly in your browser. No account, no upload, no waiting.</p>
+  <p>All processing happens locally on your device, ensuring fast performance and complete privacy.</p>
 
   <h2>Why Use InkTools</h2>
   <ul>
@@ -235,15 +442,14 @@
 
 </section>
 
-<!-- ── BOTTOM AD ── -->
+<!-- BOTTOM AD -->
 <div class="ad-slot">
   <ins class="adsbygoogle" style="display:block;"
-    data-ad-client="ca-pub-7189936182708078"
-    data-ad-slot="8603238385"></ins>
+    data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer class="site-footer">
   <span class="footer-copy">© 2026 InkTools — Image Utilities</span>
   <div class="footer-links">
