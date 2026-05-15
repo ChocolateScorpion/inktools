@@ -4,14 +4,19 @@
 
   <!-- Google AdSense -->
   <meta name="google-adsense-account" content="ca-pub-7189936182708078">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078" crossorigin="anonymous"></script>
 
   <!-- Meta -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PNG to JPG | InkTools</title>
+  <title>PNG to JPG Converter Online Free | InkTools</title>
+  <meta name="description" content="Convert PNG images to JPG instantly in your browser. Smaller file size for sharing and web use. No upload required — 100% private and free.">
   <link rel="icon" href="/favicon.ico">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
@@ -22,219 +27,311 @@
     gtag('config', 'G-R4568JEMSW');
   </script>
 
-  <!-- Styles -->
   <style>
-    * { box-sizing: border-box; font-family: Arial, sans-serif; }
+    :root {
+      --gold:        #B8862A;
+      --gold-light:  #EF9F27;
+      --gold-subtle: rgba(184,134,42,0.09);
+      --gold-border: rgba(184,134,42,0.22);
+      --bg:          #0C0C0B;
+      --surface:     #161614;
+      --surface2:    #1E1E1B;
+      --border:      rgba(255,255,255,0.07);
+      --cream:       #E8E4DC;
+      --muted:       #8C8880;
+      --faint:       #47453F;
+      --max-w:       860px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; color: inherit; }
+    html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
-      background: #0f0f0f;
-      color: #fff;
+      font-family: 'DM Sans', Arial, sans-serif;
+      background-color: var(--bg);
+      background-image: radial-gradient(ellipse 70% 45% at 50% 0%, rgba(184,134,42,0.06) 0%, transparent 65%);
+      background-attachment: fixed;
+      color: var(--cream);
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    header {
-      padding: 30px 20px;
-      font-size: 24px;
-      font-weight: 600;
+    .site-header {
+      width: 100%; max-width: var(--max-w);
+      padding: 18px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 0.5px solid var(--border);
     }
 
-    .container {
-      background: #1a1a1a;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      text-align: center;
-      width: 90%;
-      max-width: 400px;
+    .site-logo { display: flex; align-items: center; gap: 9px; }
+    .logo-ink   { font-size: 15px; font-weight: 700; letter-spacing: 2px; color: var(--cream); -webkit-text-stroke: 0.5px var(--gold); text-transform: uppercase; }
+    .logo-tools { font-size: 15px; font-weight: 300; letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase; }
+    .site-nav { display: flex; gap: 22px; }
+    .site-nav a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .site-nav a:hover { color: var(--cream); }
+
+    .tool-hero {
+      width: 100%; max-width: var(--max-w);
+      text-align: center; padding: 48px 24px 36px;
+    }
+
+    .tool-badge {
+      display: inline-flex; align-items: center;
+      background: var(--gold-subtle);
+      border: 0.5px solid var(--gold-border);
+      border-radius: 20px; padding: 4px 13px;
+      font-size: 11px; color: #C9973A;
+      margin-bottom: 18px;
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+
+    .tool-hero h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(24px, 3.5vw, 34px);
+      font-weight: 400; color: var(--cream);
+      line-height: 1.2; letter-spacing: -0.3px; margin-bottom: 10px;
+    }
+
+    .tool-hero p { font-size: 14px; color: var(--muted); max-width: 380px; margin: 0 auto; line-height: 1.6; }
+
+    .converter-wrap {
+      width: 100%; max-width: var(--max-w);
+      padding: 0 24px 48px; display: flex; justify-content: center;
+    }
+
+    .converter-box {
+      background: var(--surface); border: 0.5px solid var(--border);
+      border-radius: 20px; padding: 32px;
+      width: 100%; max-width: 460px;
     }
 
     .drop-zone {
-      border: 2px dashed #444;
-      border-radius: 12px;
-      padding: 30px;
-      margin-top: 20px;
-      cursor: pointer;
+      border: 1.5px dashed var(--gold-border); border-radius: 12px;
+      padding: 32px 20px; margin-bottom: 16px; cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
+      color: var(--muted); font-size: 14px; text-align: center;
     }
 
-    button {
-      margin-top: 20px;
-      padding: 12px;
-      width: 100%;
-      border-radius: 10px;
-      border: none;
-      background: white;
-      font-weight: 600;
-      cursor: pointer;
+    .drop-zone:hover, .drop-zone.active { border-color: var(--gold); background: var(--gold-subtle); }
+    .drop-zone svg { color: var(--gold); opacity: 0.75; margin-bottom: 4px; }
+    .drop-zone small { font-size: 12px; color: var(--faint); }
+
+    #previewContainer {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: 10px; margin-bottom: 14px;
     }
 
-    #preview {
-      max-width: 150px;
-      margin-top: 15px;
+    .preview-item {
+      background: var(--surface2); border: 0.5px solid var(--border);
+      border-radius: 10px; padding: 8px; text-align: center;
+    }
+
+    .preview-item img { width: 100%; border-radius: 6px; display: block; }
+    .preview-item p   { font-size: 11px; color: var(--muted); margin-top: 5px; word-break: break-word; }
+
+    .heic-placeholder {
+      width: 100%; height: 70px; border-radius: 6px;
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: var(--faint);
+    }
+
+    #convertBtn {
+      width: 100%; padding: 13px; border-radius: 10px; border: none;
+      background: var(--gold); color: #0C0C0B;
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 14px; font-weight: 600; letter-spacing: 0.02em;
+      cursor: pointer; transition: background 0.15s, box-shadow 0.15s;
       display: none;
     }
 
-    footer {
-      margin-top: 40px;
-      font-size: 12px;
-      color: #666;
+    #convertBtn:hover { background: var(--gold-light); box-shadow: 0 4px 18px rgba(184,134,42,0.28); }
+    #loader { font-size: 13px; color: var(--muted); text-align: center; padding: 10px 0; display: none; }
+
+    .ad-slot { width: 100%; max-width: var(--max-w); padding: 0 24px; margin: 8px 0 24px; }
+
+    .seo-section { width: 100%; max-width: 680px; padding: 0 24px 52px; text-align: left; }
+
+    .seo-section h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 22px; font-weight: 400; color: var(--cream);
+      text-align: center; margin: 40px 0 14px;
     }
 
-    .tool-content {
-      max-width: 700px;
-      margin: 60px auto;
-      padding: 0 20px;
-      text-align: left;
-      line-height: 1.7;
+    .seo-section h3 { font-size: 14px; font-weight: 500; color: var(--cream); margin: 18px 0 5px; }
+    .seo-section p  { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
+    .seo-section ul, .seo-section ol { padding-left: 18px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+
+    .site-footer {
+      width: 100%; max-width: var(--max-w);
+      padding: 24px; margin-top: auto;
+      border-top: 0.5px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 10px;
     }
 
-    .tool-content h2 {
-      text-align: center;
-      margin-top: 40px;
-    }
+    .footer-copy { font-size: 12px; color: var(--faint); }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--gold); }
 
-    .tool-content ul,
-    .tool-content ol {
-      padding-left: 20px;
+    @media (max-width: 640px) {
+      .converter-box { padding: 22px 16px; }
+      .site-nav { display: none; }
+      .site-footer { flex-direction: column; align-items: flex-start; }
     }
   </style>
 
 </head>
-
 <body>
 
-<header>
-  <a href="/" style="color:white; text-decoration:none;">InkTools</a>
+<!-- HEADER -->
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="1" width="8" height="17" rx="4" fill="#0C0C0B" stroke="#B8862A" stroke-width="1"/>
+      <polygon points="8,18 5.5,26 8,24 10.5,26" fill="#B8862A"/>
+      <ellipse cx="8" cy="27.2" rx="2.2" ry="1.1" fill="#B8862A" opacity="0.38"/>
+    </svg>
+    <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
+  </a>
+  <nav class="site-nav">
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
 </header>
 
-<!-- Top Ad -->
-<ins class="adsbygoogle"
-     style="display:block; margin-bottom:20px;"
-     data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="3707669770"></ins>
+<!-- TOP AD -->
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;"
+    data-ad-client="ca-pub-7189936182708078" data-ad-slot="3707669770"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<div class="container">
-
+<!-- TOOL HERO -->
+<div class="tool-hero">
+  <div class="tool-badge">Image Converter</div>
   <h1>Convert PNG to JPG instantly</h1>
-  <p>No upload • 100% private • Works in your browser</p>
+  <p>No upload · 100% private · Works in your browser</p>
+</div>
 
-  <div class="drop-zone" id="dropZone">
-    Drop your PNG file here or click to upload
-    <small>Supports iPhone photos</small>
-    <input type="file" id="fileInput" hidden>
+<!-- CONVERTER -->
+<div class="converter-wrap">
+  <div class="converter-box">
+    <div class="drop-zone" id="dropZone">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
+        <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+      </svg>
+      Drop your PNG file here or click to upload
+      <small>Supports .png files</small>
+      <input type="file" id="fileInput" hidden multiple accept=".png,image/png">
+    </div>
+    <div id="previewContainer"></div>
+    <div id="loader">⏳ Converting…</div>
+    <button id="convertBtn" onclick="convert()">Convert to JPG</button>
   </div>
-
-  <img id="preview">
-
-  <!-- OPTIONAL CONTROLS (ej: slider, inputs, etc) -->
-
-  <button id="convertBtn" onclick="convert()">
-    Convert to JPG
-  </button>
-
 </div>
 
-<div id="loader" style="display:none; margin-top:15px;">
-  ⏳ Processing...
+<!-- MID AD -->
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;"
+    data-ad-client="ca-pub-7189936182708078" data-ad-slot="1181011532"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
-
-<!-- Mid Ad -->
-<ins class="adsbygoogle"
-     style="display:block; margin-top:20px;"
-     data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="1181011532"></ins>
-
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <!-- SEO CONTENT -->
-<div class="tool-content">
+<section class="seo-section">
 
   <h2>What this tool does</h2>
-  <p>
-    This tool converts PNG images into JPG format instantly. 
-    JPG files are smaller and widely supported across devices.
-  </p>
+  <p>This tool converts PNG images to JPG format directly in your browser. JPG files are significantly smaller, making them ideal for sharing, uploading to websites, and saving storage space.</p>
 
   <h2>How to use</h2>
   <ol>
-    <li>Upload or drag your PNG file</li>
+    <li>Upload or drag your PNG file into the box above</li>
+    <li>Wait for the preview to appear</li>
     <li>Click "Convert to JPG"</li>
-    <li>Download your JPG instantly</li>
+    <li>Your JPG file downloads instantly</li>
   </ol>
 
   <h2>Benefits</h2>
   <ul>
-    <li>Reduce file size</li>
-    <li>Compatible with all devices</li>
-    <li>No uploads required</li>
-    <li>Fast conversion</li>
+    <li>Much smaller file size than PNG</li>
+    <li>Compatible with all devices and platforms</li>
+    <li>No uploads required — 100% private</li>
+    <li>Fast conversion directly in your browser</li>
   </ul>
 
   <h2>FAQ</h2>
-  <h3>Will I lose transparency?</h3>
-    <p>Yes. JPG does not support transparency.</p>
-  
-  <h3>Is this tool secure?</h3>
-    <p>Your files stay on your device.</p>
- 
 
+  <h3>Will I lose quality converting PNG to JPG?</h3>
+  <p>JPG uses lossy compression, so there may be a slight quality reduction. For most photos and web images the difference is barely noticeable, and the file size savings are significant.</p>
+
+  <h3>What happens to transparent areas?</h3>
+  <p>Since JPG doesn't support transparency, transparent areas in your PNG will be filled with a white background.</p>
+
+  <h3>Is this tool secure?</h3>
+  <p>Yes. Your images are processed locally in your browser and never uploaded to any server.</p>
+
+</section>
+
+<!-- BOTTOM AD -->
+<div class="ad-slot" style="margin-bottom: 24px;">
+  <ins class="adsbygoogle" style="display:block;"
+    data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<!-- Bottom Ad -->
-<ins class="adsbygoogle"
-     style="display:block; margin-top:40px;"
-     data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="8603238385"></ins>
-
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<footer>
-  © 2026 InkTools |
-  <a href="/">Home</a> |
-  <a href="/about.html">About</a> |
-  <a href="/contact.html">Contact</a> |
-  <a href="/privacy.html">Privacy</a>
+<!-- FOOTER -->
+<footer class="site-footer">
+  <span class="footer-copy">© 2026 InkTools — Image Utilities</span>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy.html">Privacy</a>
+  </div>
 </footer>
 
+<!-- Scripts -->
 <script src="/script.js"></script>
-
-<!-- OPTIONAL LIBRARIES -->
-
 <script>
 setupTool({
-
   previewFromHEIC: false,
 
   async convert(file) {
-
-    const img = await createImageBitmap(file);
-    const canvas = document.createElement("canvas");
-
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-
-    return await new Promise(resolve =>
-      canvas.toBlob(resolve, "image/jpeg", 0.9)
-    );
-  }, 
+    return await new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width  = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext("2d");
+        // Fondo blanco para áreas transparentes
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+        URL.revokeObjectURL(url);
+        canvas.toBlob(blob => {
+          if (blob) resolve(blob);
+          else reject(new Error("Conversion failed"));
+        }, "image/jpeg", 0.92);
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Could not load image")); };
+      img.src = url;
+    });
+  },
 
   getFileName(name) {
     return name.replace(/\.png$/i, ".jpg");
   }
-
 });
 </script>
 
