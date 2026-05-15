@@ -323,7 +323,7 @@
 </footer>
 
 <script>
-  function submitForm() {
+  async function submitForm() {
     const name    = document.getElementById("name").value.trim();
     const email   = document.getElementById("email").value.trim();
     const subject = document.getElementById("subject").value;
@@ -340,12 +340,31 @@
       return;
     }
 
-    // Submit via Formspree (replace YOUR_FORM_ID with your actual Formspree ID)
-    // Or connect to any other form backend here
-    const form = document.getElementById("contactForm");
-    const success = document.getElementById("successMsg");
-    form.style.display = "none";
-    success.style.display = "block";
+    const btn = document.querySelector(".btn-submit");
+    btn.disabled = true;
+    btn.textContent = "Sending\u2026";
+
+    try {
+      const response = await fetch("https://formspree.io/f/xrejwrwg", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({ name, email, subject, message })
+      });
+
+      if (response.ok) {
+        document.getElementById("contactForm").style.display = "none";
+        document.getElementById("successMsg").style.display = "block";
+      } else {
+        throw new Error("Server error");
+      }
+    } catch(err) {
+      alert("Something went wrong. Please try again or email us at contact@inktools.tech");
+      btn.disabled = false;
+      btn.textContent = "Send message";
+    }
   }
 </script>
 
