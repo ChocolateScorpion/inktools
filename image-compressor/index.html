@@ -394,6 +394,7 @@
 </footer>
 
 <!-- Scripts -->
+<script src="https://unpkg.com/heic2any/dist/heic2any.min.js"></script>
 <script src="/script.js"></script>
 <script>
   const qualityInput = document.getElementById("quality");
@@ -408,6 +409,13 @@
     async convert(file) {
       const quality = parseFloat(qualityInput.value) / 100;
 
+      // Normalizar primero — convierte HEIC/HEIF a JPEG antes de comprimir
+      // Para otros formatos sin preview, también los normaliza vía normalizeFile()
+      let normalized = file;
+      try {
+        normalized = await normalizeFile(file);
+      } catch(_) {}
+
       const loadImage = (src) => new Promise((resolve, reject) => {
         const img = new Image();
         img.onload = () => resolve(img);
@@ -420,6 +428,7 @@
         canvas.width  = img.naturalWidth;
         canvas.height = img.naturalHeight;
         const ctx = canvas.getContext("2d");
+        // Fondo blanco para PNGs con transparencia
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
@@ -431,18 +440,18 @@
 
       // Intento 1: ObjectURL directo
       try {
-        const url = URL.createObjectURL(file);
+        const url = URL.createObjectURL(normalized);
         const img = await loadImage(url);
         URL.revokeObjectURL(url);
         return await drawToJpeg(img);
       } catch (_) {}
 
-      // Intento 2: FileReader como base64
+      // Intento 2: FileReader como base64 (fallback)
       const dataUrl = await new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = e => resolve(e.target.result);
         reader.onerror = () => reject(new Error("Could not read file"));
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(normalized);
       });
 
       const img = await loadImage(dataUrl);
