@@ -454,8 +454,12 @@
         reader.readAsDataURL(normalized);
       });
 
-      const img = await loadImage(dataUrl);
-      return await drawToJpeg(img);
+      try {
+        const img = await loadImage(dataUrl);
+        return await drawToJpeg(img);
+      } catch(_) {
+        throw new Error("This file could not be read. It may be corrupted or have an incorrect format. Please try a valid JPG, PNG or WebP image.");
+      }
     },
 
     getFileName(name) {
