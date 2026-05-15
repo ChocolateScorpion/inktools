@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-7189936182708078">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078" crossorigin="anonymous"></script>
+
+  <!-- Meta -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo to Tattoo Stencil Converter | InkTools</title>
+  <meta name="description" content="Convert any photo to a clean tattoo stencil ready for hectographic printing. Adjust line thickness, contrast and detail. Free, private, no upload required.">
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-R4568JEMSW');
+  </script>
+
+  <style>
+    :root {
+      --gold:        #B8862A;
+      --gold-light:  #EF9F27;
+      --gold-subtle: rgba(184,134,42,0.09);
+      --gold-border: rgba(184,134,42,0.22);
+      --bg:          #0C0C0B;
+      --surface:     #161614;
+      --surface2:    #1E1E1B;
+      --border:      rgba(255,255,255,0.07);
+      --cream:       #E8E4DC;
+      --muted:       #8C8880;
+      --faint:       #47453F;
+      --max-w:       960px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; color: inherit; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', Arial, sans-serif;
+      background-color: var(--bg);
+      background-image: radial-gradient(ellipse 70% 45% at 50% 0%, rgba(184,134,42,0.06) 0%, transparent 65%);
+      background-attachment: fixed;
+      color: var(--cream);
+      display: flex; flex-direction: column; align-items: center;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site-header {
+      width: 100%; max-width: var(--max-w); padding: 18px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .site-logo { display: flex; align-items: center; gap: 9px; }
+    .logo-ink   { font-size: 15px; font-weight: 700; letter-spacing: 2px; color: var(--cream); -webkit-text-stroke: 0.5px var(--gold); text-transform: uppercase; }
+    .logo-tools { font-size: 15px; font-weight: 300; letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase; }
+    .site-nav { display: flex; gap: 22px; }
+    .site-nav a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .site-nav a:hover { color: var(--cream); }
+
+    .tool-hero { width: 100%; max-width: var(--max-w); text-align: center; padding: 48px 24px 36px; }
+
+    .tool-badge {
+      display: inline-flex; align-items: center;
+      background: var(--gold-subtle); border: 0.5px solid var(--gold-border);
+      border-radius: 20px; padding: 4px 13px;
+      font-size: 11px; color: #C9973A; margin-bottom: 18px;
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+
+    .tool-hero h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(24px, 3.5vw, 34px);
+      font-weight: 400; color: var(--cream);
+      line-height: 1.2; letter-spacing: -0.3px; margin-bottom: 10px;
+    }
+
+    .tool-hero p { font-size: 14px; color: var(--muted); max-width: 460px; margin: 0 auto; line-height: 1.6; }
+
+    /* Main tool layout */
+    .stencil-wrap {
+      width: 100%; max-width: var(--max-w);
+      padding: 0 24px 48px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    /* Canvas area */
+    .canvas-area {
+      background: var(--surface); border: 0.5px solid var(--border);
+      border-radius: 20px; padding: 24px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .canvas-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+
+    .canvas-panel {
+      display: flex; flex-direction: column; gap: 8px;
+    }
+
+    .canvas-label {
+      font-size: 11px; color: var(--faint);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+
+    .canvas-box {
+      background: var(--surface2); border: 0.5px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+      aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+
+    .canvas-box canvas { max-width: 100%; max-height: 100%; display: block; }
+
+    .canvas-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--faint); font-size: 13px; text-align: center; padding: 20px;
+    }
+
+    .canvas-placeholder svg { color: var(--faint); opacity: 0.5; }
+
+    /* Upload zone */
+    .upload-zone {
+      border: 1.5px dashed var(--gold-border); border-radius: 12px;
+      padding: 24px 16px; cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: var(--muted); font-size: 13px; text-align: center;
+    }
+
+    .upload-zone:hover { border-color: var(--gold); background: var(--gold-subtle); }
+    .upload-zone svg { color: var(--gold); opacity: 0.75; }
+    .upload-zone small { font-size: 12px; color: var(--faint); }
+
+    /* Controls panel */
+    .controls-panel {
+      background: var(--surface); border: 0.5px solid var(--border);
+      border-radius: 20px; padding: 24px;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+
+    .controls-title {
+      font-size: 13px; font-weight: 500; color: var(--cream);
+      padding-bottom: 12px; border-bottom: 0.5px solid var(--border);
+    }
+
+    .control-group { display: flex; flex-direction: column; gap: 8px; }
+
+    .control-header {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .control-label { font-size: 12px; color: var(--muted); }
+    .control-value { font-size: 12px; font-weight: 500; color: #C9973A; }
+
+    input[type="range"] {
+      width: 100%; height: 4px; border-radius: 2px;
+      background: var(--surface2); outline: none;
+      -webkit-appearance: none; accent-color: var(--gold); cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 16px; height: 16px;
+      border-radius: 50%; background: var(--gold); cursor: pointer;
+      border: 2px solid var(--bg); transition: background 0.15s;
+    }
+
+    /* Style presets */
+    .presets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    .preset-btn {
+      padding: 8px 10px; border-radius: 8px;
+      border: 0.5px solid var(--border);
+      background: var(--surface2); color: var(--muted);
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 12px; cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+      text-align: center;
+    }
+
+    .preset-btn:hover, .preset-btn.active {
+      border-color: var(--gold-border); color: #C9973A;
+      background: var(--gold-subtle);
+    }
+
+    /* Action buttons */
+    .btn-process {
+      width: 100%; padding: 12px; border-radius: 10px; border: none;
+      background: var(--gold); color: #0C0C0B;
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: background 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-process:hover { background: var(--gold-light); box-shadow: 0 4px 18px rgba(184,134,42,0.28); }
+    .btn-process:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-download {
+      width: 100%; padding: 11px; border-radius: 10px;
+      border: 0.5px solid var(--gold-border);
+      background: transparent; color: #C9973A;
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 13px; font-weight: 500; cursor: pointer;
+      transition: background 0.15s; display: none;
+    }
+
+    .btn-download:hover { background: var(--gold-subtle); }
+
+    .ad-slot { width: 100%; max-width: var(--max-w); padding: 0 24px; margin: 8px 0 24px; }
+
+    .seo-section { width: 100%; max-width: 680px; padding: 0 24px 52px; text-align: left; }
+
+    .seo-section h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 22px; font-weight: 400; color: var(--cream);
+      text-align: center; margin: 40px 0 14px;
+    }
+
+    .seo-section h3 { font-size: 14px; font-weight: 500; color: var(--cream); margin: 18px 0 5px; }
+    .seo-section p  { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
+    .seo-section ul, .seo-section ol { padding-left: 18px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+
+    .site-footer {
+      width: 100%; max-width: var(--max-w); padding: 24px; margin-top: auto;
+      border-top: 0.5px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 10px;
+    }
+
+    .footer-copy { font-size: 12px; color: var(--faint); }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    @media (max-width: 720px) {
+      .stencil-wrap { grid-template-columns: 1fr; }
+      .canvas-row { grid-template-columns: 1fr; }
+      .site-nav { display: none; }
+      .site-footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="1" width="8" height="17" rx="4" fill="#0C0C0B" stroke="#B8862A" stroke-width="1"/>
+      <polygon points="8,18 5.5,26 8,24 10.5,26" fill="#B8862A"/>
+      <ellipse cx="8" cy="27.2" rx="2.2" ry="1.1" fill="#B8862A" opacity="0.38"/>
+    </svg>
+    <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
+  </a>
+  <nav class="site-nav">
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="3707669770"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="tool-hero">
+  <div class="tool-badge">Tattoo Tools</div>
+  <h1>Photo to Tattoo Stencil</h1>
+  <p>Convert any photo into clean linework ready for hectographic printing. Adjust edge detection, contrast and line thickness to get the perfect stencil.</p>
+</div>
+
+<div class="stencil-wrap">
+
+  <!-- Left: canvas -->
+  <div class="canvas-area">
+
+    <div class="upload-zone" id="uploadZone">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
+        <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+      </svg>
+      Drop your photo here or click to upload
+      <small>JPG, PNG or WebP</small>
+      <input type="file" id="photoInput" hidden accept="image/*">
+    </div>
+
+    <div class="canvas-row">
+      <div class="canvas-panel">
+        <div class="canvas-label">Original</div>
+        <div class="canvas-box" id="originalBox">
+          <div class="canvas-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Upload a photo
+          </div>
+          <canvas id="originalCanvas" style="display:none;"></canvas>
+        </div>
+      </div>
+      <div class="canvas-panel">
+        <div class="canvas-label">Stencil preview</div>
+        <div class="canvas-box" id="stencilBox">
+          <div class="canvas-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+            Stencil will appear here
+          </div>
+          <canvas id="stencilCanvas" style="display:none;"></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Right: controls -->
+  <div class="controls-panel">
+
+    <div class="controls-title">Stencil settings</div>
+
+    <!-- Presets -->
+    <div class="control-group">
+      <div class="control-label">Style preset</div>
+      <div class="presets-grid">
+        <button class="preset-btn active" onclick="applyPreset('fine')">Fine lines</button>
+        <button class="preset-btn" onclick="applyPreset('bold')">Bold lines</button>
+        <button class="preset-btn" onclick="applyPreset('detailed')">High detail</button>
+        <button class="preset-btn" onclick="applyPreset('minimal')">Minimal</button>
+      </div>
+    </div>
+
+    <!-- Edge threshold -->
+    <div class="control-group">
+      <div class="control-header">
+        <span class="control-label">Edge sensitivity</span>
+        <span class="control-value" id="thresholdVal">30</span>
+      </div>
+      <input type="range" id="threshold" min="5" max="80" value="30" step="1">
+    </div>
+
+    <!-- Line thickness -->
+    <div class="control-group">
+      <div class="control-header">
+        <span class="control-label">Line thickness</span>
+        <span class="control-value" id="thicknessVal">1</span>
+      </div>
+      <input type="range" id="thickness" min="1" max="4" value="1" step="0.5">
+    </div>
+
+    <!-- Contrast -->
+    <div class="control-group">
+      <div class="control-header">
+        <span class="control-label">Contrast boost</span>
+        <span class="control-value" id="contrastVal">1.2</span>
+      </div>
+      <input type="range" id="contrast" min="1" max="3" value="1.2" step="0.1">
+    </div>
+
+    <!-- Invert -->
+    <div class="control-group">
+      <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+        <input type="checkbox" id="invertCheck" style="accent-color: var(--gold); width:14px; height:14px;">
+        <span class="control-label">Invert (white on black)</span>
+      </label>
+    </div>
+
+    <button class="btn-process" id="processBtn" onclick="processStencil()" disabled>
+      Generate stencil
+    </button>
+
+    <button class="btn-download" id="downloadBtn" onclick="downloadStencil()">
+      ↓ Download stencil PNG
+    </button>
+
+  </div>
+
+</div>
+
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="1181011532"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<section class="seo-section">
+
+  <h2>What this tool does</h2>
+  <p>This tool converts any photo into a clean black-and-white line drawing suitable for tattoo stencils. It uses edge detection algorithms to trace the outlines and details of your image, producing a result ready to print on hectographic (stencil) paper.</p>
+
+  <h2>How to use</h2>
+  <ol>
+    <li>Upload your reference photo</li>
+    <li>Choose a style preset or adjust the controls manually</li>
+    <li>Click "Generate stencil" to process</li>
+    <li>Fine-tune until the result looks right</li>
+    <li>Download as PNG and print on hectographic paper</li>
+  </ol>
+
+  <h2>Tips for best results</h2>
+  <ul>
+    <li>Use photos with good lighting and clear contrast</li>
+    <li>Simple compositions work better than complex scenes</li>
+    <li>Start with "Fine lines" preset and adjust from there</li>
+    <li>Increase "Edge sensitivity" to capture more detail</li>
+    <li>Use "Bold lines" preset for larger tattoo pieces</li>
+    <li>Portrait photos work best when the background is plain</li>
+  </ul>
+
+  <h2>FAQ</h2>
+
+  <h3>What is a hectographic printer?</h3>
+  <p>A hectographic (or thermal) printer is used by tattoo artists to transfer a stencil design onto skin before tattooing. The stencil paper requires a high-contrast black-and-white image with clear linework.</p>
+
+  <h3>Is my photo safe?</h3>
+  <p>Yes. All processing happens locally in your browser using the Canvas API. Your photos never leave your device.</p>
+
+  <h3>Can I use this for any tattoo style?</h3>
+  <p>This tool works best for traditional, neo-traditional, linework, and blackwork styles. For watercolor or hyper-realism styles, the result may need additional manual refinement.</p>
+
+</section>
+
+<div class="ad-slot" style="margin-bottom: 24px;">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<footer class="site-footer">
+  <span class="footer-copy">© 2026 InkTools — Image Utilities</span>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy.html">Privacy</a>
+  </div>
+</footer>
+
+<script>
+  const uploadZone  = document.getElementById("uploadZone");
+  const photoInput  = document.getElementById("photoInput");
+  const originalCanvas = document.getElementById("originalCanvas");
+  const stencilCanvas  = document.getElementById("stencilCanvas");
+  const processBtn  = document.getElementById("processBtn");
+  const downloadBtn = document.getElementById("downloadBtn");
+
+  let originalImage = null;
+
+  const presets = {
+    fine:     { threshold: 30, thickness: 1,   contrast: 1.2 },
+    bold:     { threshold: 20, thickness: 2.5, contrast: 1.5 },
+    detailed: { threshold: 15, thickness: 1,   contrast: 1.8 },
+    minimal:  { threshold: 50, thickness: 1,   contrast: 1.0 }
+  };
+
+  function applyPreset(name) {
+    const p = presets[name];
+    document.getElementById("threshold").value  = p.threshold;
+    document.getElementById("thickness").value  = p.thickness;
+    document.getElementById("contrast").value   = p.contrast;
+    document.getElementById("thresholdVal").textContent = p.threshold;
+    document.getElementById("thicknessVal").textContent = p.thickness;
+    document.getElementById("contrastVal").textContent  = p.contrast;
+    document.querySelectorAll(".preset-btn").forEach(b => b.classList.remove("active"));
+    document.querySelector(`[onclick="applyPreset('${name}')"]`).classList.add("active");
+    if (originalImage) processStencil();
+  }
+
+  // Slider live update
+  ["threshold","thickness","contrast"].forEach(id => {
+    document.getElementById(id).addEventListener("input", e => {
+      document.getElementById(id + "Val").textContent = e.target.value;
+    });
+  });
+
+  // Upload
+  uploadZone.addEventListener("click", () => photoInput.click());
+  uploadZone.addEventListener("dragover", e => { e.preventDefault(); uploadZone.style.borderColor = "var(--gold)"; });
+  uploadZone.addEventListener("dragleave", () => { uploadZone.style.borderColor = ""; });
+  uploadZone.addEventListener("drop", e => { e.preventDefault(); uploadZone.style.borderColor = ""; handleFile(e.dataTransfer.files[0]); });
+  photoInput.addEventListener("change", e => handleFile(e.target.files[0]));
+
+  function handleFile(file) {
+    if (!file || !file.type.startsWith("image/")) return;
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      originalImage = img;
+      const maxSize = 600;
+      const scale = Math.min(maxSize / img.width, maxSize / img.height, 1);
+      originalCanvas.width  = Math.round(img.width  * scale);
+      originalCanvas.height = Math.round(img.height * scale);
+      const ctx = originalCanvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, originalCanvas.width, originalCanvas.height);
+      originalCanvas.style.display = "block";
+      document.querySelector("#originalBox .canvas-placeholder").style.display = "none";
+      processBtn.disabled = false;
+      URL.revokeObjectURL(url);
+      processStencil();
+    };
+    img.src = url;
+  }
+
+  function processStencil() {
+    if (!originalImage) return;
+
+    const threshold = parseInt(document.getElementById("threshold").value);
+    const thickness = parseFloat(document.getElementById("thickness").value);
+    const contrast  = parseFloat(document.getElementById("contrast").value);
+    const invert    = document.getElementById("invertCheck").checked;
+
+    const w = originalCanvas.width;
+    const h = originalCanvas.height;
+
+    stencilCanvas.width  = w;
+    stencilCanvas.height = h;
+
+    const src = originalCanvas.getContext("2d").getImageData(0, 0, w, h);
+    const dst = stencilCanvas.getContext("2d").createImageData(w, h);
+
+    // Step 1: grayscale + contrast
+    const gray = new Uint8ClampedArray(w * h);
+    for (let i = 0; i < w * h; i++) {
+      const r = src.data[i*4], g = src.data[i*4+1], b = src.data[i*4+2];
+      let lum = 0.299*r + 0.587*g + 0.114*b;
+      // Apply contrast
+      lum = 128 + (lum - 128) * contrast;
+      gray[i] = Math.max(0, Math.min(255, lum));
+    }
+
+    // Step 2: Sobel edge detection
+    const edges = new Uint8ClampedArray(w * h);
+    for (let y = 1; y < h-1; y++) {
+      for (let x = 1; x < w-1; x++) {
+        const tl = gray[(y-1)*w+(x-1)], tc = gray[(y-1)*w+x], tr = gray[(y-1)*w+(x+1)];
+        const ml = gray[y*w+(x-1)],                            mr = gray[y*w+(x+1)];
+        const bl = gray[(y+1)*w+(x-1)], bc = gray[(y+1)*w+x], br = gray[(y+1)*w+(x+1)];
+        const gx = -tl - 2*ml - bl + tr + 2*mr + br;
+        const gy = -tl - 2*tc - tr + bl + 2*bc + br;
+        const mag = Math.sqrt(gx*gx + gy*gy);
+        edges[y*w+x] = mag > threshold * 3 ? 255 : 0;
+      }
+    }
+
+    // Step 3: line thickness dilation
+    const dilated = new Uint8ClampedArray(w * h);
+    const r = Math.ceil(thickness - 1);
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        let found = false;
+        for (let dy = -r; dy <= r && !found; dy++) {
+          for (let dx = -r; dx <= r && !found; dx++) {
+            const ny = y+dy, nx = x+dx;
+            if (ny>=0 && ny<h && nx>=0 && nx<w && edges[ny*w+nx] === 255) found = true;
+          }
+        }
+        dilated[y*w+x] = found ? 255 : 0;
+      }
+    }
+
+    // Step 4: write to output — white background, black lines (or inverted)
+    for (let i = 0; i < w * h; i++) {
+      const isEdge = dilated[i] === 255;
+      const val = invert
+        ? (isEdge ? 255 : 0)
+        : (isEdge ? 0 : 255);
+      dst.data[i*4]   = val;
+      dst.data[i*4+1] = val;
+      dst.data[i*4+2] = val;
+      dst.data[i*4+3] = 255;
+    }
+
+    stencilCanvas.getContext("2d").putImageData(dst, 0, 0);
+    stencilCanvas.style.display = "block";
+    document.querySelector("#stencilBox .canvas-placeholder").style.display = "none";
+    downloadBtn.style.display = "block";
+  }
+
+  function downloadStencil() {
+    stencilCanvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "stencil.png";
+      a.click();
+      URL.revokeObjectURL(url);
+    }, "image/png");
+  }
+
+  document.getElementById("invertCheck").addEventListener("change", () => {
+    if (originalImage) processStencil();
+  });
+</script>
+
+</body>
+</html>
