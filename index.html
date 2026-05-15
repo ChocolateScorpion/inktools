@@ -4,14 +4,15 @@
 
   <!-- Google AdSense -->
   <meta name="google-adsense-account" content="ca-pub-7189936182708078">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078" crossorigin="anonymous"></script>
 
   <!-- Meta -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Online Image Tools | InkTools</title>
+  <meta name="description" content="Convert, compress and resize images instantly in your browser. No upload required — 100% private. HEIC to JPG, PNG, image compressor and more.">
   <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/styles.css">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
@@ -22,157 +23,189 @@
     gtag('config', 'G-R4568JEMSW');
   </script>
 
-  <!-- Styles -->
-  <style>
-    * { box-sizing: border-box; font-family: Arial, sans-serif; }
-
-    body {
-      margin: 0;
-      background: #0f0f0f;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    header {
-      padding: 30px 20px;
-      font-size: 24px;
-      font-weight: 600;
-    }
-
-    .hero {
-      text-align: center;
-      margin-top: 40px;
-      padding: 0 20px;
-    }
-
-    .hero h1 {
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      color: #aaa;
-    }
-
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 15px;
-      width: 90%;
-      max-width: 600px;
-      margin-top: 30px;
-    }
-
-    .tool-card {
-      background: #1a1a1a;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      text-decoration: none;
-      color: white;
-      transition: 0.2s;
-    }
-
-    .tool-card:hover {
-      background: #2a2a2a;
-    }
-
-    footer {
-      margin-top: 40px;
-      font-size: 12px;
-      color: #666;
-    }
-
-    .tool-content {
-      max-width: 700px;
-      margin: 60px auto;
-      padding: 0 20px;
-      text-align: left;
-      line-height: 1.7;
-    }
-
-    .tool-content h2 {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-  </style>
-
 </head>
-
 <body>
 
-<header>
-  <a href="/" style="color:white; text-decoration:none;">InkTools</a>
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <!-- Needle icon with gold glow -->
+    <svg width="22" height="34" viewBox="0 0 22 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="needle-glow" x="-80%" y="-40%" width="260%" height="180%">
+          <feGaussianBlur stdDeviation="2.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <rect x="1" y="1" width="10" height="10" rx="2" fill="#B8862A" opacity="0.18" filter="url(#needle-glow)"/>
+      <rect x="7" y="1" width="8" height="20" rx="4" fill="#0C0C0B" stroke="#B8862A" stroke-width="0.9"/>
+      <rect x="7" y="1" width="8" height="20" rx="4" fill="#B8862A" opacity="0.12" filter="url(#needle-glow)"/>
+      <polygon points="11,21 8,30 11,28 14,30" fill="#B8862A" filter="url(#needle-glow)"/>
+      <ellipse cx="11" cy="32" rx="2.8" ry="1.4" fill="#B8862A" opacity="0.35"/>
+    </svg>
+    <div class="logo-wordmark">
+      <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
+    </div>
+  </a>
+  <nav class="site-nav">
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
 </header>
 
-<!-- Top Ad -->
-<ins class="adsbygoogle"
-     style="display:block; margin-bottom:20px;"
-     data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="3707669770"></ins>
+<!-- ── TOP AD ── -->
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;"
+    data-ad-client="ca-pub-7189936182708078"
+    data-ad-slot="3707669770"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<!-- HERO -->
+<!-- ── HERO ── -->
 <div class="hero">
-  <h1>Free Online Image Tools</h1>
-  <p>Convert, compress and resize images instantly — no upload required</p>
+  <div class="badge">
+    <span class="badge-dot"></span>
+    No uploads &nbsp;·&nbsp; 100% private
+  </div>
+  <h1>Image tools that work<br>right in your <span>browser</span></h1>
+  <p>Convert, compress, and resize images instantly — everything runs on your device, nothing leaves it.</p>
 </div>
 
-<!-- TOOLS GRID -->
-<div class="tools-grid">
+<!-- ── TOOLS GRID ── -->
+<div class="tools-section">
+  <div class="tools-label">6 free tools</div>
+  <div class="tools-grid">
 
-  <a href="/heic-to-jpg/" class="tool-card">HEIC to JPG</a>
-  <a href="/heic-to-png/" class="tool-card">HEIC to PNG</a>
-  <a href="image-compressor/" class="tool-card">Image Compressor</a>
-  <a href="image-resizer/" class="tool-card">Image Resizer</a>
-  <a href="/jpg-to-png/" class="tool-card">JPG to PNG</a>
-  <a href="/png-to-jpg/" class="tool-card">PNG to JPG</a>
+    <a href="/heic-to-jpg/" class="tool-card">
+      <div class="tool-icon icon-gold">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          <line x1="9" y1="15" x2="15" y2="15"/>
+        </svg>
+      </div>
+      <div class="tool-name">HEIC to JPG</div>
+      <div class="tool-desc">Convert iPhone photos to universal JPG format</div>
+    </a>
 
+    <a href="/heic-to-png/" class="tool-card">
+      <div class="tool-icon icon-purple">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          <circle cx="12" cy="15" r="2"/>
+        </svg>
+      </div>
+      <div class="tool-name">HEIC to PNG</div>
+      <div class="tool-desc">Lossless PNG output from HEIC files</div>
+    </a>
+
+    <a href="/image-compressor/" class="tool-card">
+      <div class="tool-icon icon-teal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/>
+          <line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/>
+        </svg>
+      </div>
+      <div class="tool-name">Image Compressor</div>
+      <div class="tool-desc">Reduce file size without visible quality loss</div>
+    </a>
+
+    <a href="/image-resizer/" class="tool-card">
+      <div class="tool-icon icon-gold">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+        </svg>
+      </div>
+      <div class="tool-name">Image Resizer</div>
+      <div class="tool-desc">Set exact dimensions for any image</div>
+    </a>
+
+    <a href="/jpg-to-png/" class="tool-card">
+      <div class="tool-icon icon-coral">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+          <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+        </svg>
+      </div>
+      <div class="tool-name">JPG to PNG</div>
+      <div class="tool-desc">Add transparency support to JPG images</div>
+    </a>
+
+    <a href="/png-to-jpg/" class="tool-card">
+      <div class="tool-icon icon-green">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+      </div>
+      <div class="tool-name">PNG to JPG</div>
+      <div class="tool-desc">Smaller files for sharing and web use</div>
+    </a>
+
+  </div>
 </div>
 
-<!-- Mid Ad -->
-<ins class="adsbygoogle"
-     style="display:block; margin-top:30px;"
-     data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="1181011532"></ins>
+<!-- ── TRUST BAR ── -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Files never leave your device
+  </div>
+  <div class="trust-item">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    Instant processing
+  </div>
+  <div class="trust-item">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+    Works on mobile
+  </div>
+  <div class="trust-item">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    Always free
+  </div>
+</div>
 
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+<!-- ── MID AD ── -->
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;"
+    data-ad-client="ca-pub-7189936182708078"
+    data-ad-slot="1181011532"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 
-<!-- SEO CONTENT -->
+<!-- ── HOW IT WORKS ── -->
+<div class="how-section">
+  <div class="section-title">How it works</div>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Drop or upload your image file</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Pick your tool or output format</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Processing happens instantly in browser</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">Download your optimized image</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SEO CONTENT ── -->
 <section class="seo-section">
 
-  <h2>What is this tool?</h2>
+  <h2>What is InkTools?</h2>
   <p>
-    InkTools is a collection of free online image utilities designed to help you convert, compress, and resize images directly in your browser.
-  </p>
-  <p>
-    You can convert HEIC to JPG or PNG, compress images to reduce file size, resize photos, or switch between JPG and PNG formats — all without uploading your files.
+    InkTools is a collection of free online image utilities designed to help you convert, compress, and resize images directly in your browser. No account, no upload, no waiting.
   </p>
   <p>
     All processing happens locally on your device, ensuring fast performance and complete privacy.
   </p>
 
-  <section class="seo-section">
-    <h2>How It Works</h2>
-    <ol>
-      <li>Upload or drag and drop your image file</li>
-      <li>Select the desired format or tool</li>
-      <li>Let the tool process your file instantly</li>
-      <li>Download your optimized image</li>
-    </ol>
-    <p>
-      InkTools runs entirely in your browser, so your files are never uploaded to any server.
-    </p>
-  </section>
-
-  <section class="seo-section">
   <h2>Why Use InkTools</h2>
   <ul>
     <li>No uploads required — your files stay on your device</li>
@@ -182,54 +215,43 @@
     <li>Works on desktop and mobile devices</li>
     <li>100% free to use</li>
   </ul>
-</section>
-  
-  <section class="seo-section">
+
   <h2>Frequently Asked Questions</h2>
 
   <h3>Can I convert HEIC images to JPG?</h3>
-  <p>
-    Yes, you can easily convert HEIC files from iPhone to JPG format for better compatibility with most devices and platforms.
-  </p>
+  <p>Yes. Convert HEIC files from iPhone to JPG format for better compatibility with most devices and platforms.</p>
 
   <h3>Do I need to upload my images?</h3>
-  <p>
-    No. All tools work directly in your browser, so your images are never uploaded or stored online.
-  </p>
+  <p>No. All tools work directly in your browser — your images are never uploaded or stored anywhere.</p>
 
   <h3>Can I compress images without losing quality?</h3>
-  <p>
-    Yes, the image compressor reduces file size while maintaining good visual quality, making it ideal for web use.
-  </p>
+  <p>Yes. The image compressor reduces file size while maintaining good visual quality, making it ideal for web use.</p>
 
   <h3>What formats are supported?</h3>
-  <p>
-    InkTools supports HEIC, JPG, and PNG formats, including conversions between them.
-  </p>
+  <p>InkTools supports HEIC, JPG, and PNG formats, including conversions between them.</p>
 
   <h3>Is InkTools free?</h3>
-  <p>
-    Yes, all tools are completely free to use with no hidden costs.
-  </p>
+  <p>Yes, all tools are completely free to use with no hidden costs.</p>
 
 </section>
-  
-<!-- Bottom Ad -->
-<ins class="adsbygoogle"
-     style="display:block; margin-top:40px;"
-     data-ad-client="ca-pub-7189936182708078"
-     data-ad-slot="8603238385"></ins>
 
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+<!-- ── BOTTOM AD ── -->
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;"
+    data-ad-client="ca-pub-7189936182708078"
+    data-ad-slot="8603238385"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 
-<footer>
-  © 2026 InkTools |
-  <a href="/">Home</a> |
-  <a href="/about.html">About</a> |
-  <a href="/contact.html">Contact</a> |
-  <a href="/privacy.html">Privacy</a>
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <span class="footer-copy">© 2026 InkTools — Image Utilities</span>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy.html">Privacy</a>
+  </div>
 </footer>
 
 </body>
