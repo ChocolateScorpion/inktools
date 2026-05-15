@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-7189936182708078">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078" crossorigin="anonymous"></script>
+
+  <!-- Meta -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebP Converter Online Free | InkTools</title>
+  <meta name="description" content="Convert WebP images to JPG or PNG instantly in your browser. Also convert JPG and PNG to WebP. No upload required — 100% private and free.">
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-R4568JEMSW');
+  </script>
+
+  <style>
+    :root {
+      --gold:        #B8862A;
+      --gold-light:  #EF9F27;
+      --gold-subtle: rgba(184,134,42,0.09);
+      --gold-border: rgba(184,134,42,0.22);
+      --bg:          #0C0C0B;
+      --surface:     #161614;
+      --surface2:    #1E1E1B;
+      --border:      rgba(255,255,255,0.07);
+      --cream:       #E8E4DC;
+      --muted:       #8C8880;
+      --faint:       #47453F;
+      --max-w:       860px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; color: inherit; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', Arial, sans-serif;
+      background-color: var(--bg);
+      background-image: radial-gradient(ellipse 70% 45% at 50% 0%, rgba(184,134,42,0.06) 0%, transparent 65%);
+      background-attachment: fixed;
+      color: var(--cream);
+      display: flex; flex-direction: column; align-items: center;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site-header {
+      width: 100%; max-width: var(--max-w);
+      padding: 18px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .site-logo { display: flex; align-items: center; gap: 9px; }
+    .logo-ink   { font-size: 15px; font-weight: 700; letter-spacing: 2px; color: var(--cream); -webkit-text-stroke: 0.5px var(--gold); text-transform: uppercase; }
+    .logo-tools { font-size: 15px; font-weight: 300; letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase; }
+    .site-nav { display: flex; gap: 22px; }
+    .site-nav a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .site-nav a:hover { color: var(--cream); }
+
+    .tool-hero { width: 100%; max-width: var(--max-w); text-align: center; padding: 48px 24px 36px; }
+
+    .tool-badge {
+      display: inline-flex; align-items: center;
+      background: var(--gold-subtle); border: 0.5px solid var(--gold-border);
+      border-radius: 20px; padding: 4px 13px;
+      font-size: 11px; color: #C9973A; margin-bottom: 18px;
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+
+    .tool-hero h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(24px, 3.5vw, 34px);
+      font-weight: 400; color: var(--cream);
+      line-height: 1.2; letter-spacing: -0.3px; margin-bottom: 10px;
+    }
+
+    .tool-hero p { font-size: 14px; color: var(--muted); max-width: 400px; margin: 0 auto; line-height: 1.6; }
+
+    .converter-wrap {
+      width: 100%; max-width: var(--max-w);
+      padding: 0 24px 48px; display: flex; justify-content: center;
+    }
+
+    .converter-box {
+      background: var(--surface); border: 0.5px solid var(--border);
+      border-radius: 20px; padding: 32px; width: 100%; max-width: 480px;
+    }
+
+    /* Format toggle */
+    .format-row {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center; gap: 10px; margin-bottom: 20px;
+    }
+
+    .format-label { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+
+    .format-select {
+      width: 100%; padding: 10px 12px;
+      background: var(--surface2); border: 0.5px solid var(--border);
+      border-radius: 8px; color: var(--cream);
+      font-family: 'DM Sans', Arial, sans-serif; font-size: 14px;
+      outline: none; cursor: pointer; transition: border-color 0.15s;
+      appearance: none;
+    }
+
+    .format-select:focus { border-color: var(--gold-border); }
+    .format-select option { background: var(--surface2); }
+
+    .format-arrow {
+      font-size: 18px; color: var(--gold);
+      text-align: center; padding-top: 20px;
+    }
+
+    .drop-zone {
+      border: 1.5px dashed var(--gold-border); border-radius: 12px;
+      padding: 32px 20px; margin-bottom: 16px; cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--muted); font-size: 14px; text-align: center;
+    }
+
+    .drop-zone:hover, .drop-zone.active { border-color: var(--gold); background: var(--gold-subtle); }
+    .drop-zone svg { color: var(--gold); opacity: 0.75; margin-bottom: 4px; }
+    .drop-zone small { font-size: 12px; color: var(--faint); }
+
+    #previewContainer {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: 10px; margin-bottom: 14px;
+    }
+
+    .preview-item {
+      background: var(--surface2); border: 0.5px solid var(--border);
+      border-radius: 10px; padding: 8px; text-align: center;
+    }
+
+    .preview-item img { width: 100%; border-radius: 6px; display: block; }
+    .preview-item p   { font-size: 11px; color: var(--muted); margin-top: 5px; word-break: break-word; }
+
+    .heic-placeholder {
+      width: 100%; height: 70px; border-radius: 6px;
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: var(--faint);
+    }
+
+    #convertBtn {
+      width: 100%; padding: 13px; border-radius: 10px; border: none;
+      background: var(--gold); color: #0C0C0B;
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 14px; font-weight: 600; letter-spacing: 0.02em;
+      cursor: pointer; transition: background 0.15s, box-shadow 0.15s; display: none;
+    }
+
+    #convertBtn:hover { background: var(--gold-light); box-shadow: 0 4px 18px rgba(184,134,42,0.28); }
+    #loader { font-size: 13px; color: var(--muted); text-align: center; padding: 10px 0; display: none; }
+
+    .ad-slot { width: 100%; max-width: var(--max-w); padding: 0 24px; margin: 8px 0 24px; }
+
+    .seo-section { width: 100%; max-width: 680px; padding: 0 24px 52px; text-align: left; }
+
+    .seo-section h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 22px; font-weight: 400; color: var(--cream);
+      text-align: center; margin: 40px 0 14px;
+    }
+
+    .seo-section h3 { font-size: 14px; font-weight: 500; color: var(--cream); margin: 18px 0 5px; }
+    .seo-section p  { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
+    .seo-section ul, .seo-section ol { padding-left: 18px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+
+    .site-footer {
+      width: 100%; max-width: var(--max-w); padding: 24px; margin-top: auto;
+      border-top: 0.5px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 10px;
+    }
+
+    .footer-copy { font-size: 12px; color: var(--faint); }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    @media (max-width: 640px) {
+      .converter-box { padding: 22px 16px; }
+      .site-nav { display: none; }
+      .site-footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="1" width="8" height="17" rx="4" fill="#0C0C0B" stroke="#B8862A" stroke-width="1"/>
+      <polygon points="8,18 5.5,26 8,24 10.5,26" fill="#B8862A"/>
+      <ellipse cx="8" cy="27.2" rx="2.2" ry="1.1" fill="#B8862A" opacity="0.38"/>
+    </svg>
+    <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
+  </a>
+  <nav class="site-nav">
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="3707669770"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="tool-hero">
+  <div class="tool-badge">Image Converter</div>
+  <h1>Convert WebP images instantly</h1>
+  <p>Convert WebP to JPG or PNG — or convert JPG and PNG to WebP. No upload · 100% private · Free.</p>
+</div>
+
+<div class="converter-wrap">
+  <div class="converter-box">
+
+    <div class="format-row">
+      <div>
+        <div class="format-label">From</div>
+        <select class="format-select" id="fromFormat">
+          <option value="webp">WebP</option>
+          <option value="jpg">JPG</option>
+          <option value="png">PNG</option>
+        </select>
+      </div>
+      <div class="format-arrow">→</div>
+      <div>
+        <div class="format-label">To</div>
+        <select class="format-select" id="toFormat">
+          <option value="jpg">JPG</option>
+          <option value="png">PNG</option>
+          <option value="webp">WebP</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="drop-zone" id="dropZone">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
+        <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+      </svg>
+      Drop your image here or click to upload
+      <small>Supports WebP, JPG and PNG</small>
+      <input type="file" id="fileInput" hidden multiple accept="image/*">
+    </div>
+
+    <div id="previewContainer"></div>
+    <div id="loader">⏳ Converting…</div>
+    <button id="convertBtn" onclick="convert()">Convert image</button>
+  </div>
+</div>
+
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="1181011532"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<section class="seo-section">
+
+  <h2>What this tool does</h2>
+  <p>This tool converts images between WebP, JPG and PNG formats directly in your browser. Choose your input and output format, drop your file, and download the converted image instantly — no account, no upload, no waiting.</p>
+
+  <h2>What is WebP?</h2>
+  <p>WebP is a modern image format developed by Google that provides excellent compression while maintaining high quality. WebP images are typically 25–35% smaller than equivalent JPG files, making them ideal for web performance. However, not all apps and devices support WebP yet, which is why converting to JPG or PNG is often necessary.</p>
+
+  <h2>When to use each format</h2>
+  <ul>
+    <li><strong style="color:#E8E4DC">WebP</strong> — Best for websites and web apps. Smallest file size with great quality.</li>
+    <li><strong style="color:#E8E4DC">JPG</strong> — Best for photos. Universal compatibility across all devices and platforms.</li>
+    <li><strong style="color:#E8E4DC">PNG</strong> — Best for images that need transparency or sharp edges like logos and icons.</li>
+  </ul>
+
+  <h2>How to use</h2>
+  <ol>
+    <li>Select your input format (From) and output format (To)</li>
+    <li>Drop or upload your image file</li>
+    <li>Click "Convert image"</li>
+    <li>Download your converted file instantly</li>
+  </ol>
+
+  <h2>FAQ</h2>
+
+  <h3>Can I convert multiple files at once?</h3>
+  <p>Yes, you can select multiple files and convert them all in one click.</p>
+
+  <h3>Will converting WebP to JPG reduce quality?</h3>
+  <p>There may be a slight quality reduction since JPG uses lossy compression, but the difference is minimal at standard quality settings.</p>
+
+  <h3>Is my file safe?</h3>
+  <p>Yes. Everything is processed locally in your browser. Your files never leave your device.</p>
+
+</section>
+
+<div class="ad-slot" style="margin-bottom: 24px;">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<footer class="site-footer">
+  <span class="footer-copy">© 2026 InkTools — Image Utilities</span>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy.html">Privacy</a>
+  </div>
+</footer>
+
+<script src="/script.js"></script>
+<script>
+  const fromFormat = document.getElementById("fromFormat");
+  const toFormat   = document.getElementById("toFormat");
+
+  // Prevent same format selection
+  function syncFormats() {
+    if (fromFormat.value === toFormat.value) {
+      const opts = ["jpg","png","webp"].filter(f => f !== fromFormat.value);
+      toFormat.value = opts[0];
+    }
+  }
+
+  fromFormat.addEventListener("change", syncFormats);
+  toFormat.addEventListener("change", () => {
+    if (fromFormat.value === toFormat.value) {
+      const opts = ["jpg","png","webp"].filter(f => f !== toFormat.value);
+      fromFormat.value = opts[0];
+    }
+  });
+
+  const mimeMap = { jpg: "image/jpeg", png: "image/png", webp: "image/webp" };
+  const extMap  = { jpg: ".jpg", png: ".png", webp: ".webp" };
+
+  setupTool({
+    previewFromHEIC: false,
+
+    async convert(file) {
+      const targetMime = mimeMap[toFormat.value] || "image/jpeg";
+      return await new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width  = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext("2d");
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+          URL.revokeObjectURL(url);
+          canvas.toBlob(blob => {
+            if (blob) resolve(blob);
+            else reject(new Error("Conversion failed"));
+          }, targetMime, 0.92);
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Could not load image")); };
+        img.src = url;
+      });
+    },
+
+    getFileName(name) {
+      const ext = extMap[toFormat.value] || ".jpg";
+      return name.replace(/\.[^.]+$/, ext);
+    }
+  });
+</script>
+
+</body>
+</html>
