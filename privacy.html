@@ -9,8 +9,8 @@
   <!-- Meta -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Online Image Tools | InkTools</title>
-  <meta name="description" content="Convert, compress and resize images instantly in your browser. No upload required — 100% private. HEIC to JPG, PNG, image compressor and more.">
+  <title>Privacy Policy | InkTools</title>
+  <meta name="description" content="InkTools privacy policy. All image processing happens locally in your browser. We never upload, store, or share your files.">
   <link rel="icon" href="/favicon.ico">
 
   <!-- Google Fonts -->
@@ -45,12 +45,10 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     a { text-decoration: none; color: inherit; }
-
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'DM Sans', Arial, sans-serif;
-      /* Fondo fijo — no se mueve al hacer scroll */
       background-color: var(--bg);
       background-image: radial-gradient(ellipse 70% 45% at 50% 0%, rgba(184,134,42,0.06) 0%, transparent 65%);
       background-attachment: fixed;
@@ -64,201 +62,119 @@
 
     /* ── HEADER ── */
     .site-header {
-      width: 100%;
-      max-width: var(--max-w);
+      width: 100%; max-width: var(--max-w);
       padding: 18px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       border-bottom: 0.5px solid var(--border);
     }
 
     .site-logo { display: flex; align-items: center; gap: 9px; }
-
-    .logo-ink {
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--cream);
-      -webkit-text-stroke: 0.5px var(--gold);
-      text-transform: uppercase;
-    }
-
-    .logo-tools {
-      font-size: 15px;
-      font-weight: 300;
-      letter-spacing: 2.5px;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
-
+    .logo-ink   { font-size: 15px; font-weight: 700; letter-spacing: 2px; color: var(--cream); -webkit-text-stroke: 0.5px var(--gold); text-transform: uppercase; }
+    .logo-tools { font-size: 15px; font-weight: 300; letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase; }
     .site-nav { display: flex; gap: 22px; }
     .site-nav a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
     .site-nav a:hover { color: var(--cream); }
 
-    /* ── HERO ── */
-    .hero {
-      width: 100%;
-      max-width: var(--max-w);
-      text-align: center;
-      padding: 56px 24px 44px;
+    /* ── PAGE CONTENT ── */
+    .page-wrap {
+      width: 100%; max-width: 680px;
+      padding: 56px 24px 64px;
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: var(--gold-subtle);
-      border: 0.5px solid var(--gold-border);
-      border-radius: 20px;
-      padding: 5px 14px;
-      font-size: 12px;
-      color: #C9973A;
-      margin-bottom: 20px;
+    .page-label {
+      font-size: 11px; color: var(--faint);
+      text-transform: uppercase; letter-spacing: 0.14em;
+      font-weight: 500; margin-bottom: 14px;
     }
 
-    .badge-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--gold-light);
-    }
-
-    .hero h1 {
+    .page-wrap h1 {
       font-family: 'DM Serif Display', Georgia, serif;
       font-size: clamp(28px, 4vw, 38px);
-      font-weight: 400;
-      color: var(--cream);
-      line-height: 1.18;
-      letter-spacing: -0.3px;
-      margin-bottom: 16px;
+      font-weight: 400; color: var(--cream);
+      line-height: 1.15; letter-spacing: -0.3px;
+      margin-bottom: 10px;
     }
 
-    .hero h1 span { color: var(--gold); }
-
-    .hero p {
-      font-size: 15px;
-      color: var(--muted);
-      max-width: 400px;
-      margin: 0 auto;
-      line-height: 1.65;
+    .last-updated {
+      font-size: 12px; color: var(--faint);
+      margin-bottom: 40px;
     }
 
-    /* ── TOOLS ── */
-    .tools-section { width: 100%; max-width: var(--max-w); padding: 0 24px; }
-
-    .tools-label {
-      font-size: 11px;
-      color: var(--faint);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-weight: 500;
-      margin-bottom: 14px;
-    }
-
-    .tools-grid {
+    /* Summary cards */
+    .summary-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       margin-bottom: 48px;
     }
 
-    .tool-card {
+    .summary-card {
       background: var(--surface);
       border: 0.5px solid var(--border);
       border-radius: 14px;
-      padding: 18px;
-      color: var(--cream);
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.15s, background 0.15s;
+      padding: 18px 16px;
+      text-align: center;
     }
 
-    .tool-card:hover {
-      border-color: var(--gold-border);
-      background: var(--surface2);
+    .summary-card svg { color: var(--gold); margin-bottom: 10px; }
+    .summary-card .s-title { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 4px; }
+    .summary-card .s-desc  { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+    /* Divider */
+    .divider { height: 0.5px; background: var(--border); margin: 36px 0; }
+
+    /* Section */
+    .policy-section { margin-bottom: 36px; }
+
+    .policy-section h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 20px; font-weight: 400; color: var(--cream);
+      margin-bottom: 14px;
     }
 
-    .tool-icon {
-      width: 34px; height: 34px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
+    .policy-section p {
+      font-size: 14px; color: var(--muted);
+      line-height: 1.75; margin-bottom: 12px;
+    }
+
+    .policy-section p strong { color: var(--cream); font-weight: 500; }
+
+    .policy-section ul {
+      padding-left: 18px; color: var(--muted);
+      font-size: 14px; line-height: 1.8;
       margin-bottom: 12px;
     }
 
-    .tool-name  { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 4px; }
-    .tool-desc  { font-size: 12px; color: var(--muted); line-height: 1.45; }
-
-    .ic-gold   { background: rgba(184,134,42,0.13); color: #C9973A; }
-    .ic-purple { background: rgba(139,92,246,0.12);  color: #a78bfa; }
-    .ic-teal   { background: rgba(20,184,166,0.12);  color: #2dd4bf; }
-    .ic-coral  { background: rgba(239,100,80,0.12);  color: #f87171; }
-    .ic-green  { background: rgba(34,197,94,0.11);   color: #4ade80; }
-    .ic-blue   { background: rgba(59,130,246,0.12);  color: #60a5fa; }
-
-    /* ── TRUST BAR ── */
-    .trust-bar {
-      width: 100%; max-width: var(--max-w);
-      padding: 20px 24px;
-      border-top: 0.5px solid var(--border);
-      border-bottom: 0.5px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 36px;
-      flex-wrap: wrap;
-      margin-bottom: 48px;
-    }
-
-    .trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
-    .trust-item svg { color: var(--gold); flex-shrink: 0; }
-
-    /* ── HOW IT WORKS ── */
-    .how-section { width: 100%; max-width: var(--max-w); padding: 0 24px 52px; }
-
-    .section-title { font-size: 16px; font-weight: 500; color: var(--cream); margin-bottom: 22px; }
-
-    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-
-    .step { text-align: center; padding: 16px 10px; }
-
-    .step-num {
-      width: 26px; height: 26px;
-      border-radius: 50%;
-      border: 0.5px solid var(--gold-border);
+    /* Highlight box */
+    .highlight-box {
       background: var(--gold-subtle);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; color: #C9973A; font-weight: 500;
-      margin: 0 auto 10px;
+      border: 0.5px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 24px 0;
+      display: flex; align-items: flex-start; gap: 12px;
     }
 
-    .step-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .highlight-box svg { color: var(--gold); flex-shrink: 0; margin-top: 1px; }
 
-    /* ── SEO ── */
-    .seo-section { width: 100%; max-width: 680px; padding: 0 24px 52px; text-align: left; }
-
-    .seo-section h2 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 22px; font-weight: 400; color: var(--cream);
-      text-align: center; margin: 40px 0 14px;
+    .highlight-box p {
+      font-size: 14px; color: #C9973A;
+      line-height: 1.65; margin: 0;
     }
 
-    .seo-section h3 { font-size: 14px; font-weight: 500; color: var(--cream); margin: 18px 0 5px; }
-    .seo-section p  { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
-    .seo-section ul, .seo-section ol { padding-left: 18px; color: var(--muted); font-size: 14px; line-height: 1.8; }
-
-    /* ── ADS ── */
-    .ad-slot { width: 100%; max-width: var(--max-w); padding: 0 24px; margin: 16px 0; }
+    /* Contact link */
+    .contact-link {
+      color: var(--gold);
+      transition: color 0.15s;
+    }
+    .contact-link:hover { color: var(--gold-light); }
 
     /* ── FOOTER ── */
     .site-footer {
       width: 100%; max-width: var(--max-w);
       padding: 24px; margin-top: auto;
       border-top: 0.5px solid var(--border);
-      display: flex; align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 10px;
     }
 
@@ -267,16 +183,10 @@
     .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
     .footer-links a:hover { color: var(--gold); }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
-      .tools-grid { grid-template-columns: repeat(2, 1fr); }
-      .steps-grid { grid-template-columns: repeat(2, 1fr); }
-      .trust-bar  { gap: 16px; }
-      .site-nav   { display: none; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .site-nav { display: none; }
       .site-footer { flex-direction: column; align-items: flex-start; }
-    }
-    @media (max-width: 380px) {
-      .tools-grid { grid-template-columns: 1fr; }
     }
   </style>
 
@@ -299,179 +209,97 @@
   </nav>
 </header>
 
-<!-- TOP AD -->
-<div class="ad-slot">
-  <ins class="adsbygoogle" style="display:block;"
-    data-ad-client="ca-pub-7189936182708078" data-ad-slot="3707669770"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
+<!-- CONTENT -->
+<div class="page-wrap">
 
-<!-- HERO -->
-<div class="hero">
-  <div class="badge"><span class="badge-dot"></span>No uploads &nbsp;·&nbsp; 100% private</div>
-  <h1>Image tools that work<br>right in your <span>browser</span></h1>
-  <p>Convert, compress, and resize images instantly — everything runs on your device, nothing leaves it.</p>
-</div>
+  <div class="page-label">Legal</div>
+  <h1>Privacy Policy</h1>
+  <div class="last-updated">Last updated: January 2026</div>
 
-<!-- TOOLS GRID -->
-<div class="tools-section">
-  <div class="tools-label">9 free tools</div>
-  <div class="tools-grid">
-
-    <a href="/heic-to-jpg/" class="tool-card">
-      <div class="tool-icon ic-gold">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-      </div>
-      <div class="tool-name">HEIC to JPG</div>
-      <div class="tool-desc">Convert iPhone photos to universal JPG format</div>
-    </a>
-
-    <a href="/heic-to-png/" class="tool-card">
-      <div class="tool-icon ic-purple">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="12" cy="15" r="2"/></svg>
-      </div>
-      <div class="tool-name">HEIC to PNG</div>
-      <div class="tool-desc">Lossless PNG output with transparency support</div>
-    </a>
-
-    <a href="/image-compressor/" class="tool-card">
-      <div class="tool-icon ic-teal">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-      </div>
-      <div class="tool-name">Image Compressor</div>
-      <div class="tool-desc">Reduce file size without visible quality loss</div>
-    </a>
-
-    <a href="/image-resizer/" class="tool-card">
-      <div class="tool-icon ic-gold">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      </div>
-      <div class="tool-name">Image Resizer</div>
-      <div class="tool-desc">Set exact pixel dimensions for any image</div>
-    </a>
-
-    <a href="/jpg-to-png/" class="tool-card">
-      <div class="tool-icon ic-coral">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-      </div>
-      <div class="tool-name">JPG to PNG</div>
-      <div class="tool-desc">Add transparency support to JPG images</div>
-    </a>
-
-    <a href="/png-to-jpg/" class="tool-card">
-      <div class="tool-icon ic-green">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      </div>
-      <div class="tool-name">PNG to JPG</div>
-      <div class="tool-desc">Smaller files for sharing and web use</div>
-    </a>
-
-    <a href="/webp-converter/" class="tool-card">
-      <div class="tool-icon ic-blue">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-      </div>
-      <div class="tool-name">WebP Converter</div>
-      <div class="tool-desc">Convert WebP to JPG or PNG and vice versa</div>
-    </a>
-
-    <a href="/photo-to-stencil/" class="tool-card">
-      <div class="tool-icon ic-gold">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg>
-      </div>
-      <div class="tool-name">Photo to Stencil</div>
-      <div class="tool-desc">Convert photos to tattoo stencils for hectographic printing</div>
-    </a>
-
-    <a href="/blog/" class="tool-card" style="border-style: dashed;">
-      <div class="tool-icon ic-purple">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      </div>
-      <div class="tool-name">Blog &amp; Guides</div>
-      <div class="tool-desc">Tips on image formats, compression and tattoo tools</div>
-    </a>
-
+  <!-- Summary cards -->
+  <div class="summary-grid">
+    <div class="summary-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="s-title">No uploads</div>
+      <div class="s-desc">Your files never leave your device</div>
+    </div>
+    <div class="summary-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <div class="s-title">No tracking</div>
+      <div class="s-desc">We don't sell or share your data</div>
+    </div>
+    <div class="summary-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+      <div class="s-title">No accounts</div>
+      <div class="s-desc">No registration, no personal data collected</div>
+    </div>
   </div>
-</div>
 
-<!-- TRUST BAR -->
-<div class="trust-bar">
-  <div class="trust-item">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    Files never leave your device
+  <div class="highlight-box">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <p><strong>The short version:</strong> InkTools processes all images locally in your browser. Your files are never uploaded to any server, never stored, and never shared with anyone. Period.</p>
   </div>
-  <div class="trust-item">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-    Instant processing
+
+  <div class="divider"></div>
+
+  <!-- Sections -->
+  <div class="policy-section">
+    <h2>1. Image processing</h2>
+    <p>All image conversion, compression, and resizing operations performed by InkTools happen <strong>entirely within your browser</strong> using standard web technologies (JavaScript, Canvas API).</p>
+    <p>Your image files are never transmitted to any external server. They are loaded into memory temporarily for processing and are cleared when you close or navigate away from the page.</p>
   </div>
-  <div class="trust-item">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-    Works on mobile
+
+  <div class="policy-section">
+    <h2>2. Data we collect</h2>
+    <p>InkTools does not collect any personal information. We do not ask for your name, email, or any other identifying details to use our tools.</p>
+    <p>We use <strong>Google Analytics</strong> to collect anonymous usage statistics, including:</p>
+    <ul>
+      <li>Pages visited and time spent on each page</li>
+      <li>General geographic region (country level)</li>
+      <li>Device type and browser version</li>
+      <li>How visitors arrive at the site (search, direct, etc.)</li>
+    </ul>
+    <p>This data is anonymous, aggregated, and used only to understand how people use InkTools so we can improve it. No individual users are identified or tracked.</p>
   </div>
-  <div class="trust-item">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-    Always free
+
+  <div class="policy-section">
+    <h2>3. Cookies</h2>
+    <p>InkTools uses minimal cookies. Google Analytics uses cookies to distinguish unique visitors and sessions. These cookies do not contain any personally identifiable information.</p>
+    <p>We also display ads through <strong>Google AdSense</strong>, which may use cookies to show relevant ads based on your browsing activity. You can opt out of personalized ads through <a href="https://adssettings.google.com" class="contact-link" target="_blank" rel="noopener">Google's ad settings</a>.</p>
   </div>
-</div>
 
-<!-- MID AD -->
-<div class="ad-slot">
-  <ins class="adsbygoogle" style="display:block;"
-    data-ad-client="ca-pub-7189936182708078" data-ad-slot="1181011532"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-
-<!-- HOW IT WORKS -->
-<div class="how-section">
-  <div class="section-title">How it works</div>
-  <div class="steps-grid">
-    <div class="step"><div class="step-num">1</div><div class="step-text">Drop or upload your image file</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-text">Pick your tool or output format</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-text">Processing happens instantly in browser</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-text">Download your optimized image</div></div>
+  <div class="policy-section">
+    <h2>4. Advertising</h2>
+    <p>InkTools is supported by Google AdSense. Ads may be displayed on our pages. Google may use cookies and similar technologies to serve ads based on your prior visits to InkTools or other websites.</p>
+    <p>InkTools does not control the content of ads displayed by Google and is not responsible for their privacy practices. For more information, see <a href="https://policies.google.com/privacy" class="contact-link" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
   </div>
-</div>
 
-<!-- SEO CONTENT -->
-<section class="seo-section">
+  <div class="policy-section">
+    <h2>5. Third-party services</h2>
+    <p>InkTools uses the following third-party services:</p>
+    <ul>
+      <li><strong>Google Analytics</strong> — anonymous usage statistics</li>
+      <li><strong>Google AdSense</strong> — advertising</li>
+      <li><strong>heic2any</strong> — open-source library for HEIC conversion, runs entirely in the browser</li>
+    </ul>
+    <p>None of these services receive your image files. Only anonymous analytics and ad-related data is shared with Google services.</p>
+  </div>
 
-  <h2>What is InkTools?</h2>
-  <p>InkTools is a collection of free online image utilities designed to help you convert, compress, and resize images directly in your browser. No account, no upload, no waiting.</p>
-  <p>All processing happens locally on your device, ensuring fast performance and complete privacy.</p>
+  <div class="policy-section">
+    <h2>6. Children's privacy</h2>
+    <p>InkTools does not knowingly collect any information from children under the age of 13. Our tools are general-purpose utilities not directed at children.</p>
+  </div>
 
-  <h2>Why Use InkTools</h2>
-  <ul>
-    <li>No uploads required — your files stay on your device</li>
-    <li>Fast and simple image conversion</li>
-    <li>Supports HEIC, JPG, and PNG formats</li>
-    <li>Reduce image file size without losing quality</li>
-    <li>Works on desktop and mobile devices</li>
-    <li>100% free to use</li>
-  </ul>
+  <div class="policy-section">
+    <h2>7. Changes to this policy</h2>
+    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated date. Continued use of InkTools after changes constitutes acceptance of the updated policy.</p>
+  </div>
 
-  <h2>Frequently Asked Questions</h2>
+  <div class="policy-section">
+    <h2>8. Contact</h2>
+    <p>If you have any questions about this Privacy Policy, please <a href="/contact.html" class="contact-link">get in touch with us</a>.</p>
+  </div>
 
-  <h3>Can I convert HEIC images to JPG?</h3>
-  <p>Yes. Convert HEIC files from iPhone to JPG format for better compatibility with most devices and platforms.</p>
-
-  <h3>Do I need to upload my images?</h3>
-  <p>No. All tools work directly in your browser — your images are never uploaded or stored anywhere.</p>
-
-  <h3>Can I compress images without losing quality?</h3>
-  <p>Yes. The image compressor reduces file size while maintaining good visual quality, making it ideal for web use.</p>
-
-  <h3>What formats are supported?</h3>
-  <p>InkTools supports HEIC, JPG, and PNG formats, including conversions between them.</p>
-
-  <h3>Is InkTools free?</h3>
-  <p>Yes, all tools are completely free to use with no hidden costs.</p>
-
-</section>
-
-<!-- BOTTOM AD -->
-<div class="ad-slot">
-  <ins class="adsbygoogle" style="display:block;"
-    data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
 <!-- FOOTER -->
