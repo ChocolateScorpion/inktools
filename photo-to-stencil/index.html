@@ -480,6 +480,7 @@
   ["threshold","thickness","contrast"].forEach(id => {
     document.getElementById(id).addEventListener("input", e => {
       document.getElementById(id + "Val").textContent = e.target.value;
+      if (originalImage) processStencil();
     });
   });
 
