@@ -1,64 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-7189936182708078">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078" crossorigin="anonymous"></script>
+
+  <!-- Meta -->
   <meta charset="UTF-8">
-  <title>Privacy Policy - InkTools</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | InkTools</title>
+  <meta name="description" content="InkTools privacy policy. All image processing happens locally in your browser. We never upload, store, or share your files.">
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-R4568JEMSW');
+  </script>
+
   <style>
+    :root {
+      --gold:        #B8862A;
+      --gold-light:  #EF9F27;
+      --gold-subtle: rgba(184,134,42,0.09);
+      --gold-border: rgba(184,134,42,0.22);
+      --bg:          #0C0C0B;
+      --surface:     #161614;
+      --surface2:    #1E1E1B;
+      --border:      rgba(255,255,255,0.07);
+      --cream:       #E8E4DC;
+      --muted:       #8C8880;
+      --faint:       #47453F;
+      --max-w:       860px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; color: inherit; }
+    html { scroll-behavior: smooth; }
+
     body {
-     background-color: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: auto;
-      padding: 40px 20px;
-      line-height: 1.6;
+      font-family: 'DM Sans', Arial, sans-serif;
+      background-color: var(--bg);
+      background-image: radial-gradient(ellipse 70% 45% at 50% 0%, rgba(184,134,42,0.06) 0%, transparent 65%);
+      background-attachment: fixed;
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    h1 {
-      margin-bottom: 20px;
+    /* ── HEADER ── */
+    .site-header {
+      width: 100%; max-width: var(--max-w);
+      padding: 18px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 0.5px solid var(--border);
     }
 
-    a {
-      color: #ccc;
+    .site-logo { display: flex; align-items: center; gap: 9px; }
+    .logo-ink   { font-size: 15px; font-weight: 700; letter-spacing: 2px; color: var(--cream); -webkit-text-stroke: 0.5px var(--gold); text-transform: uppercase; }
+    .logo-tools { font-size: 15px; font-weight: 300; letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase; }
+    .site-nav { display: flex; gap: 22px; }
+    .site-nav a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .site-nav a:hover { color: var(--cream); }
+
+    /* ── PAGE CONTENT ── */
+    .page-wrap {
+      width: 100%; max-width: 680px;
+      padding: 56px 24px 64px;
+    }
+
+    .page-label {
+      font-size: 11px; color: var(--faint);
+      text-transform: uppercase; letter-spacing: 0.14em;
+      font-weight: 500; margin-bottom: 14px;
+    }
+
+    .page-wrap h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 400; color: var(--cream);
+      line-height: 1.15; letter-spacing: -0.3px;
+      margin-bottom: 10px;
+    }
+
+    .last-updated {
+      font-size: 12px; color: var(--faint);
+      margin-bottom: 40px;
+    }
+
+    /* Summary cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 48px;
+    }
+
+    .summary-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 16px;
+      text-align: center;
+    }
+
+    .summary-card svg { color: var(--gold); margin-bottom: 10px; }
+    .summary-card .s-title { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 4px; }
+    .summary-card .s-desc  { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+    /* Divider */
+    .divider { height: 0.5px; background: var(--border); margin: 36px 0; }
+
+    /* Section */
+    .policy-section { margin-bottom: 36px; }
+
+    .policy-section h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 20px; font-weight: 400; color: var(--cream);
+      margin-bottom: 14px;
+    }
+
+    .policy-section p {
+      font-size: 14px; color: var(--muted);
+      line-height: 1.75; margin-bottom: 12px;
+    }
+
+    .policy-section p strong { color: var(--cream); font-weight: 500; }
+
+    .policy-section ul {
+      padding-left: 18px; color: var(--muted);
+      font-size: 14px; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: var(--gold-subtle);
+      border: 0.5px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 24px 0;
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+
+    .highlight-box svg { color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+
+    .highlight-box p {
+      font-size: 14px; color: #C9973A;
+      line-height: 1.65; margin: 0;
+    }
+
+    /* Contact link */
+    .contact-link {
+      color: var(--gold);
+      transition: color 0.15s;
+    }
+    .contact-link:hover { color: var(--gold-light); }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      width: 100%; max-width: var(--max-w);
+      padding: 24px; margin-top: auto;
+      border-top: 0.5px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 10px;
+    }
+
+    .footer-copy { font-size: 12px; color: var(--faint); }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    @media (max-width: 640px) {
+      .summary-grid { grid-template-columns: 1fr; }
+      .site-nav { display: none; }
+      .site-footer { flex-direction: column; align-items: flex-start; }
     }
   </style>
-</head>
 
-<header style="margin-bottom: 40px;">
-  <a href="/" style="text-decoration: none; color: white; font-size: 20px; font-weight: bold;">
-    InkTools
-  </a>
-</header>
-  
+</head>
 <body>
 
-<h1>Privacy Policy</h1>
-
-<p>At InkTools, we respect your privacy.</p>
-
-<h2>Information we collect</h2>
-<p>We do not collect personal data. All file processing happens directly in your browser.</p>
-
-<h2>Cookies</h2>
-<p>We may use cookies to improve user experience and for advertising purposes.</p>
-
-<h2>Google AdSense</h2>
-<p>We use Google AdSense to display ads. Google may use cookies and collect data to show relevant ads.</p>
-
-<p>You can learn more here:
-<a href="https://policies.google.com/technologies/ads" target="_blank">
-Google Ads Policies
-</a>
-</p>
-
-<h2>Contact</h2>
-<p>If you have any questions, you can contact us at: contact@inktools.tech</p>
-
-  <footer style="margin-top:40px;">
-    <a href="/">Home</a> |
-    <a href="/about.html">About</a> |
+<!-- HEADER -->
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="1" width="8" height="17" rx="4" fill="#0C0C0B" stroke="#B8862A" stroke-width="1"/>
+      <polygon points="8,18 5.5,26 8,24 10.5,26" fill="#B8862A"/>
+      <ellipse cx="8" cy="27.2" rx="2.2" ry="1.1" fill="#B8862A" opacity="0.38"/>
+    </svg>
+    <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
+  </a>
+  <nav class="site-nav">
+    <a href="/about.html">About</a>
     <a href="/contact.html">Contact</a>
-  </footer>
+  </nav>
+</header>
+
+<!-- CONTENT -->
+<div class="page-wrap">
+
+  <div class="page-label">Legal</div>
+  <h1>Privacy Policy</h1>
+  <div class="last-updated">Last updated: January 2026</div>
+
+  <!-- Summary cards -->
+  <div class="summary-grid">
+    <div class="summary-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="s-title">No uploads</div>
+      <div class="s-desc">Your files never leave your device</div>
+    </div>
+    <div class="summary-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <div class="s-title">No tracking</div>
+      <div class="s-desc">We don't sell or share your data</div>
+    </div>
+    <div class="summary-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+      <div class="s-title">No accounts</div>
+      <div class="s-desc">No registration, no personal data collected</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <p><strong>The short version:</strong> InkTools processes all images locally in your browser. Your files are never uploaded to any server, never stored, and never shared with anyone. Period.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Sections -->
+  <div class="policy-section">
+    <h2>1. Image processing</h2>
+    <p>All image conversion, compression, and resizing operations performed by InkTools happen <strong>entirely within your browser</strong> using standard web technologies (JavaScript, Canvas API).</p>
+    <p>Your image files are never transmitted to any external server. They are loaded into memory temporarily for processing and are cleared when you close or navigate away from the page.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>2. Data we collect</h2>
+    <p>InkTools does not collect any personal information. We do not ask for your name, email, or any other identifying details to use our tools.</p>
+    <p>We use <strong>Google Analytics</strong> to collect anonymous usage statistics, including:</p>
+    <ul>
+      <li>Pages visited and time spent on each page</li>
+      <li>General geographic region (country level)</li>
+      <li>Device type and browser version</li>
+      <li>How visitors arrive at the site (search, direct, etc.)</li>
+    </ul>
+    <p>This data is anonymous, aggregated, and used only to understand how people use InkTools so we can improve it. No individual users are identified or tracked.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>3. Cookies</h2>
+    <p>InkTools uses minimal cookies. Google Analytics uses cookies to distinguish unique visitors and sessions. These cookies do not contain any personally identifiable information.</p>
+    <p>We also display ads through <strong>Google AdSense</strong>, which may use cookies to show relevant ads based on your browsing activity. You can opt out of personalized ads through <a href="https://adssettings.google.com" class="contact-link" target="_blank" rel="noopener">Google's ad settings</a>.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>4. Advertising</h2>
+    <p>InkTools is supported by Google AdSense. Ads may be displayed on our pages. Google may use cookies and similar technologies to serve ads based on your prior visits to InkTools or other websites.</p>
+    <p>InkTools does not control the content of ads displayed by Google and is not responsible for their privacy practices. For more information, see <a href="https://policies.google.com/privacy" class="contact-link" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>5. Third-party services</h2>
+    <p>InkTools uses the following third-party services:</p>
+    <ul>
+      <li><strong>Google Analytics</strong> — anonymous usage statistics</li>
+      <li><strong>Google AdSense</strong> — advertising</li>
+      <li><strong>heic2any</strong> — open-source library for HEIC conversion, runs entirely in the browser</li>
+    </ul>
+    <p>None of these services receive your image files. Only anonymous analytics and ad-related data is shared with Google services.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>6. Children's privacy</h2>
+    <p>InkTools does not knowingly collect any information from children under the age of 13. Our tools are general-purpose utilities not directed at children.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>7. Changes to this policy</h2>
+    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated date. Continued use of InkTools after changes constitutes acceptance of the updated policy.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>8. Contact</h2>
+    <p>If you have any questions about this Privacy Policy, please <a href="/contact.html" class="contact-link">get in touch with us</a>.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <span class="footer-copy">© 2026 InkTools — Image Utilities</span>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy.html">Privacy</a>
+  </div>
+</footer>
 
 </body>
 </html>
