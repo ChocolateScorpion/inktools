@@ -58,7 +58,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Header */
     .site-header {
       width: 100%; max-width: var(--max-w); padding: 18px 24px;
       display: flex; align-items: center; justify-content: space-between;
@@ -67,11 +66,27 @@
     .site-logo { display: flex; align-items: center; gap: 9px; }
     .logo-ink   { font-size: 15px; font-weight: 700; letter-spacing: 2px; color: var(--cream); -webkit-text-stroke: 0.5px var(--gold); text-transform: uppercase; }
     .logo-tools { font-size: 15px; font-weight: 300; letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase; }
+
+    .header-right { display: flex; align-items: center; gap: 20px; }
     .site-nav { display: flex; gap: 22px; }
     .site-nav a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
     .site-nav a:hover { color: var(--cream); }
 
-    /* Hero */
+    /* Language toggle */
+    .lang-toggle {
+      display: flex; align-items: center;
+      background: var(--surface2); border: 0.5px solid var(--border);
+      border-radius: 20px; padding: 2px;
+    }
+    .lang-btn {
+      padding: 4px 10px; border-radius: 16px; border: none;
+      background: transparent; color: var(--faint);
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 11px; font-weight: 600; cursor: pointer;
+      letter-spacing: 0.05em; transition: color 0.15s, background 0.15s;
+    }
+    .lang-btn.active { background: var(--gold-subtle); color: #C9973A; }
+
     .tool-hero { width: 100%; max-width: var(--max-w); text-align: center; padding: 48px 24px 36px; }
     .tool-badge {
       display: inline-flex; align-items: center;
@@ -88,7 +103,6 @@
     }
     .tool-hero p { font-size: 14px; color: var(--muted); max-width: 480px; margin: 0 auto; line-height: 1.6; }
 
-    /* Main tool card */
     .tool-wrap { width: 100%; max-width: 720px; padding: 0 24px 48px; }
 
     .tool-card {
@@ -97,14 +111,10 @@
       display: flex; flex-direction: column; gap: 24px;
     }
 
-    /* Field groups */
     .field-group { display: flex; flex-direction: column; gap: 10px; }
     .field-label { font-size: 12px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
-    .field-hint  { font-size: 11px; color: var(--faint); margin-top: -6px; }
-
     .field-divider { height: 0.5px; background: var(--border); }
 
-    /* Text inputs */
     .text-input {
       width: 100%; padding: 11px 14px;
       background: var(--surface2); border: 0.5px solid var(--border);
@@ -115,10 +125,7 @@
     .text-input:focus { border-color: var(--gold-border); }
     .text-input::placeholder { color: var(--faint); }
 
-    /* Style grid */
-    .style-grid {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
-    }
+    .style-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
     .style-btn {
       padding: 9px 6px; border-radius: 8px;
       border: 0.5px solid var(--border);
@@ -131,7 +138,6 @@
     .style-btn:hover { border-color: var(--gold-border); color: var(--cream); }
     .style-btn.active { border-color: var(--gold); color: #C9973A; background: var(--gold-subtle); }
 
-    /* Mood chips */
     .mood-chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .mood-chip {
       padding: 6px 13px; border-radius: 20px;
@@ -146,7 +152,6 @@
     .mood-chip.active { border-color: var(--gold); color: #C9973A; background: var(--gold-subtle); }
     .mood-chip.disabled { opacity: 0.35; cursor: not-allowed; }
 
-    /* Select */
     .styled-select {
       width: 100%; padding: 11px 14px;
       background: var(--surface2); border: 0.5px solid var(--border);
@@ -160,7 +165,6 @@
     .styled-select:focus { border-color: var(--gold-border); }
     .styled-select option { background: var(--surface2); }
 
-    /* Color radio cards */
     .color-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .color-card {
       padding: 12px 10px; border-radius: 10px;
@@ -170,19 +174,13 @@
       text-align: center;
     }
     .color-card input[type="radio"] { display: none; }
-    .color-card .cc-swatch {
-      display: flex; gap: 3px; justify-content: center; margin-bottom: 8px;
-    }
-    .color-card .cc-swatch span {
-      width: 10px; height: 10px; border-radius: 50%;
-      display: inline-block;
-    }
+    .color-card .cc-swatch { display: flex; gap: 3px; justify-content: center; margin-bottom: 8px; }
+    .color-card .cc-swatch span { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
     .color-card .cc-label { font-size: 11px; color: var(--muted); line-height: 1.3; }
     .color-card:has(input:checked) { border-color: var(--gold); background: var(--gold-subtle); }
     .color-card:has(input:checked) .cc-label { color: #C9973A; }
     .color-card:hover { border-color: var(--gold-border); }
 
-    /* Detail slider */
     .slider-row { display: flex; align-items: center; gap: 12px; }
     .slider-row span { font-size: 11px; color: var(--faint); white-space: nowrap; }
     input[type="range"] {
@@ -195,16 +193,11 @@
       border-radius: 50%; background: var(--gold); cursor: pointer;
       border: 2px solid var(--bg);
     }
-    .detail-label {
-      font-size: 12px; color: #C9973A; font-weight: 500;
-      min-width: 130px; text-align: right;
-    }
+    .detail-label { font-size: 12px; color: #C9973A; font-weight: 500; min-width: 130px; text-align: right; }
 
-    /* Error messages */
     .field-error { font-size: 11px; color: #f87171; display: none; margin-top: -6px; }
     .field-error.visible { display: block; }
 
-    /* Generate button */
     .btn-generate {
       width: 100%; padding: 14px; border-radius: 12px; border: none;
       background: var(--gold); color: #0C0C0B;
@@ -214,7 +207,6 @@
     }
     .btn-generate:hover { background: var(--gold-light); box-shadow: 0 4px 20px rgba(184,134,42,0.3); }
 
-    /* Output section */
     .output-section {
       display: none; opacity: 0;
       width: 100%; max-width: 720px; padding: 0 24px;
@@ -225,15 +217,8 @@
     .output-section.visible { display: flex; }
     .output-section.animated { opacity: 1; transform: translateY(0); }
 
-    .output-card {
-      background: var(--surface); border: 0.5px solid var(--border);
-      border-radius: 16px; padding: 20px;
-    }
-    .output-header {
-      display: flex; align-items: flex-start;
-      justify-content: space-between; gap: 12px;
-      margin-bottom: 12px;
-    }
+    .output-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 16px; padding: 20px; }
+    .output-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
     .output-title { font-size: 13px; font-weight: 500; color: var(--cream); }
     .output-subtitle { font-size: 11px; color: var(--faint); margin-top: 2px; }
 
@@ -254,20 +239,13 @@
       padding: 12px; background: var(--surface2);
       border: 0.5px solid var(--border); border-radius: 10px;
       color: var(--cream); font-family: 'DM Sans', Arial, sans-serif;
-      font-size: 13px; line-height: 1.6; resize: none; overflow-y: auto;
-      outline: none;
+      font-size: 13px; line-height: 1.6; resize: none; overflow-y: auto; outline: none;
     }
 
-    .platforms-note {
-      font-size: 11px; color: var(--faint); margin-top: 8px;
-      display: flex; align-items: center; gap: 6px;
-    }
-
-    /* Ads */
     .ad-slot { width: 100%; max-width: var(--max-w); padding: 0 24px; margin: 8px 0 24px; }
 
-    /* SEO */
-    .seo-section { width: 100%; max-width: 680px; padding: 0 24px 52px; text-align: left; }
+    .seo-section { width: 100%; max-width: 680px; padding: 0 24px 52px; text-align: left; display: none; }
+    .seo-section.active { display: block; }
     .seo-section h2 {
       font-family: 'DM Serif Display', Georgia, serif;
       font-size: 22px; font-weight: 400; color: var(--cream);
@@ -277,7 +255,6 @@
     .seo-section p  { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
     .seo-section ul { padding-left: 18px; color: var(--muted); font-size: 14px; line-height: 1.8; }
 
-    /* Footer */
     .site-footer {
       width: 100%; max-width: var(--max-w); padding: 24px; margin-top: auto;
       border-top: 0.5px solid var(--border);
@@ -309,10 +286,16 @@
     </svg>
     <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
   </a>
-  <nav class="site-nav">
-    <a href="/about.html">About</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
+  <div class="header-right">
+    <nav class="site-nav">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnES" onclick="setLang('es')">ES</button>
+    </div>
+  </div>
 </header>
 
 <div class="ad-slot">
@@ -321,93 +304,87 @@
 </div>
 
 <div class="tool-hero">
-  <div class="tool-badge">Tattoo Tools</div>
-  <h1>Tattoo Reference Prompt Generator</h1>
-  <p>Describe your idea, pick a style and mood, and get a ready-to-use prompt for any AI image generator. Perfect for visualizing concepts before the design process begins.</p>
+  <div class="tool-badge" id="heroBadge">Tattoo Tools</div>
+  <h1 id="heroTitle">Tattoo Reference Prompt Generator</h1>
+  <p id="heroSubtitle">Describe your idea, pick a style and mood, and get a ready-to-use prompt for any AI image generator. Perfect for visualizing concepts before the design process begins.</p>
 </div>
 
 <div class="tool-wrap">
   <div class="tool-card">
 
-    <!-- Subject -->
     <div class="field-group">
-      <label class="field-label" for="subject">Describe the subject</label>
-      <input type="text" id="subject" class="text-input" maxlength="200" placeholder="e.g. wolf howling at moon">
+      <label class="field-label" id="subjectLabel" for="subject">Describe the subject</label>
+      <input type="text" id="subject" class="text-input" maxlength="200">
       <div class="field-error" id="subject-error">Please describe your subject before generating.</div>
     </div>
 
     <div class="field-divider"></div>
 
-    <!-- Style -->
     <div class="field-group">
-      <div class="field-label">Tattoo style</div>
+      <div class="field-label" id="styleLabel">Tattoo style</div>
       <div class="style-grid" id="styleGrid">
         <button class="style-btn" data-style="Blackwork">Blackwork</button>
         <button class="style-btn" data-style="Fine Line">Fine Line</button>
         <button class="style-btn" data-style="Neo-Traditional">Neo-Trad</button>
-        <button class="style-btn" data-style="Traditional">Traditional</button>
-        <button class="style-btn" data-style="Japanese">Japanese</button>
-        <button class="style-btn" data-style="Geometric">Geometric</button>
-        <button class="style-btn" data-style="Watercolor">Watercolor</button>
-        <button class="style-btn" data-style="Realism">Realism</button>
+        <button class="style-btn" data-style="Traditional" data-es="Tradicional">Traditional</button>
+        <button class="style-btn" data-style="Japanese" data-es="Japonés">Japanese</button>
+        <button class="style-btn" data-style="Geometric" data-es="Geométrico">Geometric</button>
+        <button class="style-btn" data-style="Watercolor" data-es="Acuarela">Watercolor</button>
+        <button class="style-btn" data-style="Realism" data-es="Realismo">Realism</button>
         <button class="style-btn" data-style="Tribal">Tribal</button>
-        <button class="style-btn" data-style="Minimalist">Minimalist</button>
+        <button class="style-btn" data-style="Minimalist" data-es="Minimalista">Minimalist</button>
       </div>
       <div class="field-error" id="style-error">Please select a tattoo style.</div>
     </div>
 
     <div class="field-divider"></div>
 
-    <!-- Mood -->
     <div class="field-group">
-      <div class="field-label">Mood <span style="font-weight:300; text-transform:none; letter-spacing:0;">(up to 4)</span></div>
+      <div class="field-label">Mood <span id="moodMax" style="font-weight:300; text-transform:none; letter-spacing:0;">(up to 4)</span></div>
       <div class="mood-chips" id="moodChips">
-        <span class="mood-chip" data-mood="Dark">Dark</span>
-        <span class="mood-chip" data-mood="Mystical">Mystical</span>
-        <span class="mood-chip" data-mood="Fierce">Fierce</span>
-        <span class="mood-chip" data-mood="Elegant">Elegant</span>
-        <span class="mood-chip" data-mood="Bold">Bold</span>
-        <span class="mood-chip" data-mood="Spiritual">Spiritual</span>
-        <span class="mood-chip" data-mood="Delicate">Delicate</span>
-        <span class="mood-chip" data-mood="Abstract">Abstract</span>
-        <span class="mood-chip" data-mood="Dramatic">Dramatic</span>
-        <span class="mood-chip" data-mood="Vintage">Vintage</span>
+        <span class="mood-chip" data-mood="Dark"      data-es="Oscuro">Dark</span>
+        <span class="mood-chip" data-mood="Mystical"  data-es="Místico">Mystical</span>
+        <span class="mood-chip" data-mood="Fierce"    data-es="Intenso">Fierce</span>
+        <span class="mood-chip" data-mood="Elegant"   data-es="Elegante">Elegant</span>
+        <span class="mood-chip" data-mood="Bold"      data-es="Atrevido">Bold</span>
+        <span class="mood-chip" data-mood="Spiritual" data-es="Espiritual">Spiritual</span>
+        <span class="mood-chip" data-mood="Delicate"  data-es="Delicado">Delicate</span>
+        <span class="mood-chip" data-mood="Abstract"  data-es="Abstracto">Abstract</span>
+        <span class="mood-chip" data-mood="Dramatic"  data-es="Dramático">Dramatic</span>
+        <span class="mood-chip" data-mood="Vintage"   data-es="Vintage">Vintage</span>
       </div>
     </div>
 
     <div class="field-divider"></div>
 
-    <!-- Elements -->
     <div class="field-group">
-      <label class="field-label" for="elements">Elements to include <span style="font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
-      <input type="text" id="elements" class="text-input" maxlength="200" placeholder="e.g. roses, skull, crescent moon, chains">
+      <label class="field-label" id="elementsLabel" for="elements">Elements to include <span id="elementsOptional" style="font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+      <input type="text" id="elements" class="text-input" maxlength="200">
     </div>
 
     <div class="field-divider"></div>
 
-    <!-- Placement -->
     <div class="field-group">
-      <label class="field-label" for="placement">Placement</label>
+      <label class="field-label" id="placementLabel" for="placement">Placement</label>
       <select id="placement" class="styled-select">
-        <option value="none">Not specified</option>
-        <option value="Forearm">Forearm</option>
-        <option value="Upper arm">Upper arm</option>
-        <option value="Full sleeve">Full sleeve</option>
-        <option value="Chest">Chest</option>
-        <option value="Back">Back</option>
-        <option value="Calf">Calf</option>
-        <option value="Thigh">Thigh</option>
-        <option value="Ribs">Ribs</option>
-        <option value="Hand">Hand</option>
-        <option value="Neck">Neck</option>
+        <option value="none"        data-es="Sin especificar">Not specified</option>
+        <option value="Forearm"     data-es="Antebrazo">Forearm</option>
+        <option value="Upper arm"   data-es="Brazo">Upper arm</option>
+        <option value="Full sleeve" data-es="Manga completa">Full sleeve</option>
+        <option value="Chest"       data-es="Pecho">Chest</option>
+        <option value="Back"        data-es="Espalda">Back</option>
+        <option value="Calf"        data-es="Pantorrilla">Calf</option>
+        <option value="Thigh"       data-es="Muslo">Thigh</option>
+        <option value="Ribs"        data-es="Costillas">Ribs</option>
+        <option value="Hand"        data-es="Mano">Hand</option>
+        <option value="Neck"        data-es="Cuello">Neck</option>
       </select>
     </div>
 
     <div class="field-divider"></div>
 
-    <!-- Color preference -->
     <div class="field-group">
-      <div class="field-label">Color preference</div>
+      <div class="field-label" id="colorLabel">Color preference</div>
       <div class="color-grid">
         <label class="color-card">
           <input type="radio" name="color" value="bw" checked>
@@ -416,7 +393,7 @@
             <span style="background:#555;"></span>
             <span style="background:#999;"></span>
           </div>
-          <div class="cc-label">Black &amp; grey</div>
+          <div class="cc-label" id="colorBW">Black &amp; grey</div>
         </label>
         <label class="color-card">
           <input type="radio" name="color" value="accent">
@@ -425,7 +402,7 @@
             <span style="background:#999;"></span>
             <span style="background:#B8862A;"></span>
           </div>
-          <div class="cc-label">B&amp;G with accents</div>
+          <div class="cc-label" id="colorAccent">B&amp;G with accents</div>
         </label>
         <label class="color-card">
           <input type="radio" name="color" value="full">
@@ -434,37 +411,33 @@
             <span style="background:#3b82f6;"></span>
             <span style="background:#22c55e;"></span>
           </div>
-          <div class="cc-label">Full color</div>
+          <div class="cc-label" id="colorFull">Full color</div>
         </label>
       </div>
     </div>
 
     <div class="field-divider"></div>
 
-    <!-- Detail level -->
     <div class="field-group">
-      <div class="field-label">Detail level</div>
+      <div class="field-label" id="detailLabel">Detail level</div>
       <div class="slider-row">
-        <span>Simple</span>
+        <span id="sliderMin">Simple</span>
         <input type="range" id="detail" min="1" max="5" value="3" step="1">
-        <span>Intricate</span>
+        <span id="sliderMax">Intricate</span>
       </div>
-      <div class="detail-label" id="detailLabel">Moderately detailed</div>
+      <div class="detail-label" id="detailValueLabel">Moderately detailed</div>
     </div>
 
-    <!-- Generate -->
     <button class="btn-generate" id="generateBtn" onclick="generatePrompt()">Generate prompts</button>
 
   </div>
 </div>
 
-<!-- Output -->
 <div class="output-section" id="outputSection">
-
   <div class="output-card">
     <div class="output-header">
       <div>
-        <div class="output-title">Universal prompt</div>
+        <div class="output-title" id="universalTitle">Universal prompt</div>
         <div class="output-subtitle">DALL-E · ChatGPT · Ideogram · Adobe Firefly</div>
       </div>
       <button class="btn-copy" id="copyUniversal" onclick="copyPrompt('universal')">Copy</button>
@@ -475,18 +448,17 @@
   <div class="output-card">
     <div class="output-header">
       <div>
-        <div class="output-title">Midjourney prompt</div>
-        <div class="output-subtitle">Paste directly into Discord with /imagine</div>
+        <div class="output-title" id="mjTitle">Midjourney prompt</div>
+        <div class="output-subtitle" id="mjSub">Paste directly into Discord with /imagine</div>
       </div>
       <button class="btn-copy" id="copyMidjourney" onclick="copyPrompt('midjourney')">Copy</button>
     </div>
     <textarea class="output-textarea" id="midjourneyPrompt" readonly></textarea>
   </div>
 
-  <p style="font-size:12px; color:var(--faint); text-align:center; padding: 0 8px 8px;">
+  <p id="outputNote" style="font-size:12px; color:var(--faint); text-align:center; padding: 0 8px 8px;">
     These prompts are references to help visualize ideas — the final tattoo design is always the artist's craft.
   </p>
-
 </div>
 
 <div class="ad-slot" style="margin-top: 16px;">
@@ -494,16 +466,14 @@
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<section class="seo-section">
-
+<!-- SEO English -->
+<section class="seo-section active" id="seoEN">
   <h2>How to use this tool</h2>
   <p>Fill in the subject of your tattoo idea, select the style that best matches what you're looking for, and add any specific elements you want included. Click "Generate prompts" to get two ready-to-use prompts — one universal and one optimized for Midjourney.</p>
   <p>Take the generated prompt, paste it into your AI image generator of choice, and use the result as a visual reference during the consultation or design process.</p>
-
   <h2>Why use AI references for tattoo consultations?</h2>
   <p>One of the most common challenges in tattoo work is translating a vague idea into something concrete. A client might say "I want something dark and mystical with a wolf" — but what does that actually look like? AI-generated references bridge that gap, giving both the artist and the client a visual starting point to work from and refine.</p>
   <p>This tool doesn't design tattoos. It helps communicate ideas faster so the real creative work — the actual tattoo design — can begin from a shared understanding.</p>
-
   <h2>Which AI tools work best?</h2>
   <ul>
     <li><strong>Midjourney</strong> — best overall quality for artistic and illustrative styles</li>
@@ -511,18 +481,37 @@
     <li><strong>Ideogram</strong> — good for clean, graphic styles like blackwork and geometric</li>
     <li><strong>Adobe Firefly</strong> — useful if you need commercially safe references</li>
   </ul>
-
   <h2>FAQ</h2>
-
   <h3>Can I use these images as the actual tattoo design?</h3>
   <p>No — AI-generated images are references, not finished tattoo designs. Tattoo art requires specific technical preparation, linework, and a skilled artist who understands how the design will age and translate on skin. Use these as inspiration and communication tools, not final artwork.</p>
-
   <h3>What is the difference between the two prompts?</h3>
   <p>The Universal prompt is written in plain descriptive language and works across all major AI tools. The Midjourney prompt includes platform-specific parameters like aspect ratio, stylize values, and version flags that produce better results in Midjourney specifically.</p>
-
   <h3>Is this tool free?</h3>
   <p>Yes, completely free. No account required, no limits on how many prompts you generate.</p>
+</section>
 
+<!-- SEO Spanish -->
+<section class="seo-section" id="seoES">
+  <h2>Cómo usar la herramienta</h2>
+  <p>Escribe tu idea en el campo de descripción, elige el estilo que más se acerque a lo que buscas y agrega los elementos que quieres que aparezcan. Dale a "Generar prompts" y obtienes dos prompts listos para pegar en cualquier IA.</p>
+  <p>Copia el prompt, pégalo en el generador de imágenes que uses y utiliza el resultado como referencia visual en la consulta o en el proceso de diseño.</p>
+  <h2>¿Para qué sirven las referencias de IA en un estudio de tatuaje?</h2>
+  <p>Uno de los problemas más comunes en consultas es pasar de "quiero algo oscuro con un lobo, como místico" a tener algo concreto sobre la mesa. El cliente tiene la imagen en la cabeza pero no sabe cómo explicarla, y el artista tiene que adivinar. Con una referencia generada en segundos, el cliente puede señalar algo y decir "más o menos esto" — y ya tienes una dirección real desde donde arrancar el diseño.</p>
+  <p>Esta herramienta no diseña tatuajes. Ayuda a que la conversación entre cliente y artista sea más concreta desde el principio, para que el tiempo del artista se vaya al trabajo que realmente importa: diseñar y tatuar.</p>
+  <h2>¿Qué herramientas de IA funcionan mejor?</h2>
+  <ul>
+    <li><strong>Midjourney</strong> — la mejor calidad para estilos ilustrativos y artísticos en general</li>
+    <li><strong>DALL-E (ChatGPT)</strong> — muy buena para retratos y composiciones realistas</li>
+    <li><strong>Ideogram</strong> — funciona muy bien para estilos gráficos y limpios como blackwork o geométrico</li>
+    <li><strong>Adobe Firefly</strong> — útil si necesitas referencias con licencia comercial segura</li>
+  </ul>
+  <h2>Preguntas frecuentes</h2>
+  <h3>¿Puedo usar estas imágenes como diseño final del tatuaje?</h3>
+  <p>No. Las imágenes generadas por IA son referencias, no diseños terminados. Un tatuaje requiere preparación técnica específica, conocimiento de cómo va a envejecer el trazo en la piel y el ojo de un artista que sepa adaptar el diseño a cada cuerpo. Úsalas como punto de partida, no como arte final.</p>
+  <h3>¿Por qué los prompts están en inglés si uso la herramienta en español?</h3>
+  <p>Los generadores de IA como Midjourney o DALL-E producen mejores resultados con prompts en inglés porque así están entrenados. El idioma del prompt afecta directamente la calidad del resultado, así que los generamos en inglés aunque la interfaz esté en español.</p>
+  <h3>¿Es gratis?</h3>
+  <p>Sí, completamente gratis. Sin cuenta, sin límites.</p>
 </section>
 
 <div class="ad-slot" style="margin-bottom: 24px;">
@@ -541,17 +530,9 @@
 </footer>
 
 <script>
-  // --- State ---
-  let selectedStyle = null;
-  const selectedMoods = new Set();
-
-  const DETAIL_LABELS = [
-    "Very simple and minimal",
-    "Simple",
-    "Moderately detailed",
-    "Highly detailed",
-    "Extremely intricate"
-  ];
+  // ── Prompt generation data (always English for AI quality) ──
+  const DETAIL_LABELS_EN = ["Very simple and minimal","Simple","Moderately detailed","Highly detailed","Extremely intricate"];
+  const DETAIL_LABELS_ES = ["Muy simple y limpio","Simple","Moderado","Muy detallado","Extremadamente detallado"];
 
   const STYLE_DESCRIPTORS = {
     "Blackwork":       "bold black ink, stark contrast, solid fills, graphic black shapes",
@@ -599,43 +580,155 @@
     "full":   "full vibrant color palette"
   };
 
-  const AR_MAP = {
-    "Full sleeve": "--ar 1:3",
-    "Back":        "--ar 2:3",
-    "Ribs":        "--ar 3:1",
-    "Hand":        "--ar 1:1",
-    "Neck":        "--ar 1:1"
+  const AR_MAP     = { "Full sleeve":"--ar 1:3","Back":"--ar 2:3","Ribs":"--ar 3:1","Hand":"--ar 1:1","Neck":"--ar 1:1" };
+  const STYLIZE    = { 1:50, 2:100, 3:250, 4:500, 5:750 };
+  const MJ_RAW     = ["Realism","Watercolor","Fine Line"];
+
+  // ── i18n strings ──
+  const T = {
+    en: {
+      badge: "Tattoo Tools",
+      title: "Tattoo Reference Prompt Generator",
+      subtitle: "Describe your idea, pick a style and mood, and get a ready-to-use prompt for any AI image generator. Perfect for visualizing concepts before the design process begins.",
+      subjectLabel: "Describe the subject",
+      subjectError: "Please describe your subject before generating.",
+      subjectPH: ["wolf howling at moon","phoenix rising from flames","portrait of a samurai warrior","geometric rose with thorns","serpent wrapped around a dagger"],
+      styleLabel: "Tattoo style",
+      styleError: "Please select a tattoo style.",
+      moodMax: "(up to 4)",
+      elementsLabel: "Elements to include",
+      elementsOpt: "(optional)",
+      elementsPH: "e.g. roses, skull, crescent moon, chains",
+      placementLabel: "Placement",
+      colorLabel: "Color preference",
+      colorBW: "Black & grey",
+      colorAccent: "B&G with accents",
+      colorFull: "Full color",
+      detailLabel: "Detail level",
+      sliderMin: "Simple",
+      sliderMax: "Intricate",
+      generateBtn: "Generate prompts",
+      universalTitle: "Universal prompt",
+      mjTitle: "Midjourney prompt",
+      mjSub: "Paste directly into Discord with /imagine",
+      copyBtn: "Copy",
+      copiedBtn: "Copied!",
+      outputNote: "These prompts are references to help visualize ideas — the final tattoo design is always the artist's craft."
+    },
+    es: {
+      badge: "Herramientas para Tatuaje",
+      title: "Generador de Prompts para Tatuaje",
+      subtitle: "Describe tu idea, elige el estilo y el mood, y obtén un prompt listo para cualquier generador de IA. Ideal para visualizar conceptos antes de arrancar el diseño.",
+      subjectLabel: "Describe el diseño",
+      subjectError: "Escribe algo antes de generar.",
+      subjectPH: ["lobo aullando a la luna","fénix saliendo de las llamas","retrato de un guerrero samurái","rosa geométrica con espinas","serpiente enroscada en un puñal"],
+      styleLabel: "Estilo del tatuaje",
+      styleError: "Elige un estilo primero.",
+      moodMax: "(máx. 4)",
+      elementsLabel: "Elementos a incluir",
+      elementsOpt: "(opcional)",
+      elementsPH: "ej. rosas, calavera, luna creciente, cadenas",
+      placementLabel: "Zona del cuerpo",
+      colorLabel: "Color",
+      colorBW: "Negro y gris",
+      colorAccent: "N&G con detalles",
+      colorFull: "Color completo",
+      detailLabel: "Nivel de detalle",
+      sliderMin: "Simple",
+      sliderMax: "Detallado",
+      generateBtn: "Generar prompts",
+      universalTitle: "Prompt universal",
+      mjTitle: "Prompt para Midjourney",
+      mjSub: "Pégalo en Discord con /imagine",
+      copyBtn: "Copiar",
+      copiedBtn: "¡Copiado!",
+      outputNote: "Estos prompts son referencias visuales — el diseño final del tatuaje siempre es trabajo del artista."
+    }
   };
 
-  const STYLIZE_MAP = { 1: 50, 2: 100, 3: 250, 4: 500, 5: 750 };
+  // ── State ──
+  let lang = localStorage.getItem("inklang") || "en";
+  let selectedStyle = null;
+  const selectedMoods = new Set();
 
-  const MJ_RAW_STYLES = ["Realism", "Watercolor", "Fine Line"];
+  // ── Language switch ──
+  function setLang(l) {
+    lang = l;
+    localStorage.setItem("inklang", l);
+    const t = T[l];
+    const isES = l === "es";
 
-  // Placeholder rotation
-  const PLACEHOLDERS = [
-    "wolf howling at moon",
-    "phoenix rising from flames",
-    "portrait of a samurai warrior",
-    "geometric rose with thorns",
-    "serpent wrapped around a dagger"
-  ];
-  document.getElementById("subject").placeholder =
-    "e.g. " + PLACEHOLDERS[Math.floor(Math.random() * PLACEHOLDERS.length)];
+    document.documentElement.lang = l;
+    document.getElementById("btnEN").classList.toggle("active", !isES);
+    document.getElementById("btnES").classList.toggle("active", isES);
 
-  // --- Style buttons ---
+    document.getElementById("heroBadge").textContent     = t.badge;
+    document.getElementById("heroTitle").textContent     = t.title;
+    document.getElementById("heroSubtitle").textContent  = t.subtitle;
+    document.getElementById("subjectLabel").textContent  = t.subjectLabel;
+    document.getElementById("subject-error").textContent = t.subjectError;
+    document.getElementById("subject").placeholder       = "e.g. " + t.subjectPH[Math.floor(Math.random() * t.subjectPH.length)];
+    document.getElementById("styleLabel").textContent    = t.styleLabel;
+    document.getElementById("style-error").textContent   = t.styleError;
+    document.getElementById("moodMax").textContent       = t.moodMax;
+    document.getElementById("elementsLabel").childNodes[0].textContent = t.elementsLabel + " ";
+    document.getElementById("elementsOptional").textContent = t.elementsOpt;
+    document.getElementById("elements").placeholder      = t.elementsPH;
+    document.getElementById("placementLabel").textContent = t.placementLabel;
+    document.getElementById("colorLabel").textContent    = t.colorLabel;
+    document.getElementById("colorBW").innerHTML         = t.colorBW;
+    document.getElementById("colorAccent").innerHTML     = t.colorAccent;
+    document.getElementById("colorFull").textContent     = t.colorFull;
+    document.getElementById("detailLabel").textContent   = t.detailLabel;
+    document.getElementById("sliderMin").textContent     = t.sliderMin;
+    document.getElementById("sliderMax").textContent     = t.sliderMax;
+    document.getElementById("generateBtn").textContent   = t.generateBtn;
+    document.getElementById("universalTitle").textContent = t.universalTitle;
+    document.getElementById("mjTitle").textContent       = t.mjTitle;
+    document.getElementById("mjSub").textContent         = t.mjSub;
+    document.getElementById("outputNote").textContent    = t.outputNote;
+
+    // Update detail value label
+    const detailVal = parseInt(document.getElementById("detail").value);
+    const labels = isES ? DETAIL_LABELS_ES : DETAIL_LABELS_EN;
+    document.getElementById("detailValueLabel").textContent = labels[detailVal - 1];
+
+    // Mood chips
+    document.querySelectorAll(".mood-chip").forEach(chip => {
+      chip.textContent = isES ? chip.dataset.es : chip.dataset.mood;
+    });
+
+    // Style buttons
+    document.querySelectorAll(".style-btn").forEach(btn => {
+      btn.textContent = isES && btn.dataset.es ? btn.dataset.es : btn.dataset.style;
+    });
+
+    // Placement options
+    document.querySelectorAll("#placement option").forEach(opt => {
+      opt.textContent = isES ? opt.dataset.es : opt.defaultValue === "none"
+        ? "Not specified"
+        : opt.value.charAt(0).toUpperCase() + opt.value.slice(1);
+    });
+
+    // SEO sections
+    document.getElementById("seoEN").classList.toggle("active", !isES);
+    document.getElementById("seoES").classList.toggle("active", isES);
+
+    // Copy buttons — reset text
+    document.getElementById("copyUniversal").textContent  = t.copyBtn;
+    document.getElementById("copyMidjourney").textContent = t.copyBtn;
+  }
+
+  // ── Style buttons ──
   document.getElementById("styleGrid").addEventListener("click", e => {
     const btn = e.target.closest(".style-btn");
     if (!btn) return;
     document.querySelectorAll(".style-btn").forEach(b => b.classList.remove("active"));
-    if (selectedStyle === btn.dataset.style) {
-      selectedStyle = null;
-    } else {
-      btn.classList.add("active");
-      selectedStyle = btn.dataset.style;
-    }
+    selectedStyle = selectedStyle === btn.dataset.style ? null : btn.dataset.style;
+    if (selectedStyle) btn.classList.add("active");
   });
 
-  // --- Mood chips ---
+  // ── Mood chips ──
   document.getElementById("moodChips").addEventListener("click", e => {
     const chip = e.target.closest(".mood-chip");
     if (!chip || chip.classList.contains("disabled")) return;
@@ -654,52 +747,45 @@
     }
   });
 
-  // --- Detail slider ---
+  // ── Detail slider ──
   document.getElementById("detail").addEventListener("input", function () {
-    document.getElementById("detailLabel").textContent = DETAIL_LABELS[this.value - 1];
+    const labels = lang === "es" ? DETAIL_LABELS_ES : DETAIL_LABELS_EN;
+    document.getElementById("detailValueLabel").textContent = labels[this.value - 1];
   });
 
-  // --- Generate ---
+  // ── Generate ──
   function generatePrompt() {
     let valid = true;
+    const t = T[lang];
 
     const subject = document.getElementById("subject").value.trim();
-    const subjectErr = document.getElementById("subject-error");
-    if (!subject) {
-      subjectErr.classList.add("visible");
-      valid = false;
-    } else {
-      subjectErr.classList.remove("visible");
-    }
+    const subErr  = document.getElementById("subject-error");
+    if (!subject) { subErr.classList.add("visible"); valid = false; }
+    else          { subErr.classList.remove("visible"); }
 
-    const styleErr = document.getElementById("style-error");
-    if (!selectedStyle) {
-      styleErr.classList.add("visible");
-      valid = false;
-    } else {
-      styleErr.classList.remove("visible");
-    }
+    const stErr = document.getElementById("style-error");
+    if (!selectedStyle) { stErr.classList.add("visible"); valid = false; }
+    else                { stErr.classList.remove("visible"); }
 
     if (!valid) return;
 
-    const moods     = Array.from(selectedMoods);
-    const elements  = document.getElementById("elements").value.trim();
-    const placement = document.getElementById("placement").value;
-    const color     = document.querySelector('input[name="color"]:checked').value;
-    const detail    = parseInt(document.getElementById("detail").value);
+    const moods      = Array.from(selectedMoods);
+    const elements   = document.getElementById("elements").value.trim();
+    const placement  = document.getElementById("placement").value;
+    const color      = document.querySelector('input[name="color"]:checked').value;
+    const detail     = parseInt(document.getElementById("detail").value);
 
-    const styleDesc    = STYLE_DESCRIPTORS[selectedStyle] || selectedStyle + " tattoo style";
+    const styleDesc    = STYLE_DESCRIPTORS[selectedStyle];
     const moodStr      = moods.length ? moods.map(m => MOOD_MAP[m]).join(", ") : null;
     const colorStr     = COLOR_MAP[color];
-    const detailStr    = DETAIL_LABELS[detail - 1].toLowerCase();
+    const detailStr    = DETAIL_LABELS_EN[detail - 1].toLowerCase();
     const placementStr = PLACEMENT_MAP[placement] || null;
 
-    // Universal prompt
+    // Universal prompt (always English for best AI results)
     const parts = [`Tattoo design of ${subject}`, `${selectedStyle} tattoo style`, styleDesc];
     if (moodStr)      parts.push(`Mood: ${moodStr}`);
     if (elements)     parts.push(`Include elements: ${elements}`);
-    parts.push(`Color: ${colorStr}`);
-    parts.push(`Detail level: ${detailStr}`);
+    parts.push(`Color: ${colorStr}`, `Detail level: ${detailStr}`);
     if (placementStr) parts.push(placementStr);
     parts.push("Tattoo stencil reference art, professional tattoo flash style, isolated on white background, high resolution");
 
@@ -711,55 +797,45 @@
     if (elements) mjParts.push(elements);
     mjParts.push(colorStr, "tattoo flash art, white background, professional tattoo reference");
 
-    const ar        = AR_MAP[placement] || "--ar 3:4";
-    const stylize   = STYLIZE_MAP[detail];
-    const rawFlag   = MJ_RAW_STYLES.includes(selectedStyle) ? "--style raw " : "";
-
-    const midjourneyPrompt =
-      `/imagine prompt: ${mjParts.join(", ")}, ${ar} --stylize ${stylize} ${rawFlag}--v 6.1`.trim();
+    const ar      = AR_MAP[placement] || "--ar 3:4";
+    const rawFlag = MJ_RAW.includes(selectedStyle) ? "--style raw " : "";
+    const mjPrompt = `/imagine prompt: ${mjParts.join(", ")}, ${ar} --stylize ${STYLIZE[detail]} ${rawFlag}--v 6.1`.trim();
 
     document.getElementById("universalPrompt").value  = universalPrompt;
-    document.getElementById("midjourneyPrompt").value = midjourneyPrompt;
+    document.getElementById("midjourneyPrompt").value = mjPrompt;
 
     const section = document.getElementById("outputSection");
     section.classList.add("visible");
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => section.classList.add("animated"));
-    });
+    requestAnimationFrame(() => requestAnimationFrame(() => section.classList.add("animated")));
     section.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  // --- Copy ---
+  // ── Copy ──
   function copyPrompt(type) {
-    const id  = type === "universal" ? "universalPrompt" : "midjourneyPrompt";
-    const btn = type === "universal" ? "copyUniversal"   : "copyMidjourney";
-    const text = document.getElementById(id).value;
-    const button = document.getElementById(btn);
+    const id     = type === "universal" ? "universalPrompt"  : "midjourneyPrompt";
+    const btnId  = type === "universal" ? "copyUniversal"    : "copyMidjourney";
+    const text   = document.getElementById(id).value;
+    const button = document.getElementById(btnId);
+    const t      = T[lang];
 
-    const restore = () => {
-      button.textContent = "Copy";
-      button.classList.remove("copied");
-    };
+    const restore = () => { button.textContent = t.copyBtn; button.classList.remove("copied"); };
 
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text).then(() => {
-        button.textContent = "Copied!";
-        button.classList.add("copied");
+        button.textContent = t.copiedBtn; button.classList.add("copied");
         setTimeout(restore, 1500);
       });
     } else {
       const ta = document.createElement("textarea");
-      ta.value = text;
-      ta.style.position = "fixed"; ta.style.opacity = "0";
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-      button.textContent = "Copied!";
-      button.classList.add("copied");
+      ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta);
+      button.textContent = t.copiedBtn; button.classList.add("copied");
       setTimeout(restore, 1500);
     }
   }
+
+  // ── Init ──
+  setLang(lang);
 </script>
 
 </body>
