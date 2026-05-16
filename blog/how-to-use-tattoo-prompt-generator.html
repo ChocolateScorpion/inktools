@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="google-adsense-account" content="ca-pub-7189936182708078">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Use the Tattoo Prompt Generator | InkTools Blog</title>
+  <meta name="description" content="A step-by-step guide to generating AI reference prompts for tattoo consultations. Includes real prompt examples by style: blackwork, fine line, Japanese, realism and more.">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-R4568JEMSW');</script>
+  <style>
+    :root{--gold:#B8862A;--gold-light:#EF9F27;--gold-subtle:rgba(184,134,42,0.09);--gold-border:rgba(184,134,42,0.22);--bg:#0C0C0B;--surface:#161614;--surface2:#1E1E1B;--border:rgba(255,255,255,0.07);--cream:#E8E4DC;--muted:#8C8880;--faint:#47453F;--max-w:860px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    a{text-decoration:none;color:inherit;}
+    body{font-family:'DM Sans',Arial,sans-serif;background-color:var(--bg);background-image:radial-gradient(ellipse 70% 45% at 50% 0%,rgba(184,134,42,0.06) 0%,transparent 65%);background-attachment:fixed;color:var(--cream);display:flex;flex-direction:column;align-items:center;min-height:100vh;-webkit-font-smoothing:antialiased;}
+    .site-header{width:100%;max-width:var(--max-w);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--border);}
+    .site-logo{display:flex;align-items:center;gap:9px;}
+    .logo-ink{font-size:15px;font-weight:700;letter-spacing:2px;color:var(--cream);-webkit-text-stroke:0.5px var(--gold);text-transform:uppercase;}
+    .logo-tools{font-size:15px;font-weight:300;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;}
+    .site-nav{display:flex;gap:22px;}
+    .site-nav a{font-size:13px;color:var(--muted);transition:color 0.15s;}
+    .site-nav a:hover{color:var(--cream);}
+    .article-wrap{width:100%;max-width:680px;padding:56px 24px 64px;}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+    .article-tag{font-size:11px;color:#C9973A;text-transform:uppercase;letter-spacing:0.1em;background:var(--gold-subtle);border:0.5px solid var(--gold-border);border-radius:20px;padding:3px 10px;}
+    .article-date{font-size:12px;color:var(--faint);}
+    .article-wrap h1{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(26px,4vw,36px);font-weight:400;color:var(--cream);line-height:1.2;letter-spacing:-0.3px;margin-bottom:20px;}
+    .article-intro{font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:36px;padding-bottom:36px;border-bottom:0.5px solid var(--border);}
+    .article-wrap h2{font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;color:var(--cream);margin:36px 0 14px;}
+    .article-wrap h3{font-size:16px;font-weight:500;color:var(--cream);margin:24px 0 10px;}
+    .article-wrap p{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:16px;}
+    .article-wrap p strong{color:var(--cream);font-weight:500;}
+    .article-wrap ul,.article-wrap ol{padding-left:20px;color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:16px;}
+    .article-wrap ul li strong{color:var(--cream);}
+    .steps-list{counter-reset:steps;list-style:none;padding-left:0;display:flex;flex-direction:column;gap:18px;margin-bottom:16px;}
+    .steps-list li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--muted);line-height:1.65;}
+    .steps-list li::before{counter-increment:steps;content:counter(steps);min-width:28px;height:28px;border-radius:50%;background:var(--gold-subtle);border:0.5px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:12px;color:#C9973A;font-weight:500;flex-shrink:0;margin-top:2px;}
+    .steps-list li strong{color:var(--cream);}
+    .tip-box{background:var(--surface);border-left:2px solid var(--gold);border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;}
+    .tip-box p{font-size:14px;color:var(--muted);margin:0;line-height:1.65;}
+    .tip-box strong{color:#C9973A;}
+    .prompt-example{background:var(--surface2);border:0.5px solid var(--border);border-radius:10px;padding:16px 18px;margin:12px 0 20px;font-size:13px;color:var(--muted);line-height:1.7;font-style:italic;}
+    .prompt-example strong{color:#C9973A;font-style:normal;display:block;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+    .style-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 24px;}
+    .style-card{background:var(--surface);border:0.5px solid var(--border);border-radius:10px;padding:16px;}
+    .style-card .sc-name{font-size:13px;font-weight:500;color:var(--cream);margin-bottom:6px;}
+    .style-card .sc-settings{font-size:12px;color:var(--muted);line-height:1.6;}
+    .style-card .sc-settings span{color:#C9973A;}
+    .cta-box{background:var(--gold-subtle);border:0.5px solid var(--gold-border);border-radius:14px;padding:24px;margin:32px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+    .cta-box p{font-size:14px;color:#C9973A;margin:0;}
+    .cta-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;background:var(--gold);color:#0C0C0B;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;transition:background 0.15s;}
+    .cta-btn:hover{background:var(--gold-light);}
+    .back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin-bottom:32px;transition:color 0.15s;}
+    .back-link:hover{color:var(--cream);}
+    .site-footer{width:100%;max-width:var(--max-w);padding:24px;margin-top:auto;border-top:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .footer-copy{font-size:12px;color:var(--faint);}
+    .footer-links{display:flex;gap:18px;}
+    .footer-links a{font-size:12px;color:var(--faint);transition:color 0.15s;}
+    .footer-links a:hover{color:var(--gold);}
+    .ad-slot{width:100%;max-width:var(--max-w);padding:0 24px;margin:8px 0 24px;}
+    @media(max-width:640px){.style-cards{grid-template-columns:1fr;}.site-nav{display:none;}.site-footer{flex-direction:column;align-items:flex-start;}}
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <svg width="16" height="28" viewBox="0 0 16 28" fill="none"><rect x="4" y="1" width="8" height="17" rx="4" fill="#0C0C0B" stroke="#B8862A" stroke-width="1"/><polygon points="8,18 5.5,26 8,24 10.5,26" fill="#B8862A"/><ellipse cx="8" cy="27.2" rx="2.2" ry="1.1" fill="#B8862A" opacity="0.38"/></svg>
+    <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
+  </a>
+  <nav class="site-nav">
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="3707669770"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="article-wrap">
+
+  <a href="/blog/" class="back-link">← Back to Blog</a>
+
+  <div class="article-meta">
+    <span class="article-tag">Tattoo Tools</span>
+    <span class="article-date">May 2026 · 4 min read</span>
+  </div>
+
+  <h1>How to use the Tattoo Prompt Generator</h1>
+
+  <p class="article-intro">The Tattoo Prompt Generator turns a few selections into a detailed, ready-to-use prompt for any AI image tool. Here's a walkthrough of each field, plus real prompt examples by tattoo style so you can see exactly what kind of output to expect.</p>
+
+  <h2>Step by step</h2>
+
+  <ol class="steps-list">
+    <li>
+      <strong>Describe the subject.</strong> This is the core of your idea — what the tattoo is actually of. Be as specific as you can. "Wolf" is fine, but "wolf howling at a crescent moon, seen from below" gives the AI much more to work with and produces a more useful reference.
+    </li>
+    <li>
+      <strong>Select a tattoo style.</strong> Choose the style that most closely matches what you're going for. This is the single most impactful setting — it changes everything from linework weight to color approach to overall aesthetic. If you're unsure, "Fine Line" and "Blackwork" tend to produce the cleanest, most universally readable references.
+    </li>
+    <li>
+      <strong>Pick up to 4 moods.</strong> Moods layer adjectives on top of the style. "Dark + Mystical" produces very different results than "Elegant + Delicate" even with the same subject and style. Stick to moods that actually coexist — don't pick both "Fierce" and "Delicate" unless you're intentionally going for contrast.
+    </li>
+    <li>
+      <strong>Add specific elements (optional).</strong> List objects, symbols, or motifs you want in the composition. Separated by commas: "roses, skull, chain, crescent moon." These get inserted directly into the prompt and guide the AI toward specific imagery.
+    </li>
+    <li>
+      <strong>Choose placement.</strong> Selecting a placement adds compositional guidance — a forearm piece needs a different layout than a full back piece. If you haven't decided on placement yet, leave it as "Not specified."
+    </li>
+    <li>
+      <strong>Set color preference and detail level.</strong> Black &amp; grey is the default and produces the most stencil-like references. Crank up the detail level for complex, intricate concepts; keep it low for clean, minimal designs.
+    </li>
+    <li>
+      <strong>Click Generate.</strong> You'll get two prompts — a Universal prompt that works in any AI tool, and a Midjourney prompt with platform-specific parameters already set.
+    </li>
+  </ol>
+
+  <div class="tip-box">
+    <p><strong>Quick tip:</strong> Generate, paste into your AI tool, look at the result, then come back and adjust one thing. Change the mood, or add an element, or bump the detail level. Iterating in small steps gets you to a useful reference faster than trying to get the perfect prompt on the first try.</p>
+  </div>
+
+  <h2>Prompt examples by style</h2>
+  <p>Here are real outputs from the generator to show what each style produces.</p>
+
+  <h3>Blackwork</h3>
+  <div class="prompt-example">
+    <strong>Universal prompt</strong>
+    Tattoo design of serpent coiled around a dagger. Blackwork tattoo style. Bold black ink, stark contrast, solid fills, graphic black shapes. Mood: dark and shadowy, dramatic and intense. Include elements: roses, dripping blood. Color: black and grey ink only, no color, subtle grey shading. Detail level: highly detailed. Tattoo stencil reference art, professional tattoo flash style, isolated on white background, high resolution.
+  </div>
+
+  <h3>Fine Line</h3>
+  <div class="prompt-example">
+    <strong>Universal prompt</strong>
+    Tattoo design of hummingbird hovering over a wildflower. Fine Line tattoo style. Ultra-thin delicate linework, single needle precision, subtle shading. Mood: delicate and intricate, elegant and refined. Color: black and grey ink only. Detail level: moderately detailed. Designed for forearm placement, horizontal composition. Tattoo stencil reference art, professional tattoo flash style, isolated on white background, high resolution.
+  </div>
+
+  <h3>Japanese / Irezumi</h3>
+  <div class="prompt-example">
+    <strong>Universal prompt</strong>
+    Tattoo design of koi fish swimming upriver. Japanese tattoo style. Irezumi style, flowing composition, bold outlines, traditional Japanese aesthetic. Mood: spiritual and transcendent, bold and striking. Include elements: cherry blossoms, waves, water spray. Color: full vibrant color palette. Detail level: extremely intricate. Full sleeve tattoo, flowing composition from shoulder to wrist. Tattoo stencil reference art, professional tattoo flash style, isolated on white background, high resolution.
+  </div>
+
+  <h3>Neo-Traditional</h3>
+  <div class="prompt-example">
+    <strong>Universal prompt</strong>
+    Tattoo design of owl perched on a branch at night. Neo-Traditional tattoo style. Bold outlines, illustrative style, rich decorative fills, ornamental details. Mood: mystical and ethereal, vintage and timeworn. Include elements: moon, geometric frame, roses. Color: primarily black and grey with selective warm color accents. Detail level: highly detailed. Tattoo stencil reference art, professional tattoo flash style, isolated on white background, high resolution.
+  </div>
+
+  <h2>Recommended settings by style</h2>
+
+  <div class="style-cards">
+    <div class="style-card">
+      <div class="sc-name">Blackwork &amp; Geometric</div>
+      <div class="sc-settings">Detail: <span>3–4</span> · Color: <span>Black &amp; grey</span> · Best in: <span>Ideogram, Midjourney</span></div>
+    </div>
+    <div class="style-card">
+      <div class="sc-name">Fine Line &amp; Minimalist</div>
+      <div class="sc-settings">Detail: <span>2–3</span> · Color: <span>Black &amp; grey</span> · Best in: <span>Midjourney --style raw</span></div>
+    </div>
+    <div class="style-card">
+      <div class="sc-name">Japanese &amp; Neo-Traditional</div>
+      <div class="sc-settings">Detail: <span>4–5</span> · Color: <span>Full color or accents</span> · Best in: <span>Midjourney</span></div>
+    </div>
+    <div class="style-card">
+      <div class="sc-name">Realism &amp; Portrait</div>
+      <div class="sc-settings">Detail: <span>4–5</span> · Color: <span>Black &amp; grey</span> · Best in: <span>DALL-E, ChatGPT</span></div>
+    </div>
+    <div class="style-card">
+      <div class="sc-name">Watercolor</div>
+      <div class="sc-settings">Detail: <span>3</span> · Color: <span>Full color</span> · Best in: <span>Midjourney --style raw</span></div>
+    </div>
+    <div class="style-card">
+      <div class="sc-name">Traditional American</div>
+      <div class="sc-settings">Detail: <span>2–3</span> · Color: <span>Full color</span> · Best in: <span>Midjourney, Ideogram</span></div>
+    </div>
+  </div>
+
+  <h2>Where to paste your prompts</h2>
+  <ul>
+    <li><strong>Midjourney</strong> — paste the Midjourney prompt directly into Discord using <code style="background:var(--surface2);padding:2px 6px;border-radius:4px;font-size:13px;">/imagine</code>. The parameters (--ar, --stylize, --v) are already included.</li>
+    <li><strong>ChatGPT / DALL-E</strong> — paste the Universal prompt as your message. You can add "Generate this as a tattoo reference image" at the start if needed.</li>
+    <li><strong>Ideogram</strong> — paste the Universal prompt in the generation field. Works especially well for graphic and geometric styles.</li>
+    <li><strong>Adobe Firefly</strong> — paste the Universal prompt. Useful when you need commercially safe reference imagery.</li>
+  </ul>
+
+  <div class="tip-box">
+    <p><strong>Remember:</strong> The generated image is a reference, not the final design. Show it to your artist as a direction — "something like this but in your style" — not as the artwork itself. The tattoo design is always the artist's work.</p>
+  </div>
+
+  <div class="cta-box">
+    <p>Ready to generate your first tattoo reference prompt? It takes about a minute.</p>
+    <a href="/tattoo-prompt-generator/" class="cta-btn">Open Prompt Generator →</a>
+  </div>
+
+</div>
+
+<div class="ad-slot" style="margin-bottom:24px;">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<footer class="site-footer">
+  <span class="footer-copy">© 2026 InkTools — Image Utilities</span>
+  <div class="footer-links">
+    <a href="/">Home</a><a href="/blog/">Blog</a>
+    <a href="/about.html">About</a><a href="/privacy.html">Privacy</a>
+  </div>
+</footer>
+</body>
+</html>
