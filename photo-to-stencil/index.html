@@ -447,20 +447,20 @@
 </footer>
 
 <script>
-  const uploadZone  = document.getElementById("uploadZone");
-  const photoInput  = document.getElementById("photoInput");
+  const uploadZone     = document.getElementById("uploadZone");
+  const photoInput     = document.getElementById("photoInput");
   const originalCanvas = document.getElementById("originalCanvas");
   const stencilCanvas  = document.getElementById("stencilCanvas");
-  const processBtn  = document.getElementById("processBtn");
-  const downloadBtn = document.getElementById("downloadBtn");
+  const processBtn     = document.getElementById("processBtn");
+  const downloadBtn    = document.getElementById("downloadBtn");
 
   let originalImage = null;
 
   const presets = {
-    fine:     { threshold: 30, thickness: 1,   contrast: 1.2 },
-    bold:     { threshold: 20, thickness: 2.5, contrast: 1.5 },
-    detailed: { threshold: 15, thickness: 1,   contrast: 1.8 },
-    minimal:  { threshold: 50, thickness: 1,   contrast: 1.0 }
+    fine:     { threshold: 55, thickness: 1,   contrast: 1.2 },
+    bold:     { threshold: 35, thickness: 2.5, contrast: 1.5 },
+    detailed: { threshold: 70, thickness: 1,   contrast: 1.8 },
+    minimal:  { threshold: 20, thickness: 1,   contrast: 1.0 }
   };
 
   function applyPreset(name) {
@@ -476,7 +476,6 @@
     if (originalImage) processStencil();
   }
 
-  // Slider live update
   ["threshold","thickness","contrast"].forEach(id => {
     document.getElementById(id).addEventListener("input", e => {
       document.getElementById(id + "Val").textContent = e.target.value;
@@ -484,7 +483,6 @@
     });
   });
 
-  // Upload
   uploadZone.addEventListener("click", () => photoInput.click());
   uploadZone.addEventListener("dragover", e => { e.preventDefault(); uploadZone.style.borderColor = "var(--gold)"; });
   uploadZone.addEventListener("dragleave", () => { uploadZone.style.borderColor = ""; });
@@ -501,8 +499,7 @@
       const scale = Math.min(maxSize / img.width, maxSize / img.height, 1);
       originalCanvas.width  = Math.round(img.width  * scale);
       originalCanvas.height = Math.round(img.height * scale);
-      const ctx = originalCanvas.getContext("2d");
-      ctx.drawImage(img, 0, 0, originalCanvas.width, originalCanvas.height);
+      originalCanvas.getContext("2d").drawImage(img, 0, 0, originalCanvas.width, originalCanvas.height);
       originalCanvas.style.display = "block";
       document.querySelector("#originalBox .canvas-placeholder").style.display = "none";
       processBtn.disabled = false;
@@ -512,13 +509,55 @@
     img.src = url;
   }
 
+  function gaussianKernel(sigma) {
+    const radius = Math.ceil(sigma * 3);
+    const size   = 2 * radius + 1;
+    const kernel = new Float32Array(size);
+    let sum = 0;
+    for (let i = 0; i < size; i++) {
+      const x = i - radius;
+      kernel[i] = Math.exp(-(x * x) / (2 * sigma * sigma));
+      sum += kernel[i];
+    }
+    for (let i = 0; i < size; i++) kernel[i] /= sum;
+    return { kernel, radius };
+  }
+
+  function gaussianBlur(src, w, h, sigma) {
+    const { kernel, radius } = gaussianKernel(sigma);
+    const temp = new Float32Array(w * h);
+    const out  = new Float32Array(w * h);
+
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        let val = 0;
+        for (let k = -radius; k <= radius; k++) {
+          val += src[y * w + Math.max(0, Math.min(w - 1, x + k))] * kernel[k + radius];
+        }
+        temp[y * w + x] = val;
+      }
+    }
+
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        let val = 0;
+        for (let k = -radius; k <= radius; k++) {
+          val += temp[Math.max(0, Math.min(h - 1, y + k)) * w + x] * kernel[k + radius];
+        }
+        out[y * w + x] = val;
+      }
+    }
+
+    return out;
+  }
+
   function processStencil() {
     if (!originalImage) return;
 
-    const threshold = parseInt(document.getElementById("threshold").value);
-    const thickness = parseFloat(document.getElementById("thickness").value);
-    const contrast  = parseFloat(document.getElementById("contrast").value);
-    const invert    = document.getElementById("invertCheck").checked;
+    const sensitivity = parseInt(document.getElementById("threshold").value);
+    const thickness   = parseFloat(document.getElementById("thickness").value);
+    const contrast    = parseFloat(document.getElementById("contrast").value);
+    const invert      = document.getElementById("invertCheck").checked;
 
     const w = originalCanvas.width;
     const h = originalCanvas.height;
@@ -529,52 +568,57 @@
     const src = originalCanvas.getContext("2d").getImageData(0, 0, w, h);
     const dst = stencilCanvas.getContext("2d").createImageData(w, h);
 
-    // Step 1: grayscale + contrast
-    const gray = new Uint8ClampedArray(w * h);
+    // Step 1: grayscale + contrast, normalized to [0,1]
+    const gray = new Float32Array(w * h);
     for (let i = 0; i < w * h; i++) {
       const r = src.data[i*4], g = src.data[i*4+1], b = src.data[i*4+2];
-      let lum = 0.299*r + 0.587*g + 0.114*b;
-      // Apply contrast
-      lum = 128 + (lum - 128) * contrast;
-      gray[i] = Math.max(0, Math.min(255, lum));
+      let lum = (0.299*r + 0.587*g + 0.114*b) / 255;
+      lum = 0.5 + (lum - 0.5) * contrast;
+      gray[i] = Math.max(0, Math.min(1, lum));
     }
 
-    // Step 2: Sobel edge detection
-    const edges = new Uint8ClampedArray(w * h);
-    for (let y = 1; y < h-1; y++) {
-      for (let x = 1; x < w-1; x++) {
-        const tl = gray[(y-1)*w+(x-1)], tc = gray[(y-1)*w+x], tr = gray[(y-1)*w+(x+1)];
-        const ml = gray[y*w+(x-1)],                            mr = gray[y*w+(x+1)];
-        const bl = gray[(y+1)*w+(x-1)], bc = gray[(y+1)*w+x], br = gray[(y+1)*w+(x+1)];
-        const gx = -tl - 2*ml - bl + tr + 2*mr + br;
-        const gy = -tl - 2*tc - tr + bl + 2*bc + br;
-        const mag = Math.sqrt(gx*gx + gy*gy);
-        edges[y*w+x] = mag > threshold * 3 ? 255 : 0;
-      }
+    // Step 2: XDoG (Extended Difference of Gaussians)
+    // Higher sensitivity → smaller sigma → finer detail captured
+    const sigma = 2.5 - (sensitivity / 80) * 2.0;
+    const k     = 1.6;   // ratio between the two Gaussians
+    const p     = 0.98;  // sharpness — closer to 1 = sharper, cleaner lines
+    const phi   = 10;    // soft-threshold steepness
+    const eps   = 0;     // edge/non-edge boundary
+
+    const g1 = gaussianBlur(gray, w, h, sigma);
+    const g2 = gaussianBlur(gray, w, h, sigma * k);
+
+    const edgeMap = new Uint8ClampedArray(w * h);
+    for (let i = 0; i < w * h; i++) {
+      const d   = g1[i] - p * g2[i];
+      const val = d >= eps ? 1.0 : 1.0 + Math.tanh(phi * (d - eps));
+      edgeMap[i] = val < 0.95 ? 255 : 0;
     }
 
-    // Step 3: line thickness dilation
+    // Step 3: dilation for line thickness
     const dilated = new Uint8ClampedArray(w * h);
-    const r = Math.ceil(thickness - 1);
-    for (let y = 0; y < h; y++) {
-      for (let x = 0; x < w; x++) {
-        let found = false;
-        for (let dy = -r; dy <= r && !found; dy++) {
-          for (let dx = -r; dx <= r && !found; dx++) {
-            const ny = y+dy, nx = x+dx;
-            if (ny>=0 && ny<h && nx>=0 && nx<w && edges[ny*w+nx] === 255) found = true;
+    const rad = Math.ceil(thickness - 1);
+    if (rad <= 0) {
+      dilated.set(edgeMap);
+    } else {
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          let found = false;
+          for (let dy = -rad; dy <= rad && !found; dy++) {
+            for (let dx = -rad; dx <= rad && !found; dx++) {
+              const ny = y+dy, nx = x+dx;
+              if (ny>=0 && ny<h && nx>=0 && nx<w && edgeMap[ny*w+nx] === 255) found = true;
+            }
           }
+          dilated[y*w+x] = found ? 255 : 0;
         }
-        dilated[y*w+x] = found ? 255 : 0;
       }
     }
 
-    // Step 4: write to output — white background, black lines (or inverted)
+    // Step 4: write output
     for (let i = 0; i < w * h; i++) {
       const isEdge = dilated[i] === 255;
-      const val = invert
-        ? (isEdge ? 255 : 0)
-        : (isEdge ? 0 : 255);
+      const val = invert ? (isEdge ? 255 : 0) : (isEdge ? 0 : 255);
       dst.data[i*4]   = val;
       dst.data[i*4+1] = val;
       dst.data[i*4+2] = val;
