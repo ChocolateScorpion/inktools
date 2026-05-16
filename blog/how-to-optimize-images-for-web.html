@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="google-adsense-account" content="ca-pub-7189936182708078">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Optimize Images for the Web Without Losing Quality | InkTools Blog</title>
+  <meta name="description" content="Large images slow down your website and hurt SEO. Learn how to compress, resize and convert images to the right format for faster load times.">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-R4568JEMSW');</script>
+  <style>
+    :root{--gold:#B8862A;--gold-light:#EF9F27;--gold-subtle:rgba(184,134,42,0.09);--gold-border:rgba(184,134,42,0.22);--bg:#0C0C0B;--surface:#161614;--surface2:#1E1E1B;--border:rgba(255,255,255,0.07);--cream:#E8E4DC;--muted:#8C8880;--faint:#47453F;--max-w:860px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    a{text-decoration:none;color:inherit;}
+    body{font-family:'DM Sans',Arial,sans-serif;background-color:var(--bg);background-image:radial-gradient(ellipse 70% 45% at 50% 0%,rgba(184,134,42,0.06) 0%,transparent 65%);background-attachment:fixed;color:var(--cream);display:flex;flex-direction:column;align-items:center;min-height:100vh;-webkit-font-smoothing:antialiased;}
+    .site-header{width:100%;max-width:var(--max-w);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--border);}
+    .site-logo{display:flex;align-items:center;gap:9px;}
+    .logo-ink{font-size:15px;font-weight:700;letter-spacing:2px;color:var(--cream);-webkit-text-stroke:0.5px var(--gold);text-transform:uppercase;}
+    .logo-tools{font-size:15px;font-weight:300;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;}
+    .site-nav{display:flex;gap:22px;}
+    .site-nav a{font-size:13px;color:var(--muted);transition:color 0.15s;}
+    .site-nav a:hover{color:var(--cream);}
+    .article-wrap{width:100%;max-width:680px;padding:56px 24px 64px;}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+    .article-tag{font-size:11px;color:#C9973A;text-transform:uppercase;letter-spacing:0.1em;background:var(--gold-subtle);border:0.5px solid var(--gold-border);border-radius:20px;padding:3px 10px;}
+    .article-date{font-size:12px;color:var(--faint);}
+    .article-wrap h1{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(26px,4vw,36px);font-weight:400;color:var(--cream);line-height:1.2;letter-spacing:-0.3px;margin-bottom:20px;}
+    .article-intro{font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:36px;padding-bottom:36px;border-bottom:0.5px solid var(--border);}
+    .article-wrap h2{font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;color:var(--cream);margin:36px 0 14px;}
+    .article-wrap p{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:16px;}
+    .article-wrap p strong{color:var(--cream);font-weight:500;}
+    .article-wrap ul,.article-wrap ol{padding-left:20px;color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:16px;}
+    .tip-box{background:var(--surface);border-left:2px solid var(--gold);border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;}
+    .tip-box p{font-size:14px;color:var(--muted);margin:0;line-height:1.65;}
+    .tip-box strong{color:#C9973A;}
+    .steps-list{counter-reset:steps;list-style:none;padding-left:0;display:flex;flex-direction:column;gap:16px;margin-bottom:16px;}
+    .steps-list li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--muted);line-height:1.65;}
+    .steps-list li::before{counter-increment:steps;content:counter(steps);min-width:26px;height:26px;border-radius:50%;background:var(--gold-subtle);border:0.5px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:12px;color:#C9973A;font-weight:500;flex-shrink:0;}
+    .cta-box{background:var(--gold-subtle);border:0.5px solid var(--gold-border);border-radius:14px;padding:24px;margin:32px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+    .cta-box p{font-size:14px;color:#C9973A;margin:0;}
+    .cta-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;background:var(--gold);color:#0C0C0B;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;transition:background 0.15s;}
+    .cta-btn:hover{background:var(--gold-light);}
+    .back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin-bottom:32px;transition:color 0.15s;}
+    .back-link:hover{color:var(--cream);}
+    .site-footer{width:100%;max-width:var(--max-w);padding:24px;margin-top:auto;border-top:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .footer-copy{font-size:12px;color:var(--faint);}
+    .footer-links{display:flex;gap:18px;}
+    .footer-links a{font-size:12px;color:var(--faint);transition:color 0.15s;}
+    .footer-links a:hover{color:var(--gold);}
+    .ad-slot{width:100%;max-width:var(--max-w);padding:0 24px;margin:8px 0 24px;}
+    @media(max-width:640px){.site-nav{display:none;}.site-footer{flex-direction:column;align-items:flex-start;}}
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <svg width="16" height="28" viewBox="0 0 16 28" fill="none"><rect x="4" y="1" width="8" height="17" rx="4" fill="#0C0C0B" stroke="#B8862A" stroke-width="1"/><polygon points="8,18 5.5,26 8,24 10.5,26" fill="#B8862A"/><ellipse cx="8" cy="27.2" rx="2.2" ry="1.1" fill="#B8862A" opacity="0.38"/></svg>
+    <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
+  </a>
+  <nav class="site-nav">
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="3707669770"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="article-wrap">
+
+  <a href="/blog/" class="back-link">← Back to Blog</a>
+
+  <div class="article-meta">
+    <span class="article-tag">Web Performance</span>
+    <span class="article-date">May 2026 · 5 min read</span>
+  </div>
+
+  <h1>How to optimize images for the web without losing quality</h1>
+
+  <p class="article-intro">Images are typically the largest files on any webpage. Unoptimized images slow down your site, hurt your search rankings, and frustrate visitors. Here's a practical approach to getting images right for the web.</p>
+
+  <h2>Why image optimization matters</h2>
+  <p>Google uses page speed as a ranking factor, and images are usually the biggest contributor to slow load times. A single uncompressed photo from a modern smartphone can be 5–10MB. The same photo, properly optimized for web, should be under 200KB — a reduction of 95% with barely any visible difference.</p>
+  <p>Beyond SEO, faster pages mean better user experience. Studies consistently show that pages loading in under 2 seconds have significantly lower bounce rates than slower pages.</p>
+
+  <h2>Step 1: Choose the right format</h2>
+  <p>Format choice is the most impactful decision you can make. As a general rule:</p>
+  <ul>
+    <li><strong>Photos and hero images</strong> → WebP (with JPG fallback for older browsers)</li>
+    <li><strong>Logos, icons, illustrations</strong> → SVG if possible, otherwise PNG</li>
+    <li><strong>Background textures, decorative images</strong> → WebP or compressed JPG</li>
+    <li><strong>Screenshots and UI mockups</strong> → PNG</li>
+  </ul>
+
+  <div class="tip-box">
+    <p><strong>Quick win:</strong> Converting your site's JPG images to WebP alone can reduce image weight by 25–35% with no visible quality change.</p>
+  </div>
+
+  <h2>Step 2: Resize to the right dimensions</h2>
+  <p>There's no point serving a 4000×3000px image when it's displayed at 800×600px on screen. The browser has to download all those extra pixels and then scale them down — wasting bandwidth and time.</p>
+  <p>Before uploading any image to your website, resize it to the maximum size it will be displayed at. For most blog post images, 1200px wide is more than enough. For thumbnails and cards, 400–600px is often sufficient.</p>
+
+  <div class="tip-box">
+    <p><strong>Rule of thumb:</strong> Your image dimensions should be no more than 2× the display size (to account for retina/HiDPI screens).</p>
+  </div>
+
+  <h2>Step 3: Compress without losing quality</h2>
+  <p>After resizing, compress the image to reduce file size further. The key is finding the right balance between quality and file size. For most web images:</p>
+  <ul>
+    <li><strong>JPG quality 70–80%</strong> is the sweet spot — small file, good quality</li>
+    <li><strong>WebP quality 75–85%</strong> gives similar quality at smaller size</li>
+    <li><strong>PNG compression</strong> is lossless so quality stays perfect, but files remain larger</li>
+  </ul>
+
+  <h2>A practical workflow for web images</h2>
+  <ol class="steps-list">
+    <li>Start with the original high-quality source file</li>
+    <li>Resize to the maximum display size (e.g. 1200px wide for blog posts)</li>
+    <li>Convert to WebP if your website supports it</li>
+    <li>Compress with quality set to 75–80%</li>
+    <li>Check the file size — aim for under 200KB for most images, under 100KB for thumbnails</li>
+    <li>Upload and test your page speed</li>
+  </ol>
+
+  <h2>What file size should you target?</h2>
+  <ul>
+    <li>Hero / banner images: under 300KB</li>
+    <li>Blog post inline images: under 150KB</li>
+    <li>Thumbnails and card images: under 80KB</li>
+    <li>Icons and small UI elements: under 20KB</li>
+  </ul>
+
+  <div class="cta-box">
+    <p>Compress and convert your images for free — right in your browser, no upload needed.</p>
+    <a href="/image-compressor/" class="cta-btn">Compress images →</a>
+  </div>
+
+</div>
+
+<div class="ad-slot" style="margin-bottom:24px;">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<footer class="site-footer">
+  <span class="footer-copy">© 2026 InkTools — Image Utilities</span>
+  <div class="footer-links">
+    <a href="/">Home</a><a href="/blog/">Blog</a>
+    <a href="/about.html">About</a><a href="/privacy.html">Privacy</a>
+  </div>
+</footer>
+</body>
+</html>
