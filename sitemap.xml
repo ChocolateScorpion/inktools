@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-<url>
-<loc>https://inktools.tech/</loc>
-</url>
-
-<url>
-<loc>https://inktools.tech/heic-to-jpg</loc>
-</url>
+  <url><loc>https://inktools.tech/</loc></url>
+  <url><loc>https://inktools.tech/heic-to-jpg/</loc></url>
+  <url><loc>https://inktools.tech/heic-to-png/</loc></url>
+  <url><loc>https://inktools.tech/image-compressor/</loc></url>
+  <url><loc>https://inktools.tech/image-resizer/</loc></url>
+  <url><loc>https://inktools.tech/jpg-to-png/</loc></url>
+  <url><loc>https://inktools.tech/png-to-jpg/</loc></url>
+  <url><loc>https://inktools.tech/webp-converter/</loc></url>
+  <url><loc>https://inktools.tech/photo-to-stencil/</loc></url>
+  <url><loc>https://inktools.tech/tattoo-prompt-generator/</loc></url>
+  <url><loc>https://inktools.tech/blog/</loc></url>
+  <url><loc>https://inktools.tech/blog/heic-vs-jpg.html</loc></url>
+  <url><loc>https://inktools.tech/blog/how-to-optimize-images-for-web.html</loc></url>
+  <url><loc>https://inktools.tech/blog/jpg-vs-png-vs-webp.html</loc></url>
+  <url><loc>https://inktools.tech/blog/tattoo-stencil-guide.html</loc></url>
+  <url><loc>https://inktools.tech/blog/ai-references-tattoo-consultations.html</loc></url>
+  <url><loc>https://inktools.tech/blog/how-to-use-tattoo-prompt-generator.html</loc></url>
+  <url><loc>https://inktools.tech/about.html</loc></url>
+  <url><loc>https://inktools.tech/contact.html</loc></url>
+  <url><loc>https://inktools.tech/privacy.html</loc></url>
 
 </urlset>
