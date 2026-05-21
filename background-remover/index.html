@@ -165,7 +165,25 @@
     }
 
     #convertBtn:hover { background: var(--gold-light); box-shadow: 0 4px 18px rgba(184,134,42,0.28); }
-    #loader { font-size: 13px; color: var(--muted); text-align: center; padding: 10px 0; display: none; }
+
+    #loader { display: none; padding: 8px 0; }
+
+    .loader-inner {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 12px;
+    }
+
+    .loader-spinner {
+      width: 34px; height: 34px;
+      border: 2.5px solid var(--gold-border);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #loader-text { font-size: 13px; color: var(--muted); text-align: center; line-height: 1.5; }
 
     .ad-slot { width: 100%; max-width: var(--max-w); padding: 0 24px; margin: 8px 0 24px; }
 
@@ -256,7 +274,12 @@
     </div>
 
     <div id="previewContainer"></div>
-    <div id="loader">⏳ Processing…</div>
+    <div id="loader">
+      <div class="loader-inner">
+        <div class="loader-spinner"></div>
+        <span id="loader-text">⏳ Processing…</span>
+      </div>
+    </div>
     <button id="convertBtn" onclick="convert()">Remove Background</button>
   </div>
 </div>
@@ -341,15 +364,17 @@ setupTool({
   previewFromHEIC: false,
 
   async convert(file) {
-    const loader = document.getElementById('loader');
+    const loaderText = document.getElementById('loader-text');
 
-    if (loader) loader.textContent = '⬇️ Loading AI model (first use only)…';
+    const setText = (msg) => { if (loaderText) loaderText.textContent = msg; };
+
+    setText('⬇️ Loading AI model (first use only)…');
 
     const { removeBackground } = await import(
       'https://esm.sh/@imgly/background-removal@1.7.0'
     );
 
-    if (loader) loader.textContent = '✂️ Removing background… (this may take 20–40 s)';
+    setText('✂️ Removing background… (may take 20–40 s)');
 
     const result = await removeBackground(file, {
       model: 'isnet_fp16',
@@ -358,12 +383,11 @@ setupTool({
         quality: 1.0,
       },
       progress(key, current, total) {
-        if (!loader) return;
         if (total > 0) {
           const pct = Math.round((current / total) * 100);
-          loader.textContent = `⬇️ Loading AI model… ${pct}%`;
+          setText(`⬇️ Loading AI model… ${pct}%`);
         } else {
-          loader.textContent = '⬇️ Loading AI model…';
+          setText('⬇️ Loading AI model…');
         }
       },
     });
