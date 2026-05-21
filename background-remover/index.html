@@ -349,18 +349,22 @@ setupTool({
       'https://esm.sh/@imgly/background-removal@1.7.0'
     );
 
-    if (loader) loader.textContent = '✂️ Removing background…';
+    if (loader) loader.textContent = '✂️ Removing background… (this may take 20–40 s)';
 
     const result = await removeBackground(file, {
-      model: 'isnet',
+      model: 'isnet_fp16',
       output: {
         format: 'image/png',
         quality: 1.0,
       },
       progress(key, current, total) {
-        if (!loader || total === 0) return;
-        const pct = Math.round((current / total) * 100);
-        loader.textContent = `⬇️ Loading AI model… ${pct}%`;
+        if (!loader) return;
+        if (total > 0) {
+          const pct = Math.round((current / total) * 100);
+          loader.textContent = `⬇️ Loading AI model… ${pct}%`;
+        } else {
+          loader.textContent = '⬇️ Loading AI model…';
+        }
       },
     });
 
