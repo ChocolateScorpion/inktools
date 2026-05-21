@@ -352,7 +352,7 @@ setupTool({
     if (loader) loader.textContent = '✂️ Removing background…';
 
     const result = await removeBackground(file, {
-      publicPath: 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.7.0/dist/',
+      model: 'isnet',
       output: {
         format: 'image/png',
         quality: 1.0,
