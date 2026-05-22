@@ -371,10 +371,17 @@ setupTool({
   previewFromHEIC: false,
 
   async convert(file) {
-    if (!file.type.includes("heic") && !file.type.includes("heif")) {
-      return file;
-    }
-    const result = await heic2any({ blob: file, toType: "image/jpeg" });
+    const type = file.type.toLowerCase();
+    const name = file.name.toLowerCase();
+    const isHEIC =
+      type.includes("heic") ||
+      type.includes("heif") ||
+      name.endsWith(".heic") ||
+      name.endsWith(".heif");
+
+    if (!isHEIC) return file;
+
+    const result = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.92 });
     return Array.isArray(result) ? result[0] : result;
   },
 
