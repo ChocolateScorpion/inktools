@@ -446,15 +446,55 @@
     .tool-icon {
       width: 38px; height: 38px;
       border-radius: 10px;
-      background: rgba(224,150,36,0.10);
-      border: 0.5px solid var(--gold-border);
+      background: rgba(6,9,24,0.85);
+      border: 0.5px solid;
       display: flex; align-items: center; justify-content: center;
-      color: var(--gold-light);
       margin-bottom: 14px;
-      box-shadow: 0 2px 10px rgba(224,150,36,0.10);
       flex-shrink: 0;
+      transition: box-shadow 0.22s;
     }
     .featured .tool-icon { width: 42px; height: 42px; border-radius: 11px; margin-bottom: 16px; }
+
+    /* Neon color categories */
+    .tool-icon.ic-gold {
+      border-color: rgba(224,150,36,0.7);
+      color: #F5B042;
+      box-shadow: 0 0 12px rgba(224,150,36,0.22), inset 0 0 10px rgba(224,150,36,0.06);
+    }
+    .tool-icon.ic-gold svg { filter: drop-shadow(0 0 4px rgba(224,150,36,0.55)); }
+    .tool-card:hover .tool-icon.ic-gold { box-shadow: 0 0 18px rgba(224,150,36,0.35), inset 0 0 14px rgba(224,150,36,0.10); }
+
+    .tool-icon.ic-blue {
+      border-color: rgba(79,148,255,0.7);
+      color: #7BB8FF;
+      box-shadow: 0 0 12px rgba(79,148,255,0.22), inset 0 0 10px rgba(79,148,255,0.06);
+    }
+    .tool-icon.ic-blue svg { filter: drop-shadow(0 0 4px rgba(79,148,255,0.55)); }
+    .tool-card:hover .tool-icon.ic-blue { box-shadow: 0 0 18px rgba(79,148,255,0.35), inset 0 0 14px rgba(79,148,255,0.10); }
+
+    .tool-icon.ic-purple {
+      border-color: rgba(160,80,255,0.7);
+      color: #C47AFF;
+      box-shadow: 0 0 12px rgba(160,80,255,0.22), inset 0 0 10px rgba(160,80,255,0.06);
+    }
+    .tool-icon.ic-purple svg { filter: drop-shadow(0 0 4px rgba(160,80,255,0.55)); }
+    .tool-card:hover .tool-icon.ic-purple { box-shadow: 0 0 18px rgba(160,80,255,0.35), inset 0 0 14px rgba(160,80,255,0.10); }
+
+    .tool-icon.ic-green {
+      border-color: rgba(52,211,153,0.7);
+      color: #5DE8B0;
+      box-shadow: 0 0 12px rgba(52,211,153,0.22), inset 0 0 10px rgba(52,211,153,0.06);
+    }
+    .tool-icon.ic-green svg { filter: drop-shadow(0 0 4px rgba(52,211,153,0.55)); }
+    .tool-card:hover .tool-icon.ic-green { box-shadow: 0 0 18px rgba(52,211,153,0.35), inset 0 0 14px rgba(52,211,153,0.10); }
+
+    .tool-icon.ic-orange {
+      border-color: rgba(249,115,22,0.7);
+      color: #FDA060;
+      box-shadow: 0 0 12px rgba(249,115,22,0.22), inset 0 0 10px rgba(249,115,22,0.06);
+    }
+    .tool-icon.ic-orange svg { filter: drop-shadow(0 0 4px rgba(249,115,22,0.55)); }
+    .tool-card:hover .tool-icon.ic-orange { box-shadow: 0 0 18px rgba(249,115,22,0.35), inset 0 0 14px rgba(249,115,22,0.10); }
 
     .tool-name { font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 5px; }
     .featured .tool-name { font-size: 16px; font-weight: 600; }
@@ -798,7 +838,7 @@
 
   <div class="tools-featured">
     <a href="/heic-to-jpg/" class="tool-card featured reveal" data-d="1">
-      <div class="tool-icon">
+      <div class="tool-icon ic-gold">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><rect x="8" y="13" width="8" height="5" rx="1"/></svg>
       </div>
       <div class="tool-name">HEIC to JPG</div>
@@ -806,7 +846,7 @@
       <div class="tool-arrow">Open tool <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
     </a>
     <a href="/heic-to-png/" class="tool-card featured reveal" data-d="2">
-      <div class="tool-icon">
+      <div class="tool-icon ic-gold">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="12" cy="15" r="2"/></svg>
       </div>
       <div class="tool-name">HEIC to PNG</div>
@@ -817,7 +857,7 @@
 
   <div class="tools-grid">
     <a href="/image-compressor/" class="tool-card reveal" data-d="1">
-      <div class="tool-icon">
+      <div class="tool-icon ic-blue">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
       </div>
       <div class="tool-name">Image Compressor</div>
@@ -825,7 +865,7 @@
       <div class="tool-arrow">Open <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
     </a>
     <a href="/background-remover/" class="tool-card reveal" data-d="2">
-      <div class="tool-icon">
+      <div class="tool-icon ic-purple">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
       </div>
       <div class="tool-name">Background Remover</div>
@@ -833,15 +873,15 @@
       <div class="tool-arrow">Open <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
     </a>
     <a href="/image-resizer/" class="tool-card reveal" data-d="3">
-      <div class="tool-icon">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      <div class="tool-icon ic-green">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
       </div>
       <div class="tool-name">Image Resizer</div>
       <div class="tool-desc">Set exact pixel dimensions for any image</div>
       <div class="tool-arrow">Open <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
     </a>
     <a href="/jpg-to-png/" class="tool-card reveal" data-d="1">
-      <div class="tool-icon">
+      <div class="tool-icon ic-gold">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
       </div>
       <div class="tool-name">JPG to PNG</div>
@@ -849,7 +889,7 @@
       <div class="tool-arrow">Open <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
     </a>
     <a href="/webp-converter/" class="tool-card reveal" data-d="2">
-      <div class="tool-icon">
+      <div class="tool-icon ic-blue">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
       </div>
       <div class="tool-name">WebP Converter</div>
@@ -857,7 +897,7 @@
       <div class="tool-arrow">Open <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
     </a>
     <a href="/heic-to-mp4/" class="tool-card reveal" data-d="3">
-      <div class="tool-icon">
+      <div class="tool-icon ic-orange">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
       </div>
       <div class="tool-name">HEIC to MP4</div>
