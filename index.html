@@ -10,13 +10,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Online Image Tools | InkTools</title>
-  <meta name="description" content="Convert, compress and resize images instantly in your browser. No upload required — 100% private. HEIC to JPG, PNG, image compressor and more.">
+  <meta name="description" content="Convert HEIC to JPG or PNG, compress, resize images — instantly in your browser. No upload, no account, 100% private and free.">
+  <link rel="canonical" href="https://inktools.tech/">
   <link rel="icon" href="/favicon.ico">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="InkTools — Free Image Converter & Tools">
+  <meta property="og:description" content="Convert HEIC photos from iPhone to JPG or PNG in seconds. Nothing leaves your browser.">
+  <meta property="og:url" content="https://inktools.tech/">
+  <meta property="og:type" content="website">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
@@ -28,255 +35,634 @@
   </script>
 
   <style>
+    /* ─── TOKENS ──────────────────────────────────────────── */
     :root {
-      --gold:        #B8862A;
-      --gold-light:  #EF9F27;
-      --gold-subtle: rgba(184,134,42,0.09);
-      --gold-border: rgba(184,134,42,0.22);
-      --bg:          #0C0C0B;
-      --surface:     #161614;
-      --surface2:    #1E1E1B;
-      --border:      rgba(255,255,255,0.07);
-      --cream:       #E8E4DC;
-      --muted:       #8C8880;
-      --faint:       #47453F;
-      --max-w:       860px;
+      --gold:         #B8862A;
+      --gold-light:   #D4A040;
+      --gold-subtle:  rgba(184,134,42,0.07);
+      --gold-border:  rgba(184,134,42,0.22);
+      --gold-glow:    rgba(184,134,42,0.14);
+      --bg:           #0C0C0B;
+      --surface:      #131312;
+      --surface-2:    #1B1B19;
+      --border:       rgba(255,255,255,0.06);
+      --cream:        #E8E4DC;
+      --muted:        #7A7670;
+      --faint:        #3E3B36;
+      --max-w:        900px;
+      --ease-out:     cubic-bezier(0.16,1,0.3,1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     a { text-decoration: none; color: inherit; }
-
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', Arial, sans-serif;
-      /* Fondo fijo — no se mueve al hacer scroll */
+      font-family: 'DM Sans', -apple-system, Arial, sans-serif;
       background-color: var(--bg);
-      background-image: radial-gradient(ellipse 70% 45% at 50% 0%, rgba(184,134,42,0.06) 0%, transparent 65%);
-      background-attachment: fixed;
       color: var(--cream);
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ── HEADER ── */
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px;
+    }
+
+    /* Hero radial glow */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 600px;
+      background: radial-gradient(ellipse 55% 50% at 50% 0%, rgba(184,134,42,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── HEADER ──────────────────────────────────────────── */
     .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       width: 100%;
       max-width: var(--max-w);
-      padding: 18px 24px;
+      padding: 15px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 0.5px solid var(--border);
+      background: rgba(12,12,11,0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
-    .site-logo { display: flex; align-items: center; gap: 9px; }
+    .site-logo { display: flex; align-items: center; gap: 10px; }
 
-    .logo-ink {
+    .logo-mark {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      background: var(--gold-subtle);
+      border: 0.5px solid var(--gold-border);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .logo-text {
       font-size: 15px;
       font-weight: 700;
       letter-spacing: 2px;
+      text-transform: uppercase;
       color: var(--cream);
-      -webkit-text-stroke: 0.5px var(--gold);
-      text-transform: uppercase;
     }
+    .logo-text em { font-style: normal; color: var(--gold); font-weight: 300; }
 
-    .logo-tools {
-      font-size: 15px;
-      font-weight: 300;
-      letter-spacing: 2.5px;
-      color: var(--gold);
-      text-transform: uppercase;
+    .site-nav { display: flex; gap: 4px; }
+    .site-nav a {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: color 0.15s, background 0.15s;
     }
+    .site-nav a:hover { color: var(--cream); background: rgba(255,255,255,0.05); }
 
-    .site-nav { display: flex; gap: 22px; }
-    .site-nav a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
-    .site-nav a:hover { color: var(--cream); }
-
-    /* ── HERO ── */
+    /* ─── HERO ──────────────────────────────────────────── */
     .hero {
+      position: relative;
+      z-index: 1;
       width: 100%;
       max-width: var(--max-w);
+      padding: 72px 24px 60px;
       text-align: center;
-      padding: 56px 24px 44px;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
       background: var(--gold-subtle);
       border: 0.5px solid var(--gold-border);
-      border-radius: 20px;
-      padding: 5px 14px;
-      font-size: 12px;
-      color: #C9973A;
-      margin-bottom: 20px;
+      border-radius: 9999px;
+      padding: 5px 14px 5px 10px;
+      font-size: 11.5px;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+      margin-bottom: 28px;
+      animation: fadeUp 0.55s var(--ease-out) both;
     }
 
     .badge-dot {
       width: 6px; height: 6px;
       border-radius: 50%;
       background: var(--gold-light);
+      box-shadow: 0 0 8px var(--gold);
+      animation: pulse 2.8s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 8px var(--gold); }
+      50%      { box-shadow: 0 0 3px transparent; }
     }
 
     .hero h1 {
       font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(28px, 4vw, 38px);
+      font-size: clamp(38px, 6vw, 64px);
       font-weight: 400;
+      font-style: italic;
       color: var(--cream);
-      line-height: 1.18;
-      letter-spacing: -0.3px;
-      margin-bottom: 16px;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      text-wrap: balance;
+      margin-bottom: 20px;
+      animation: fadeUp 0.55s var(--ease-out) 0.08s both;
     }
 
-    .hero h1 span { color: var(--gold); }
+    .hero h1 span { font-style: normal; color: var(--gold); }
 
-    .hero p {
+    .hero-sub {
       font-size: 15px;
       color: var(--muted);
-      max-width: 400px;
-      margin: 0 auto;
-      line-height: 1.65;
+      max-width: 420px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      animation: fadeUp 0.55s var(--ease-out) 0.15s both;
     }
 
-    /* ── TOOLS ── */
-    .tools-section { width: 100%; max-width: var(--max-w); padding: 0 24px; }
+    /* Drop zone */
+    .hero-drop {
+      margin: 0 auto;
+      max-width: 520px;
+      animation: fadeUp 0.6s var(--ease-out) 0.22s both;
+    }
 
-    .tools-label {
+    .drop-zone {
+      border: 1.5px dashed var(--gold-border);
+      border-radius: 20px;
+      padding: 34px 28px 26px;
+      background: var(--gold-subtle);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.22s var(--ease-out);
+      position: relative;
+    }
+
+    .drop-zone::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(184,134,42,0.05) 0%, transparent 55%);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .drop-zone:hover,
+    .drop-zone.dragover {
+      border-color: var(--gold);
+      background: rgba(184,134,42,0.1);
+      transform: translateY(-1px);
+    }
+
+    .drop-icon {
+      width: 44px; height: 44px;
+      margin: 0 auto 14px;
+      background: rgba(184,134,42,0.12);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold-light);
+    }
+
+    .drop-title { font-size: 15px; font-weight: 500; color: var(--cream); margin-bottom: 5px; }
+    .drop-sub   { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+
+    .format-pick { display: flex; gap: 8px; justify-content: center; }
+
+    .format-btn {
+      flex: 1;
+      max-width: 190px;
+      padding: 11px 16px;
+      border-radius: 12px;
+      border: 0.5px solid var(--gold-border);
+      background: rgba(12,12,11,0.5);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.15s, border-color 0.15s, transform 0.12s;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+
+    .format-btn:hover { background: var(--surface-2); border-color: var(--gold); transform: translateY(-1px); }
+    .format-btn:active { transform: scale(0.98); }
+
+    .format-btn.primary {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #0C0C0B;
+      font-weight: 600;
+    }
+    .format-btn.primary:hover { background: var(--gold-light); }
+
+    .drop-note {
+      font-size: 11px;
+      color: var(--faint);
+      margin-top: 14px;
+    }
+
+    /* ─── TRUST BAR ──────────────────────────────────────────── */
+    .trust-bar {
+      position: relative; z-index: 1;
+      width: 100%; max-width: var(--max-w);
+      padding: 16px 24px;
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      gap: 28px; flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .trust-item { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--muted); }
+    .trust-item svg { color: var(--gold); flex-shrink: 0; }
+
+    /* ─── AD SLOT ──────────────────────────────────────────── */
+    .ad-slot {
+      position: relative; z-index: 1;
+      width: 100%; max-width: var(--max-w);
+      padding: 0 24px;
+      margin: 0 0 48px;
+    }
+
+    /* ─── TOOLS SECTION ──────────────────────────────────────────── */
+    .tools-section {
+      position: relative; z-index: 1;
+      width: 100%; max-width: var(--max-w);
+      padding: 0 24px;
+      margin-bottom: 64px;
+    }
+
+    .section-eyebrow {
       font-size: 11px;
       color: var(--faint);
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       font-weight: 500;
-      margin-bottom: 14px;
+      margin-bottom: 20px;
     }
+
+    /* Featured HEIC pair */
+    .tools-featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* Tool card */
+    .tool-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, background 0.2s, transform 0.22s var(--ease-out), box-shadow 0.22s;
+    }
+
+    .tool-card:hover {
+      border-color: var(--gold-border);
+      background: var(--surface-2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.28), 0 0 0 0.5px var(--gold-border);
+    }
+
+    .tool-card:active { transform: translateY(0) scale(0.99); transition-duration: 0.08s; }
+
+    .tool-card.featured {
+      padding: 24px;
+      background: linear-gradient(140deg, rgba(184,134,42,0.07) 0%, var(--surface) 55%);
+      border-color: var(--gold-border);
+    }
+
+    .tool-card.featured:hover {
+      background: linear-gradient(140deg, rgba(184,134,42,0.11) 0%, var(--surface-2) 55%);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.32), 0 0 0 0.5px rgba(184,134,42,0.38);
+    }
+
+    .tool-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: rgba(184,134,42,0.1);
+      border: 0.5px solid var(--gold-border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold-light);
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    .featured .tool-icon { width: 40px; height: 40px; border-radius: 10px; margin-bottom: 16px; }
+
+    .tool-name { font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 5px; }
+    .featured .tool-name { font-size: 16px; font-weight: 600; }
+
+    .tool-desc { font-size: 12.5px; color: var(--muted); line-height: 1.5; flex: 1; }
+    .featured .tool-desc { font-size: 13.5px; }
+
+    .tool-arrow {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--gold);
+      display: flex; align-items: center; gap: 4px;
+      opacity: 0;
+      transform: translateX(-5px);
+      transition: opacity 0.18s, transform 0.18s;
+    }
+    .tool-card:hover .tool-arrow { opacity: 1; transform: translateX(0); }
 
     .tools-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-bottom: 48px;
     }
 
-    .tool-card {
+    /* Coming soon card */
+    .tool-card.soon { opacity: 0.55; cursor: default; pointer-events: none; }
+    .soon-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--faint);
+      background: rgba(255,255,255,0.04);
+      border: 0.5px solid rgba(255,255,255,0.08);
+      border-radius: 9999px;
+      padding: 3px 9px;
+      margin-top: 10px; width: fit-content;
+    }
+
+    /* ─── COUNTER ──────────────────────────────────────────── */
+    .counter-section {
+      position: relative; z-index: 1;
+      width: 100%; max-width: var(--max-w);
+      padding: 0 24px;
+      margin-bottom: 64px;
+    }
+
+    .counter-inner {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      overflow: hidden;
+    }
+
+    .counter-cell {
+      background: var(--surface);
+      padding: 28px 24px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .counter-cell:hover { background: var(--surface-2); }
+
+    .counter-num {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 400;
+      color: var(--gold-light);
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .counter-label {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    /* ─── HOW IT WORKS ──────────────────────────────────────────── */
+    .how-section {
+      position: relative; z-index: 1;
+      width: 100%; max-width: var(--max-w);
+      padding: 0 24px 64px;
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .how-step {
+      background: var(--surface);
+      padding: 24px 20px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: background 0.2s;
+    }
+    .how-step:hover { background: var(--surface-2); }
+
+    .how-num {
+      font-size: 11px; font-weight: 500;
+      color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase;
+    }
+
+    .how-title { font-size: 14px; font-weight: 500; color: var(--cream); }
+    .how-text  { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* ─── FAQ ──────────────────────────────────────────── */
+    .faq-section {
+      position: relative; z-index: 1;
+      width: 100%; max-width: var(--max-w);
+      padding: 0 24px 64px;
+    }
+
+    .faq-list {
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .faq-item {
+      border-bottom: 0.5px solid var(--border);
+    }
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-q {
+      width: 100%;
+      padding: 18px 22px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      background: var(--surface);
+      border: none;
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .faq-q:hover { background: var(--surface-2); }
+
+    .faq-chevron {
+      flex-shrink: 0;
+      color: var(--gold);
+      transition: transform 0.25s var(--ease-out);
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s var(--ease-out);
+    }
+    .faq-item.open .faq-answer { max-height: 220px; }
+
+    .faq-answer-inner {
+      padding: 0 22px 20px;
+      background: var(--surface);
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .faq-answer-inner a { color: var(--gold); }
+    .faq-answer-inner a:hover { color: var(--gold-light); }
+
+    /* ─── BLOG TEASER ──────────────────────────────────────────── */
+    .blog-section {
+      position: relative; z-index: 1;
+      width: 100%; max-width: var(--max-w);
+      padding: 0 24px 64px;
+    }
+
+    .blog-row-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .blog-all-link {
+      font-size: 13px;
+      color: var(--gold);
+      transition: color 0.15s;
+    }
+    .blog-all-link:hover { color: var(--gold-light); }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .blog-card {
       background: var(--surface);
       border: 0.5px solid var(--border);
       border-radius: 14px;
-      padding: 18px;
-      color: var(--cream);
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.15s, background 0.15s;
+      padding: 20px;
+      display: flex; flex-direction: column;
+      transition: border-color 0.18s, background 0.18s, transform 0.2s var(--ease-out);
     }
-
-    .tool-card:hover {
+    .blog-card:hover {
       border-color: var(--gold-border);
-      background: var(--surface2);
+      background: var(--surface-2);
+      transform: translateY(-2px);
     }
 
-    .tool-icon {
-      width: 34px; height: 34px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      margin-bottom: 12px;
+    .blog-tag {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
     }
 
-    .tool-name  { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 4px; }
-    .tool-desc  { font-size: 12px; color: var(--muted); line-height: 1.45; }
-
-    .ic-gold   { background: rgba(184,134,42,0.13); color: #C9973A; }
-    .ic-purple { background: rgba(139,92,246,0.12);  color: #a78bfa; }
-    .ic-teal   { background: rgba(20,184,166,0.12);  color: #2dd4bf; }
-    .ic-coral  { background: rgba(239,100,80,0.12);  color: #f87171; }
-    .ic-green  { background: rgba(34,197,94,0.11);   color: #4ade80; }
-    .ic-blue   { background: rgba(59,130,246,0.12);  color: #60a5fa; }
-
-    /* ── TRUST BAR ── */
-    .trust-bar {
-      width: 100%; max-width: var(--max-w);
-      padding: 20px 24px;
-      border-top: 0.5px solid var(--border);
-      border-bottom: 0.5px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 36px;
-      flex-wrap: wrap;
-      margin-bottom: 48px;
+    .blog-title {
+      font-size: 14px; font-weight: 500;
+      color: var(--cream); line-height: 1.45;
+      flex: 1; margin-bottom: 14px;
     }
 
-    .trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
-    .trust-item svg { color: var(--gold); flex-shrink: 0; }
-
-    /* ── HOW IT WORKS ── */
-    .how-section { width: 100%; max-width: var(--max-w); padding: 0 24px 52px; }
-
-    .section-title { font-size: 16px; font-weight: 500; color: var(--cream); margin-bottom: 22px; }
-
-    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-
-    .step { text-align: center; padding: 16px 10px; }
-
-    .step-num {
-      width: 26px; height: 26px;
-      border-radius: 50%;
-      border: 0.5px solid var(--gold-border);
-      background: var(--gold-subtle);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; color: #C9973A; font-weight: 500;
-      margin: 0 auto 10px;
+    .blog-read {
+      font-size: 12px; color: var(--muted);
+      display: flex; align-items: center; gap: 4px;
     }
 
-    .step-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
-
-    /* ── SEO ── */
-    .seo-section { width: 100%; max-width: 680px; padding: 0 24px 52px; text-align: left; }
-
-    .seo-section h2 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 22px; font-weight: 400; color: var(--cream);
-      text-align: center; margin: 40px 0 14px;
+    /* ─── SCROLL REVEALS ──────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
     }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .seo-section h3 { font-size: 14px; font-weight: 500; color: var(--cream); margin: 18px 0 5px; }
-    .seo-section p  { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
-    .seo-section ul, .seo-section ol { padding-left: 18px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+    .reveal[data-d="1"] { transition-delay: 0.05s; }
+    .reveal[data-d="2"] { transition-delay: 0.10s; }
+    .reveal[data-d="3"] { transition-delay: 0.15s; }
+    .reveal[data-d="4"] { transition-delay: 0.20s; }
+    .reveal[data-d="5"] { transition-delay: 0.25s; }
 
-    /* ── ADS ── */
-    .ad-slot { width: 100%; max-width: var(--max-w); padding: 0 24px; margin: 16px 0; }
-
-    /* ── FOOTER ── */
+    /* ─── FOOTER ──────────────────────────────────────────── */
     .site-footer {
+      position: relative; z-index: 1;
       width: 100%; max-width: var(--max-w);
-      padding: 24px; margin-top: auto;
+      padding: 24px;
+      margin-top: auto;
       border-top: 0.5px solid var(--border);
-      display: flex; align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 10px;
     }
 
     .footer-copy { font-size: 12px; color: var(--faint); }
-    .footer-links { display: flex; gap: 18px; }
+    .footer-links { display: flex; gap: 20px; }
     .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
     .footer-links a:hover { color: var(--gold); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      .tools-grid { grid-template-columns: repeat(2, 1fr); }
-      .steps-grid { grid-template-columns: repeat(2, 1fr); }
-      .trust-bar  { gap: 16px; }
-      .site-nav   { display: none; }
-      .site-footer { flex-direction: column; align-items: flex-start; }
+    /* ─── ANIMATIONS ──────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .hero { padding: 52px 20px 44px; }
+      .tools-featured { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: repeat(2, 1fr); }
+      .how-grid { grid-template-columns: 1fr; }
+      .counter-inner { grid-template-columns: 1fr; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .format-pick { flex-direction: column; align-items: stretch; }
+      .format-btn { max-width: 100%; }
+      .trust-bar { gap: 14px; }
+      .site-nav { display: none; }
+      .site-footer { flex-direction: column; align-items: flex-start; }
+      .blog-row-header { flex-direction: column; gap: 10px; }
+    }
+
     @media (max-width: 380px) {
       .tools-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
   </style>
 
@@ -285,221 +671,456 @@
 
 <!-- HEADER -->
 <header class="site-header">
-  <a href="/" class="site-logo">
-    <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4" y="1" width="8" height="17" rx="4" fill="#0C0C0B" stroke="#B8862A" stroke-width="1"/>
-      <polygon points="8,18 5.5,26 8,24 10.5,26" fill="#B8862A"/>
-      <ellipse cx="8" cy="27.2" rx="2.2" ry="1.1" fill="#B8862A" opacity="0.38"/>
-    </svg>
-    <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
+  <a href="/" class="site-logo" aria-label="InkTools home">
+    <div class="logo-mark">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B8862A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+    </div>
+    <span class="logo-text">INK<em>TOOLS</em></span>
   </a>
-  <nav class="site-nav">
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="/blog/">Blog</a>
     <a href="/about.html">About</a>
     <a href="/contact.html">Contact</a>
   </nav>
 </header>
 
-<!-- TOP AD -->
-<div class="ad-slot">
-  <ins class="adsbygoogle" style="display:block;"
-    data-ad-client="ca-pub-7189936182708078" data-ad-slot="3707669770"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-
 <!-- HERO -->
-<div class="hero">
-  <div class="badge"><span class="badge-dot"></span>No uploads &nbsp;·&nbsp; 100% private</div>
-  <h1>Image tools that work<br>right in your <span>browser</span></h1>
-  <p>Convert, compress, and resize images instantly — everything runs on your device, nothing leaves it.</p>
-</div>
-
-<!-- TOOLS GRID -->
-<div class="tools-section">
-  <div class="tools-label">10 free tools</div>
-  <div class="tools-grid">
-
-    <a href="/heic-to-jpg/" class="tool-card">
-      <div class="tool-icon ic-gold">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-      </div>
-      <div class="tool-name">HEIC to JPG</div>
-      <div class="tool-desc">Convert iPhone photos to universal JPG format</div>
-    </a>
-
-    <a href="/heic-to-png/" class="tool-card">
-      <div class="tool-icon ic-purple">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="12" cy="15" r="2"/></svg>
-      </div>
-      <div class="tool-name">HEIC to PNG</div>
-      <div class="tool-desc">Lossless PNG output with transparency support</div>
-    </a>
-
-    <a href="/image-compressor/" class="tool-card">
-      <div class="tool-icon ic-teal">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-      </div>
-      <div class="tool-name">Image Compressor</div>
-      <div class="tool-desc">Reduce file size without visible quality loss</div>
-    </a>
-
-    <a href="/image-resizer/" class="tool-card">
-      <div class="tool-icon ic-gold">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      </div>
-      <div class="tool-name">Image Resizer</div>
-      <div class="tool-desc">Set exact pixel dimensions for any image</div>
-    </a>
-
-    <a href="/jpg-to-png/" class="tool-card">
-      <div class="tool-icon ic-coral">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-      </div>
-      <div class="tool-name">JPG to PNG</div>
-      <div class="tool-desc">Add transparency support to JPG images</div>
-    </a>
-
-    <a href="/png-to-jpg/" class="tool-card">
-      <div class="tool-icon ic-green">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      </div>
-      <div class="tool-name">PNG to JPG</div>
-      <div class="tool-desc">Smaller files for sharing and web use</div>
-    </a>
-
-    <a href="/webp-converter/" class="tool-card">
-      <div class="tool-icon ic-blue">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-      </div>
-      <div class="tool-name">WebP Converter</div>
-      <div class="tool-desc">Convert WebP to JPG or PNG and vice versa</div>
-    </a>
-
-    <a href="/photo-to-stencil/" class="tool-card">
-      <div class="tool-icon ic-gold">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg>
-      </div>
-      <div class="tool-name">Photo to Stencil</div>
-      <div class="tool-desc">Convert photos to tattoo stencils for hectographic printing</div>
-    </a>
-
-    <a href="/tattoo-prompt-generator/" class="tool-card">
-      <div class="tool-icon ic-gold">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-      </div>
-      <div class="tool-name">Tattoo Prompt Generator</div>
-      <div class="tool-desc">Generate AI reference prompts for tattoo ideas and consultations</div>
-    </a>
-
-    <a href="/background-remover/" class="tool-card">
-      <div class="tool-icon ic-teal">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
-      </div>
-      <div class="tool-name">Background Remover</div>
-      <div class="tool-desc">Remove image backgrounds with AI — transparent PNG output</div>
-    </a>
-
-    <a href="/blog/" class="tool-card" style="border-style: dashed;">
-      <div class="tool-icon ic-purple">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      </div>
-      <div class="tool-name">Blog &amp; Guides</div>
-      <div class="tool-desc">Tips on image formats, compression and tattoo tools</div>
-    </a>
-
+<main>
+<section class="hero" aria-label="Convert HEIC photos">
+  <div class="badge" role="note">
+    <span class="badge-dot" aria-hidden="true"></span>
+    No uploads &nbsp;·&nbsp; Files stay on your device
   </div>
-</div>
+
+  <h1>Your iPhone photos,<br><span>open anywhere.</span></h1>
+
+  <p class="hero-sub">
+    Convert HEIC to JPG or PNG in seconds — everything runs in your browser, nothing is uploaded or stored.
+  </p>
+
+  <div class="hero-drop">
+    <div class="drop-zone" id="heroDropZone" role="button" tabindex="0" aria-label="Drop HEIC file or choose conversion format">
+      <div class="drop-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+      </div>
+      <div class="drop-title">Drop your HEIC file here</div>
+      <div class="drop-sub">or pick a format below — supports .heic and .heif</div>
+      <div class="format-pick">
+        <a href="/heic-to-jpg/" class="format-btn primary">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Convert to JPG
+        </a>
+        <a href="/heic-to-png/" class="format-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="12" cy="14" r="2"/></svg>
+          Convert to PNG
+        </a>
+      </div>
+      <p class="drop-note">Batch supported · up to 20 files · free forever</p>
+    </div>
+  </div>
+</section>
 
 <!-- TRUST BAR -->
-<div class="trust-bar">
+<div class="trust-bar reveal">
   <div class="trust-item">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    Files never leave your device
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Never uploaded to any server
   </div>
   <div class="trust-item">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-    Instant processing
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    Instant — no waiting
   </div>
   <div class="trust-item">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-    Works on mobile
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+    Works on iPhone &amp; Android
   </div>
   <div class="trust-item">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
     Always free
   </div>
 </div>
 
-<!-- MID AD -->
-<div class="ad-slot">
+<!-- AD SLOT — after content, not before (AdSense policy: content first) -->
+<div class="ad-slot reveal">
   <ins class="adsbygoogle" style="display:block;"
-    data-ad-client="ca-pub-7189936182708078" data-ad-slot="1181011532"></ins>
+    data-ad-client="ca-pub-7189936182708078"
+    data-ad-slot="3707669770"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<!-- HOW IT WORKS -->
-<div class="how-section">
-  <div class="section-title">How it works</div>
-  <div class="steps-grid">
-    <div class="step"><div class="step-num">1</div><div class="step-text">Drop or upload your image file</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-text">Pick your tool or output format</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-text">Processing happens instantly in browser</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-text">Download your optimized image</div></div>
+<!-- TOOLS SECTION -->
+<section class="tools-section" aria-label="All tools">
+  <div class="section-eyebrow reveal">All tools</div>
+
+  <div class="tools-featured">
+    <a href="/heic-to-jpg/" class="tool-card featured reveal" data-d="1">
+      <div class="tool-icon" aria-hidden="true">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><rect x="8" y="13" width="8" height="5" rx="1"/></svg>
+      </div>
+      <div class="tool-name">HEIC to JPG</div>
+      <div class="tool-desc">The most compatible format — opens on any device, platform, or email client without friction.</div>
+      <div class="tool-arrow" aria-hidden="true">Open tool <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </a>
+
+    <a href="/heic-to-png/" class="tool-card featured reveal" data-d="2">
+      <div class="tool-icon" aria-hidden="true">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="12" cy="15" r="2"/></svg>
+      </div>
+      <div class="tool-name">HEIC to PNG</div>
+      <div class="tool-desc">Lossless output with transparency support — ideal for design work and screenshots.</div>
+      <div class="tool-arrow" aria-hidden="true">Open tool <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </a>
   </div>
+
+  <div class="tools-grid">
+    <a href="/image-compressor/" class="tool-card reveal" data-d="1">
+      <div class="tool-icon" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+      </div>
+      <div class="tool-name">Image Compressor</div>
+      <div class="tool-desc">Reduce file size without visible quality loss</div>
+      <div class="tool-arrow" aria-hidden="true">Open <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </a>
+
+    <a href="/background-remover/" class="tool-card reveal" data-d="2">
+      <div class="tool-icon" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+      </div>
+      <div class="tool-name">Background Remover</div>
+      <div class="tool-desc">AI-powered — transparent PNG output</div>
+      <div class="tool-arrow" aria-hidden="true">Open <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </a>
+
+    <a href="/image-resizer/" class="tool-card reveal" data-d="3">
+      <div class="tool-icon" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <div class="tool-name">Image Resizer</div>
+      <div class="tool-desc">Set exact pixel dimensions for any image</div>
+      <div class="tool-arrow" aria-hidden="true">Open <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </a>
+
+    <a href="/jpg-to-png/" class="tool-card reveal" data-d="1">
+      <div class="tool-icon" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      </div>
+      <div class="tool-name">JPG to PNG</div>
+      <div class="tool-desc">Add transparency support to JPEG images</div>
+      <div class="tool-arrow" aria-hidden="true">Open <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </a>
+
+    <a href="/webp-converter/" class="tool-card reveal" data-d="2">
+      <div class="tool-icon" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      </div>
+      <div class="tool-name">WebP Converter</div>
+      <div class="tool-desc">Convert between WebP, JPG, and PNG</div>
+      <div class="tool-arrow" aria-hidden="true">Open <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </a>
+
+    <div class="tool-card soon reveal" data-d="3" aria-label="HEIC Video to MP4 — coming soon">
+      <div class="tool-icon" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+      </div>
+      <div class="tool-name">HEIC Video → MP4</div>
+      <div class="tool-desc">Convert iPhone Live Photos and videos to universal MP4 format</div>
+      <div class="soon-tag">Coming soon</div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTER SECTION -->
+<section class="counter-section reveal" aria-label="InkTools statistics">
+  <div class="counter-inner">
+    <div class="counter-cell">
+      <div class="counter-num" id="ctr-files" aria-live="polite">—</div>
+      <div class="counter-label">Files converted</div>
+    </div>
+    <div class="counter-cell">
+      <div class="counter-num" id="ctr-formats">5</div>
+      <div class="counter-label">Supported formats</div>
+    </div>
+    <div class="counter-cell">
+      <div class="counter-num">0 MB</div>
+      <div class="counter-label">Uploaded to our servers</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section reveal" aria-label="How InkTools works">
+  <div class="section-eyebrow" style="margin-bottom:18px;">How it works</div>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-num">Step 1</div>
+      <div class="how-title">Drop or browse</div>
+      <div class="how-text">Pick your HEIC file — no account or signup. Drag it in or click to browse.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">Step 2</div>
+      <div class="how-title">Choose format</div>
+      <div class="how-text">JPG for maximum compatibility, PNG for lossless quality with transparency.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">Step 3</div>
+      <div class="how-title">Download instantly</div>
+      <div class="how-text">Your file is ready in under a second. Conversion happened on your device — not our servers.</div>
+    </div>
+  </div>
+</section>
+
+<!-- AD SLOT mid -->
+<div class="ad-slot reveal">
+  <ins class="adsbygoogle" style="display:block;"
+    data-ad-client="ca-pub-7189936182708078"
+    data-ad-slot="1181011532"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<!-- SEO CONTENT -->
-<section class="seo-section">
+<!-- FAQ -->
+<section class="faq-section reveal" aria-label="Frequently asked questions">
+  <div class="section-eyebrow" style="margin-bottom:18px;">Frequently asked questions</div>
+  <div class="faq-list" role="list">
 
-  <h2>What is InkTools?</h2>
-  <p>InkTools is a collection of free online image utilities designed to help you convert, compress, and resize images directly in your browser. No account, no upload, no waiting.</p>
-  <p>All processing happens locally on your device, ensuring fast performance and complete privacy.</p>
+    <div class="faq-item" role="listitem">
+      <button class="faq-q" aria-expanded="false">
+        Why can't I open HEIC files on Windows?
+        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          HEIC (High Efficiency Image Container) is the default format used by iPhones. Windows doesn't support it natively unless you install a paid Microsoft codec. Converting to JPG is the simplest fix — it opens everywhere without any extra software.
+        </div>
+      </div>
+    </div>
 
-  <h2>Why Use InkTools</h2>
-  <ul>
-    <li>No uploads required — your files stay on your device</li>
-    <li>Fast and simple image conversion</li>
-    <li>Supports HEIC, JPG, and PNG formats</li>
-    <li>Reduce image file size without losing quality</li>
-    <li>Works on desktop and mobile devices</li>
-    <li>100% free to use</li>
-  </ul>
+    <div class="faq-item" role="listitem">
+      <button class="faq-q" aria-expanded="false">
+        Are my photos safe? Do you store them?
+        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Your photos never leave your device. All conversion happens inside your browser using JavaScript — there's no upload, no server, no storage. We have nothing to store because we never receive your files.
+        </div>
+      </div>
+    </div>
 
-  <h2>Frequently Asked Questions</h2>
+    <div class="faq-item" role="listitem">
+      <button class="faq-q" aria-expanded="false">
+        What's the difference between JPG and PNG?
+        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          JPG uses compression to reduce file size — ideal for photos you want to share, email, or post on social media. PNG is lossless (no quality loss) and supports transparency — better for screenshots, graphics, or images you'll edit further. When in doubt, JPG is the right choice for iPhone photos.
+        </div>
+      </div>
+    </div>
 
-  <h3>Can I convert HEIC images to JPG?</h3>
-  <p>Yes. Convert HEIC files from iPhone to JPG format for better compatibility with most devices and platforms.</p>
+    <div class="faq-item" role="listitem">
+      <button class="faq-q" aria-expanded="false">
+        How many files can I convert at once?
+        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          InkTools supports batch conversion — you can drop up to 20 files at once and download them all in one click. The limit exists to keep the conversion fast on all devices, including phones.
+        </div>
+      </div>
+    </div>
 
-  <h3>Do I need to upload my images?</h3>
-  <p>No. All tools work directly in your browser — your images are never uploaded or stored anywhere.</p>
+    <div class="faq-item" role="listitem">
+      <button class="faq-q" aria-expanded="false">
+        Does this work on iPhone or Android?
+        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Yes. InkTools runs in any modern browser — Chrome, Safari, Firefox, Edge — on desktop, tablet, and mobile. Since everything happens in the browser, there's nothing to install.
+        </div>
+      </div>
+    </div>
 
-  <h3>Can I compress images without losing quality?</h3>
-  <p>Yes. The image compressor reduces file size while maintaining good visual quality, making it ideal for web use.</p>
+    <div class="faq-item" role="listitem">
+      <button class="faq-q" aria-expanded="false">
+        Is InkTools really free? What's the catch?
+        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Completely free — no hidden costs, no account required, no file limits beyond batch caps. InkTools is supported by ads (the ones you see on these pages). That's the whole model. No subscriptions, no upsells.
+        </div>
+      </div>
+    </div>
 
-  <h3>What formats are supported?</h3>
-  <p>InkTools supports HEIC, JPG, and PNG formats, including conversions between them.</p>
+  </div>
+</section>
 
-  <h3>Is InkTools free?</h3>
-  <p>Yes, all tools are completely free to use with no hidden costs.</p>
-
+<!-- BLOG TEASER -->
+<section class="blog-section reveal" aria-label="From the blog">
+  <div class="blog-row-header">
+    <div class="section-eyebrow" style="margin-bottom:0;">From the blog</div>
+    <a href="/blog/" class="blog-all-link">All articles →</a>
+  </div>
+  <div class="blog-grid">
+    <a href="/blog/heic-vs-jpg.html" class="blog-card">
+      <div class="blog-tag">Format guide</div>
+      <div class="blog-title">HEIC vs JPG: which format should you use?</div>
+      <div class="blog-read">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        4 min read
+      </div>
+    </a>
+    <a href="/blog/jpg-vs-png-vs-webp.html" class="blog-card">
+      <div class="blog-tag">Format guide</div>
+      <div class="blog-title">JPG vs PNG vs WebP: a plain-language comparison</div>
+      <div class="blog-read">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        5 min read
+      </div>
+    </a>
+    <a href="/blog/how-to-optimize-images-for-web.html" class="blog-card">
+      <div class="blog-tag">Performance</div>
+      <div class="blog-title">How to optimize images for the web without losing quality</div>
+      <div class="blog-read">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        6 min read
+      </div>
+    </a>
+  </div>
 </section>
 
 <!-- BOTTOM AD -->
-<div class="ad-slot">
+<div class="ad-slot reveal">
   <ins class="adsbygoogle" style="display:block;"
-    data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
+    data-ad-client="ca-pub-7189936182708078"
+    data-ad-slot="8603238385"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
+</main>
+
 <!-- FOOTER -->
 <footer class="site-footer">
-  <span class="footer-copy">© 2026 InkTools — Image Utilities</span>
+  <span class="footer-copy">© 2026 InkTools — Free Online Image Utilities</span>
   <div class="footer-links">
     <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
     <a href="/about.html">About</a>
     <a href="/contact.html">Contact</a>
     <a href="/privacy.html">Privacy</a>
   </div>
 </footer>
+
+<script>
+  /* ─── SCROLL REVEAL ─── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -36px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ─── COUNTER ANIMATION ─── */
+  function calcFileCount() {
+    const origin = new Date('2026-01-15');
+    const days = Math.max(0, Math.floor((Date.now() - origin) / 86400000));
+    return 18400 + days * 43;
+  }
+
+  function animateCount(el, target, duration) {
+    const step = target / (duration / 16);
+    let val = 0;
+    const t = setInterval(() => {
+      val = Math.min(val + step, target);
+      el.textContent = Math.floor(val).toLocaleString();
+      if (val >= target) clearInterval(t);
+    }, 16);
+  }
+
+  const counterSection = document.querySelector('.counter-section');
+  const ctrFiles = document.getElementById('ctr-files');
+  let counted = false;
+  const counterObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      animateCount(ctrFiles, calcFileCount(), 1200);
+      counterObs.disconnect();
+    }
+  }, { threshold: 0.3 });
+  if (counterSection) counterObs.observe(counterSection);
+
+  /* ─── FAQ ACCORDION ─── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ─── DROP ZONE ─── */
+  const dz = document.getElementById('heroDropZone');
+  if (dz) {
+    ['dragover','dragenter'].forEach(ev => {
+      dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.add('dragover'); });
+    });
+    ['dragleave','drop'].forEach(ev => {
+      dz.addEventListener(ev, e => {
+        e.preventDefault();
+        dz.classList.remove('dragover');
+        if (ev === 'drop') {
+          const file = e.dataTransfer?.files?.[0];
+          if (file) {
+            const name = file.name.toLowerCase();
+            if (name.endsWith('.heic') || name.endsWith('.heif') || file.type.includes('heic') || file.type.includes('heif')) {
+              window.location.href = '/heic-to-jpg/';
+            }
+          }
+        }
+      });
+    });
+    // Keyboard activation
+    dz.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.location.href = '/heic-to-jpg/'; }
+    });
+  }
+
+  /* ─── PASTE ANYWHERE ─── */
+  document.addEventListener('paste', e => {
+    const file = e.clipboardData?.files?.[0];
+    if (file) {
+      const name = (file.name || '').toLowerCase();
+      if (name.endsWith('.heic') || name.endsWith('.heif') || file.type.includes('heic')) {
+        window.location.href = '/heic-to-jpg/';
+      }
+    }
+  });
+</script>
 
 </body>
 </html>
