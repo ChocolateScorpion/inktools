@@ -9,14 +9,14 @@
   <!-- Meta -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HEIC to MP4 Converter — Free Online Slideshow Maker | InkTools</title>
-  <meta name="description" content="Convert HEIC photos from iPhone into an MP4 video slideshow. Free, private, and instant — everything runs in your browser. No upload required.">
+  <title>HEIC / MOV to MP4 Converter — Free Online | InkTools</title>
+  <meta name="description" content="Convert HEIC or MOV videos from iPhone to universal MP4 (H.264). Free, private, runs entirely in your browser — nothing is uploaded.">
   <link rel="canonical" href="https://inktools.tech/heic-to-mp4/">
   <link rel="icon" href="/favicon.ico">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="HEIC to MP4 — Free Browser Converter | InkTools">
-  <meta property="og:description" content="Turn your iPhone HEIC photos into an MP4 video in seconds. Nothing is uploaded.">
+  <meta property="og:title" content="HEIC / MOV to MP4 — Free Browser Converter | InkTools">
+  <meta property="og:description" content="Convert HEVC iPhone videos to universal MP4. No upload, no account. Everything runs in your browser.">
   <meta property="og:url" content="https://inktools.tech/heic-to-mp4/">
   <meta property="og:type" content="website">
 
@@ -29,8 +29,8 @@
     gtag('config', 'G-R4568JEMSW');
   </script>
 
-  <!-- heic2any — same CDN as other tools -->
-  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+  <!-- FFmpeg.wasm — runs entirely in the browser -->
+  <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
 
   <style>
     /* ─── TOKENS — matches V2 homepage ─────────────────── */
@@ -46,6 +46,11 @@
       --gold-subtle: rgba(224,150,36,0.09);
       --gold-border: rgba(224,150,36,0.25);
       --gold-glow:   rgba(224,150,36,0.18);
+      --orange:      #F97316;
+      --orange-light:#FDA060;
+      --orange-sub:  rgba(249,115,22,0.09);
+      --orange-brd:  rgba(249,115,22,0.28);
+      --orange-glow: rgba(249,115,22,0.18);
       --cream:       #F2EFEA;
       --muted:       #6E7280;
       --muted-2:     #9097A8;
@@ -70,18 +75,17 @@
       overflow-x: hidden;
     }
 
-    /* Orbs — lighter version so tool UI stays legible */
     .orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .orb  { position: absolute; border-radius: 50%; filter: blur(100px); }
     .orb-1 {
       width: 560px; height: 560px;
-      background: radial-gradient(circle, rgba(224,150,36,0.10) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(249,115,22,0.09) 0%, transparent 65%);
       top: -260px; right: 5%;
       animation: drift1 32s ease-in-out infinite alternate;
     }
     .orb-2 {
       width: 440px; height: 440px;
-      background: radial-gradient(circle, rgba(79,148,255,0.09) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(79,148,255,0.08) 0%, transparent 65%);
       bottom: -160px; left: 0;
       animation: drift2 38s ease-in-out infinite alternate;
     }
@@ -129,12 +133,19 @@
 
     .tool-badge {
       display: inline-flex; align-items: center; gap: 7px;
-      background: var(--gold-subtle); border: 0.5px solid var(--gold-border);
+      background: var(--orange-sub); border: 0.5px solid var(--orange-brd);
       border-radius: 9999px; padding: 4px 14px;
-      font-size: 11px; color: var(--gold-light);
+      font-size: 11px; color: var(--orange-light);
       letter-spacing: 0.1em; text-transform: uppercase;
       margin-bottom: 18px;
     }
+    .badge-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--orange-light);
+      box-shadow: 0 0 8px var(--orange), 0 0 16px var(--orange-glow);
+      animation: pulse 2.5s ease infinite;
+    }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 8px var(--orange); opacity:1; } 50% { box-shadow: 0 0 3px transparent; opacity:0.6; } }
 
     .tool-hero h1 {
       font-family: Georgia, 'Times New Roman', serif;
@@ -143,9 +154,9 @@
       color: var(--cream); line-height: 1.15;
       letter-spacing: -1px; margin-bottom: 12px;
     }
-    .tool-hero h1 strong { font-style: normal; color: var(--gold); font-weight: 400; }
+    .tool-hero h1 strong { font-style: normal; color: var(--orange-light); font-weight: 400; }
 
-    .tool-hero p { font-size: 14px; color: var(--muted-2); line-height: 1.65; }
+    .tool-hero p { font-size: 14px; color: var(--muted-2); line-height: 1.65; max-width: 560px; margin: 0 auto; }
 
     /* ─── AD SLOT ─────────────────────────────────── */
     .ad-slot { position: relative; z-index: 1; width: 100%; max-width: var(--max-w); padding: 12px 28px; }
@@ -163,7 +174,7 @@
       backdrop-filter: blur(20px) saturate(150%);
       -webkit-backdrop-filter: blur(20px) saturate(150%);
       border: 0.5px solid var(--glass-edge);
-      box-shadow: inset 0 0.5px 0 var(--glass-top), 0 16px 50px rgba(0,0,0,0.55), 0 0 60px rgba(224,150,36,0.05);
+      box-shadow: inset 0 0.5px 0 var(--glass-top), 0 16px 50px rgba(0,0,0,0.55), 0 0 60px rgba(249,115,22,0.04);
       border-radius: 22px;
       padding: 52px 32px;
       cursor: pointer;
@@ -171,724 +182,626 @@
       transition: border-color 0.25s, background 0.25s, transform 0.3s var(--ease);
       position: relative; overflow: hidden;
     }
-
     .drop-zone::after {
       content: ''; position: absolute; inset: 0; border-radius: inherit;
-      background: radial-gradient(circle at 50% -10%, rgba(224,150,36,0.07) 0%, transparent 55%);
+      background: radial-gradient(circle at 50% -10%, rgba(249,115,22,0.06) 0%, transparent 55%);
       opacity: 0; transition: opacity 0.3s; pointer-events: none;
     }
-    .drop-zone:hover { border-color: rgba(224,150,36,0.35); background: rgba(255,255,255,0.06); transform: translateY(-2px); }
+    .drop-zone:hover { border-color: var(--orange-brd); background: rgba(255,255,255,0.06); transform: translateY(-2px); }
     .drop-zone:hover::after { opacity: 1; }
-    .drop-zone.dragover { border-color: var(--gold); background: rgba(224,150,36,0.06); transform: scale(1.01); }
+    .drop-zone.dragover { border-color: var(--orange); background: rgba(249,115,22,0.05); transform: scale(1.01); }
 
-    /* Animated icon in drop zone */
-    .dz-icon-wrap {
-      width: 64px; height: 64px; margin: 0 auto 20px;
-      position: relative;
-    }
-
+    .dz-icon-wrap { width: 64px; height: 64px; margin: 0 auto 20px; position: relative; }
     .dz-ring {
-      position: absolute; inset: 0;
-      border-radius: 50%;
-      border: 1px solid var(--gold-border);
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 1px solid var(--orange-brd);
       animation: ringPulse 2.8s ease-in-out infinite;
     }
     .dz-ring:nth-child(2) { animation-delay: 0.9s; }
     .dz-ring:nth-child(3) { animation-delay: 1.8s; }
-
     @keyframes ringPulse {
-      0%   { transform: scale(0.6); opacity: 0.7; }
-      100% { transform: scale(1.6); opacity: 0; }
+      0%   { transform: scale(0.65); opacity: 0; }
+      30%  { opacity: 0.6; }
+      100% { transform: scale(1.4); opacity: 0; }
     }
-
     .dz-icon-inner {
-      position: absolute; inset: 12px;
+      position: absolute; inset: 16px;
+      background: var(--orange-sub); border: 0.5px solid var(--orange-brd);
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(224,150,36,0.18), rgba(224,150,36,0.06));
-      border: 0.5px solid var(--gold-border);
       display: flex; align-items: center; justify-content: center;
-      color: var(--gold-light);
-      box-shadow: 0 0 18px var(--gold-glow);
+      color: var(--orange-light);
+      box-shadow: 0 0 20px var(--orange-glow);
     }
+    .dz-icon-inner svg { filter: drop-shadow(0 0 4px rgba(249,115,22,0.5)); }
 
     .dz-title { font-size: 16px; font-weight: 500; color: var(--cream); margin-bottom: 6px; }
-    .dz-sub   { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+    .dz-sub { font-size: 13px; color: var(--muted); margin-bottom: 16px; line-height: 1.55; }
 
-    .dz-btn {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 11px 22px; border-radius: 11px;
-      border: 0.5px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.06);
-      color: var(--cream); font-size: 13px; font-weight: 500;
-      cursor: pointer; transition: background 0.18s, border-color 0.18s;
-      backdrop-filter: blur(8px);
+    .dz-formats {
+      display: inline-flex; gap: 6px; flex-wrap: wrap; justify-content: center;
     }
-    .dz-btn:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.2); }
+    .dz-fmt {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      color: var(--orange-light); background: var(--orange-sub);
+      border: 0.5px solid var(--orange-brd);
+      border-radius: 6px; padding: 3px 8px;
+    }
 
-    .dz-note { font-size: 11px; color: var(--faint); margin-top: 14px; }
-
-    /* ─── FILE PREVIEW STRIP ─────────────────────────────────── */
-    .preview-strip {
+    /* ─── SELECTED FILE INFO ─────────────────────────────────── */
+    .file-info {
       display: none;
-      gap: 10px;
-      overflow-x: auto;
-      padding: 20px 0 4px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--faint) transparent;
-    }
-
-    .preview-thumb {
-      flex-shrink: 0;
-      width: 90px; height: 90px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 0.5px solid var(--glass-edge);
       background: var(--glass);
-      backdrop-filter: blur(8px);
-      position: relative;
-      animation: thumbIn 0.35s var(--ease) both;
+      border: 0.5px solid var(--glass-edge);
+      border-radius: 14px; padding: 18px 22px;
+      margin-top: 12px;
+      align-items: center; gap: 14px;
     }
-
-    @keyframes thumbIn {
-      from { opacity: 0; transform: scale(0.85) translateY(8px); }
-      to   { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    .preview-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .preview-thumb .thumb-loading {
-      position: absolute; inset: 0;
+    .file-info.visible { display: flex; }
+    .fi-icon {
+      width: 38px; height: 38px; flex-shrink: 0; border-radius: 9px;
+      background: var(--orange-sub); border: 0.5px solid var(--orange-brd);
       display: flex; align-items: center; justify-content: center;
-      background: rgba(6,9,24,0.6);
-      font-size: 10px; color: var(--muted);
+      color: var(--orange-light);
     }
+    .fi-details { flex: 1; min-width: 0; }
+    .fi-name { font-size: 14px; font-weight: 500; color: var(--cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .fi-size { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .fi-clear {
+      width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+      background: transparent; border: 0.5px solid var(--glass-edge);
+      color: var(--muted); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, color 0.15s;
+    }
+    .fi-clear:hover { background: rgba(255,255,255,0.06); color: var(--cream); }
 
-    .thumb-spin {
-      width: 20px; height: 20px;
-      border: 1.5px solid var(--faint);
-      border-top-color: var(--gold);
+    /* ─── FFMPEG LOADING ─────────────────────────────────── */
+    .ffmpeg-loading {
+      display: none;
+      background: var(--glass);
+      border: 0.5px solid var(--glass-edge);
+      border-radius: 14px; padding: 22px 24px;
+      margin-top: 12px;
+      align-items: center; gap: 14px;
+      font-size: 13px; color: var(--muted-2);
+    }
+    .ffmpeg-loading.visible { display: flex; }
+    .spin {
+      width: 20px; height: 20px; flex-shrink: 0;
+      border: 1.5px solid var(--orange-brd);
+      border-top-color: var(--orange-light);
       border-radius: 50%;
-      animation: spin 0.7s linear infinite;
+      animation: spin 0.8s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .file-count {
-      font-size: 12px; color: var(--muted); margin-top: 8px;
-      display: none;
-    }
-
-    /* ─── SETTINGS PANEL ─────────────────────────────────── */
-    .settings-panel {
-      display: none;
-      background: var(--glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 0.5px solid var(--glass-edge);
-      box-shadow: inset 0 0.5px 0 var(--glass-top), 0 4px 20px rgba(0,0,0,0.4);
-      border-radius: 18px;
-      padding: 22px 24px;
-      margin-top: 14px;
-      gap: 20px;
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    .setting-group label {
-      display: block; font-size: 11px; color: var(--faint);
-      text-transform: uppercase; letter-spacing: 0.12em;
-      font-weight: 500; margin-bottom: 8px;
-    }
-
-    .setting-group select,
-    .setting-group input[type="range"] {
-      width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 0.5px solid var(--glass-edge);
-      border-radius: 8px;
-      color: var(--cream);
-      font-size: 13px;
-      padding: 8px 12px;
-      cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
-    }
-
-    .setting-group select:focus { outline: none; border-color: var(--gold-border); }
-
-    .setting-group input[type="range"] {
-      padding: 0; height: 4px;
-      accent-color: var(--gold);
-    }
-
-    .range-val { font-size: 12px; color: var(--gold-light); margin-top: 5px; }
-
-    /* ─── PROGRESS STATE ─────────────────────────────────── */
-    .progress-area {
-      display: none;
-      background: var(--glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 0.5px solid var(--glass-edge);
-      box-shadow: inset 0 0.5px 0 var(--glass-top), 0 4px 20px rgba(0,0,0,0.4);
-      border-radius: 18px;
-      padding: 28px 28px 24px;
-      margin-top: 14px;
-      text-align: center;
-    }
-
-    /* Live canvas preview — shows frames being drawn */
-    #liveCanvas {
-      width: 100%;
-      max-width: 380px;
-      border-radius: 12px;
-      border: 0.5px solid var(--glass-edge);
-      display: block;
-      margin: 0 auto 20px;
-      background: rgba(0,0,0,0.3);
-    }
-
-    .progress-label {
-      font-size: 13px; color: var(--muted-2); margin-bottom: 12px;
-    }
-
-    .progress-bar-wrap {
-      height: 3px;
-      background: var(--faint);
-      border-radius: 9999px;
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      border-radius: 9999px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-      width: 0%;
-      transition: width 0.25s var(--ease);
-      box-shadow: 0 0 8px var(--gold-glow);
-    }
-
-    .progress-frames { font-size: 11px; color: var(--faint); }
-
-    /* ─── ACTIONS ─────────────────────────────────── */
-    .action-row {
-      display: none;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
+    /* ─── CONVERT BUTTON ─────────────────────────────────── */
     .btn-convert {
-      flex: 1;
-      padding: 13px 20px; border-radius: 12px;
-      border: none; cursor: pointer;
-      background: var(--gold); color: #060918;
-      font-size: 14px; font-weight: 600;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      transition: background 0.18s, box-shadow 0.2s, transform 0.15s var(--ease);
-      box-shadow: 0 4px 20px rgba(224,150,36,0.28);
+      width: 100%; margin-top: 14px;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, rgba(249,115,22,0.18) 0%, rgba(249,115,22,0.08) 100%);
+      border: 0.5px solid var(--orange-brd);
+      border-radius: 12px;
+      font-size: 14px; font-weight: 600; color: var(--orange-light);
+      cursor: pointer; display: none;
+      align-items: center; justify-content: center; gap: 8px;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      box-shadow: 0 0 30px rgba(249,115,22,0.10);
     }
-    .btn-convert:hover { background: var(--gold-light); box-shadow: 0 6px 28px rgba(224,150,36,0.4); transform: translateY(-1px); }
-    .btn-convert:active { transform: scale(0.98); }
-    .btn-convert:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-convert:hover { background: linear-gradient(135deg, rgba(249,115,22,0.26) 0%, rgba(249,115,22,0.14) 100%); border-color: rgba(249,115,22,0.5); transform: translateY(-1px); }
+    .btn-convert:active { transform: translateY(0); }
+    .btn-convert.visible { display: flex; }
+    .btn-convert:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 
-    .btn-reset {
-      padding: 13px 18px; border-radius: 12px;
-      border: 0.5px solid var(--glass-edge);
-      background: var(--glass); color: var(--muted);
-      font-size: 13px; cursor: pointer;
-      backdrop-filter: blur(8px);
-      transition: background 0.15s, color 0.15s;
-    }
-    .btn-reset:hover { background: var(--glass-hover); color: var(--cream); }
-
-    /* ─── SUCCESS / DOWNLOAD ─────────────────────────────────── */
-    .download-area {
+    /* ─── PROGRESS ─────────────────────────────────── */
+    .progress-wrap {
       display: none;
       background: var(--glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 0.5px solid rgba(224,150,36,0.25);
-      box-shadow: inset 0 0.5px 0 rgba(224,150,36,0.15), 0 4px 20px rgba(0,0,0,0.4), 0 0 50px rgba(224,150,36,0.05);
-      border-radius: 18px;
-      padding: 28px;
-      margin-top: 14px;
-      text-align: center;
-      animation: fadeUp 0.5s var(--ease) both;
+      border: 0.5px solid var(--glass-edge);
+      border-radius: 14px; padding: 22px 24px;
+      margin-top: 12px;
     }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .progress-wrap.visible { display: block; }
+    .progress-label { font-size: 13px; color: var(--muted-2); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .progress-bar-bg {
+      height: 4px; background: rgba(255,255,255,0.07);
+      border-radius: 4px; overflow: hidden; margin-bottom: 8px;
     }
-
-    .success-icon {
-      width: 48px; height: 48px; margin: 0 auto 16px;
-      background: linear-gradient(135deg, rgba(224,150,36,0.18), rgba(224,150,36,0.06));
-      border: 0.5px solid var(--gold-border);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--gold-light);
-      box-shadow: 0 0 24px var(--gold-glow);
+    .progress-bar-fill {
+      height: 100%; width: 0%; border-radius: 4px;
+      background: linear-gradient(90deg, #F97316, #FDA060);
+      box-shadow: 0 0 8px rgba(249,115,22,0.5);
+      transition: width 0.4s var(--ease);
     }
+    .progress-pct { font-size: 12px; color: var(--muted); }
+    .progress-note { font-size: 11px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
 
-    .download-title { font-size: 15px; font-weight: 500; color: var(--cream); margin-bottom: 5px; }
-    .download-meta  { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
-
+    /* ─── RESULT ─────────────────────────────────── */
+    .result-wrap {
+      display: none;
+      background: rgba(249,115,22,0.05);
+      border: 0.5px solid var(--orange-brd);
+      border-radius: 14px; padding: 22px 24px;
+      margin-top: 12px;
+    }
+    .result-wrap.visible { display: block; }
+    .result-meta { font-size: 13px; color: var(--muted-2); margin-bottom: 14px; }
+    .result-meta strong { color: var(--cream); }
     .btn-download {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 28px; border-radius: 12px;
-      border: none; cursor: pointer;
-      background: var(--gold); color: #060918;
-      font-size: 14px; font-weight: 600;
-      transition: background 0.18s, box-shadow 0.2s;
-      box-shadow: 0 4px 20px rgba(224,150,36,0.28);
-      margin-bottom: 10px;
+      width: 100%;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, rgba(249,115,22,0.22) 0%, rgba(249,115,22,0.10) 100%);
+      border: 0.5px solid var(--orange-brd);
+      border-radius: 12px;
+      font-size: 14px; font-weight: 600; color: var(--orange-light);
+      cursor: pointer; display: flex;
+      align-items: center; justify-content: center; gap: 8px;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      box-shadow: 0 0 30px rgba(249,115,22,0.12);
     }
-    .btn-download:hover { background: var(--gold-light); box-shadow: 0 6px 28px rgba(224,150,36,0.4); }
-
+    .btn-download:hover { background: linear-gradient(135deg, rgba(249,115,22,0.30) 0%, rgba(249,115,22,0.16) 100%); transform: translateY(-1px); }
     .btn-again {
-      display: block; font-size: 12px; color: var(--muted);
-      cursor: pointer; transition: color 0.15s; margin-top: 6px;
-      background: none; border: none;
+      width: 100%; margin-top: 10px;
+      padding: 11px 20px;
+      background: transparent; border: 0.5px solid var(--glass-edge);
+      border-radius: 12px; font-size: 13px; color: var(--muted);
+      cursor: pointer; transition: background 0.15s, color 0.15s;
     }
-    .btn-again:hover { color: var(--cream); }
+    .btn-again:hover { background: rgba(255,255,255,0.05); color: var(--cream); }
 
-    /* ─── SEO CONTENT ─────────────────────────────────── */
-    .seo-section {
+    /* ─── ERROR ─────────────────────────────────── */
+    .error-wrap {
+      display: none;
+      background: rgba(239,68,68,0.06);
+      border: 0.5px solid rgba(239,68,68,0.3);
+      border-radius: 14px; padding: 18px 22px;
+      margin-top: 12px;
+      font-size: 13px; color: #FCA5A5;
+    }
+    .error-wrap.visible { display: block; }
+
+    /* ─── HOW IT WORKS ─────────────────────────────────── */
+    .how-section {
       position: relative; z-index: 1;
-      width: 100%; max-width: 680px;
-      padding: 0 28px 64px;
+      width: 100%; max-width: var(--max-w);
+      padding: 0 28px 56px;
     }
-
-    .seo-section h2 {
-      font-family: Georgia, serif;
-      font-size: 22px; font-weight: 400; font-style: italic;
-      color: var(--cream); margin: 40px 0 12px;
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 20px;
     }
+    .how-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .how-card {
+      background: var(--glass); border: 0.5px solid var(--glass-edge);
+      border-radius: 16px; padding: 22px;
+    }
+    .how-num {
+      font-size: 11px; font-weight: 700; color: var(--orange-light);
+      letter-spacing: 0.08em; margin-bottom: 10px;
+    }
+    .how-title { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 5px; }
+    .how-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
 
-    .seo-section h3 { font-size: 14px; font-weight: 500; color: var(--cream); margin: 18px 0 5px; }
-    .seo-section p  { font-size: 14px; color: var(--muted-2); line-height: 1.75; margin-bottom: 10px; }
-    .seo-section ul { padding-left: 18px; color: var(--muted-2); font-size: 14px; line-height: 1.8; }
+    /* ─── FAQ ─────────────────────────────────── */
+    .faq-section {
+      position: relative; z-index: 1;
+      width: 100%; max-width: var(--max-w);
+      padding: 0 28px 72px;
+    }
+    .faq-item {
+      border-bottom: 0.5px solid var(--border); padding: 16px 0;
+    }
+    .faq-q {
+      font-size: 14px; font-weight: 500; color: var(--cream);
+      cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      list-style: none; user-select: none;
+    }
+    .faq-q::after { content: '+'; color: var(--muted); font-size: 16px; flex-shrink: 0; transition: transform 0.2s; }
+    details[open] .faq-q::after { transform: rotate(45deg); }
+    .faq-a { font-size: 13px; color: var(--muted-2); line-height: 1.7; padding-top: 10px; }
 
     /* ─── FOOTER ─────────────────────────────────── */
     .site-footer {
       position: relative; z-index: 1;
       width: 100%; max-width: var(--max-w);
-      padding: 24px 28px; margin-top: auto;
+      padding: 24px 28px;
       border-top: 0.5px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 10px;
+      flex-wrap: wrap; gap: 14px;
     }
-
-    .footer-copy { font-size: 12px; color: var(--faint); }
+    .footer-copy { font-size: 12px; color: var(--muted); }
     .footer-links { display: flex; gap: 20px; }
-    .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
-    .footer-links a:hover { color: var(--gold); }
+    .footer-links a { font-size: 12px; color: var(--muted); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--cream); }
 
-    /* ─── RESPONSIVE ─────────────────────────────────── */
-    @media (max-width: 640px) {
-      .settings-panel { grid-template-columns: 1fr; }
-      .site-nav { display: none; }
-      .tool-hero { padding: 40px 20px 28px; }
-      .tool-wrap { padding: 0 20px 48px; }
-      .site-footer { flex-direction: column; align-items: flex-start; }
+    /* ─── PRIVACY STRIP ─────────────────────────────────── */
+    .privacy-strip {
+      display: flex; align-items: center; justify-content: center; gap: 20px;
+      flex-wrap: wrap;
+      padding: 14px 28px; margin-bottom: 8px;
+      font-size: 12px; color: var(--muted);
+      position: relative; z-index: 1;
     }
+    .privacy-item { display: flex; align-items: center; gap: 5px; }
+    .privacy-item svg { color: var(--orange-light); }
 
-    @media (prefers-reduced-motion: reduce) {
-      .orb, .dz-ring, .thumb-spin { animation: none !important; }
-      .drop-zone, .btn-convert, .preview-thumb { transition: none !important; }
+    @media (max-width: 640px) {
+      .how-grid { grid-template-columns: 1fr; }
+      .site-nav { display: none; }
+      .tool-hero { padding: 36px 18px 28px; }
+      .tool-wrap, .how-section, .faq-section { padding-left: 18px; padding-right: 18px; }
+      .drop-zone { padding: 36px 20px; }
     }
   </style>
-
 </head>
 <body>
 
+<div class="orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
 <div class="grain"></div>
-<div class="orbs">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-</div>
 
 <!-- HEADER -->
 <header class="site-header">
   <a href="/" class="site-logo">
     <div class="logo-mark">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E09624" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-      </svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E09624" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
     </div>
-    <span class="logo-word">INK<em>TOOLS</em></span>
+    <span class="logo-word">Ink<em>Tools</em></span>
   </a>
   <nav class="site-nav">
-    <a href="/">Tools</a>
-    <a href="/about.html">About</a>
-    <a href="/contact.html">Contact</a>
+    <a href="/">All tools</a>
+    <a href="/heic-to-jpg/">HEIC to JPG</a>
+    <a href="/image-compressor/">Compress</a>
   </nav>
 </header>
 
-<!-- TOP AD — content above, ad after hero -->
-<div class="tool-hero">
-  <div class="tool-badge">Video Converter</div>
-  <h1>HEIC photos into a<br><strong>video, instantly.</strong></h1>
-  <p>Drop your iPhone photos — we'll turn them into an MP4 slideshow in your browser.<br>Nothing is uploaded. Nothing is stored.</p>
-</div>
-
-<div class="ad-slot">
-  <ins class="adsbygoogle" style="display:block;"
-       data-ad-client="ca-pub-7189936182708078"
-       data-ad-slot="3707669770"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-
-<!-- TOOL -->
-<div class="tool-wrap">
-
-  <!-- DROP ZONE -->
-  <div class="drop-zone" id="dropZone">
-    <div class="dz-icon-wrap">
-      <div class="dz-ring"></div>
-      <div class="dz-ring"></div>
-      <div class="dz-ring"></div>
-      <div class="dz-icon-inner">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>
-        </svg>
-      </div>
-    </div>
-    <div class="dz-title">Drop your HEIC photos here</div>
-    <div class="dz-sub">or click to browse — supports .heic and .heif</div>
-    <button class="dz-btn" onclick="document.getElementById('fileInput').click()">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      Choose files
-    </button>
-    <p class="dz-note">Up to 30 files · Becomes one slideshow video · Free forever</p>
-    <input type="file" id="fileInput" hidden multiple accept=".heic,.heif,image/heic,image/heif">
-  </div>
-
-  <!-- PREVIEW STRIP -->
-  <div class="preview-strip" id="previewStrip" style="display:flex;flex-wrap:wrap;"></div>
-  <div class="file-count" id="fileCount"></div>
-
-  <!-- SETTINGS -->
-  <div class="settings-panel" id="settingsPanel" style="display:grid;">
-
-    <div class="setting-group">
-      <label>Seconds per photo</label>
-      <input type="range" id="secPerPhoto" min="1" max="8" value="3" step="0.5"
-             oninput="document.getElementById('secVal').textContent = this.value + 's'">
-      <div class="range-val" id="secVal">3s</div>
-    </div>
-
-    <div class="setting-group">
-      <label>Resolution</label>
-      <select id="resolution">
-        <option value="1920">1080p (1920×1080)</option>
-        <option value="1280" selected>720p (1280×720)</option>
-        <option value="854">480p (854×480)</option>
-      </select>
-    </div>
-
-    <div class="setting-group">
-      <label>Frame rate</label>
-      <select id="framerate">
-        <option value="30" selected>30 fps</option>
-        <option value="24">24 fps</option>
-        <option value="60">60 fps</option>
-      </select>
-    </div>
-
-  </div>
-
-  <!-- ACTION ROW -->
-  <div class="action-row" id="actionRow" style="display:flex;">
-    <button class="btn-convert" id="convertBtn" onclick="startEncoding()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      Create video
-    </button>
-    <button class="btn-reset" onclick="resetTool()">Clear</button>
-  </div>
-
-  <!-- PROGRESS -->
-  <div class="progress-area" id="progressArea">
-    <canvas id="liveCanvas" width="640" height="360"></canvas>
-    <div class="progress-label" id="progressLabel">Decoding photos…</div>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="progressFill"></div>
-    </div>
-    <div class="progress-frames" id="progressFrames"></div>
-  </div>
-
-  <!-- DOWNLOAD -->
-  <div class="download-area" id="downloadArea">
-    <div class="success-icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-    </div>
-    <div class="download-title" id="downloadTitle">Your video is ready</div>
-    <div class="download-meta" id="downloadMeta"></div>
-    <a id="downloadLink" class="btn-download">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Download video
-    </a>
-    <button class="btn-again" onclick="resetTool()">Convert more photos</button>
-  </div>
-
-</div>
-
-<!-- MID AD -->
-<div class="ad-slot">
-  <ins class="adsbygoogle" style="display:block;"
-       data-ad-client="ca-pub-7189936182708078"
-       data-ad-slot="1181011532"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-
-<!-- SEO CONTENT -->
-<section class="seo-section">
-  <h2>What does HEIC to MP4 mean?</h2>
-  <p>HEIC is the photo format iPhones save by default. MP4 is the universal video format that plays on every device, browser, and app. This tool takes your HEIC photos and turns them into a slideshow video — each photo displayed in sequence, ready to share or post anywhere.</p>
-
-  <h2>How to use this tool</h2>
-  <ul>
-    <li>Drop or choose your HEIC files (up to 30 photos)</li>
-    <li>Set how long each photo should appear (1–8 seconds)</li>
-    <li>Pick your output resolution and frame rate</li>
-    <li>Click <strong>Create video</strong> — it runs in your browser, no upload needed</li>
-    <li>Download the finished MP4 file</li>
-  </ul>
-
-  <h2>Is this private?</h2>
-  <p>Completely. Your photos never leave your device — all the encoding happens using your browser's own video tools (the Canvas and MediaRecorder APIs). We never receive your files, and nothing is stored on any server.</p>
-
-  <h2>What video format will I get?</h2>
-  <p>The tool outputs the best format your browser supports: MP4 (H.264) on Safari and iOS, WebM (VP8) on Chrome and Firefox. Both formats play on all modern devices. The download button shows you which format was produced.</p>
+<!-- HERO -->
+<section class="tool-hero">
+  <div class="tool-badge"><span class="badge-dot"></span>Video Converter</div>
+  <h1>Convert <strong>HEIC / MOV</strong> to MP4</h1>
+  <p>iPhone videos are encoded in HEVC (H.265) and often won't play on Windows or Android. Convert them to universally compatible H.264 MP4 — entirely in your browser, no upload needed.</p>
 </section>
 
-<!-- BOTTOM AD -->
+<!-- AD SLOT 1 -->
 <div class="ad-slot">
-  <ins class="adsbygoogle" style="display:block;"
-       data-ad-client="ca-pub-7189936182708078"
-       data-ad-slot="8603238385"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7189936182708078" data-ad-slot="3707669770" data-ad-format="auto" data-full-width-responsive="true"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
+
+<!-- MAIN TOOL -->
+<section class="tool-wrap">
+
+  <!-- Drop Zone -->
+  <div class="drop-zone" id="dropZone">
+    <div class="dz-icon-wrap">
+      <div class="dz-ring"></div><div class="dz-ring"></div><div class="dz-ring"></div>
+      <div class="dz-icon-inner">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+      </div>
+    </div>
+    <div class="dz-title">Drop your video file here</div>
+    <div class="dz-sub">Or click to browse · Runs 100% in your browser</div>
+    <div class="dz-formats">
+      <span class="dz-fmt">.HEIC</span>
+      <span class="dz-fmt">.MOV</span>
+      <span class="dz-fmt">.HEVC</span>
+      <span class="dz-fmt">.MP4</span>
+      <span class="dz-fmt">.MKV</span>
+    </div>
+    <input type="file" id="fileInput" accept=".heic,.hevc,.mov,.mp4,.mkv,.avi,.m4v,video/*" style="display:none">
+  </div>
+
+  <!-- Selected file -->
+  <div class="file-info" id="fileInfo">
+    <div class="fi-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+    </div>
+    <div class="fi-details">
+      <div class="fi-name" id="fileName">video.heic</div>
+      <div class="fi-size" id="fileSize">0 MB</div>
+    </div>
+    <button class="fi-clear" id="fileClear" title="Remove file">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <!-- FFmpeg loading -->
+  <div class="ffmpeg-loading" id="ffmpegLoading">
+    <div class="spin"></div>
+    <div>Loading converter engine<span id="loadingEllipsis">...</span> <span style="color:var(--muted);font-size:12px">(~25 MB, one-time download)</span></div>
+  </div>
+
+  <!-- Convert button -->
+  <button class="btn-convert" id="btnConvert">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+    Convert to MP4
+  </button>
+
+  <!-- Progress -->
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label">
+      <div class="spin"></div>
+      <span id="progressLabel">Transcoding…</span>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+    <div class="progress-pct" id="progressPct">0%</div>
+    <div class="progress-note">Large files may take a few minutes. Do not close this tab.</div>
+  </div>
+
+  <!-- Result -->
+  <div class="result-wrap" id="resultWrap">
+    <div class="result-meta" id="resultMeta">Ready to download</div>
+    <a class="btn-download" id="btnDownload" download>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download MP4
+    </a>
+    <button class="btn-again" id="btnAgain">Convert another file</button>
+  </div>
+
+  <!-- Error -->
+  <div class="error-wrap" id="errorWrap"></div>
+
+</section>
+
+<!-- PRIVACY STRIP -->
+<div class="privacy-strip">
+  <div class="privacy-item">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    No upload — files never leave your device
+  </div>
+  <div class="privacy-item">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    Powered by FFmpeg compiled to WebAssembly
+  </div>
+  <div class="privacy-item">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    H.264 output plays on any device
+  </div>
+</div>
+
+<!-- AD SLOT 2 -->
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7189936182708078" data-ad-slot="1181011532" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="section-label">How it works</div>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">01</div>
+      <div class="how-title">Drop your video</div>
+      <div class="how-desc">Select any HEIC, MOV, or HEVC file from your iPhone or computer. No size limit applies server-side — your device is the limit.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">02</div>
+      <div class="how-title">FFmpeg transcodes it</div>
+      <div class="how-desc">FFmpeg runs inside your browser via WebAssembly. It decodes HEVC and re-encodes to H.264 MP4 — the universal format.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">03</div>
+      <div class="how-title">Download instantly</div>
+      <div class="how-desc">When done, download the MP4. It plays on Windows, Android, WhatsApp, email clients — anywhere.</div>
+    </div>
+  </div>
+</section>
+
+<!-- AD SLOT 3 -->
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-label">Frequently asked</div>
+
+  <details class="faq-item">
+    <summary class="faq-q">Why can't I play my iPhone video on Windows?</summary>
+    <p class="faq-a">iPhones record video in HEVC (H.265) format, which Windows doesn't support natively unless you install the HEVC Video Extensions from the Microsoft Store (paid). Converting to H.264 MP4 makes the file playable everywhere with no extra software.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-q">What formats does this tool accept?</summary>
+    <p class="faq-a">It accepts .heic, .mov, .hevc, .mp4, .mkv, .avi, and .m4v files. The most common iPhone case is a .mov file with HEVC encoding, or a .heic file exported from your Photos app.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-q">How long does conversion take?</summary>
+    <p class="faq-a">It depends on your device and file size. A 1-minute 4K HEVC video typically takes 1–4 minutes on a modern laptop. FFmpeg runs in a single browser thread so it's slower than a native desktop app — but entirely private.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-q">Is my video uploaded to any server?</summary>
+    <p class="faq-a">No. FFmpeg is compiled to WebAssembly and runs directly in your browser tab. Your file never leaves your device. InkTools has no backend that handles video files.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-q">What's the difference between HEIC and HEVC?</summary>
+    <p class="faq-a">HEIC (High Efficiency Image Container) is Apple's file format. It can contain still images or short video clips. HEVC (H.265) is the video codec used inside those files. Both are different from the older H.264/MP4 standard that everything can play.</p>
+  </details>
+</section>
 
 <!-- FOOTER -->
 <footer class="site-footer">
-  <span class="footer-copy">© 2026 InkTools — Free Online Image Utilities</span>
+  <div class="footer-copy">© 2025 InkTools · All processing local, in-browser</div>
   <div class="footer-links">
-    <a href="/">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy.html">Privacy</a>
+    <a href="/">All tools</a>
+    <a href="/heic-to-jpg/">HEIC to JPG</a>
+    <a href="/background-remover/">BG Remover</a>
   </div>
 </footer>
 
 <script>
-// ─── STATE ───────────────────────────────────────────────────────────────────
-let decodedImages = [];   // ImageBitmap[]
-let outputBlob    = null;
-let outputExt     = 'mp4';
+(function () {
+  'use strict';
 
-// ─── DROP ZONE ───────────────────────────────────────────────────────────────
-const dz = document.getElementById('dropZone');
-const fi = document.getElementById('fileInput');
+  const { createFFmpeg, fetchFile } = FFmpeg;
 
-dz.addEventListener('click', () => fi.click());
-fi.addEventListener('change', () => handleFiles(fi.files));
+  const dropZone    = document.getElementById('dropZone');
+  const fileInput   = document.getElementById('fileInput');
+  const fileInfo    = document.getElementById('fileInfo');
+  const fileName    = document.getElementById('fileName');
+  const fileSize    = document.getElementById('fileSize');
+  const fileClear   = document.getElementById('fileClear');
+  const ffmpegLoad  = document.getElementById('ffmpegLoading');
+  const btnConvert  = document.getElementById('btnConvert');
+  const progressWrap= document.getElementById('progressWrap');
+  const progressFill= document.getElementById('progressFill');
+  const progressPct = document.getElementById('progressPct');
+  const progressLbl = document.getElementById('progressLabel');
+  const resultWrap  = document.getElementById('resultWrap');
+  const resultMeta  = document.getElementById('resultMeta');
+  const btnDownload = document.getElementById('btnDownload');
+  const btnAgain    = document.getElementById('btnAgain');
+  const errorWrap   = document.getElementById('errorWrap');
 
-dz.addEventListener('dragover',  e => { e.preventDefault(); dz.classList.add('dragover'); });
-dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
-dz.addEventListener('drop', e => {
-  e.preventDefault(); dz.classList.remove('dragover');
-  handleFiles(e.dataTransfer.files);
-});
+  let selectedFile = null;
+  let ffmpeg = null;
+  let ffmpegReady = false;
+  let objectURL = null;
 
-document.addEventListener('paste', e => {
-  const files = Array.from(e.clipboardData?.files || []).filter(f => /\.(heic|heif)$/i.test(f.name));
-  if (files.length) handleFiles(files);
-});
+  /* ─── Ellipsis animation ─────────── */
+  let ellipsisCount = 0;
+  const ellipsisEl = document.getElementById('loadingEllipsis');
+  const ellipsisInterval = setInterval(() => {
+    ellipsisCount = (ellipsisCount + 1) % 4;
+    if (ellipsisEl) ellipsisEl.textContent = '.'.repeat(ellipsisCount + 1);
+  }, 500);
 
-// ─── FILE HANDLING ───────────────────────────────────────────────────────────
-async function handleFiles(fileList) {
-  const files = Array.from(fileList).filter(f => /\.(heic|heif)$/i.test(f.name)).slice(0, 30);
-  if (!files.length) return;
+  /* ─── Preload FFmpeg immediately ─── */
+  async function initFFmpeg() {
+    ffmpegLoad.classList.add('visible');
+    try {
+      ffmpeg = createFFmpeg({
+        corePath: 'https://unpkg.com/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js',
+        log: false,
+      });
+      ffmpeg.setProgress(({ ratio }) => {
+        const pct = Math.min(100, Math.round(ratio * 100));
+        progressFill.style.width = pct + '%';
+        progressPct.textContent = pct + '%';
+        if (pct > 0 && pct < 100) progressLbl.textContent = 'Transcoding…';
+      });
+      await ffmpeg.load();
+      ffmpegReady = true;
+    } catch (err) {
+      showError('Failed to load the conversion engine. Please refresh and try again. (' + err.message + ')');
+    } finally {
+      ffmpegLoad.classList.remove('visible');
+      clearInterval(ellipsisInterval);
+    }
+    if (selectedFile && ffmpegReady) btnConvert.classList.add('visible');
+  }
 
-  resetState();
-  showUI('loading');
+  initFFmpeg();
 
-  const strip = document.getElementById('previewStrip');
-  strip.innerHTML = '';
-  strip.style.display = 'flex';
-  document.getElementById('fileCount').style.display = 'block';
-  document.getElementById('fileCount').textContent = `${files.length} photo${files.length > 1 ? 's' : ''} selected`;
+  /* ─── Drop zone ─────────────────── */
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    const f = e.dataTransfer.files[0];
+    if (f) handleFile(f);
+  });
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files[0]) handleFile(fileInput.files[0]);
+  });
 
-  decodedImages = [];
+  function handleFile(f) {
+    resetState();
+    selectedFile = f;
+    fileName.textContent = f.name;
+    fileSize.textContent = formatBytes(f.size);
+    fileInfo.classList.add('visible');
+    if (ffmpegReady) btnConvert.classList.add('visible');
+    else if (!ffmpeg) initFFmpeg();
+  }
 
-  for (let i = 0; i < files.length; i++) {
-    // Placeholder thumb
-    const thumbEl = document.createElement('div');
-    thumbEl.className = 'preview-thumb';
-    thumbEl.style.animationDelay = `${i * 0.04}s`;
-    thumbEl.innerHTML = '<div class="thumb-loading"><div class="thumb-spin"></div></div>';
-    strip.appendChild(thumbEl);
+  fileClear.addEventListener('click', () => { resetState(); selectedFile = null; });
+
+  /* ─── Convert ────────────────────── */
+  btnConvert.addEventListener('click', async () => {
+    if (!selectedFile || !ffmpegReady) return;
+    resetOutput();
+    btnConvert.disabled = true;
+    progressWrap.classList.add('visible');
+    progressLbl.textContent = 'Reading file…';
+
+    const ext = selectedFile.name.split('.').pop().toLowerCase() || 'bin';
+    const inputName = 'input.' + ext;
+    const outputName = 'output.mp4';
+    const baseName = selectedFile.name.replace(/\.[^.]+$/, '');
 
     try {
-      const blob = await heic2any({ blob: files[i], toType: 'image/jpeg', quality: 0.82 });
-      const url  = URL.createObjectURL(Array.isArray(blob) ? blob[0] : blob);
-      const img  = new Image();
-      await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = url; });
-      const bmp = await createImageBitmap(img);
-      decodedImages.push(bmp);
+      progressLbl.textContent = 'Transcoding…';
+      ffmpeg.FS('writeFile', inputName, await fetchFile(selectedFile));
+      await ffmpeg.run(
+        '-i', inputName,
+        '-c:v', 'libx264',
+        '-preset', 'fast',
+        '-crf', '23',
+        '-movflags', 'faststart',
+        '-c:a', 'aac',
+        '-b:a', '128k',
+        outputName
+      );
+      const data = ffmpeg.FS('readFile', outputName);
+      const blob = new Blob([data.buffer], { type: 'video/mp4' });
+      if (objectURL) URL.revokeObjectURL(objectURL);
+      objectURL = URL.createObjectURL(blob);
 
-      // Update thumb
-      thumbEl.innerHTML = `<img src="${url}" alt="Photo ${i+1}" loading="lazy">`;
-    } catch {
-      thumbEl.innerHTML = '<div class="thumb-loading" style="font-size:18px;">✕</div>';
+      progressWrap.classList.remove('visible');
+      resultMeta.innerHTML = `<strong>${baseName}.mp4</strong> — ${formatBytes(blob.size)} · H.264, universally compatible`;
+      btnDownload.href = objectURL;
+      btnDownload.download = baseName + '.mp4';
+      resultWrap.classList.add('visible');
+
+      /* clean up FS */
+      try { ffmpeg.FS('unlink', inputName); } catch(_) {}
+      try { ffmpeg.FS('unlink', outputName); } catch(_) {}
+    } catch (err) {
+      progressWrap.classList.remove('visible');
+      showError('Conversion failed: ' + err.message + '. Make sure the file is a valid video.');
+    } finally {
+      btnConvert.disabled = false;
     }
+  });
+
+  btnAgain.addEventListener('click', () => { resetState(); selectedFile = null; fileInput.value = ''; });
+
+  /* ─── Helpers ─────────────────────── */
+  function resetState() {
+    fileInfo.classList.remove('visible');
+    btnConvert.classList.remove('visible');
+    btnConvert.disabled = false;
+    resetOutput();
   }
 
-  showUI('ready');
-}
-
-// ─── ENCODING ────────────────────────────────────────────────────────────────
-async function startEncoding() {
-  if (!decodedImages.length) return;
-
-  const secPerPhoto = parseFloat(document.getElementById('secPerPhoto').value);
-  const width       = parseInt(document.getElementById('resolution').value);
-  const fps         = parseInt(document.getElementById('framerate').value);
-  const height      = Math.round(width * 9 / 16);
-
-  showUI('encoding');
-
-  const canvas = document.getElementById('liveCanvas');
-  canvas.width  = width;
-  canvas.height = height;
-  const ctx = canvas.getContext('2d');
-
-  // Pick best MIME type
-  const mimeTypes = ['video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp8', 'video/webm'];
-  const mimeType  = mimeTypes.find(m => MediaRecorder.isTypeSupported(m)) || 'video/webm';
-  outputExt       = mimeType.includes('mp4') ? 'mp4' : 'webm';
-
-  const stream   = canvas.captureStream(fps);
-  const recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 4_000_000 });
-  const chunks   = [];
-  recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
-
-  const totalFrames = Math.ceil(decodedImages.length * secPerPhoto * fps);
-  let   framesDone  = 0;
-
-  recorder.start();
-
-  for (let imgIdx = 0; imgIdx < decodedImages.length; imgIdx++) {
-    const bmp           = decodedImages[imgIdx];
-    const framesForThis = Math.ceil(secPerPhoto * fps);
-
-    // Ken Burns: slow pan/zoom across this image
-    const startScale  = 1.0;
-    const endScale    = 1.06;
-    const startOffX   = (imgIdx % 2 === 0) ? -0.02 : 0.02;
-    const endOffX     = -startOffX;
-
-    for (let f = 0; f < framesForThis; f++) {
-      const t       = framesForThis > 1 ? f / (framesForThis - 1) : 0;
-      const scale   = startScale + (endScale - startScale) * t;
-      const offXpct = startOffX  + (endOffX  - startOffX)  * t;
-
-      // Draw frame
-      ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, width, height);
-
-      const imgAspect = bmp.width / bmp.height;
-      const cvAspect  = width / height;
-      let dw, dh;
-      if (imgAspect > cvAspect) { dh = height * scale; dw = dh * imgAspect; }
-      else                       { dw = width  * scale; dh = dw / imgAspect; }
-
-      const dx = (width  - dw) / 2 + dw * offXpct;
-      const dy = (height - dh) / 2;
-      ctx.drawImage(bmp, dx, dy, dw, dh);
-
-      framesDone++;
-      const pct = Math.round((framesDone / totalFrames) * 100);
-      document.getElementById('progressFill').style.width   = pct + '%';
-      document.getElementById('progressFrames').textContent = `Photo ${imgIdx + 1} of ${decodedImages.length}`;
-      document.getElementById('progressLabel').textContent  = `Encoding… ${pct}%`;
-
-      // Yield to browser so canvas paints and progress updates
-      if (f % 6 === 0) await sleep(0);
-    }
-
-    // Brief black gap between photos (0.12s)
-    const gapFrames = Math.max(1, Math.round(fps * 0.12));
-    for (let g = 0; g < gapFrames; g++) {
-      ctx.fillStyle = '#000'; ctx.fillRect(0, 0, width, height);
-      await sleep(0);
-    }
+  function resetOutput() {
+    progressWrap.classList.remove('visible');
+    resultWrap.classList.remove('visible');
+    errorWrap.classList.remove('visible');
+    progressFill.style.width = '0%';
+    progressPct.textContent = '0%';
   }
 
-  recorder.stop();
-  await new Promise(r => recorder.onstop = r);
-
-  outputBlob = new Blob(chunks, { type: mimeType });
-  showDownload(outputBlob, outputExt, decodedImages.length, secPerPhoto);
-}
-
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-// ─── UI STATES ───────────────────────────────────────────────────────────────
-function showUI(state) {
-  const el = id => document.getElementById(id);
-
-  el('dropZone').style.display      = state === 'idle'     ? 'block' : 'none';
-  el('previewStrip').style.display  = (state === 'ready' || state === 'loading') ? 'flex' : 'none';
-  el('fileCount').style.display     = (state === 'ready' || state === 'loading') ? 'block' : 'none';
-  el('settingsPanel').style.display = state === 'ready'    ? 'grid'  : 'none';
-  el('actionRow').style.display     = state === 'ready'    ? 'flex'  : 'none';
-  el('progressArea').style.display  = state === 'encoding' ? 'block' : 'none';
-  el('downloadArea').style.display  = state === 'done'     ? 'block' : 'none';
-
-  if (state === 'encoding') {
-    el('progressFill').style.width = '0%';
-    el('progressLabel').textContent = 'Decoding photos…';
-    el('progressFrames').textContent = '';
+  function showError(msg) {
+    errorWrap.textContent = msg;
+    errorWrap.classList.add('visible');
+    btnConvert.disabled = false;
   }
-}
 
-function showDownload(blob, ext, photoCount, secs) {
-  const url      = URL.createObjectURL(blob);
-  const link     = document.getElementById('downloadLink');
-  link.href      = url;
-  link.download  = `inktools-slideshow.${ext}`;
-  const sizeMB   = (blob.size / 1024 / 1024).toFixed(1);
-  const duration = Math.round(photoCount * secs);
-  document.getElementById('downloadTitle').textContent = 'Your video is ready';
-  document.getElementById('downloadMeta').textContent  =
-    `${photoCount} photo${photoCount > 1 ? 's' : ''} · ~${duration}s · ${sizeMB} MB · .${ext}`;
-  showUI('done');
-}
+  function formatBytes(b) {
+    if (b < 1024 * 1024) return (b / 1024).toFixed(1) + ' KB';
+    return (b / (1024 * 1024)).toFixed(1) + ' MB';
+  }
 
-function resetTool() {
-  decodedImages.forEach(b => b.close?.());
-  decodedImages = [];
-  outputBlob    = null;
-  document.getElementById('previewStrip').innerHTML = '';
-  document.getElementById('fileInput').value = '';
-  showUI('idle');
-  document.getElementById('dropZone').style.display = 'block';
-}
-
-function resetState() {
-  decodedImages.forEach(b => b.close?.());
-  decodedImages = [];
-}
-
-const id = s => document.getElementById(s);
+})();
 </script>
 
 </body>
