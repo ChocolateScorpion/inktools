@@ -29,8 +29,8 @@
     gtag('config', 'G-R4568JEMSW');
   </script>
 
-  <!-- FFmpeg.wasm v0.11 + single-thread core (no SharedArrayBuffer, no cross-origin worker) -->
-  <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+  <!-- FFmpeg.wasm v0.12 — worker self-hosted (same-origin), core single-thread (no SharedArrayBuffer) -->
+  <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.6/dist/umd/ffmpeg.js"></script>
 
   <style>
     /* ─── TOKENS — matches V2 homepage ─────────────────── */
@@ -638,8 +638,17 @@
 (function () {
   'use strict';
 
-  /* v0.11 API — worker is bundled inline (no cross-origin issue) */
-  const { createFFmpeg, fetchFile } = FFmpeg;
+  /* v0.12: worker self-hosted (same-origin), core@0.12.4 single-thread (no SharedArrayBuffer) */
+  const { FFmpeg } = FFmpegWASM;
+
+  async function fetchFile(file) {
+    return new Uint8Array(await file.arrayBuffer());
+  }
+  async function toBlobURL(url, mimeType) {
+    const resp = await fetch(url);
+    const blob = new Blob([await resp.arrayBuffer()], { type: mimeType });
+    return URL.createObjectURL(blob);
+  }
 
   const dropZone    = document.getElementById('dropZone');
   const fileInput   = document.getElementById('fileInput');
@@ -676,18 +685,26 @@
   async function initFFmpeg() {
     ffmpegLoad.classList.add('visible');
     try {
-      /* core-st: single-thread build — no SharedArrayBuffer, no pthreads */
-      ffmpeg = createFFmpeg({
-        corePath: 'https://unpkg.com/@ffmpeg/core-st@0.11.1/dist/ffmpeg-core.js',
-        log: false,
-      });
-      ffmpeg.setProgress(({ ratio }) => {
-        const pct = Math.min(100, Math.round(ratio * 100));
+      ffmpeg = new FFmpeg();
+      ffmpeg.on('progress', ({ progress }) => {
+        const pct = Math.min(100, Math.round(progress * 100));
         progressFill.style.width = pct + '%';
         progressPct.textContent = pct + '%';
         if (pct > 0 && pct < 100) progressLbl.textContent = 'Transcoding…';
       });
-      await ffmpeg.load();
+      await ffmpeg.load({
+        /* worker self-hosted — avoids cross-origin Worker restriction */
+        workerURL: '/heic-to-mp4/ffmpeg-worker.js',
+        /* @ffmpeg/core@0.12.4 single-thread: no SharedArrayBuffer needed */
+        coreURL: await toBlobURL(
+          'https://unpkg.com/@ffmpeg/core@0.12.4/dist/umd/ffmpeg-core.js',
+          'text/javascript'
+        ),
+        wasmURL: await toBlobURL(
+          'https://unpkg.com/@ffmpeg/core@0.12.4/dist/umd/ffmpeg-core.wasm',
+          'application/wasm'
+        ),
+      });
       ffmpegReady = true;
     } catch (err) {
       showError('Failed to load the conversion engine. Please refresh and try again. (' + err.message + ')');
@@ -741,15 +758,15 @@
 
     try {
       progressLbl.textContent = 'Transcoding…';
-      ffmpeg.FS('writeFile', inputName, await fetchFile(selectedFile));
-      await ffmpeg.run(
+      await ffmpeg.writeFile(inputName, await fetchFile(selectedFile));
+      await ffmpeg.exec([
         '-i', inputName,
         '-c:v', 'libx264', '-preset', 'fast', '-crf', '23',
         '-movflags', 'faststart',
         '-c:a', 'aac', '-b:a', '128k',
-        outputName
-      );
-      const data = ffmpeg.FS('readFile', outputName);
+        outputName,
+      ]);
+      const data = await ffmpeg.readFile(outputName);
       const blob = new Blob([data.buffer], { type: 'video/mp4' });
       if (objectURL) URL.revokeObjectURL(objectURL);
       objectURL = URL.createObjectURL(blob);
@@ -760,8 +777,8 @@
       btnDownload.download = baseName + '.mp4';
       resultWrap.classList.add('visible');
 
-      try { ffmpeg.FS('unlink', inputName); } catch(_) {}
-      try { ffmpeg.FS('unlink', outputName); } catch(_) {}
+      try { await ffmpeg.deleteFile(inputName); } catch(_) {}
+      try { await ffmpeg.deleteFile(outputName); } catch(_) {}
     } catch (err) {
       progressWrap.classList.remove('visible');
       showError('Conversion failed: ' + err.message + '. Make sure the file is a valid video.');
