@@ -31,7 +31,6 @@
 
   <!-- FFmpeg.wasm v0.12 — single-thread core, no SharedArrayBuffer required -->
   <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.6/dist/umd/ffmpeg.js"></script>
-  <script src="https://unpkg.com/@ffmpeg/util@0.12.1/dist/umd/util.js"></script>
 
   <style>
     /* ─── TOKENS — matches V2 homepage ─────────────────── */
@@ -641,7 +640,16 @@
 
   /* v0.12 API — single-thread core, no SharedArrayBuffer */
   const { FFmpeg } = FFmpegWASM;
-  const { fetchFile, toBlobURL } = FFmpegUtil;
+
+  /* Inline utils — no external @ffmpeg/util dependency needed */
+  async function fetchFile(file) {
+    return new Uint8Array(await file.arrayBuffer());
+  }
+  async function toBlobURL(url, mimeType) {
+    const resp = await fetch(url);
+    const blob = new Blob([await resp.arrayBuffer()], { type: mimeType });
+    return URL.createObjectURL(blob);
+  }
 
   const dropZone    = document.getElementById('dropZone');
   const fileInput   = document.getElementById('fileInput');
