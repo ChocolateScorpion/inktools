@@ -30,7 +30,8 @@
   </script>
 
   <!-- FFmpeg.wasm v0.12 — worker self-hosted (same-origin), core single-thread (no SharedArrayBuffer) -->
-  <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.6/dist/umd/ffmpeg.js"></script>
+  <!-- FFmpeg.wasm v0.12 — fully self-hosted (ffmpeg.js + 814.ffmpeg.js), core single-thread -->
+  <script src="/heic-to-mp4/ffmpeg.js"></script>
 
   <style>
     /* ─── TOKENS — matches V2 homepage ─────────────────── */
@@ -693,8 +694,6 @@
         if (pct > 0 && pct < 100) progressLbl.textContent = 'Transcoding…';
       });
       await ffmpeg.load({
-        /* worker self-hosted — avoids cross-origin Worker restriction */
-        workerURL: '/heic-to-mp4/ffmpeg-worker.js',
         /* @ffmpeg/core@0.12.4 single-thread: no SharedArrayBuffer needed */
         coreURL: await toBlobURL(
           'https://unpkg.com/@ffmpeg/core@0.12.4/dist/umd/ffmpeg-core.js',
