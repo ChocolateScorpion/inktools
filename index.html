@@ -763,10 +763,242 @@
       .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
       .drop-zone, .tool-card, .blog-card { transition: none !important; }
     }
+
+    /* ─── SPLASH ───────────────────────────────── */
+    .itk-splash {
+      position: fixed; inset: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg);
+      opacity: 1; transition: opacity 0.42s ease;
+    }
+    .itk-splash.out  { opacity: 0; pointer-events: none; }
+    .itk-splash.gone { display: none; }
+
+    .itk-splash-inner { display: flex; flex-direction: column; align-items: center; }
+
+    .itk-splash-mark {
+      width: 76px; height: 76px; border-radius: 20px;
+      background: var(--gold-subtle); border: 0.5px solid var(--gold-border);
+      box-shadow: 0 0 48px var(--gold-glow), 0 0 90px rgba(224,150,36,0.10);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px;
+      animation: splashGlow 2.4s ease-in-out infinite;
+    }
+    @keyframes splashGlow {
+      0%,100% { box-shadow: 0 0 48px var(--gold-glow), 0 0 90px rgba(224,150,36,0.10); }
+      50%      { box-shadow: 0 0 64px rgba(224,150,36,0.32), 0 0 120px rgba(224,150,36,0.14); }
+    }
+    .itk-splash-word {
+      font-size: 26px; font-weight: 700; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--cream); margin-bottom: 10px;
+    }
+    .itk-splash-word em { font-style: normal; color: var(--gold); font-weight: 300; }
+    .itk-splash-sub {
+      font-size: 11px; letter-spacing: 0.1em; color: rgba(242,239,234,0.28);
+      text-transform: lowercase; font-family: ui-monospace, monospace;
+    }
+
+    /* ─── GUIDE OVERLAY ────────────────────────── */
+    .itk-guide {
+      position: fixed; inset: 0; z-index: 400;
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+      background: rgba(6,9,24,0.52);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .itk-guide.in  { opacity: 1; pointer-events: auto; }
+    .itk-guide.out { opacity: 0; pointer-events: none; }
+
+    .itk-guide-card {
+      width: 100%; max-width: 540px;
+      background: rgba(11,16,38,0.98);
+      border: 0.5px solid rgba(255,255,255,0.09);
+      border-radius: 22px;
+      box-shadow: 0 2px 0 rgba(255,255,255,0.04) inset, 0 48px 120px rgba(0,0,0,0.72);
+      overflow: hidden;
+      transform: translateY(22px);
+      transition: transform 0.48s cubic-bezier(0.16,1,0.3,1);
+    }
+    .itk-guide.in .itk-guide-card { transform: translateY(0); }
+    .itk-guide-body { padding: 34px 30px 26px; }
+
+    .itk-guide-eyebrow {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(224,150,36,0.65);
+      font-family: ui-monospace, monospace; margin-bottom: 18px;
+    }
+    .itk-guide-q {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 25px; font-weight: 400; font-style: italic;
+      color: var(--cream); letter-spacing: -0.4px; line-height: 1.18;
+      margin-bottom: 6px;
+    }
+    .itk-guide-q.sm { font-size: 19px; margin-bottom: 20px; }
+    .itk-guide-hint { font-size: 12px; color: rgba(242,239,234,0.36); margin-bottom: 26px; line-height: 1.5; }
+
+    .itk-type-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+
+    .itk-type-btn {
+      background: rgba(255,255,255,0.025); border: 0.5px solid rgba(255,255,255,0.08);
+      border-radius: 14px; padding: 20px 16px 18px;
+      cursor: pointer; display: flex; flex-direction: column;
+      align-items: flex-start; gap: 5px; text-align: left;
+      font-family: inherit; color: var(--cream);
+      transition: background 0.14s, border-color 0.14s, transform 0.12s, box-shadow 0.14s;
+    }
+    .itk-type-btn:hover { transform: translateY(-2px); }
+    .itk-type-btn:active { transform: none; }
+    .itk-type-btn.img:hover {
+      background: rgba(224,150,36,0.07); border-color: rgba(224,150,36,0.38);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.28), 0 0 18px rgba(224,150,36,0.1);
+    }
+    .itk-type-btn.vid:hover {
+      background: rgba(79,148,255,0.07); border-color: rgba(79,148,255,0.38);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.28), 0 0 18px rgba(79,148,255,0.1);
+    }
+    .itk-type-icon  { font-size: 22px; margin-bottom: 4px; }
+    .itk-type-label { font-size: 15px; font-weight: 600; }
+    .itk-type-chips { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 3px; }
+    .itk-type-chip  {
+      font-size: 10px; color: rgba(242,239,234,0.4);
+      background: rgba(255,255,255,0.05); border: 0.5px solid rgba(255,255,255,0.08);
+      border-radius: 99px; padding: 2px 7px;
+      font-family: ui-monospace, monospace; letter-spacing: 0.04em;
+    }
+
+    .itk-skip-btn {
+      display: block; width: 100%; background: transparent;
+      border: 0.5px solid rgba(224,150,36,0.45); border-radius: 10px;
+      font-size: 12px; font-weight: 500; color: var(--gold);
+      font-family: inherit; cursor: pointer; padding: 11px 16px;
+      letter-spacing: 0.06em; text-align: center;
+      box-shadow: 0 0 10px rgba(224,150,36,0.18), inset 0 0 12px rgba(224,150,36,0.04);
+      text-shadow: 0 0 10px rgba(224,150,36,0.55);
+      transition: border-color 0.16s, box-shadow 0.16s, text-shadow 0.16s, color 0.16s;
+    }
+    .itk-skip-btn:hover {
+      border-color: rgba(224,150,36,0.75); color: var(--gold-light);
+      box-shadow: 0 0 18px rgba(224,150,36,0.35), 0 0 40px rgba(224,150,36,0.12), inset 0 0 16px rgba(224,150,36,0.07);
+      text-shadow: 0 0 14px rgba(224,150,36,0.8);
+    }
+
+    .itk-back-btn {
+      background: none; border: none; font-family: inherit; font-size: 12px;
+      color: rgba(242,239,234,0.38); cursor: pointer; padding: 0;
+      margin-bottom: 20px; display: inline-flex; align-items: center; gap: 5px;
+      transition: color 0.14s;
+    }
+    .itk-back-btn:hover { color: rgba(242,239,234,0.72); }
+
+    .itk-tools-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 7px;
+      margin-bottom: 18px; max-height: 310px; overflow-y: auto;
+      scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent;
+    }
+    .itk-tools-grid::-webkit-scrollbar { width: 4px; }
+    .itk-tools-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 9px; }
+
+    .itk-tool-item {
+      display: flex; align-items: flex-start; gap: 9px;
+      background: rgba(255,255,255,0.022); border: 0.5px solid rgba(255,255,255,0.065);
+      border-radius: 10px; padding: 11px 12px;
+      cursor: pointer; text-decoration: none; color: inherit;
+      transition: background 0.12s, border-color 0.12s, transform 0.1s;
+    }
+    .itk-tool-item:hover {
+      background: rgba(255,255,255,0.052); border-color: rgba(255,255,255,0.13);
+      transform: translateY(-1px);
+    }
+    .itk-tool-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      flex-shrink: 0; margin-top: 5px;
+    }
+    .itk-d-gold   { background: #E09624; box-shadow: 0 0 5px rgba(224,150,36,0.7); }
+    .itk-d-blue   { background: #4F94FF; box-shadow: 0 0 5px rgba(79,148,255,0.7); }
+    .itk-d-purple { background: #A050FF; box-shadow: 0 0 5px rgba(160,80,255,0.7); }
+    .itk-d-green  { background: #34D399; box-shadow: 0 0 5px rgba(52,211,153,0.7); }
+    .itk-d-orange { background: #F97316; box-shadow: 0 0 5px rgba(249,115,22,0.7); }
+    .itk-tool-name { font-size: 12.5px; font-weight: 500; color: rgba(242,239,234,0.88); line-height: 1.3; display: block; }
+    .itk-tool-desc { font-size: 10.5px; color: rgba(242,239,234,0.34); line-height: 1.4; display: block; margin-top: 2px; }
+
+    .itk-step { display: block; }
+    .itk-step.hidden { display: none; }
+    .itk-step.enter-fwd  { animation: itkEnterFwd  0.28s cubic-bezier(0.16,1,0.3,1) both; }
+    .itk-step.enter-back { animation: itkEnterBack 0.28s cubic-bezier(0.16,1,0.3,1) both; }
+    @keyframes itkEnterFwd  { from { opacity:0; transform:translateX(18px);  } to { opacity:1; transform:translateX(0); } }
+    @keyframes itkEnterBack { from { opacity:0; transform:translateX(-18px); } to { opacity:1; transform:translateX(0); } }
+
+    @media (max-width: 480px) {
+      .itk-type-row { grid-template-columns: 1fr; }
+      .itk-tools-grid { grid-template-columns: 1fr; max-height: 260px; }
+      .itk-guide-body { padding: 26px 20px 22px; }
+      .itk-guide-q { font-size: 21px; }
+    }
   </style>
 
 </head>
 <body>
+
+<!-- ── SPLASH ──────────────────────────── -->
+<div id="itkSplash" class="itk-splash">
+  <div class="itk-splash-inner">
+    <div class="itk-splash-mark">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E09624" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+    </div>
+    <div class="itk-splash-word">INK<em>TOOLS</em></div>
+    <div class="itk-splash-sub">image &amp; video tools · in your browser</div>
+  </div>
+</div>
+
+<!-- ── GUIDE ───────────────────────────── -->
+<div id="itkGuide" class="itk-guide">
+  <div class="itk-guide-card">
+    <div class="itk-guide-body">
+
+      <!-- Step 1: type -->
+      <div id="itkStep1" class="itk-step">
+        <div class="itk-guide-eyebrow">InkTools · Bienvenido</div>
+        <h2 class="itk-guide-q">¿Con qué trabajas hoy?</h2>
+        <p class="itk-guide-hint">Te llevamos directo a la herramienta</p>
+        <div class="itk-type-row">
+          <button class="itk-type-btn img" onclick="itkShowImages()">
+            <span class="itk-type-icon">🖼</span>
+            <span class="itk-type-label">Imagen</span>
+            <div class="itk-type-chips">
+              <span class="itk-type-chip">Convertir</span>
+              <span class="itk-type-chip">Comprimir</span>
+              <span class="itk-type-chip">Redimensionar</span>
+            </div>
+          </button>
+          <button class="itk-type-btn vid" onclick="itkGoVideo()">
+            <span class="itk-type-icon">🎬</span>
+            <span class="itk-type-label">Video</span>
+            <div class="itk-type-chips">
+              <span class="itk-type-chip">HEIC</span>
+              <span class="itk-type-chip">MOV</span>
+              <span class="itk-type-chip">→ MP4</span>
+            </div>
+          </button>
+        </div>
+        <button class="itk-skip-btn" onclick="itkDismiss()">Explorar todo →</button>
+      </div>
+
+      <!-- Step 2: image tools -->
+      <div id="itkStep2" class="itk-step hidden">
+        <button class="itk-back-btn" onclick="itkBackToStep1()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+          Volver
+        </button>
+        <h2 class="itk-guide-q sm">Herramientas de imagen</h2>
+        <div class="itk-tools-grid" id="itkToolsGrid"></div>
+        <button class="itk-skip-btn" onclick="itkDismiss()">Ver todas las tools →</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <div class="grain"></div>
 
@@ -1138,6 +1370,79 @@
     const f = e.clipboardData?.files?.[0];
     if (f && /\.(heic|heif)$/i.test(f.name)) window.location.href = '/heic-to-jpg/';
   });
+
+  /* ─── Splash + Guide ──────────────────────────── */
+  (function () {
+    const ITK_KEY = 'itk_guide_done';
+    const splash  = document.getElementById('itkSplash');
+    const guide   = document.getElementById('itkGuide');
+    const step1   = document.getElementById('itkStep1');
+    const step2   = document.getElementById('itkStep2');
+    const toolsGrid = document.getElementById('itkToolsGrid');
+
+    const TOOLS = [
+      { name:'HEIC to JPG',      desc:'El más compatible, abre en cualquier dispositivo', dot:'itk-d-gold',   url:'/heic-to-jpg/' },
+      { name:'HEIC to PNG',      desc:'Sin pérdida de calidad, con transparencias',        dot:'itk-d-gold',   url:'/heic-to-png/' },
+      { name:'JPG to PNG',       desc:'Agrega soporte a transparencias en JPEGs',          dot:'itk-d-blue',   url:'/jpg-to-png/' },
+      { name:'PNG to JPG',       desc:'Reduce el tamaño del archivo desde PNG',            dot:'itk-d-blue',   url:'/png-to-jpg/' },
+      { name:'WebP Converter',   desc:'Convierte hacia y desde formato WebP',              dot:'itk-d-purple', url:'/webp-converter/' },
+      { name:'Image Compressor', desc:'Reduce el peso sin perder calidad visible',         dot:'itk-d-green',  url:'/image-compressor/' },
+      { name:'Image Resizer',    desc:'Dimensiones exactas en píxeles',                    dot:'itk-d-orange', url:'/image-resizer/' },
+      { name:'Photo to Stencil', desc:'Fotos a stencil para tatuajes',                    dot:'itk-d-orange', url:'/photo-to-stencil/' },
+    ];
+
+    TOOLS.forEach(t => {
+      const a = document.createElement('a');
+      a.className = 'itk-tool-item';
+      a.href = t.url;
+      a.innerHTML = `<span class="itk-tool-dot ${t.dot}"></span><span><span class="itk-tool-name">${t.name}</span><span class="itk-tool-desc">${t.desc}</span></span>`;
+      toolsGrid.appendChild(a);
+    });
+
+    function done() { try { localStorage.setItem(ITK_KEY, '1'); } catch(_) {} }
+
+    function startSplash() {
+      setTimeout(() => {
+        splash.classList.add('out');
+        guide.classList.add('in');
+        setTimeout(() => splash.classList.add('gone'), 460);
+      }, 1300);
+    }
+
+    window.itkShowImages = function () {
+      step1.classList.add('hidden');
+      step2.classList.remove('hidden', 'enter-back');
+      void step2.offsetWidth;
+      step2.classList.add('enter-fwd');
+    };
+
+    window.itkBackToStep1 = function () {
+      step2.classList.add('hidden');
+      step1.classList.remove('hidden', 'enter-fwd');
+      void step1.offsetWidth;
+      step1.classList.add('enter-back');
+    };
+
+    window.itkGoVideo = function () {
+      done();
+      window.location.href = '/heic-to-mp4/';
+    };
+
+    window.itkDismiss = function () {
+      done();
+      guide.classList.remove('in');
+      guide.classList.add('out');
+      setTimeout(() => { guide.style.display = 'none'; }, 420);
+    };
+
+    // Only show on first visit
+    try {
+      if (!localStorage.getItem(ITK_KEY)) startSplash();
+      else { splash.classList.add('gone'); }
+    } catch(_) {
+      startSplash();
+    }
+  })();
 </script>
 
 </body>
