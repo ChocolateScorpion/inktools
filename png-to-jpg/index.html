@@ -181,6 +181,19 @@
     .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
     .footer-links a:hover { color: var(--gold); }
 
+    .info-section { width: 100%; max-width: var(--max-w); padding: 0 24px 64px; margin: 0 auto; }
+    .info-section h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--cream); margin-bottom: 16px; margin-top: 40px; }
+    .info-section p { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; counter-reset: steps; }
+    .steps-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 14px; color: var(--muted); line-height: 1.6; counter-increment: steps; }
+    .steps-list li::before { content: counter(steps); min-width: 24px; height: 24px; border-radius: 50%; background: var(--gold-subtle); border: 0.5px solid var(--gold-border); color: var(--gold); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .steps-list li strong { color: var(--cream); }
+    .mini-faq { margin-top: 8px; }
+    .mini-faq-item { border-bottom: 0.5px solid var(--border); padding: 16px 0; }
+    .mini-faq-item:last-child { border-bottom: none; }
+    .mini-faq-q { font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 6px; }
+    .mini-faq-a { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
     @media (max-width: 640px) {
       .converter-box { padding: 22px 16px; }
       .site-nav { display: none; }
@@ -286,6 +299,44 @@
   <ins class="adsbygoogle" style="display:block;"
     data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- HOW TO USE + FAQ -->
+<div class="info-section">
+
+  <h2>How to use the PNG to JPG converter</h2>
+  <p>PNG files are large — great for editing, but not ideal for sharing or uploading to social media. Converting to JPG reduces file size by 60–80% with minimal visible quality loss, making your images faster to upload and easier to share.</p>
+
+  <ul class="steps-list">
+    <li><strong>Upload your PNG</strong> — drag and drop or click to browse. Transparent PNGs are supported (transparency is replaced with a white background).</li>
+    <li><strong>Set quality</strong> — use the quality slider if available. 85% is recommended for a balance of size and clarity.</li>
+    <li><strong>Download your JPG</strong> — click Convert and save your compressed JPG.</li>
+  </ul>
+
+  <h2>Frequently asked questions</h2>
+  <div class="mini-faq">
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">What happens to transparent areas when converting PNG to JPG?</div>
+      <div class="mini-faq-a">JPG doesn't support transparency, so transparent areas are filled with a white background during conversion.</div>
+    </div>
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">How much smaller will my JPG be?</div>
+      <div class="mini-faq-a">Typically 60–80% smaller than the original PNG, depending on the image content.</div>
+    </div>
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Can I convert PNG logos to JPG?</div>
+      <div class="mini-faq-a">You can, but logos often have transparency and sharp edges that JPG compresses poorly. For logos, keep PNG or switch to SVG.</div>
+    </div>
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Is there quality loss when converting PNG to JPG?</div>
+      <div class="mini-faq-a">Yes — JPG uses lossy compression. At 85%+ quality the loss is minimal and usually invisible.</div>
+    </div>
+
+  </div>
 </div>
 
 <!-- FOOTER -->

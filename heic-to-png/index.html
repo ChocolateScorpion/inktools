@@ -205,6 +205,20 @@
       .site-nav { display: none; }
       .site-footer { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ─── INFO SECTION ─── */
+    .info-section { width: 100%; max-width: var(--max-w); padding: 0 24px 64px; margin: 0 auto; }
+    .info-section h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--cream); margin-bottom: 16px; margin-top: 40px; }
+    .info-section p { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; counter-reset: steps; }
+    .steps-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 14px; color: var(--muted); line-height: 1.6; counter-increment: steps; }
+    .steps-list li::before { content: counter(steps); min-width: 24px; height: 24px; border-radius: 50%; background: var(--gold-subtle); border: 0.5px solid var(--gold-border); color: var(--gold); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .steps-list li strong { color: var(--cream); }
+    .mini-faq { margin-top: 8px; }
+    .mini-faq-item { border-bottom: 0.5px solid var(--border); padding: 16px 0; }
+    .mini-faq-item:last-child { border-bottom: none; }
+    .mini-faq-q { font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 6px; }
+    .mini-faq-a { font-size: 14px; color: var(--muted); line-height: 1.7; }
   </style>
 
 </head>
@@ -309,6 +323,38 @@
     data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
+
+<!-- INFO SECTION -->
+<section class="info-section">
+  <p>PNG is the format of choice when you need transparency or lossless quality — perfect for logos, screenshots, and images that will be edited further. This tool converts your iPhone HEIC photos to PNG without any quality loss, right in your browser.</p>
+
+  <h2>How to use</h2>
+  <ol class="steps-list">
+    <li><strong>Upload your HEIC file</strong> — drag and drop or click to browse. Multiple files are supported.</li>
+    <li><strong>Review the preview</strong> — a preview of your image appears so you can confirm it loaded correctly.</li>
+    <li><strong>Download your PNG</strong> — click Convert and then download your lossless PNG file.</li>
+  </ol>
+
+  <h2>Frequently asked questions</h2>
+  <div class="mini-faq">
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Why choose PNG over JPG for converted HEIC files?</div>
+      <div class="mini-faq-a">PNG is lossless — no quality is lost during conversion. It's the best choice when you plan to edit the image further or need pixel-perfect quality.</div>
+    </div>
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Does HEIC support transparency?</div>
+      <div class="mini-faq-a">HEIC can store transparency data, and this converter preserves it in the PNG output.</div>
+    </div>
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Are PNG files larger than HEIC?</div>
+      <div class="mini-faq-a">Yes — PNG is lossless and uncompressed, so files are typically 3–5x larger than HEIC. If storage is a concern, consider JPG instead.</div>
+    </div>
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Can I convert iPhone screenshots saved as HEIC?</div>
+      <div class="mini-faq-a">Yes. Screenshots on recent iPhones may be saved as HEIC or PNG depending on settings — this tool handles both.</div>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer class="site-footer">

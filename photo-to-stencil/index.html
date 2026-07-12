@@ -250,6 +250,19 @@
     .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
     .footer-links a:hover { color: var(--gold); }
 
+    .info-section { width: 100%; max-width: var(--max-w); padding: 0 24px 64px; margin: 0 auto; }
+    .info-section h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--cream); margin-bottom: 16px; margin-top: 40px; }
+    .info-section p { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; counter-reset: steps; }
+    .steps-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 14px; color: var(--muted); line-height: 1.6; counter-increment: steps; }
+    .steps-list li::before { content: counter(steps); min-width: 24px; height: 24px; border-radius: 50%; background: var(--gold-subtle); border: 0.5px solid var(--gold-border); color: var(--gold); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .steps-list li strong { color: var(--cream); }
+    .mini-faq { margin-top: 8px; }
+    .mini-faq-item { border-bottom: 0.5px solid var(--border); padding: 16px 0; }
+    .mini-faq-item:last-child { border-bottom: none; }
+    .mini-faq-q { font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 6px; }
+    .mini-faq-a { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
     @media (max-width: 720px) {
       .stencil-wrap { grid-template-columns: 1fr; }
       .canvas-row { grid-template-columns: 1fr; }
@@ -452,6 +465,44 @@
 <div class="ad-slot" style="margin-bottom: 24px;">
   <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- HOW TO USE + FAQ -->
+<div class="info-section">
+
+  <h2>How to use the photo to stencil converter</h2>
+  <p>A great tattoo stencil is the difference between a design that transfers cleanly and one that muddles on skin. This tool converts any reference photo into a high-contrast black-and-white stencil using AI edge detection — the same technique tattoo artists use when tracing designs by hand.</p>
+
+  <ul class="steps-list">
+    <li><strong>Upload your reference photo</strong> — any clear photo works best. Portraits, objects, animals, and illustrations all convert well.</li>
+    <li><strong>Choose a preset or fine-tune</strong> — select from preset styles (fine lines, bold, sketch) or adjust the threshold and detail sliders manually.</li>
+    <li><strong>Download your stencil</strong> — save the high-contrast black-and-white image, ready to print on stencil paper or share with your tattoo artist.</li>
+  </ul>
+
+  <h2>Frequently asked questions</h2>
+  <div class="mini-faq">
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">What photos work best for making a stencil?</div>
+      <div class="mini-faq-a">High-contrast photos with clear edges work best — avoid blurry or low-light shots. Portraits and close-up object photos typically produce excellent stencils.</div>
+    </div>
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Can I adjust the level of detail in the stencil?</div>
+      <div class="mini-faq-a">Yes — use the threshold and detail sliders to control how much fine detail is captured. Higher threshold = bolder, simpler lines.</div>
+    </div>
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Does the AI stencil tool work for fine line tattoos?</div>
+      <div class="mini-faq-a">Yes — set the tool to the Fine Lines preset for delicate, thin-line output that preserves subtle details.</div>
+    </div>
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Do I need to print the stencil on special paper?</div>
+      <div class="mini-faq-a">For transferring to skin, tattoo stencil paper (thermal paper) works best. For sharing a design with your artist, any printer paper works.</div>
+    </div>
+
+  </div>
 </div>
 
 <footer class="site-footer">

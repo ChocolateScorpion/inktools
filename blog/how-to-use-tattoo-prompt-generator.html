@@ -64,6 +64,14 @@
     .footer-links a:hover{color:var(--gold);}
     .ad-slot{width:100%;max-width:var(--max-w);padding:0 24px;margin:8px 0 24px;}
     @media(max-width:640px){.style-cards{grid-template-columns:1fr;}.site-nav{display:none;}.site-footer{flex-direction:column;align-items:flex-start;}}
+    .faq-section{margin:48px 0 40px;}
+    .faq-section h2{font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;color:var(--cream);margin-bottom:24px;}
+    .faq-item{border-bottom:0.5px solid var(--border);padding:18px 0;}
+    .faq-item:last-child{border-bottom:none;}
+    .faq-q{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:8px;}
+    .faq-a{font-size:14px;color:var(--muted);line-height:1.7;}
+    .article-figure{margin:32px 0;}
+    .article-figure figcaption{font-size:12px;color:var(--faint);text-align:center;margin-top:10px;}
   </style>
 </head>
 <body>
@@ -96,6 +104,49 @@
   <h1>How to use the Tattoo Prompt Generator</h1>
 
   <p class="article-intro">The Tattoo Prompt Generator turns a few selections into a detailed, ready-to-use prompt for any AI image tool. Here's a walkthrough of each field, plus real prompt examples by tattoo style so you can see exactly what kind of output to expect.</p>
+
+  <figure class="article-figure">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 180" width="100%" aria-label="Diagram showing a text prompt flowing through an AI model to produce three different tattoo style outputs: minimalist, geometric, and traditional">
+      <defs>
+        <marker id="pg-arr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L5.5,3.5 L0,6.5 Z" fill="#B8862A"/></marker>
+        <marker id="pg-arr2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L5.5,3.5 L0,6.5 Z" fill="#B8862A" opacity="0.55"/></marker>
+      </defs>
+      <!-- Prompt input box -->
+      <rect x="12" y="65" width="122" height="50" rx="8" fill="#1E1E1B" stroke="rgba(184,134,42,0.3)" stroke-width="0.75"/>
+      <text x="73" y="85" font-family="DM Sans,Arial,sans-serif" font-size="10.5" font-weight="500" fill="#E8E4DC" text-anchor="middle">Your prompt</text>
+      <text x="73" y="103" font-family="DM Sans,Arial,sans-serif" font-size="9" fill="#8C8880" text-anchor="middle">"wolf · dark · mystical"</text>
+      <!-- Arrow to AI -->
+      <line x1="136" y1="90" x2="186" y2="90" stroke="#B8862A" stroke-width="1" marker-end="url(#pg-arr)"/>
+      <!-- AI model box -->
+      <rect x="189" y="53" width="118" height="74" rx="10" fill="#161614" stroke="#B8862A" stroke-width="0.75"/>
+      <text x="248" y="78" font-family="DM Sans,Arial,sans-serif" font-size="11" font-weight="500" fill="#B8862A" text-anchor="middle">AI Model</text>
+      <!-- sparkle -->
+      <g transform="translate(248,101)" opacity="0.8">
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#EF9F27" stroke-width="1.2"/>
+        <line x1="-8" y1="0" x2="8" y2="0" stroke="#EF9F27" stroke-width="1.2"/>
+        <line x1="-5.5" y1="-5.5" x2="5.5" y2="5.5" stroke="#EF9F27" stroke-width="0.8"/>
+        <line x1="5.5" y1="-5.5" x2="-5.5" y2="5.5" stroke="#EF9F27" stroke-width="0.8"/>
+        <circle cx="0" cy="0" r="2.5" fill="#EF9F27"/>
+      </g>
+      <!-- Fan-out arrows -->
+      <path d="M307,75 C342,75 362,47 392,40" stroke="#B8862A" stroke-width="1" fill="none" stroke-opacity="0.6" marker-end="url(#pg-arr2)"/>
+      <line x1="307" y1="90" x2="392" y2="90" stroke="#B8862A" stroke-width="1" stroke-opacity="0.6" marker-end="url(#pg-arr2)"/>
+      <path d="M307,105 C342,105 362,133 392,140" stroke="#B8862A" stroke-width="1" fill="none" stroke-opacity="0.6" marker-end="url(#pg-arr2)"/>
+      <!-- Output: Minimalist -->
+      <rect x="395" y="18" width="115" height="44" rx="8" fill="#1E1E1B" stroke="rgba(184,134,42,0.25)" stroke-width="0.75"/>
+      <text x="452" y="36" font-family="DM Sans,Arial,sans-serif" font-size="10.5" font-weight="500" fill="#E8E4DC" text-anchor="middle">Minimalist</text>
+      <text x="452" y="53" font-family="DM Sans,Arial,sans-serif" font-size="9" fill="#8C8880" text-anchor="middle">clean · single lines</text>
+      <!-- Output: Geometric -->
+      <rect x="395" y="68" width="115" height="44" rx="8" fill="#1E1E1B" stroke="rgba(184,134,42,0.25)" stroke-width="0.75"/>
+      <text x="452" y="86" font-family="DM Sans,Arial,sans-serif" font-size="10.5" font-weight="500" fill="#E8E4DC" text-anchor="middle">Geometric</text>
+      <text x="452" y="103" font-family="DM Sans,Arial,sans-serif" font-size="9" fill="#8C8880" text-anchor="middle">shapes · symmetry</text>
+      <!-- Output: Traditional -->
+      <rect x="395" y="118" width="115" height="44" rx="8" fill="#1E1E1B" stroke="rgba(184,134,42,0.25)" stroke-width="0.75"/>
+      <text x="452" y="136" font-family="DM Sans,Arial,sans-serif" font-size="10.5" font-weight="500" fill="#E8E4DC" text-anchor="middle">Traditional</text>
+      <text x="452" y="153" font-family="DM Sans,Arial,sans-serif" font-size="9" fill="#8C8880" text-anchor="middle">bold lines · color</text>
+    </svg>
+    <figcaption>One prompt, three possible style directions — the generator writes the technical language so you don't have to.</figcaption>
+  </figure>
 
   <h2>Step by step</h2>
 
@@ -193,6 +244,34 @@
 
   <div class="tip-box">
     <p><strong>Remember:</strong> The generated image is a reference, not the final design. Show it to your artist as a direction — "something like this but in your style" — not as the artwork itself. The tattoo design is always the artist's work.</p>
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">What AI image generators work best with these prompts?</div>
+      <div class="faq-a">Midjourney consistently produces the strongest tattoo references, especially for illustrative styles like blackwork and neo-traditional. For geometric and clean graphic work, Ideogram is excellent; for portrait realism, DALL-E via ChatGPT tends to give the most usable results.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I use the generated prompts for free commercial tattoo designs?</div>
+      <div class="faq-a">The prompts themselves are yours to use however you like. Whether the AI-generated images produced from those prompts are commercially usable depends on the terms of service of the specific AI platform you use — Midjourney and Adobe Firefly have different licensing rules. The prompts are just text; the images carry the platform's terms.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How do I make the prompt more specific to my style?</div>
+      <div class="faq-a">Add descriptive elements and adjust the mood settings — these have the biggest impact on output. If you have an artist whose work you admire, describe that aesthetic with adjectives rather than naming the artist directly. Terms like "crisp single-pass linework," "high-contrast negative space," or "flat graphic fills" often sharpen the output significantly.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Does the generator work for fine line tattoos?</div>
+      <div class="faq-a">Yes — select "Fine Line" as the style and keep the detail level at 2–3. The generated prompt will include technical language about ultra-thin linework and single-needle precision. Midjourney with --style raw tends to give the cleanest fine line references with this approach.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I ask my tattoo artist to use these prompts?</div>
+      <div class="faq-a">Absolutely — many clients bring the generated images (not just the prompts) to consultations as direction references. You can share either the prompt or the resulting image; most artists find the image more immediately useful since it gives them something concrete to react to and build from.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What's the difference between Midjourney and Stable Diffusion for tattoo art?</div>
+      <div class="faq-a">Midjourney produces more aesthetically polished and stylistically coherent results out of the box, making it the easier choice for consultation references. Stable Diffusion offers more fine-grained control through community models specifically trained on tattoo art, but requires more setup and technical knowledge to get consistently good results.</div>
+    </div>
   </div>
 
   <div class="cta-box">
