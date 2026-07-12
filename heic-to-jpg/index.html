@@ -246,6 +246,20 @@
       .site-nav { display: none; }
       .site-footer { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ─── INFO SECTION ─── */
+    .info-section { width: 100%; max-width: var(--max-w); padding: 0 24px 64px; margin: 0 auto; }
+    .info-section h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--cream); margin-bottom: 16px; margin-top: 40px; }
+    .info-section p { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; counter-reset: steps; }
+    .steps-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 14px; color: var(--muted); line-height: 1.6; counter-increment: steps; }
+    .steps-list li::before { content: counter(steps); min-width: 24px; height: 24px; border-radius: 50%; background: var(--gold-subtle); border: 0.5px solid var(--gold-border); color: var(--gold); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .steps-list li strong { color: var(--cream); }
+    .mini-faq { margin-top: 8px; }
+    .mini-faq-item { border-bottom: 0.5px solid var(--border); padding: 16px 0; }
+    .mini-faq-item:last-child { border-bottom: none; }
+    .mini-faq-q { font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 6px; }
+    .mini-faq-a { font-size: 14px; color: var(--muted); line-height: 1.7; }
   </style>
 
 </head>
@@ -351,6 +365,38 @@
     data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
+
+<!-- INFO SECTION -->
+<section class="info-section">
+  <p>HEIC is Apple's default photo format — it uses half the storage of JPG while keeping the same quality. But HEIC isn't supported everywhere: Windows (without Apple software), most Android apps, and many websites only accept JPG. This converter lets you switch formats instantly, entirely in your browser.</p>
+
+  <h2>How to use</h2>
+  <ol class="steps-list">
+    <li><strong>Upload your HEIC file</strong> — drag and drop or click to select. You can convert multiple files at once.</li>
+    <li><strong>Choose quality</strong> — adjust the JPG quality slider if needed. 85% is a good balance between size and quality.</li>
+    <li><strong>Convert and download</strong> — click Convert, then download your JPG files. They're ready to use anywhere.</li>
+  </ol>
+
+  <h2>Frequently asked questions</h2>
+  <div class="mini-faq">
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Does HEIC to JPG conversion lose quality?</div>
+      <div class="mini-faq-a">JPG uses lossy compression, so some quality is lost compared to the original HEIC. At 85–90% quality the difference is invisible to the naked eye.</div>
+    </div>
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Can I convert multiple HEIC files at once?</div>
+      <div class="mini-faq-a">Yes — drop multiple files into the upload area and they'll all be converted together.</div>
+    </div>
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Will my photos look different after conversion?</div>
+      <div class="mini-faq-a">Colors, exposure, and composition are preserved. The main difference is file size — JPG is typically 10–20% larger than HEIC.</div>
+    </div>
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">My iPhone photos are in HEIC — how do I know?</div>
+      <div class="mini-faq-a">If your iPhone is set to 'High Efficiency' in camera settings, it saves photos as HEIC. You can check by looking at the file extension.</div>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer class="site-footer">

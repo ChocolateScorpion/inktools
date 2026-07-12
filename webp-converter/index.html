@@ -200,6 +200,20 @@
       .site-nav { display: none; }
       .site-footer { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ─── INFO SECTION ─── */
+    .info-section { width: 100%; max-width: var(--max-w); padding: 0 24px 64px; margin: 0 auto; }
+    .info-section h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--cream); margin-bottom: 16px; margin-top: 40px; }
+    .info-section p { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; counter-reset: steps; }
+    .steps-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 14px; color: var(--muted); line-height: 1.6; counter-increment: steps; }
+    .steps-list li::before { content: counter(steps); min-width: 24px; height: 24px; border-radius: 50%; background: var(--gold-subtle); border: 0.5px solid var(--gold-border); color: var(--gold); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .steps-list li strong { color: var(--cream); }
+    .mini-faq { margin-top: 8px; }
+    .mini-faq-item { border-bottom: 0.5px solid var(--border); padding: 16px 0; }
+    .mini-faq-item:last-child { border-bottom: none; }
+    .mini-faq-q { font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 6px; }
+    .mini-faq-a { font-size: 14px; color: var(--muted); line-height: 1.7; }
   </style>
 </head>
 <body>
@@ -314,6 +328,38 @@
   <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
+
+<!-- INFO SECTION -->
+<section class="info-section">
+  <p>WebP is Google's modern image format — it produces files 25–35% smaller than JPG and PNG at the same visual quality. This makes your website load faster and score higher on Core Web Vitals. This converter handles both directions: convert any image to WebP, or convert WebP back to JPG or PNG.</p>
+
+  <h2>How to use</h2>
+  <ol class="steps-list">
+    <li><strong>Upload your image</strong> — drop any JPG, PNG, or WebP file into the upload area.</li>
+    <li><strong>Choose your output format</strong> — select WebP, JPG, or PNG from the dropdown. The button label updates to confirm your choice.</li>
+    <li><strong>Convert and download</strong> — click the button and your converted file downloads immediately.</li>
+  </ol>
+
+  <h2>Frequently asked questions</h2>
+  <div class="mini-faq">
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Is WebP supported by all browsers?</div>
+      <div class="mini-faq-a">Yes — WebP is supported by all modern browsers including Chrome, Safari (since 2020), Firefox, and Edge. It's safe to use on any website.</div>
+    </div>
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Does converting to WebP reduce quality?</div>
+      <div class="mini-faq-a">WebP uses both lossy and lossless modes. In lossy mode (the default here) there is minimal quality loss at the same perceived quality as JPG.</div>
+    </div>
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Can I convert WebP back to JPG?</div>
+      <div class="mini-faq-a">Yes — select JPG as the output format and this tool converts in the other direction too.</div>
+    </div>
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Why are my WebP files so much smaller?</div>
+      <div class="mini-faq-a">WebP uses a more efficient compression algorithm than JPG or PNG, reducing file size by 25–35% with no visible quality difference.</div>
+    </div>
+  </div>
+</section>
 
 <footer class="site-footer">
   <span class="footer-copy">© 2026 InkTools — Image Utilities</span>

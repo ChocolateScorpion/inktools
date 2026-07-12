@@ -53,6 +53,15 @@
     .footer-links a{font-size:12px;color:var(--faint);transition:color 0.15s;}
     .footer-links a:hover{color:var(--gold);}
     .ad-slot{width:100%;max-width:var(--max-w);padding:0 24px;margin:8px 0 24px;}
+    .faq-section{margin:48px 0 40px;}
+    .faq-section h2{font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;color:var(--cream);margin-bottom:24px;}
+    .faq-item{border-bottom:0.5px solid var(--border);padding:18px 0;}
+    .faq-item:last-child{border-bottom:none;}
+    .faq-q{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:8px;}
+    .faq-a{font-size:14px;color:var(--muted);line-height:1.7;}
+    .article-figure{margin:32px 0;}
+    .article-figure figcaption{font-size:12px;color:var(--faint);text-align:center;margin-top:10px;}
+    .article-wrap code{background:var(--surface);border:0.5px solid var(--border);border-radius:3px;padding:1px 5px;font-size:13px;color:var(--cream);font-family:monospace;}
     @media(max-width:640px){.site-nav{display:none;}.site-footer{flex-direction:column;align-items:flex-start;}}
   </style>
 </head>
@@ -86,6 +95,25 @@
   <h1>How to optimize images for the web without losing quality</h1>
 
   <p class="article-intro">Images are typically the largest files on any webpage. Unoptimized images slow down your site, hurt your search rankings, and frustrate visitors. Here's a practical approach to getting images right for the web.</p>
+
+  <figure class="article-figure">
+    <svg viewBox="0 0 600 148" width="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:10px;overflow:hidden;">
+      <rect width="600" height="148" fill="#161614"/>
+      <!-- Baseline -->
+      <line x1="100" y1="112" x2="500" y2="112" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+      <!-- Left bar: Original PNG (80px tall) -->
+      <text x="200" y="22" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="12" fill="#8C8880">Original PNG</text>
+      <rect x="160" y="32" width="80" height="80" rx="4" fill="#B8862A" opacity="0.32"/>
+      <text x="200" y="130" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="14" font-weight="500" fill="#E8E4DC">4.2 MB</text>
+      <!-- Center label -->
+      <text x="300" y="65" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="19" font-weight="600" fill="#EF9F27">96% smaller</text>
+      <!-- Right bar: Optimized WebP (4px tall, proportional to 20× reduction) -->
+      <text x="400" y="22" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="12" fill="#8C8880">Optimized WebP</text>
+      <rect x="360" y="108" width="80" height="4" rx="2" fill="#EF9F27"/>
+      <text x="400" y="130" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="14" font-weight="500" fill="#EF9F27">210 KB</text>
+    </svg>
+    <figcaption>A 4.2 MB PNG hero image saved as WebP at 80% quality: 210 KB — a 96% reduction with no perceptible quality loss.</figcaption>
+  </figure>
 
   <h2>Why image optimization matters</h2>
   <p>Google uses page speed as a ranking factor, and images are usually the biggest contributor to slow load times. A single uncompressed photo from a modern smartphone can be 5–10MB. The same photo, properly optimized for web, should be under 200KB — a reduction of 95% with barely any visible difference.</p>
@@ -137,6 +165,52 @@
     <li>Thumbnails and card images: under 80KB</li>
     <li>Icons and small UI elements: under 20KB</li>
   </ul>
+
+  <h2>The impact of image weight on Core Web Vitals</h2>
+  <p>Google's Core Web Vitals are performance metrics that directly influence search rankings, and images are their biggest single lever. Two metrics are especially affected by how you handle images:</p>
+  <p><strong>Largest Contentful Paint (LCP)</strong> measures how quickly the largest visible element on the page loads. In most cases that element is a hero image or banner photo. Google's threshold for a "good" LCP score is under 2.5 seconds. A 5 MB hero image on a typical mobile connection will blow past that limit; the same image compressed and converted to WebP at 180 KB will comfortably pass it.</p>
+  <p><strong>Cumulative Layout Shift (CLS)</strong> measures visual stability. When images load without predefined dimensions, the surrounding content shifts as images appear — an experience Google penalizes in rankings. The fix is simple: always include <code>width</code> and <code>height</code> attributes on your <code>&lt;img&gt;</code> tags so the browser can reserve the correct space before the image loads, regardless of how fast or slow the connection is.</p>
+  <p>To put real numbers on it: a 5 MB hero image resized and converted to WebP at 80% quality becomes approximately 180 KB — a 96% reduction. On a 10 Mbps mobile connection, that's the difference between a 4-second image load and a 0.14-second one. Image optimization is the single highest-impact change most websites can make to their Core Web Vitals scores.</p>
+
+  <h2>Lazy loading: defer what the user can't see yet</h2>
+  <p>HTML5's <code>loading="lazy"</code> attribute tells the browser to skip loading an image until it is about to enter the viewport. This means your page's initial load only fetches images that are actually visible — everything else waits until the user scrolls near it. Adding lazy loading to below-the-fold images is a one-attribute change with no visual downside:</p>
+  <div class="tip-box">
+    <p><strong>Syntax:</strong> <code>&lt;img src="photo.webp" loading="lazy" width="800" height="600" alt="Description"&gt;</code></p>
+  </div>
+  <p>One critical exception: <strong>do not use <code>loading="lazy"</code> on hero images or any content visible on first load</strong>. Those images need to start downloading immediately — deferring them would hurt your LCP score. Apply lazy loading to images in the article body, product grids, related-posts sections, and footers. Browser support is universal across all modern browsers (Chrome, Firefox, Safari, Edge) with no JavaScript or polyfills required.</p>
+
+  <h2>Set the right dimensions before you compress</h2>
+  <p>One of the most common image optimization mistakes is uploading a large image and relying on CSS to make it appear smaller on the page. For example, setting <code>max-width: 700px</code> in CSS controls how the image is <em>displayed</em> — but the browser still downloads every pixel of the original file and then scales it down in memory. A 4000 × 3000 px image displayed at 700 × 525 px wastes roughly 97% of its pixels.</p>
+  <p>Always resize your image to the actual display size — or at most 2× the display size to account for retina and HiDPI screens — before uploading. For a blog post image displayed at 700 px wide, serve an image that is 1400 px wide. For a product thumbnail at 300 px, serve a 600 px image. Never let CSS do the work that image resizing should have done before upload.</p>
+  <p>A real-world example: a 5 MB smartphone photo resized to 1400 px wide, then converted to WebP at 80% quality, becomes approximately 180 KB — a 96% reduction with no perceptible quality loss at any screen size the image will realistically be displayed at. That is the impact of combining resize and compress together.</p>
+
+  <div class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">What is the best image format for websites in 2026?</div>
+      <div class="faq-a">WebP is the best choice for most web images — it delivers smaller file sizes than JPG and PNG at comparable quality, supports transparency, and is supported by all modern browsers. For logos and icons, SVG is even better when the artwork is vector-based, since it scales perfectly at any size with minimal file weight. For contexts that require broad compatibility such as email attachments or some third-party uploads, JPG remains the safest fallback format.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How much should I compress images without losing quality?</div>
+      <div class="faq-a">For JPG and WebP, a quality setting of 75–85% is the sweet spot for web images. At 80% quality, file sizes are typically 40–60% smaller than at 100%, with differences that are nearly invisible at normal viewing sizes on most displays. Dropping below 70% starts introducing visible compression artifacts, especially around text, sharp edges, and areas of high contrast. For PNG, compression is always lossless, so image quality never degrades — only the encoding efficiency and file size change based on the compression level you choose.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Does image size affect SEO?</div>
+      <div class="faq-a">Yes, significantly. Google uses Core Web Vitals — including Largest Contentful Paint (LCP) — as ranking signals. Large, unoptimized images are the single biggest contributor to poor LCP scores. A page with a 5 MB hero image will almost certainly fail Google's performance thresholds; the same page with a properly optimized 180 KB WebP version will pass. Image optimization is one of the most effective ways to improve search rankings without changing any written content on the page.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What is lazy loading and should I use it?</div>
+      <div class="faq-a">Lazy loading defers image loading until the image is about to enter the visible viewport, so the browser's initial page load only fetches what the user can actually see. You enable it with <code>loading="lazy"</code> on your <code>&lt;img&gt;</code> tags — no JavaScript required. Use it on all images that appear below the fold, including body images, product grids, and comment-section avatars. Do not use it on hero images or anything visible on first load, as deferring those would hurt your LCP score rather than help it.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Should I use a CDN for images?</div>
+      <div class="faq-a">Yes, if your site serves significant traffic or has visitors in multiple regions. A CDN (Content Delivery Network) distributes copies of your images to servers around the world so each visitor downloads from a server geographically close to them, rather than your origin server. Many CDNs also offer automatic image optimization — serving WebP to supporting browsers, resizing images dynamically, and applying compression — which can dramatically improve performance without any manual work on individual files. For high-traffic sites, a CDN is often the single biggest performance improvement after basic image compression.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What's the difference between resizing and compressing an image?</div>
+      <div class="faq-a">Resizing changes the pixel dimensions of an image — for example, from 4000 × 3000 px down to 1400 × 1050 px. Compressing reduces the file size without necessarily changing dimensions, by encoding the image data more efficiently or discarding less-perceptible detail. Both are important and work best together: resize first to eliminate unnecessary pixels, then compress to reduce the encoded data size. Doing only one of these steps leaves substantial file-size savings on the table — a compressed but still oversized image still wastes bandwidth when the browser scales it down in CSS.</div>
+    </div>
+  </div>
 
   <div class="cta-box">
     <p>Compress and convert your images for free — right in your browser, no upload needed.</p>

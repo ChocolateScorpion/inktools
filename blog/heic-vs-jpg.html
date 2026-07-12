@@ -52,6 +52,15 @@
     .footer-links a{font-size:12px;color:var(--faint);transition:color 0.15s;}
     .footer-links a:hover{color:var(--gold);}
     .ad-slot{width:100%;max-width:var(--max-w);padding:0 24px;margin:8px 0 24px;}
+    .faq-section{margin:48px 0 40px;}
+    .faq-section h2{font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;color:var(--cream);margin-bottom:24px;}
+    .faq-item{border-bottom:0.5px solid var(--border);padding:18px 0;}
+    .faq-item:last-child{border-bottom:none;}
+    .faq-q{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:8px;}
+    .faq-a{font-size:14px;color:var(--muted);line-height:1.7;}
+    .article-figure{margin:32px 0;}
+    .article-figure figcaption{font-size:12px;color:var(--faint);text-align:center;margin-top:10px;}
+    .article-wrap code{background:var(--surface);border:0.5px solid var(--border);border-radius:3px;padding:1px 5px;font-size:13px;color:var(--cream);font-family:monospace;}
     @media(max-width:640px){.site-nav{display:none;}.site-footer{flex-direction:column;align-items:flex-start;}}
   </style>
 </head>
@@ -85,6 +94,32 @@
   <h1>HEIC vs JPG: What's the difference and when to convert</h1>
 
   <p class="article-intro">Since iOS 11, iPhones have saved photos in HEIC format by default. It's a smarter format in many ways — but it causes compatibility headaches with Windows PCs, older apps, and most websites. Here's everything you need to know.</p>
+
+  <figure class="article-figure">
+    <svg viewBox="0 0 600 160" width="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:10px;overflow:hidden;">
+      <rect width="600" height="160" fill="#161614"/>
+      <!-- Left panel: HEIC -->
+      <rect x="20" y="16" width="240" height="128" rx="8" fill="#1E1E1B" stroke="rgba(184,134,42,0.22)" stroke-width="0.5"/>
+      <!-- Phone icon -->
+      <rect x="108" y="30" width="34" height="56" rx="6" fill="none" stroke="#B8862A" stroke-width="1.5"/>
+      <line x1="108" y1="75" x2="142" y2="75" stroke="#B8862A" stroke-width="0.75"/>
+      <circle cx="125" cy="82" r="2.5" fill="#B8862A"/>
+      <text x="125" y="107" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="17" font-weight="600" fill="#E8E4DC">HEIC</text>
+      <text x="125" y="130" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="22" font-weight="600" fill="#EF9F27">2 MB</text>
+      <!-- Center label -->
+      <text x="300" y="74" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="11" fill="#8C8880">Same quality</text>
+      <text x="300" y="96" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="22" fill="#47453F">↔</text>
+      <!-- Right panel: JPG -->
+      <rect x="340" y="16" width="240" height="128" rx="8" fill="#1E1E1B" stroke="rgba(184,134,42,0.22)" stroke-width="0.5"/>
+      <!-- Photo frame icon -->
+      <rect x="429" y="30" width="52" height="40" rx="4" fill="none" stroke="#8C8880" stroke-width="1.5"/>
+      <polyline points="429,63 444,48 455,58 464,45 481,63" stroke="#8C8880" stroke-width="1.5" fill="none"/>
+      <circle cx="440" cy="40" r="4" fill="none" stroke="#8C8880" stroke-width="1.5"/>
+      <text x="460" y="107" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="17" font-weight="600" fill="#E8E4DC">JPG</text>
+      <text x="460" y="130" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="22" font-weight="600" fill="#8C8880">4 MB</text>
+    </svg>
+    <figcaption>HEIC and JPG at equivalent visual quality — HEIC takes roughly half the storage space.</figcaption>
+  </figure>
 
   <h2>What is HEIC?</h2>
   <p>HEIC stands for High Efficiency Image Container. It's a file format based on the HEVC (H.265) video compression standard, adopted by Apple in 2017. The main advantage is that HEIC files are roughly <strong>50% smaller</strong> than equivalent JPG files at the same visual quality, which saves significant storage space on your iPhone.</p>
@@ -126,6 +161,55 @@
   <h2>How to stop iPhone from shooting in HEIC</h2>
   <p>If you'd rather avoid converting altogether, you can change your iPhone camera settings. Go to <strong>Settings → Camera → Formats</strong> and choose <strong>Most Compatible</strong>. This makes your iPhone shoot in JPG instead of HEIC.</p>
   <p>The downside is that your photos will take up more storage space. The better approach for most people is to keep shooting in HEIC and convert only when needed.</p>
+
+  <h2>Why Apple chose HEIC</h2>
+  <p>Apple adopted HEIC in iOS 11 (2017) for a clear technical reason: HEVC, the compression standard at HEIC's core, is roughly twice as efficient as the older codec underlying JPG. In practice, a HEIC photo takes up about half the storage of an equivalent JPG at the same visual quality. For an iPhone with 128 GB of storage accumulating years of photos and videos, that difference is meaningful — you simply get to keep more.</p>
+  <p>HEIC also unlocks capabilities that JPG cannot support: <strong>10-bit color depth</strong> for richer gradients and smoother tonal transitions, <strong>HDR metadata</strong> for better-looking images on HDR displays, <strong>depth map data</strong> powering Portrait Mode bokeh, and <strong>image sequences</strong> for Live Photos and slow-motion bursts — all stored in a single file. From Apple's perspective, HEIC was a significant engineering upgrade that brought real, tangible benefits to everyday iPhone photography.</p>
+
+  <h2>The compatibility problem in detail</h2>
+  <p>Despite its technical advantages, HEIC support outside the Apple ecosystem remains inconsistent. Here is where you will run into problems:</p>
+  <ul>
+    <li><strong>Windows:</strong> Windows 10 and 11 can open HEIC files after installing the free "HEIF Image Extensions" codec from the Microsoft Store. Older Windows versions (7, 8, 8.1) have no HEIC support whatsoever without third-party software.</li>
+    <li><strong>Web browsers:</strong> Chrome, Firefox, Edge, and most mainstream browsers do not render HEIC images embedded in web pages. Uploading a HEIC file to a web form often produces an error or a silent failure.</li>
+    <li><strong>Android:</strong> No native HEIC support. Android devices cannot open HEIC files without a dedicated third-party app.</li>
+    <li><strong>Image editing software:</strong> Adobe Lightroom and Photoshop (2019 and later) support HEIC. Many older versions and smaller editing tools do not.</li>
+    <li><strong>Email:</strong> Sending a HEIC file as an email attachment works on your end, but Windows and Android recipients may be unable to open it without extra software installed.</li>
+    <li><strong>Print labs and photo services:</strong> Many online print services require JPG or PNG and will reject HEIC uploads entirely.</li>
+  </ul>
+
+  <h2>Should you shoot in HEIC or JPG?</h2>
+  <p>The right choice depends on how you primarily use your photos:</p>
+  <p><strong>Keep shooting in HEIC</strong> if your photos live mainly within the Apple ecosystem — on your iPhone, Mac, and iCloud. HEIC gives you better storage efficiency and preserves advanced features like Live Photos and Portrait Mode depth data. When you need to share a specific photo outside that ecosystem, convert just that one file.</p>
+  <p><strong>Switch to JPG</strong> (Settings → Camera → Formats → Most Compatible) if you regularly share photos with Windows or Android users, frequently upload to websites or web forms, or use editing software that doesn't support HEIC. The cost is roughly twice the storage space per photo.</p>
+  <p>For most iPhone users, the practical sweet spot is keeping the HEIC default and converting individual photos on demand. Converting a handful of files when you need to share them is far less wasteful than storing every photo at double the file size permanently.</p>
+
+  <div class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">Can I open HEIC files on Windows?</div>
+      <div class="faq-a">Windows 10 and 11 can open HEIC files after you install the free "HEIF Image Extensions" codec from the Microsoft Store. Without it, Windows shows a generic file icon and refuses to open the file. Windows 7 and 8 have no native HEIC support at all — you would need a third-party image viewer. The easiest solution on any Windows version is to convert the HEIC to JPG first using a free online tool.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Does converting HEIC to JPG lose quality?</div>
+      <div class="faq-a">Converting HEIC to JPG involves re-encoding the image, which technically introduces a small quality loss. However, at quality settings of 90% or higher — which most converters use as a default — the difference is completely indistinguishable to the human eye at normal viewing sizes. You will not notice any visual degradation in the converted file.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Why do iPhones use HEIC instead of JPG?</div>
+      <div class="faq-a">Apple adopted HEIC because it produces files that are roughly half the size of JPG at the same visual quality. This saves storage space on the device, speeds up iCloud backups, and enables features JPG cannot support — such as depth data for Portrait Mode, HDR metadata, 10-bit color, and Live Photo sequences. For users who stay within the Apple ecosystem, HEIC is a strictly better format than JPG in almost every way.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I make my iPhone save photos as JPG instead?</div>
+      <div class="faq-a">Yes. Go to Settings → Camera → Formats and select "Most Compatible." Your iPhone will then save new photos as JPG. The trade-off is that photos will take up roughly twice as much storage space compared to HEIC. You will also lose the option to capture Live Photos with full sequence data stored in the file. For most people, keeping HEIC and converting when needed is the better long-term approach.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is HEIC the same as HEIF?</div>
+      <div class="faq-a">Not exactly. HEIF (High Efficiency Image File Format) is the container format standard developed by the MPEG group — think of it as the wrapper. HEIC is Apple's specific implementation of HEIF using HEVC compression for the image data inside. You'll often see the terms used interchangeably in casual conversation, but technically HEIC is a subset of HEIF. Other HEIF variants exist that use different compression codecs, such as AVIF, which uses AV1 compression.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Are HEIC files good for printing?</div>
+      <div class="faq-a">Yes. HEIC supports high quality, wide color gamut, and 10-bit depth — all of which are beneficial for printing. Most modern professional print labs can handle HEIC files. However, older or smaller print services may require JPG or TIFF. When in doubt, convert to JPG at high quality (90%+) before sending to a print lab — this guarantees compatibility and produces a file that is indistinguishable from the HEIC original in print.</div>
+    </div>
+  </div>
 
   <div class="cta-box">
     <p>Need to convert a HEIC photo right now? Try our free tool — no upload required.</p>

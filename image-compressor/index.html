@@ -259,6 +259,19 @@
     .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
     .footer-links a:hover { color: var(--gold); }
 
+    .info-section { width: 100%; max-width: var(--max-w); padding: 0 24px 64px; margin: 0 auto; }
+    .info-section h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--cream); margin-bottom: 16px; margin-top: 40px; }
+    .info-section p { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; counter-reset: steps; }
+    .steps-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 14px; color: var(--muted); line-height: 1.6; counter-increment: steps; }
+    .steps-list li::before { content: counter(steps); min-width: 24px; height: 24px; border-radius: 50%; background: var(--gold-subtle); border: 0.5px solid var(--gold-border); color: var(--gold); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .steps-list li strong { color: var(--cream); }
+    .mini-faq { margin-top: 8px; }
+    .mini-faq-item { border-bottom: 0.5px solid var(--border); padding: 16px 0; }
+    .mini-faq-item:last-child { border-bottom: none; }
+    .mini-faq-q { font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 6px; }
+    .mini-faq-a { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
     @media (max-width: 640px) {
       .converter-box { padding: 22px 16px; }
       .site-nav { display: none; }
@@ -380,6 +393,44 @@
   <ins class="adsbygoogle" style="display:block;"
     data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- HOW TO USE + FAQ -->
+<div class="info-section">
+
+  <h2>How to use the image compressor</h2>
+  <p>Large images slow down websites, increase data usage, and take longer to upload. This compressor reduces image file sizes by up to 90% while keeping quality high — no account needed, no upload to a server, everything runs in your browser.</p>
+
+  <ul class="steps-list">
+    <li><strong>Upload your image</strong> — supports JPG, PNG, and WebP. Drag and drop or click to browse.</li>
+    <li><strong>Adjust compression</strong> — use the quality slider to balance file size versus visual quality. 75–85% is the recommended range for web images.</li>
+    <li><strong>Compare and download</strong> — review the before/after size, then download your compressed image.</li>
+  </ul>
+
+  <h2>Frequently asked questions</h2>
+  <div class="mini-faq">
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">How much can I compress an image without losing quality?</div>
+      <div class="mini-faq-a">At 80–85% quality, compression is usually invisible to the naked eye. Below 60% you may start to see artefacts, especially in photos with fine detail.</div>
+    </div>
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Does compression change my image dimensions?</div>
+      <div class="mini-faq-a">No — this tool only reduces file size through compression. Dimensions (width × height) stay the same. Use the Image Resizer if you need to change dimensions.</div>
+    </div>
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Can I compress a PNG file?</div>
+      <div class="mini-faq-a">Yes — PNG compression uses lossless methods, so the quality remains identical while file size is reduced.</div>
+    </div>
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">What's the best quality setting for social media uploads?</div>
+      <div class="mini-faq-a">70–80% is usually sufficient for Instagram, Facebook, and Twitter, which re-compress images anyway.</div>
+    </div>
+
+  </div>
 </div>
 
 <!-- FOOTER -->

@@ -212,6 +212,19 @@
     .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
     .footer-links a:hover { color: var(--gold); }
 
+    .info-section { width: 100%; max-width: var(--max-w); padding: 0 24px 64px; margin: 0 auto; }
+    .info-section h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--cream); margin-bottom: 16px; margin-top: 40px; }
+    .info-section p { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; counter-reset: steps; }
+    .steps-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 14px; color: var(--muted); line-height: 1.6; counter-increment: steps; }
+    .steps-list li::before { content: counter(steps); min-width: 24px; height: 24px; border-radius: 50%; background: var(--gold-subtle); border: 0.5px solid var(--gold-border); color: var(--gold); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .steps-list li strong { color: var(--cream); }
+    .mini-faq { margin-top: 8px; }
+    .mini-faq-item { border-bottom: 0.5px solid var(--border); padding: 16px 0; }
+    .mini-faq-item:last-child { border-bottom: none; }
+    .mini-faq-q { font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 6px; }
+    .mini-faq-a { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
     @media (max-width: 640px) {
       .converter-box { padding: 22px 16px; }
       .site-nav { display: none; }
@@ -344,6 +357,44 @@
   <ins class="adsbygoogle" style="display:block;"
     data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- HOW TO USE + FAQ -->
+<div class="info-section">
+
+  <h2>How to use the background remover</h2>
+  <p>Background removal used to require Photoshop and patience. This tool does it in seconds using AI — upload a photo, and the background is detected and removed automatically, leaving you with a clean cutout on a transparent background, saved as PNG.</p>
+
+  <ul class="steps-list">
+    <li><strong>Upload your photo</strong> — portraits, product photos, and objects on simple backgrounds work best.</li>
+    <li><strong>Wait for AI processing</strong> — the model runs entirely in your browser. Processing typically takes 3–10 seconds depending on your device.</li>
+    <li><strong>Download the PNG</strong> — your cutout is saved with a transparent background, ready for any design project.</li>
+  </ul>
+
+  <h2>Frequently asked questions</h2>
+  <div class="mini-faq">
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">What types of photos work best for background removal?</div>
+      <div class="mini-faq-a">Photos with clear contrast between subject and background work best — portraits, product shots on plain backgrounds, and animals against simple scenery.</div>
+    </div>
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Is my photo sent to a server?</div>
+      <div class="mini-faq-a">No — the AI model runs entirely in your browser using WebAssembly. Your photos never leave your device.</div>
+    </div>
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">Why is the background removal imperfect on some photos?</div>
+      <div class="mini-faq-a">Complex backgrounds with similar colors to the subject, hair, and fine details like fur can be challenging. Manual touchup may be needed for professional results.</div>
+    </div>
+
+    <div class="mini-faq-item">
+      <div class="mini-faq-q">What format is the output?</div>
+      <div class="mini-faq-a">Always PNG, since PNG supports the transparent background that background removal creates.</div>
+    </div>
+
+  </div>
 </div>
 
 <!-- FOOTER -->

@@ -61,6 +61,14 @@
     .footer-links a:hover{color:var(--gold);}
     .ad-slot{width:100%;max-width:var(--max-w);padding:0 24px;margin:8px 0 24px;}
     @media(max-width:640px){.comparison-grid{grid-template-columns:1fr;}.site-nav{display:none;}.site-footer{flex-direction:column;align-items:flex-start;}}
+    .faq-section{margin:48px 0 40px;}
+    .faq-section h2{font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;color:var(--cream);margin-bottom:24px;}
+    .faq-item{border-bottom:0.5px solid var(--border);padding:18px 0;}
+    .faq-item:last-child{border-bottom:none;}
+    .faq-q{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:8px;}
+    .faq-a{font-size:14px;color:var(--muted);line-height:1.7;}
+    .article-figure{margin:32px 0;}
+    .article-figure figcaption{font-size:12px;color:var(--faint);text-align:center;margin-top:10px;}
   </style>
 </head>
 <body>
@@ -93,6 +101,56 @@
   <h1>How AI references are changing tattoo consultations</h1>
 
   <p class="article-intro">A client sits down and says "I want something dark and mystical, like a wolf but more spiritual, you know?" The artist nods, sketches for an hour, comes back — and the client says "not quite what I had in mind." Anyone who has worked in a tattoo studio has been in this room. AI-generated references are starting to change how that conversation goes.</p>
+
+  <figure class="article-figure">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 180" width="100%" aria-label="Before and after comparison: traditional approach of bringing a single photo versus AI-assisted approach of generating multiple concept directions">
+      <!-- Left panel: Traditional -->
+      <rect x="10" y="10" width="250" height="160" rx="10" fill="#161614" stroke="rgba(255,255,255,0.07)" stroke-width="0.75"/>
+      <text x="135" y="34" font-family="DM Sans,Arial,sans-serif" font-size="9.5" font-weight="500" fill="#47453F" text-anchor="middle" letter-spacing="0.1em">TRADITIONAL</text>
+      <!-- Photo frame icon -->
+      <rect x="92" y="48" width="86" height="62" rx="5" fill="#1E1E1B" stroke="#47453F" stroke-width="1"/>
+      <rect x="102" y="57" width="66" height="44" rx="3" fill="#161614"/>
+      <!-- photo scenery lines -->
+      <polyline points="104,95 120,74 136,87 152,70 166,95" stroke="#47453F" stroke-width="1.2" fill="none"/>
+      <circle cx="155" cy="64" r="5" fill="#47453F"/>
+      <text x="135" y="128" font-family="DM Sans,Arial,sans-serif" font-size="11" fill="#8C8880" text-anchor="middle">Bring a photo</text>
+      <text x="135" y="147" font-family="DM Sans,Arial,sans-serif" font-size="9" fill="#47453F" text-anchor="middle">one reference · fixed idea</text>
+      <!-- Divider -->
+      <line x1="284" y1="22" x2="284" y2="158" stroke="rgba(184,134,42,0.22)" stroke-width="0.75" stroke-dasharray="4 4"/>
+      <rect x="271" y="82" width="26" height="16" rx="8" fill="#161614" stroke="rgba(184,134,42,0.22)" stroke-width="0.5"/>
+      <text x="284" y="93" font-family="DM Sans,Arial,sans-serif" font-size="9" fill="#B8862A" text-anchor="middle">vs</text>
+      <!-- Right panel: AI-Assisted -->
+      <rect x="300" y="10" width="250" height="160" rx="10" fill="#161614" stroke="rgba(184,134,42,0.22)" stroke-width="0.75"/>
+      <text x="425" y="34" font-family="DM Sans,Arial,sans-serif" font-size="9.5" font-weight="500" fill="#B8862A" text-anchor="middle" letter-spacing="0.1em">AI-ASSISTED</text>
+      <!-- Three image frames -->
+      <rect x="313" y="50" width="56" height="40" rx="4" fill="#1E1E1B" stroke="rgba(184,134,42,0.28)" stroke-width="0.75"/>
+      <rect x="397" y="44" width="56" height="40" rx="4" fill="#1E1E1B" stroke="rgba(184,134,42,0.5)" stroke-width="0.75"/>
+      <rect x="481" y="50" width="56" height="40" rx="4" fill="#1E1E1B" stroke="rgba(184,134,42,0.28)" stroke-width="0.75"/>
+      <!-- Sparkle in center frame -->
+      <g transform="translate(425,64)" opacity="0.9">
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#EF9F27" stroke-width="1.3"/>
+        <line x1="-8" y1="0" x2="8" y2="0" stroke="#EF9F27" stroke-width="1.3"/>
+        <line x1="-5.5" y1="-5.5" x2="5.5" y2="5.5" stroke="#EF9F27" stroke-width="0.8"/>
+        <line x1="5.5" y1="-5.5" x2="-5.5" y2="5.5" stroke="#EF9F27" stroke-width="0.8"/>
+        <circle cx="0" cy="0" r="2.5" fill="#EF9F27"/>
+      </g>
+      <!-- Small stars in side frames -->
+      <g transform="translate(341,70)" opacity="0.45">
+        <line x1="0" y1="-5" x2="0" y2="5" stroke="#B8862A" stroke-width="1.1"/>
+        <line x1="-5" y1="0" x2="5" y2="0" stroke="#B8862A" stroke-width="1.1"/>
+        <circle cx="0" cy="0" r="1.5" fill="#B8862A"/>
+      </g>
+      <g transform="translate(509,70)" opacity="0.45">
+        <line x1="0" y1="-5" x2="0" y2="5" stroke="#B8862A" stroke-width="1.1"/>
+        <line x1="-5" y1="0" x2="5" y2="0" stroke="#B8862A" stroke-width="1.1"/>
+        <circle cx="0" cy="0" r="1.5" fill="#B8862A"/>
+      </g>
+      <text x="425" y="110" font-family="DM Sans,Arial,sans-serif" font-size="11" fill="#E8E4DC" text-anchor="middle">Generate concepts</text>
+      <text x="425" y="128" font-family="DM Sans,Arial,sans-serif" font-size="9" fill="#8C8880" text-anchor="middle">multiple directions · seconds</text>
+      <text x="425" y="148" font-family="DM Sans,Arial,sans-serif" font-size="9" fill="#47453F" text-anchor="middle">artist refines the final design</text>
+    </svg>
+    <figcaption>AI references don't replace the consultation — they accelerate the alignment phase so artists spend more time designing.</figcaption>
+  </figure>
 
   <h2>The consultation problem</h2>
   <p>Most tattoo ideas start as feelings, not images. Clients describe moods, emotions, and vague aesthetic references that make complete sense in their head but are nearly impossible to communicate precisely. They bring photos from Pinterest that are stylistically all over the place, or they describe something they saw in a dream.</p>
@@ -155,6 +213,34 @@
   </ul>
 
   <p>The key regardless of platform: <strong>write a specific prompt</strong>. "Wolf tattoo" produces generic results. "Neo-traditional wolf tattoo, bold outlines, dark and mystical mood, roses and crescent moon, black and grey, isolated on white background" produces something an artist and client can actually discuss.</p>
+
+  <div class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">Are tattoo artists open to AI-generated reference images?</div>
+      <div class="faq-a">Increasingly yes, particularly when the references are presented as direction rather than a design to copy exactly. Many artists appreciate that AI references help clients articulate their ideas more concretely, which reduces time spent interpreting vague descriptions. Framing matters — lead with "something in this direction" rather than "I want this."</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can AI replace the creative input of a tattoo artist?</div>
+      <div class="faq-a">No. AI generates images that look like tattoos but has no understanding of how ink behaves on skin, how designs age, how linework needs to be weighted for longevity, or how a composition wraps around a specific body part. Those decisions require real craft knowledge that only an experienced artist has. AI is a communication aid, not a design tool for tattooing.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What's the best way to present AI references to my artist?</div>
+      <div class="faq-a">Bring two or three images that each capture a different aspect of what you want — one for style, one for composition, one for mood — rather than a single image you expect to be replicated. Point out specific elements you like in each and give the artist creative latitude within that frame.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Are AI tattoo designs copyrightable?</div>
+      <div class="faq-a">In most jurisdictions, AI-generated images without substantial human creative input do not qualify for copyright protection. The tattoo your artist creates from that reference, however, is their original artwork and is protected. The value — and the IP — is in what the artist makes, not in the AI image itself.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How accurate are AI-generated tattoo references to the final result?</div>
+      <div class="faq-a">They're directional, not precise. An AI image establishes mood, style, and rough composition — but the final tattoo will look substantially different because a skilled artist adapts the design for skin, placement, size, and longevity. The reference is the starting point of a creative process, not a preview of the finished tattoo.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I use AI references for cover-up tattoos?</div>
+      <div class="faq-a">Yes, and they can be especially useful here. Cover-up work requires designing around specific shapes and ink density — you can describe those constraints in your prompt and generate concepts that account for them. Your artist will still assess the existing tattoo and make the technical decisions, but having a direction established early saves consultation time.</div>
+    </div>
+  </div>
 
   <div class="cta-box">
     <p>Generate a ready-to-use tattoo reference prompt — pick style, mood, and elements, and get an optimized prompt for any AI tool.</p>

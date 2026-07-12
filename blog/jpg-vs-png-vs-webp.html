@@ -52,6 +52,15 @@
     .footer-links a{font-size:12px;color:var(--faint);transition:color 0.15s;}
     .footer-links a:hover{color:var(--gold);}
     .ad-slot{width:100%;max-width:var(--max-w);padding:0 24px;margin:8px 0 24px;}
+    .faq-section{margin:48px 0 40px;}
+    .faq-section h2{font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;color:var(--cream);margin-bottom:24px;}
+    .faq-item{border-bottom:0.5px solid var(--border);padding:18px 0;}
+    .faq-item:last-child{border-bottom:none;}
+    .faq-q{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:8px;}
+    .faq-a{font-size:14px;color:var(--muted);line-height:1.7;}
+    .article-figure{margin:32px 0;}
+    .article-figure figcaption{font-size:12px;color:var(--faint);text-align:center;margin-top:10px;}
+    .article-wrap code{background:var(--surface);border:0.5px solid var(--border);border-radius:3px;padding:1px 5px;font-size:13px;color:var(--cream);font-family:monospace;}
     @media(max-width:640px){.format-cards{grid-template-columns:1fr;}.site-nav{display:none;}.site-footer{flex-direction:column;align-items:flex-start;}}
   </style>
 </head>
@@ -85,6 +94,26 @@
   <h1>JPG vs PNG vs WebP: which format should you use?</h1>
 
   <p class="article-intro">Choosing the wrong image format can mean bloated file sizes, quality loss, or compatibility issues. Here's a practical breakdown of when to use JPG, PNG, and WebP — and when to convert between them.</p>
+
+  <figure class="article-figure">
+    <svg viewBox="0 0 600 143" width="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:10px;overflow:hidden;">
+      <rect width="600" height="143" fill="#161614"/>
+      <text x="300" y="18" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="11" fill="#47453F">Typical file size — same 12 MP photo from a 4 MB RAW source</text>
+      <!-- JPG row -->
+      <text x="68" y="52" text-anchor="end" font-family="'DM Sans',Arial,sans-serif" font-size="13" font-weight="500" fill="#E8E4DC">JPG</text>
+      <rect x="75" y="37" width="104" height="22" rx="4" fill="#B8862A" opacity="0.75"/>
+      <text x="184" y="52" font-family="'DM Sans',Arial,sans-serif" font-size="12" fill="#EF9F27">~800 KB</text>
+      <!-- PNG row -->
+      <text x="68" y="87" text-anchor="end" font-family="'DM Sans',Arial,sans-serif" font-size="13" font-weight="500" fill="#E8E4DC">PNG</text>
+      <rect x="75" y="72" width="415" height="22" rx="4" fill="#B8862A" opacity="0.28"/>
+      <text x="495" y="87" font-family="'DM Sans',Arial,sans-serif" font-size="12" fill="#EF9F27">~3.2 MB</text>
+      <!-- WebP row -->
+      <text x="68" y="122" text-anchor="end" font-family="'DM Sans',Arial,sans-serif" font-size="13" font-weight="500" fill="#E8E4DC">WebP</text>
+      <rect x="75" y="107" width="65" height="22" rx="4" fill="#EF9F27" opacity="0.85"/>
+      <text x="145" y="122" font-family="'DM Sans',Arial,sans-serif" font-size="12" fill="#EF9F27">~500 KB</text>
+    </svg>
+    <figcaption>Approximate file sizes when exporting a 12 MP photo from a 4 MB RAW source at standard quality settings.</figcaption>
+  </figure>
 
   <div class="format-cards">
     <div class="format-card">
@@ -128,6 +157,63 @@
     <li>Photo for social media → <strong style="color:#E8E4DC">JPG</strong></li>
     <li>Design asset for editing → <strong style="color:#E8E4DC">PNG</strong></li>
   </ul>
+
+  <h2>Real-world file size comparison</h2>
+  <p>To make the format differences concrete, consider a typical 12-megapixel photo from a modern smartphone with a 4 MB RAW source file:</p>
+  <ul>
+    <li><strong>JPG at 80% quality:</strong> approximately 800 KB</li>
+    <li><strong>PNG (lossless):</strong> approximately 3.2 MB</li>
+    <li><strong>WebP at 80% quality:</strong> approximately 500 KB</li>
+  </ul>
+  <p>WebP produces a file roughly 37% smaller than JPG, while PNG is four times larger. On a website with ten images per page, switching from JPG to WebP could cut over 3 MB of image weight per page load — a meaningful improvement for mobile users and anyone on a slower connection.</p>
+  <p>The PNG file being so much larger doesn't mean PNG is inefficient — it means PNG is preserving every pixel exactly as captured. For photographs, that extra data is imperceptible to the eye. For screenshots of text or sharp diagrams, that lossless precision matters enormously.</p>
+
+  <h2>How browsers and platforms handle each format</h2>
+  <p>Format support isn't uniform across the web. Understanding where each format works will help you avoid compatibility surprises:</p>
+  <ul>
+    <li><strong>Email clients:</strong> Most email clients (Outlook, Apple Mail, Gmail web) block or ignore WebP. JPG is the only reliable choice for email attachments and inline images.</li>
+    <li><strong>Social media:</strong> Instagram, Facebook, and X (Twitter) transcode uploaded images to their own internal formats, so your input format matters less for the final result. That said, starting with a high-quality JPG or PNG gives the platform's encoder better material to work from.</li>
+    <li><strong>WordPress:</strong> Supports JPG, PNG, and WebP natively since version 5.8. Plugins like Imagify and ShortPixel can automatically generate WebP versions of every uploaded image.</li>
+    <li><strong>Older Windows:</strong> WebP requires Windows 10 build 1809 or later. Windows 7 and 8 users cannot open WebP files without installing third-party software.</li>
+    <li><strong>macOS and iOS:</strong> Full native support for all three formats, including WebP preview in Finder and the Photos app.</li>
+    <li><strong>Android:</strong> Full WebP support since Android 4.0 (2011), meaning virtually every Android device in active use today can display WebP without issue.</li>
+  </ul>
+
+  <h2>Which format wins for SEO?</h2>
+  <p>For websites, WebP is the clear winner from an SEO perspective. Smaller file sizes lead to faster page loads, which directly affects two of Google's Core Web Vitals signals:</p>
+  <ul>
+    <li><strong>Largest Contentful Paint (LCP):</strong> Measures how quickly the largest visible element — typically a hero image — loads. A hero image in WebP loads 25–35% faster than the same image in JPG, helping you hit Google's "good" threshold of under 2.5 seconds.</li>
+    <li><strong>Cumulative Layout Shift (CLS):</strong> Images served without defined dimensions cause content to shift as they load, which Google penalizes. Always specify <code>width</code> and <code>height</code> attributes on your <code>&lt;img&gt;</code> tags regardless of format.</li>
+  </ul>
+  <p>Practically speaking, a website that loads in 1.5 seconds will outrank an identical site loading in 3.5 seconds. Image optimization — particularly converting to WebP — is one of the highest-impact, lowest-effort changes you can make to improve your Core Web Vitals score and search visibility.</p>
+
+  <div class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">Is WebP supported in all browsers?</div>
+      <div class="faq-a">Yes. As of 2023, WebP is supported by all major browsers including Chrome, Firefox, Safari (since version 14), Edge, and Opera. The only significant exception is Internet Explorer, which has no WebP support — but IE accounts for less than 1% of global web traffic and is no longer maintained by Microsoft. For the vast majority of your visitors, serving WebP is completely safe.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I convert a JPG to PNG without quality loss?</div>
+      <div class="faq-a">When you convert JPG to PNG, the resulting PNG file is lossless — but you cannot recover quality that was already lost when the image was first compressed as a JPG. The conversion itself adds no further degradation. Think of it like photocopying a photocopy: the new copy is faithful to what it's given, but the quality lost in the first compression is already permanent. If you need a truly lossless image, you need the original source file before it was ever saved as JPG.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Why does PNG look better than JPG for screenshots?</div>
+      <div class="faq-a">Screenshots contain sharp edges, flat colors, and text — exactly the kind of content where JPG's lossy compression creates visible artifacts. JPG was designed for photographs with gradual color transitions, where discarding a little data is imperceptible. When it encounters the hard boundaries of a UI element or a line of text, it introduces blurring and color halos. PNG's lossless compression preserves every pixel exactly, keeping text crisp and interface colors accurate.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Does WebP support transparency like PNG?</div>
+      <div class="faq-a">Yes. WebP supports an alpha channel for transparency in both its lossy and lossless modes. This makes it a complete replacement for PNG in web contexts — you can use WebP for logos, icons, and cutout images that need a transparent background, and you'll still benefit from the smaller file sizes WebP offers over PNG.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Which format should I use for my website?</div>
+      <div class="faq-a">Use WebP for photos and hero images, serving it via the HTML <code>&lt;picture&gt;</code> element with a JPG fallback for older environments. Use SVG for logos and icons whenever the artwork is vector-based — SVG scales perfectly at any size. Use PNG for screenshots and images where pixel-perfect accuracy is required. Avoid serving large JPG or PNG files when WebP is an option; the file size savings are significant and the quality difference is negligible at typical viewing sizes.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What is the difference between lossy and lossless compression?</div>
+      <div class="faq-a">Lossy compression (used by JPG, and optionally by WebP) permanently removes some image data to achieve smaller files. The data discarded is chosen to be as imperceptible as possible, but it cannot be recovered — and re-saving a lossy file further degrades it each time. Lossless compression (used by PNG, and optionally by WebP) compresses data without discarding any information, so the original image can be perfectly reconstructed. Lossy files are smaller; lossless files preserve every detail. For photos shared casually, lossy is fine. For design assets you'll edit repeatedly, lossless is the right choice.</div>
+    </div>
+  </div>
 
   <div class="cta-box">
     <p>Need to convert between formats? All InkTools converters are free and run in your browser.</p>

@@ -62,6 +62,14 @@
     .footer-links a:hover{color:var(--gold);}
     .ad-slot{width:100%;max-width:var(--max-w);padding:0 24px;margin:8px 0 24px;}
     @media(max-width:640px){.settings-grid{grid-template-columns:1fr;}.site-nav{display:none;}.site-footer{flex-direction:column;align-items:flex-start;}}
+    .faq-section{margin:48px 0 40px;}
+    .faq-section h2{font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;color:var(--cream);margin-bottom:24px;}
+    .faq-item{border-bottom:0.5px solid var(--border);padding:18px 0;}
+    .faq-item:last-child{border-bottom:none;}
+    .faq-q{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:8px;}
+    .faq-a{font-size:14px;color:var(--muted);line-height:1.7;}
+    .article-figure{margin:32px 0;}
+    .article-figure figcaption{font-size:12px;color:var(--faint);text-align:center;margin-top:10px;}
   </style>
 </head>
 <body>
@@ -94,6 +102,66 @@
   <h1>How to create a tattoo stencil from a photo: a complete guide</h1>
 
   <p class="article-intro">Converting a reference photo into a clean, printable tattoo stencil is one of the most time-consuming parts of tattoo preparation. This guide walks through the process step by step — from choosing the right photo to getting a stencil ready for hectographic printing.</p>
+
+  <figure class="article-figure">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 160" width="100%" aria-label="Three-step workflow: upload a photo, AI converts it to a stencil, then print and transfer to skin">
+      <defs>
+        <marker id="sg-arr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0.5 L5.5,3.5 L0,6.5 Z" fill="#B8862A"/></marker>
+      </defs>
+      <!-- Step 1: Upload photo -->
+      <rect x="16" y="16" width="144" height="128" rx="10" fill="#161614" stroke="rgba(184,134,42,0.22)" stroke-width="0.75"/>
+      <circle cx="88" cy="38" r="10" fill="#1E1E1B" stroke="rgba(184,134,42,0.3)" stroke-width="0.5"/>
+      <text x="88" y="42" font-family="DM Sans,Arial,sans-serif" font-size="10" font-weight="500" fill="#B8862A" text-anchor="middle">1</text>
+      <!-- Camera body -->
+      <rect x="56" y="56" width="64" height="46" rx="6" fill="#1E1E1B" stroke="#47453F" stroke-width="1"/>
+      <!-- Viewfinder bump -->
+      <rect x="70" y="50" width="18" height="8" rx="3" fill="#47453F"/>
+      <!-- Lens ring -->
+      <circle cx="88" cy="79" r="14" fill="none" stroke="#B8862A" stroke-width="1.3"/>
+      <circle cx="88" cy="79" r="7" fill="rgba(184,134,42,0.12)"/>
+      <circle cx="88" cy="79" r="3" fill="rgba(184,134,42,0.3)"/>
+      <text x="88" y="118" font-family="DM Sans,Arial,sans-serif" font-size="11" font-weight="500" fill="#E8E4DC" text-anchor="middle">Upload photo</text>
+      <text x="88" y="134" font-family="DM Sans,Arial,sans-serif" font-size="9" fill="#8C8880" text-anchor="middle">any reference image</text>
+      <!-- Arrow 1 -->
+      <line x1="162" y1="80" x2="196" y2="80" stroke="#B8862A" stroke-width="1.2" marker-end="url(#sg-arr)"/>
+      <!-- Step 2: AI converts -->
+      <rect x="200" y="16" width="160" height="128" rx="10" fill="#161614" stroke="#B8862A" stroke-width="0.75"/>
+      <circle cx="280" cy="38" r="10" fill="rgba(184,134,42,0.09)" stroke="#B8862A" stroke-width="0.75"/>
+      <text x="280" y="42" font-family="DM Sans,Arial,sans-serif" font-size="10" font-weight="500" fill="#B8862A" text-anchor="middle">2</text>
+      <!-- Magic wand -->
+      <line x1="256" y1="100" x2="296" y2="58" stroke="#E8E4DC" stroke-width="2" stroke-linecap="round"/>
+      <rect x="246" y="95" width="14" height="9" rx="2.5" fill="#B8862A"/>
+      <!-- Sparkles around wand tip -->
+      <g transform="translate(299,55)" opacity="0.85">
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#EF9F27" stroke-width="1.1"/>
+        <line x1="-8" y1="0" x2="8" y2="0" stroke="#EF9F27" stroke-width="1.1"/>
+        <line x1="-5" y1="-5" x2="5" y2="5" stroke="#EF9F27" stroke-width="0.7"/>
+        <line x1="5" y1="-5" x2="-5" y2="5" stroke="#EF9F27" stroke-width="0.7"/>
+        <circle cx="0" cy="0" r="2" fill="#EF9F27"/>
+      </g>
+      <text x="280" y="118" font-family="DM Sans,Arial,sans-serif" font-size="11" font-weight="500" fill="#E8E4DC" text-anchor="middle">AI converts stencil</text>
+      <text x="280" y="134" font-family="DM Sans,Arial,sans-serif" font-size="9" fill="#8C8880" text-anchor="middle">edge detection · clean lines</text>
+      <!-- Arrow 2 -->
+      <line x1="362" y1="80" x2="396" y2="80" stroke="#B8862A" stroke-width="1.2" marker-end="url(#sg-arr)"/>
+      <!-- Step 3: Print & transfer -->
+      <rect x="400" y="16" width="144" height="128" rx="10" fill="#161614" stroke="rgba(184,134,42,0.22)" stroke-width="0.75"/>
+      <circle cx="472" cy="38" r="10" fill="#1E1E1B" stroke="rgba(184,134,42,0.3)" stroke-width="0.5"/>
+      <text x="472" y="42" font-family="DM Sans,Arial,sans-serif" font-size="10" font-weight="500" fill="#B8862A" text-anchor="middle">3</text>
+      <!-- Printer body -->
+      <rect x="443" y="62" width="58" height="34" rx="5" fill="#1E1E1B" stroke="#47453F" stroke-width="1"/>
+      <!-- Paper feed top -->
+      <rect x="452" y="54" width="40" height="12" rx="2" fill="#47453F"/>
+      <!-- Paper output -->
+      <rect x="452" y="86" width="40" height="22" rx="2" fill="#1E1E1B" stroke="#B8862A" stroke-width="0.75"/>
+      <line x1="458" y1="93" x2="486" y2="93" stroke="#B8862A" stroke-width="0.8"/>
+      <line x1="458" y1="100" x2="486" y2="100" stroke="#B8862A" stroke-width="0.8"/>
+      <!-- Status light -->
+      <circle cx="489" cy="71" r="3.5" fill="#B8862A" opacity="0.6"/>
+      <text x="472" y="118" font-family="DM Sans,Arial,sans-serif" font-size="11" font-weight="500" fill="#E8E4DC" text-anchor="middle">Print &amp; transfer</text>
+      <text x="472" y="134" font-family="DM Sans,Arial,sans-serif" font-size="9" fill="#8C8880" text-anchor="middle">hectographic paper</text>
+    </svg>
+    <figcaption>The stencil tool handles the conversion automatically — from photo to print-ready PNG in seconds.</figcaption>
+  </figure>
 
   <h2>What is a tattoo stencil?</h2>
   <p>A tattoo stencil is a black-and-white line drawing that gets transferred onto the client's skin before tattooing. It serves as a guide for the artist, marking the outlines, shadows, and key details of the design. The stencil is typically printed on hectographic (thermal) paper, then applied to the skin using stencil solution.</p>
@@ -172,6 +240,34 @@
     <li><strong>Realistic / portrait</strong> — Fine lines, high detail preset, high contrast boost to bring out texture</li>
     <li><strong>Geometric</strong> — Works best with clean vector-style references rather than photos</li>
   </ul>
+
+  <div class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">What type of paper should I use to print a tattoo stencil?</div>
+      <div class="faq-a">Hectographic (thermal) paper is the standard for professional stencil work — it transfers to skin cleanly when activated with stencil solution. You'll need a thermal printer designed for tattoo stencils (brands like Dragonhawk or Spirit are common). Always do a test print on regular paper first to confirm size and proportions before using the stencil paper.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I make a stencil from any photo?</div>
+      <div class="faq-a">Most photos can be converted, but results vary significantly by source quality. High-contrast photos with plain backgrounds produce clean, usable stencils. Busy landscape photos, low-light shots, or heavily filtered images tend to produce cluttered or muddy linework. The cleaner the original photo, the better the stencil output.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Does the photo quality affect the stencil output?</div>
+      <div class="faq-a">Yes, significantly. A sharp, well-lit photo of at least 1000px on the shortest side gives the edge detection algorithm enough detail to work cleanly. Compressed, blurry, or low-resolution images produce stencils with broken lines and noise. If you're working from a client's phone photo, ask for the highest resolution version available.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How do I transfer the stencil to skin?</div>
+      <div class="faq-a">Clean and dry the skin thoroughly, then apply a thin layer of stencil solution or alcohol-free deodorant. Press the printed stencil firmly and evenly for 30–60 seconds, then peel slowly. Let the transfer dry completely before tattooing — rushing this step leads to smearing. Green soap or rubbing alcohol removes the stencil cleanly if repositioning is needed.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I edit the stencil after generating it?</div>
+      <div class="faq-a">Yes — download the PNG and open it in any image editor (Photoshop, Procreate, or GIMP). Since the stencil is black on white, it's straightforward to clean up unwanted lines, remove noise from the conversion, or add elements manually. Many artists do a quick cleanup pass before printing to tighten the linework.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is the stencil tool free to use?</div>
+      <div class="faq-a">Yes, the Photo to Stencil tool on InkTools is completely free with no account required. It runs entirely in your browser — your photo is processed locally on your device, so your client reference images are never uploaded to a server and stay completely private.</div>
+    </div>
+  </div>
 
   <div class="cta-box">
     <p>Try the Photo to Stencil tool — free, private, runs entirely in your browser.</p>
