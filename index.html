@@ -21,7 +21,7 @@
   <meta property="og:type" content="website">
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMSW"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -959,14 +959,14 @@
 
       <!-- Step 1: type -->
       <div id="itkStep1" class="itk-step">
-        <div class="itk-guide-eyebrow">InkTools · Bienvenido</div>
-        <h2 class="itk-guide-q">¿Con qué trabajas hoy?</h2>
-        <p class="itk-guide-hint">Te llevamos directo a la herramienta</p>
+        <div class="itk-guide-eyebrow" id="itkGuideEyebrow">InkTools · Bienvenido</div>
+        <h2 class="itk-guide-q" id="itkGuideQ1">¿Con qué trabajas hoy?</h2>
+        <p class="itk-guide-hint" id="itkGuideHint">Te llevamos directo a la herramienta</p>
         <div class="itk-type-row">
           <button class="itk-type-btn img" onclick="itkShowImages()">
             <span class="itk-type-icon">🖼</span>
-            <span class="itk-type-label">Imagen</span>
-            <div class="itk-type-chips">
+            <span class="itk-type-label" id="itkImgLabel">Imagen</span>
+            <div class="itk-type-chips" id="itkImgChips">
               <span class="itk-type-chip">Convertir</span>
               <span class="itk-type-chip">Comprimir</span>
               <span class="itk-type-chip">Redimensionar</span>
@@ -982,18 +982,18 @@
             </div>
           </button>
         </div>
-        <button class="itk-skip-btn" onclick="itkDismiss()">Explorar todo →</button>
+        <button class="itk-skip-btn" id="itkSkipBtn1" onclick="itkDismiss()">Explorar todo →</button>
       </div>
 
       <!-- Step 2: image tools -->
       <div id="itkStep2" class="itk-step hidden">
         <button class="itk-back-btn" onclick="itkBackToStep1()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
-          Volver
+          <span id="itkBackLabel">Volver</span>
         </button>
-        <h2 class="itk-guide-q sm">Herramientas de imagen</h2>
+        <h2 class="itk-guide-q sm" id="itkGuideQ2">Herramientas de imagen</h2>
         <div class="itk-tools-grid" id="itkToolsGrid"></div>
-        <button class="itk-skip-btn" onclick="itkDismiss()">Ver todas las tools →</button>
+        <button class="itk-skip-btn" id="itkSkipBtn2" onclick="itkDismiss()">Ver todas las tools →</button>
       </div>
 
     </div>
@@ -1380,22 +1380,47 @@
     const step2   = document.getElementById('itkStep2');
     const toolsGrid = document.getElementById('itkToolsGrid');
 
+    const isES = navigator.language.startsWith('es');
+
+    // UI strings — Spanish / English
+    const UI = {
+      eyebrow:  isES ? 'InkTools · Bienvenido'                : 'InkTools · Welcome',
+      q1:       isES ? '¿Con qué trabajas hoy?'               : 'What are you working on today?',
+      hint:     isES ? 'Te llevamos directo a la herramienta' : 'We\'ll take you straight to the right tool',
+      imgLabel: isES ? 'Imagen'                               : 'Image',
+      imgChips: isES ? ['Convertir','Comprimir','Redimensionar'] : ['Convert','Compress','Resize'],
+      skipBtn1: isES ? 'Explorar todo →'                      : 'Explore all →',
+      backLabel: isES ? 'Volver'                              : 'Back',
+      q2:       isES ? 'Herramientas de imagen'               : 'Image tools',
+      skipBtn2: isES ? 'Ver todas las tools →'                : 'See all tools →',
+    };
+
+    document.getElementById('itkGuideEyebrow').textContent = UI.eyebrow;
+    document.getElementById('itkGuideQ1').textContent      = UI.q1;
+    document.getElementById('itkGuideHint').textContent    = UI.hint;
+    document.getElementById('itkImgLabel').textContent     = UI.imgLabel;
+    document.getElementById('itkImgChips').innerHTML       = UI.imgChips.map(c => `<span class="itk-type-chip">${c}</span>`).join('');
+    document.getElementById('itkSkipBtn1').textContent     = UI.skipBtn1;
+    document.getElementById('itkBackLabel').textContent    = UI.backLabel;
+    document.getElementById('itkGuideQ2').textContent      = UI.q2;
+    document.getElementById('itkSkipBtn2').textContent     = UI.skipBtn2;
+
     const TOOLS = [
-      { name:'HEIC to JPG',      desc:'El más compatible, abre en cualquier dispositivo', dot:'itk-d-gold',   url:'/heic-to-jpg/' },
-      { name:'HEIC to PNG',      desc:'Sin pérdida de calidad, con transparencias',        dot:'itk-d-gold',   url:'/heic-to-png/' },
-      { name:'JPG to PNG',       desc:'Agrega soporte a transparencias en JPEGs',          dot:'itk-d-blue',   url:'/jpg-to-png/' },
-      { name:'PNG to JPG',       desc:'Reduce el tamaño del archivo desde PNG',            dot:'itk-d-blue',   url:'/png-to-jpg/' },
-      { name:'WebP Converter',   desc:'Convierte hacia y desde formato WebP',              dot:'itk-d-purple', url:'/webp-converter/' },
-      { name:'Image Compressor', desc:'Reduce el peso sin perder calidad visible',         dot:'itk-d-green',  url:'/image-compressor/' },
-      { name:'Image Resizer',    desc:'Dimensiones exactas en píxeles',                    dot:'itk-d-orange', url:'/image-resizer/' },
-      { name:'Photo to Stencil', desc:'Fotos a stencil para tatuajes',                    dot:'itk-d-orange', url:'/photo-to-stencil/' },
+      { name:'HEIC to JPG',      desc:'El más compatible, abre en cualquier dispositivo', descEN:'Most compatible, opens on any device',       dot:'itk-d-gold',   url:'/heic-to-jpg/' },
+      { name:'HEIC to PNG',      desc:'Sin pérdida de calidad, con transparencias',        descEN:'Lossless quality, supports transparency',    dot:'itk-d-gold',   url:'/heic-to-png/' },
+      { name:'JPG to PNG',       desc:'Agrega soporte a transparencias en JPEGs',          descEN:'Convert to lossless PNG format',             dot:'itk-d-blue',   url:'/jpg-to-png/' },
+      { name:'PNG to JPG',       desc:'Reduce el tamaño del archivo desde PNG',            descEN:'Convert PNG to smaller JPG files',           dot:'itk-d-blue',   url:'/png-to-jpg/' },
+      { name:'WebP Converter',   desc:'Convierte hacia y desde formato WebP',              descEN:'Convert to/from WebP format',                dot:'itk-d-purple', url:'/webp-converter/' },
+      { name:'Image Compressor', desc:'Reduce el peso sin perder calidad visible',         descEN:'Reduce file size without losing quality',    dot:'itk-d-green',  url:'/image-compressor/' },
+      { name:'Image Resizer',    desc:'Dimensiones exactas en píxeles',                    descEN:'Resize to exact pixel dimensions',           dot:'itk-d-orange', url:'/image-resizer/' },
+      { name:'Photo to Stencil', desc:'Fotos a stencil para tatuajes',                    descEN:'Turn photos into tattoo stencils',           dot:'itk-d-orange', url:'/photo-to-stencil/' },
     ];
 
     TOOLS.forEach(t => {
       const a = document.createElement('a');
       a.className = 'itk-tool-item';
       a.href = t.url;
-      a.innerHTML = `<span class="itk-tool-dot ${t.dot}"></span><span><span class="itk-tool-name">${t.name}</span><span class="itk-tool-desc">${t.desc}</span></span>`;
+      a.innerHTML = `<span class="itk-tool-dot ${t.dot}"></span><span><span class="itk-tool-name">${t.name}</span><span class="itk-tool-desc">${isES ? t.desc : t.descEN}</span></span>`;
       toolsGrid.appendChild(a);
     });
 

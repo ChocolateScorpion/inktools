@@ -19,7 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMSW"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -40,7 +40,7 @@
       --cream:       #E8E4DC;
       --muted:       #8C8880;
       --faint:       #47453F;
-      --max-w:       960px;
+      --max-w:       860px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -521,10 +521,15 @@
       try {
         await runAISegmentation();
       } catch (e) {
-        alert("Could not load AI model. Check your connection and try again.");
+        const errDiv = document.getElementById('loader') || document.getElementById('aiLabel');
+        if (errDiv) { errDiv.textContent = 'Could not load AI model. Check your connection and try again.'; errDiv.style.color = '#FF6060'; }
         this.checked = false;
         aiMask = null;
+        this.disabled = false;
+        scheduleProcess();
+        return;
       }
+      document.getElementById("aiLabel").style.color = '';
       document.getElementById("aiLabel").innerHTML = 'AI portrait mode <span style="font-size:10px; color:var(--faint);">(people)</span>';
       this.disabled = false;
     } else {
@@ -779,6 +784,9 @@
       URL.revokeObjectURL(url);
     }, "image/png");
   }
+
+  // Initialize sliders to match the active "Fine lines" preset
+  applyPreset('fine');
 </script>
 
 </body>

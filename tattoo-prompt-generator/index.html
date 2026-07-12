@@ -19,7 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMSW"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -670,7 +670,7 @@
     document.getElementById("subject").placeholder       = "e.g. " + t.subjectPH[Math.floor(Math.random() * t.subjectPH.length)];
     document.getElementById("styleLabel").textContent    = t.styleLabel;
     document.getElementById("style-error").textContent   = t.styleError;
-    document.getElementById("moodMax").textContent       = t.moodMax;
+    updateMoodCounter();
     document.getElementById("elementsLabel").childNodes[0].textContent = t.elementsLabel + " ";
     document.getElementById("elementsOptional").textContent = t.elementsOpt;
     document.getElementById("elements").placeholder      = t.elementsPH;
@@ -728,6 +728,11 @@
     if (selectedStyle) btn.classList.add("active");
   });
 
+  // ── Mood counter ──
+  function updateMoodCounter() {
+    document.getElementById("moodMax").textContent = "(" + selectedMoods.size + " / 4)";
+  }
+
   // ── Mood chips ──
   document.getElementById("moodChips").addEventListener("click", e => {
     const chip = e.target.closest(".mood-chip");
@@ -745,6 +750,7 @@
       selectedMoods.add(mood);
       chip.classList.add("active");
     }
+    updateMoodCounter();
   });
 
   // ── Detail slider ──
@@ -799,7 +805,7 @@
 
     const ar      = AR_MAP[placement] || "--ar 3:4";
     const rawFlag = MJ_RAW.includes(selectedStyle) ? "--style raw " : "";
-    const mjPrompt = `/imagine prompt: ${mjParts.join(", ")}, ${ar} --stylize ${STYLIZE[detail]} ${rawFlag}--v 6.1`.trim();
+    const mjPrompt = `/imagine prompt: ${mjParts.join(", ")}, ${ar} --stylize ${STYLIZE[detail]} ${rawFlag}--v 7`.trim();
 
     document.getElementById("universalPrompt").value  = universalPrompt;
     document.getElementById("midjourneyPrompt").value = mjPrompt;
