@@ -21,7 +21,7 @@
   <meta property="og:type" content="website">
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMSW"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -1144,7 +1144,9 @@
     }
 
     const CHB={game:{x:22,y:45,w:210,h:100},drink:{x:248,y:45,w:210,h:100}};
+    function eTrack(name,params){if(typeof gtag!=='undefined')gtag('event',name,params||{});}
     function restartGame(cur){
+      eTrack('entertain_game_over',{game_type:cur});
       if(Math.random()<0.5){if(cur==='raptor')raptorInit();else snakeInit();}
       else{if(cur==='raptor'){eMode='snake';snakeInit();}else{eMode='raptor';raptorInit();}}
     }
@@ -1385,9 +1387,11 @@
         if(mx>=gb.x&&mx<=gb.x+gb.w&&my>=gb.y&&my<=gb.y+gb.h){
           eMode=isMob()?'raptor':(Math.random()<0.5?'raptor':'snake');
           if(eMode==='raptor')raptorInit();else snakeInit();
+          eTrack('entertain_game_start',{game_type:eMode});
           showBtn('game');
         }else if(mx>=db.x&&mx<=db.x+db.w&&my>=db.y&&my<=db.y+db.h){
           eMode='drink-choose';dDrink=null;dLevel=0.92;dSips=0;dParts=[];dHov=null;
+          eTrack('entertain_drink_start');
           showBtn('drink');
         }
         return;
@@ -1397,6 +1401,7 @@
         DBTNS.forEach(b=>{
           if(mx>=b.x&&mx<=b.x+DBW&&my>=b.y&&my<=b.y+DBH){
             dDrink=b.id;eMode='drinking';dLevel=0.92;dSips=0;dParts=[];
+            eTrack('entertain_drink_chosen',{drink:b.id});
           }
         });
         return;

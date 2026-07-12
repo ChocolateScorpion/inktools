@@ -9,9 +9,15 @@
   <!-- Meta -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About | InkTools</title>
+  <title>About InkTools — Free Online Image Tools</title>
   <meta name="description" content="InkTools is a collection of free, private image utilities that run entirely in your browser. No uploads, no accounts, no tracking.">
   <link rel="icon" href="/favicon.ico">
+  <link rel="canonical" href="https://inktools.tech/about.html">
+  <meta property="og:title" content="About InkTools — Free Online Image Tools">
+  <meta property="og:description" content="InkTools is a collection of free, private image utilities that run entirely in your browser. No uploads, no accounts, no tracking.">
+  <meta property="og:url" content="https://inktools.tech/about.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="InkTools">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +25,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMSW"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -204,6 +210,8 @@
     .footer-links { display: flex; gap: 18px; }
     .footer-links a { font-size: 12px; color: var(--faint); transition: color 0.15s; }
     .footer-links a:hover { color: var(--gold); }
+    .gold-link { color: var(--gold); transition: color 0.15s; }
+    .gold-link:hover { color: var(--gold-light); }
 
     @media (max-width: 640px) {
       .values-grid { grid-template-columns: 1fr; }
@@ -226,6 +234,7 @@
     <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
   </a>
   <nav class="site-nav">
+    <a href="/blog/">Blog</a>
     <a href="/about.html" class="active">About</a>
     <a href="/contact.html">Contact</a>
   </nav>
@@ -280,7 +289,7 @@
 
   <div class="divider"></div>
 
-  <p>InkTools is a one-person project — built because I needed it, kept going because other people did too. It started with image converters and grew into tattoo tools somewhere along the way. More tools are coming. If there's something you'd like to see, I'd genuinely like to hear it.</p>
+  <p>InkTools started as a one-tool fix for a real problem, and kept going because other people had the same one. It started with image converters and grew into tattoo tools — <a href="/photo-to-stencil/" class="gold-link">Photo to Stencil</a> and <a href="/tattoo-prompt-generator/" class="gold-link">Tattoo Prompt Generator</a> — along the way. More tools are coming. If there's something you'd like to see, we'd genuinely like to hear from you.</p>
 
   <div class="cta-row">
     <a href="/" class="btn-primary">
@@ -294,9 +303,10 @@
 
 <!-- FOOTER -->
 <footer class="site-footer">
-  <span class="footer-copy">© 2026 InkTools — Image Utilities</span>
+  <span class="footer-copy">© 2026 InkTools — Free Online Image Utilities</span>
   <div class="footer-links">
     <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
     <a href="/about.html">About</a>
     <a href="/contact.html">Contact</a>
     <a href="/privacy.html">Privacy</a>

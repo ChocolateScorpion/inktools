@@ -19,7 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMS"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMSW"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -339,19 +339,24 @@
   }
 
   fromFormat.addEventListener("change", syncFormats);
+  function updateConvertBtnLabel() {
+    document.getElementById("convertBtn").textContent = "Convert to " + toFormat.value.toUpperCase();
+  }
+  // Set initial button label to match the default selected output format
+  updateConvertBtnLabel();
+
   toFormat.addEventListener("change", () => {
     if (fromFormat.value === toFormat.value) {
       const opts = ["jpg","png","webp"].filter(f => f !== toFormat.value);
       fromFormat.value = opts[0];
     }
+    updateConvertBtnLabel();
   });
 
   const mimeMap = { jpg: "image/jpeg", png: "image/png", webp: "image/webp" };
   const extMap  = { jpg: ".jpg", png: ".png", webp: ".webp" };
 
   setupTool({
-    previewFromHEIC: false,
-
     async convert(file) {
       const targetMime = mimeMap[toFormat.value] || "image/jpeg";
       return await new Promise((resolve, reject) => {
@@ -362,8 +367,11 @@
           canvas.width  = img.naturalWidth;
           canvas.height = img.naturalHeight;
           const ctx = canvas.getContext("2d");
-          ctx.fillStyle = "#ffffff";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          // White background fill only for JPEG output (preserves transparency for PNG/WebP)
+          if (toFormat.value === 'jpg') {
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+          }
           ctx.drawImage(img, 0, 0);
           URL.revokeObjectURL(url);
           canvas.toBlob(blob => {
