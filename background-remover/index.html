@@ -308,15 +308,14 @@
 <section class="seo-section">
 
   <h2>What this tool does</h2>
-  <p>Background Remover uses an AI segmentation model (ISNet) running entirely in your browser via WebAssembly to automatically detect and remove the background from any photo. The result is a high-quality transparent PNG — perfect for product shots, profile photos, tattoo references, and more.</p>
+  <p>Background removal used to require Photoshop and patience. This tool does it in seconds using an AI segmentation model (ISNet) running entirely in your browser via WebAssembly — upload a photo and the background is detected and removed automatically, leaving a clean cutout on a transparent background, saved as PNG. Perfect for product shots, profile photos, and tattoo references.</p>
   <p>Unlike cloud-based services, your images never leave your device. No usage limits, no watermarks, no account required.</p>
 
   <h2>How to use</h2>
   <ol>
-    <li>Upload or drag your image into the box above</li>
-    <li>Click "Remove Background"</li>
-    <li>On first use, the AI model downloads automatically (~40 MB, one-time)</li>
-    <li>Wait 10–30 seconds while the AI processes your image</li>
+    <li>Upload or drag your photo into the box above — portraits, product photos, and objects on simple backgrounds work best</li>
+    <li>Click "Remove Background" — on first use, the AI model downloads automatically (~40 MB, one-time, then cached)</li>
+    <li>Wait 3–30 seconds while the AI processes your image, depending on your device</li>
     <li>Your transparent PNG downloads automatically</li>
   </ol>
 
@@ -332,6 +331,9 @@
 
   <h2>FAQ</h2>
 
+  <h3>What types of photos work best for background removal?</h3>
+  <p>Photos with clear contrast between subject and background work best — portraits, product shots on plain backgrounds, and animals against simple scenery.</p>
+
   <h3>Why does it take longer the first time?</h3>
   <p>The AI model (~40 MB) is downloaded to your browser on first use. Your browser caches it automatically, so all future uses process in seconds without any download.</p>
 
@@ -339,7 +341,7 @@
   <p>JPG, PNG, WebP, and HEIC are all supported as input. The output is always a transparent PNG file.</p>
 
   <h3>How accurate is the background detection?</h3>
-  <p>The tool uses ISNet, a high-precision segmentation model that handles hair, fur, and fine edges very well. For subjects with similar colors to the background, results may vary — but you can always run it through again or use the result as a starting point.</p>
+  <p>The tool uses ISNet, a high-precision segmentation model that handles hair, fur, and fine edges very well. For subjects with similar colors to the background, results may vary, or need manual touchup — but you can always run it through again or use the result as a starting point.</p>
 
   <h3>Can I use this to prepare tattoo reference images?</h3>
   <p>Yes. Isolating a subject on a transparent background is a great first step. You can then place it on a different background or use the <a href="/photo-to-stencil/" style="color: var(--gold);">Photo to Stencil</a> tool to convert it to a printable stencil.</p>
@@ -347,8 +349,8 @@
   <h3>Does it work on mobile?</h3>
   <p>Yes. The tool runs in any modern browser, including Safari and Chrome on mobile. Processing may be slightly slower on older phones.</p>
 
-  <h3>Are my images kept private?</h3>
-  <p>Completely. The AI model runs in your browser using WebAssembly and ONNX Runtime. Your images are never uploaded, stored, or shared — everything happens locally on your device.</p>
+  <h3>Is my photo sent to a server?</h3>
+  <p>No. The AI model runs entirely in your browser using WebAssembly and ONNX Runtime. Your images are never uploaded, stored, or shared — everything happens locally on your device.</p>
 
 </section>
 
@@ -357,44 +359,6 @@
   <ins class="adsbygoogle" style="display:block;"
     data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-
-<!-- HOW TO USE + FAQ -->
-<div class="info-section">
-
-  <h2>How to use the background remover</h2>
-  <p>Background removal used to require Photoshop and patience. This tool does it in seconds using AI — upload a photo, and the background is detected and removed automatically, leaving you with a clean cutout on a transparent background, saved as PNG.</p>
-
-  <ul class="steps-list">
-    <li><strong>Upload your photo</strong> — portraits, product photos, and objects on simple backgrounds work best.</li>
-    <li><strong>Wait for AI processing</strong> — the model runs entirely in your browser. Processing typically takes 3–10 seconds depending on your device.</li>
-    <li><strong>Download the PNG</strong> — your cutout is saved with a transparent background, ready for any design project.</li>
-  </ul>
-
-  <h2>Frequently asked questions</h2>
-  <div class="mini-faq">
-
-    <div class="mini-faq-item">
-      <div class="mini-faq-q">What types of photos work best for background removal?</div>
-      <div class="mini-faq-a">Photos with clear contrast between subject and background work best — portraits, product shots on plain backgrounds, and animals against simple scenery.</div>
-    </div>
-
-    <div class="mini-faq-item">
-      <div class="mini-faq-q">Is my photo sent to a server?</div>
-      <div class="mini-faq-a">No — the AI model runs entirely in your browser using WebAssembly. Your photos never leave your device.</div>
-    </div>
-
-    <div class="mini-faq-item">
-      <div class="mini-faq-q">Why is the background removal imperfect on some photos?</div>
-      <div class="mini-faq-a">Complex backgrounds with similar colors to the subject, hair, and fine details like fur can be challenging. Manual touchup may be needed for professional results.</div>
-    </div>
-
-    <div class="mini-faq-item">
-      <div class="mini-faq-q">What format is the output?</div>
-      <div class="mini-faq-a">Always PNG, since PNG supports the transparent background that background removal creates.</div>
-    </div>
-
-  </div>
 </div>
 
 <!-- FOOTER -->

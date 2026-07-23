@@ -680,38 +680,21 @@
     <summary class="faq-q">What's the difference between HEIC and HEVC?</summary>
     <p class="faq-a">HEIC (High Efficiency Image Container) is Apple's file format. It can contain still images or short video clips. HEVC (H.265) is the video codec used inside those files. Both are different from the older H.264/MP4 standard that everything can play.</p>
   </details>
-</section>
 
-<!-- INFO SECTION -->
-<section class="info-section">
-  <p>HEIC Live Photos capture a brief moment of motion along with your still image. This tool extracts and converts that motion into a standard MP4 video file you can share on any platform — Instagram, WhatsApp, Android, Windows — without compatibility issues.</p>
+  <details class="faq-item">
+    <summary class="faq-q">Why won't my HEIC Live Photo convert?</summary>
+    <p class="faq-a">Not all HEIC files contain a video track — only Live Photos do. If your photo was taken in standard mode (not Live), it won't have motion data to extract, so there's nothing to convert.</p>
+  </details>
 
-  <h2>How to use</h2>
-  <ol class="steps-list">
-    <li><strong>Select your HEIC Live Photo</strong> — click the upload area or drag and drop your .heic file. Live Photos include a motion component that will be extracted automatically.</li>
-    <li><strong>Wait for conversion</strong> — FFmpeg processes the video track entirely in your browser. For longer Live Photos this may take a few seconds.</li>
-    <li><strong>Download your MP4</strong> — click the download button to save your video. It's ready to share on any platform.</li>
-  </ol>
+  <details class="faq-item">
+    <summary class="faq-q">Does converting reduce video quality?</summary>
+    <p class="faq-a">The conversion uses the original video data from your file. Quality depends on the source — no additional compression is added beyond the H.264 re-encode needed for universal compatibility.</p>
+  </details>
 
-  <h2>Frequently asked questions</h2>
-  <div class="mini-faq">
-    <div class="mini-faq-item">
-      <div class="mini-faq-q">Does converting HEIC to MP4 reduce video quality?</div>
-      <div class="mini-faq-a">The conversion uses the original video data from your Live Photo. Quality depends on the source — there is no additional compression added during conversion.</div>
-    </div>
-    <div class="mini-faq-item">
-      <div class="mini-faq-q">Why won't my HEIC Live Photo convert?</div>
-      <div class="mini-faq-a">Not all HEIC files contain a video track — only Live Photos do. If your photo was taken in standard mode (not Live), it won't have video data to extract.</div>
-    </div>
-    <div class="mini-faq-item">
-      <div class="mini-faq-q">Is my video uploaded to a server?</div>
-      <div class="mini-faq-a">No. All processing happens in your browser using WebAssembly. Your file never leaves your device.</div>
-    </div>
-    <div class="mini-faq-item">
-      <div class="mini-faq-q">How large can the HEIC file be?</div>
-      <div class="mini-faq-a">There's no hard limit, but very large files may take longer to process depending on your device's speed.</div>
-    </div>
-  </div>
+  <details class="faq-item">
+    <summary class="faq-q">How large a file can I convert?</summary>
+    <p class="faq-a">There's no hard limit, but very large files take longer to process — speed depends on your device, since everything runs locally in your browser tab.</p>
+  </details>
 </section>
 
 <!-- FOOTER -->
