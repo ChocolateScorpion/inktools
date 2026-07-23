@@ -361,8 +361,17 @@ setupTool({
 
     if (!isHEIC) return file;
 
-    const result = await heic2any({ blob: file, toType: "image/png" });
-    return Array.isArray(result) ? result[0] : result;
+    try {
+      const result = await heic2any({ blob: file, toType: "image/png" });
+      return Array.isArray(result) ? result[0] : result;
+    } catch(e) {
+      const bmp = await createImageBitmap(file);
+      const cv = document.createElement('canvas');
+      cv.width = bmp.width; cv.height = bmp.height;
+      cv.getContext('2d').drawImage(bmp, 0, 0);
+      bmp.close();
+      return new Promise((res, rej) => cv.toBlob(b => b ? res(b) : rej(new Error('Format not supported by this browser')), 'image/png'));
+    }
   },
 
   getFileName(name) {

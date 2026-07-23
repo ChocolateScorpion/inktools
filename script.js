@@ -10,22 +10,19 @@ async function normalizeFile(file) {
     name.endsWith(".heif");
 
   if (isHEIC) {
-
-    const convertedBlob = await heic2any({
-      blob: file,
-      toType: "image/jpeg",
-      quality: 0.9
-    });
-
-    const blob = Array.isArray(convertedBlob)
-      ? convertedBlob[0]
-      : convertedBlob;
-
-    return new File(
-      [blob],
-      file.name.replace(/\.(heic|heif)$/i, ".jpg"),
-      { type: "image/jpeg" }
-    );
+    let blob;
+    try {
+      const convertedBlob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.9 });
+      blob = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
+    } catch(e) {
+      const bmp = await createImageBitmap(file);
+      const cv = document.createElement('canvas');
+      cv.width = bmp.width; cv.height = bmp.height;
+      cv.getContext('2d').drawImage(bmp, 0, 0);
+      bmp.close();
+      blob = await new Promise((res, rej) => cv.toBlob(b => b ? res(b) : rej(new Error('export failed')), 'image/jpeg', 0.9));
+    }
+    return new File([blob], file.name.replace(/\.(heic|heif)$/i, ".jpg"), { type: "image/jpeg" });
   }
 
   return file;
