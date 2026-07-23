@@ -158,7 +158,12 @@ function setupTool(config) {
 
       console.error(err);
 
-      alert("Conversion failed");
+      const isLibheif = err && (err.code === 2 || (err.message && err.message.includes('LIBHEIF')) || (err.message && err.message.includes('could not be decoded')));
+      if (isLibheif) {
+        alert("This HEIC file uses a format that couldn't be decoded in your browser.\n\nTry one of these:\n• Open the file on your iPhone or Mac and export it as JPG\n• Take a screenshot of the image and convert that instead\n• Use Safari on Mac, which has full HEIC support");
+      } else {
+        alert("Conversion failed. Please try a different file.");
+      }
     }
 
     btn.style.display = "block";
