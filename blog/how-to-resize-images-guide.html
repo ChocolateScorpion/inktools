@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="google-adsense-account" content="ca-pub-7189936182708078">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to resize images without losing quality: a complete guide | InkTools Blog</title>
+  <meta name="description" content="How to resize images for web, email, print, and social media without losing quality. Covers resampling algorithms, aspect ratios, and the best free tools.">
+  <link rel="canonical" href="https://inktools.tech/blog/how-to-resize-images-guide.html">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMSW"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-R4568JEMSW');</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How to resize images without losing quality: a complete guide",
+    "description": "How to resize images for web, email, print, and social media without losing quality. Covers resampling algorithms, aspect ratios, and the best free tools.",
+    "datePublished": "2026-07-10",
+    "dateModified": "2026-07-10",
+    "url": "https://inktools.tech/blog/how-to-resize-images-guide.html",
+    "author": {"@type": "Organization", "name": "InkTools", "url": "https://inktools.tech"},
+    "publisher": {"@type": "Organization", "name": "InkTools", "url": "https://inktools.tech"}
+  }
+  </script>
+  <style>
+    :root{--gold:#B8862A;--gold-light:#EF9F27;--gold-subtle:rgba(184,134,42,0.09);--gold-border:rgba(184,134,42,0.22);--bg:#0C0C0B;--surface:#161614;--surface2:#1E1E1B;--border:rgba(255,255,255,0.07);--cream:#E8E4DC;--muted:#8C8880;--faint:#47453F;--max-w:860px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    a{text-decoration:none;color:inherit;}
+    body{font-family:'DM Sans',Arial,sans-serif;background-color:var(--bg);background-image:radial-gradient(ellipse 70% 45% at 50% 0%,rgba(184,134,42,0.06) 0%,transparent 65%);background-attachment:fixed;color:var(--cream);display:flex;flex-direction:column;align-items:center;min-height:100vh;-webkit-font-smoothing:antialiased;}
+    .site-header{width:100%;max-width:var(--max-w);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--border);}
+    .site-logo{display:flex;align-items:center;gap:9px;}
+    .logo-ink{font-size:15px;font-weight:700;letter-spacing:2px;color:var(--cream);-webkit-text-stroke:0.5px var(--gold);text-transform:uppercase;}
+    .logo-tools{font-size:15px;font-weight:300;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;}
+    .site-nav{display:flex;gap:22px;}
+    .site-nav a{font-size:13px;color:var(--muted);transition:color 0.15s;}
+    .site-nav a:hover{color:var(--cream);}
+    .article-wrap{width:100%;max-width:680px;padding:56px 24px 64px;}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+    .article-tag{font-size:11px;color:#C9973A;text-transform:uppercase;letter-spacing:0.1em;background:var(--gold-subtle);border:0.5px solid var(--gold-border);border-radius:20px;padding:3px 10px;}
+    .article-date{font-size:12px;color:var(--faint);}
+    .article-wrap h1{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(26px,4vw,36px);font-weight:400;color:var(--cream);line-height:1.2;letter-spacing:-0.3px;margin-bottom:20px;}
+    .article-intro{font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:36px;padding-bottom:36px;border-bottom:0.5px solid var(--border);}
+    .article-wrap h2{font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;color:var(--cream);margin:36px 0 14px;}
+    .article-wrap p{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:16px;}
+    .article-wrap p strong{color:var(--cream);font-weight:500;}
+    .article-wrap ul,.article-wrap ol{padding-left:20px;color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:16px;}
+    .tip-box{background:var(--surface);border-left:2px solid var(--gold);border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;}
+    .tip-box p{font-size:14px;color:var(--muted);margin:0;line-height:1.65;}
+    .tip-box strong{color:#C9973A;}
+    .steps-list{counter-reset:steps;list-style:none;padding-left:0;display:flex;flex-direction:column;gap:16px;margin-bottom:16px;}
+    .steps-list li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--muted);line-height:1.65;}
+    .steps-list li::before{counter-increment:steps;content:counter(steps);min-width:26px;height:26px;border-radius:50%;background:var(--gold-subtle);border:0.5px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:12px;color:#C9973A;font-weight:500;flex-shrink:0;}
+    .cta-box{background:var(--gold-subtle);border:0.5px solid var(--gold-border);border-radius:14px;padding:24px;margin:32px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+    .cta-box p{font-size:14px;color:#C9973A;margin:0;}
+    .cta-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;background:var(--gold);color:#0C0C0B;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;transition:background 0.15s;}
+    .cta-btn:hover{background:var(--gold-light);}
+    .back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin-bottom:32px;transition:color 0.15s;}
+    .back-link:hover{color:var(--cream);}
+    .site-footer{width:100%;max-width:var(--max-w);padding:24px;margin-top:auto;border-top:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .footer-copy{font-size:12px;color:var(--faint);}
+    .footer-links{display:flex;gap:18px;}
+    .footer-links a{font-size:12px;color:var(--faint);transition:color 0.15s;}
+    .footer-links a:hover{color:var(--gold);}
+    .ad-slot{width:100%;max-width:var(--max-w);padding:0 24px;margin:8px 0 24px;}
+    .faq-section{margin:48px 0 40px;}
+    .faq-section h2{font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;color:var(--cream);margin-bottom:24px;}
+    .faq-item{border-bottom:0.5px solid var(--border);padding:18px 0;}
+    .faq-item:last-child{border-bottom:none;}
+    .faq-q{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:8px;}
+    .faq-a{font-size:14px;color:var(--muted);line-height:1.7;}
+    .article-figure{margin:32px 0;}
+    .article-figure figcaption{font-size:12px;color:var(--faint);text-align:center;margin-top:10px;}
+    .article-wrap code{background:var(--surface);border:0.5px solid var(--border);border-radius:3px;padding:1px 5px;font-size:13px;color:var(--cream);font-family:monospace;}
+    .data-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:20px;}
+    .data-table th{text-align:left;font-size:11px;color:var(--faint);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;padding:8px 12px;border-bottom:0.5px solid var(--border);}
+    .data-table td{padding:10px 12px;color:var(--muted);border-bottom:0.5px solid rgba(255,255,255,0.04);vertical-align:top;}
+    .data-table td:first-child{color:var(--cream);font-weight:500;}
+    .table-wrap{overflow-x:auto;margin-bottom:20px;}
+    @media(max-width:640px){.site-nav{display:none;}.site-footer{flex-direction:column;align-items:flex-start;}}
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <svg width="16" height="28" viewBox="0 0 16 28" fill="none"><rect x="4" y="1" width="8" height="17" rx="4" fill="#0C0C0B" stroke="#B8862A" stroke-width="1"/><polygon points="8,18 5.5,26 8,24 10.5,26" fill="#B8862A"/><ellipse cx="8" cy="27.2" rx="2.2" ry="1.1" fill="#B8862A" opacity="0.38"/></svg>
+    <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
+  </a>
+  <nav class="site-nav">
+    <a href="/">Tools</a>
+    <a href="/blog/">Blog</a>
+    <a href="/about.html">About</a>
+  </nav>
+</header>
+
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="3707669770"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="article-wrap">
+
+  <a href="/blog/" class="back-link">← Back to Blog</a>
+
+  <div class="article-meta">
+    <span class="article-tag">How-To Guide</span>
+    <span class="article-date">July 2026 · 8 min read</span>
+  </div>
+
+  <h1>How to resize images without losing quality: a complete guide</h1>
+
+  <p class="article-intro">Resizing an image sounds like a ten-second task. And technically it is — but done incorrectly, the problems aren't always immediately obvious. An image that looks fine on your screen might be 18MB when it should be 80KB. A portrait photo might look perfect before you add it to a slideshow, then appear stretched and distorted in the presentation. A product photo might look sharp on your laptop and blurry on a retina phone screen. This guide covers the complete picture: what actually happens when you resize, which algorithms produce the best results, what aspect ratio means and why it matters, and how to resize correctly for every common destination — web, email, print, and social media.</p>
+
+  <figure class="article-figure">
+    <svg viewBox="0 0 600 150" width="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:10px;overflow:hidden;">
+      <rect width="600" height="150" fill="#161614"/>
+      <!-- Large rectangle (source) -->
+      <rect x="30" y="28" width="180" height="94" rx="4" fill="rgba(184,134,42,0.12)" stroke="rgba(184,134,42,0.35)" stroke-width="1"/>
+      <text x="120" y="72" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="13" font-weight="500" fill="#E8E4DC">6000 × 4000 px</text>
+      <text x="120" y="90" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="11" fill="#8C8880">18 MB original</text>
+      <!-- Arrow -->
+      <line x1="218" y1="75" x2="282" y2="75" stroke="#B8862A" stroke-width="1.5"/>
+      <polygon points="282,70 292,75 282,80" fill="#B8862A"/>
+      <text x="250" y="68" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="9" fill="#47453F" letter-spacing="0.06em">RESIZE + COMPRESS</text>
+      <!-- Small rectangle (result) -->
+      <rect x="300" y="50" width="100" height="50" rx="3" fill="rgba(239,159,39,0.12)" stroke="#EF9F27" stroke-width="1"/>
+      <text x="350" y="73" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="12" font-weight="500" fill="#EF9F27">1200 × 800 px</text>
+      <text x="350" y="89" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="11" fill="#EF9F27">80 KB</text>
+      <!-- Reduction label -->
+      <text x="470" y="68" text-anchor="start" font-family="'DM Sans',Arial,sans-serif" font-size="19" font-weight="600" fill="#EF9F27">99.6%</text>
+      <text x="470" y="85" text-anchor="start" font-family="'DM Sans',Arial,sans-serif" font-size="11" fill="#8C8880">smaller</text>
+      <!-- Bottom label -->
+      <text x="300" y="138" text-anchor="start" font-family="'DM Sans',Arial,sans-serif" font-size="10" fill="#47453F">Result: same visual quality at the display size — a fraction of the weight.</text>
+    </svg>
+    <figcaption>A 6000×4000px smartphone photo resized to 1200×800px and compressed as WebP at 80% quality: from 18 MB to approximately 80 KB with no perceptible quality loss at the display size.</figcaption>
+  </figure>
+
+  <h2>Resizing vs cropping — the difference</h2>
+  <p>These two operations are often conflated because they both change what appears in the final image, but they work in fundamentally different ways:</p>
+  <p><strong>Resizing</strong> changes the pixel dimensions of the entire image. Taking a 4000×3000px photo and making it 1200×900px scales every pixel proportionally — the whole composition stays intact, just smaller. Nothing is removed from the frame; everything is scaled down.</p>
+  <p><strong>Cropping</strong> removes pixels at the edges to change the composition or aspect ratio. A 4000×3000px landscape photo cropped to 3000×3000px removes the sides to produce a square. The remaining pixels are not scaled — they stay at their original resolution, just with a different boundary.</p>
+  <p>In practice, you often need both operations in sequence, and the order matters. Crop first to establish the composition and shape you need, then resize to the exact pixel dimensions required by the platform or layout. Doing it in reverse — resizing first and then cropping — can leave you with fewer pixels to work with than you intended.</p>
+
+  <h2>Scaling down vs scaling up</h2>
+  <p>This is the most important conceptual distinction in image resizing, and understanding it prevents the most common quality mistakes.</p>
+  <p><strong>Scaling down</strong> (making an image smaller) is always safe and generally improves subjective sharpness. When you reduce a 4000px-wide image to 1200px, the software averages multiple source pixels into each output pixel. The result has well-defined edges, accurate color, and good detail representation. Some total information is discarded — you can't get back to 4000px without quality loss — but the scaled-down image looks excellent at its new size.</p>
+  <p><strong>Scaling up</strong> (making an image larger) is always a quality compromise. When you increase a 1200px image to 4000px, the software has to invent 3.3 pixels for every 1 original pixel. It does this through interpolation — mathematical estimation of what the in-between pixels should look like based on their neighbors. The visible result is always some degree of softness or blurring, because the invented pixels carry no real information from the original scene.</p>
+  <p>The degree of quality loss when scaling up depends on how aggressive the increase is. Going from 800px to 900px (12.5% larger) is barely perceptible. Going from 800px to 2400px (3× larger) produces obvious blurriness. The practical rule: <strong>never scale up beyond 110–120% if the result needs to look sharp</strong>. If you genuinely need a larger image, source a higher-resolution original rather than stretching a small one.</p>
+
+  <div class="tip-box">
+    <p><strong>Always keep your originals:</strong> Once you've scaled down and saved over the original file, you've permanently discarded the pixel data needed to scale back up without quality loss. Always keep the full-resolution source and create resized copies — never replace the original with a smaller version.</p>
+  </div>
+
+  <h2>Resampling algorithms explained</h2>
+  <p>When software resizes an image, it uses a resampling algorithm to calculate what color each pixel in the new image should be. The choice of algorithm affects both the visual quality of the result and how long the process takes:</p>
+  <ul>
+    <li><strong>Nearest Neighbor:</strong> The simplest algorithm — each output pixel takes the value of the nearest input pixel. Processing is fast but results look blocky and pixelated when scaling up. Scaling down produces a rough, staircased result. This algorithm is correct for exactly one use case: pixel art, where you want to preserve crisp, hard pixel edges without any blending or anti-aliasing between them.</li>
+    <li><strong>Bilinear:</strong> Each output pixel is calculated by blending the four nearest input pixels. Faster than more advanced algorithms and produces smooth results, though sometimes slightly soft. Acceptable for casual resizing where speed is more important than maximum quality.</li>
+    <li><strong>Bicubic:</strong> The standard choice for photographs. Samples 16 neighboring pixels for each output pixel and applies a curve-based weighting that produces sharp, accurate results for both upscaling and downscaling. Most professional tools — Photoshop, Lightroom, GIMP — default to Bicubic or one of its variants: Bicubic Sharper for making images smaller, Bicubic Smoother for making them larger.</li>
+    <li><strong>Lanczos (also called Sinc or Lanczos 3):</strong> A more computationally intensive filter that preserves edge sharpness particularly well when downscaling. Produces the sharpest results for making detailed photographs smaller. The tradeoff is slightly longer processing time, which is noticeable when batch-processing large files. If your tool offers it, Lanczos is the best choice for downscaling high-detail photography.</li>
+  </ul>
+  <p>For most users and most situations, bicubic is the right default. Use Lanczos for high-quality downscaling when your tool supports it, and reserve Nearest Neighbor for pixel art only.</p>
+
+  <h2>Understanding aspect ratio</h2>
+  <p>The aspect ratio is the proportional relationship between an image's width and height, expressed as width:height. It determines the shape of the image — how wide or tall it appears — independently of its actual pixel dimensions.</p>
+  <p>Common ratios and where you encounter them:</p>
+  <ul>
+    <li><strong>16:9</strong> — widescreen. The standard for desktop wallpapers, YouTube videos, TV content, web hero banners, and presentation slides in most software.</li>
+    <li><strong>4:3</strong> — slightly less wide than 16:9. The ratio of older monitors, standard definition TV, many point-and-shoot cameras, and iPad screens.</li>
+    <li><strong>1:1</strong> — perfectly square. Instagram's original format, many business profile pictures, album art, and app icons.</li>
+    <li><strong>9:16</strong> — tall portrait orientation. The vertical flip of 16:9. Instagram Stories, TikTok, and YouTube Shorts all use this ratio.</li>
+    <li><strong>3:2</strong> — the native ratio of most DSLR cameras and many mirrorless cameras. Also the ratio of a standard 4×6 inch print.</li>
+    <li><strong>4:5</strong> — the maximum portrait ratio Instagram allows for feed posts. Taller than 1:1 but not as extreme as 9:16, it occupies more screen real estate in a feed than a square post.</li>
+  </ul>
+  <p>If you change an image's dimensions to a different aspect ratio than its original without cropping first, the image will appear distorted — stretched horizontally, squashed vertically, or both. The fix is always to crop to the target ratio first, then scale to the required pixel dimensions. Most resize tools include a "lock aspect ratio" option (typically a padlock icon between the width and height fields). Keep this locked unless you're intentionally changing the shape, and crop before resizing when a shape change is needed.</p>
+
+  <h2>Resizing for web</h2>
+  <p>The web is where improper resizing has the largest practical impact, on both page performance and user experience. The core rule — never serve an image larger than it will be displayed — sounds simple but is violated constantly, often because the original photo comes from a camera at 6000px wide and the developer uploads it without resizing.</p>
+  <p>Recommended dimensions by web use case:</p>
+  <ul>
+    <li><strong>Full-width hero banner:</strong> 1920×1080px for a standard widescreen layout. For most sites, 1440px wide is the practical maximum needed.</li>
+    <li><strong>Blog post hero image:</strong> 1200×675px (16:9) or 1200×800px (3:2, matching typical camera output).</li>
+    <li><strong>Inline article images:</strong> 800–1200px wide, height proportional to the content.</li>
+    <li><strong>Thumbnails and card images:</strong> 400–600px wide, height matching the card layout's aspect ratio.</li>
+    <li><strong>Avatar and profile pictures:</strong> 200×200px minimum; 400×400px for retina displays at the standard sizes used in most interfaces.</li>
+  </ul>
+  <p>For retina and HiDPI displays — which now include virtually all smartphones and most modern laptops — images need to be served at approximately 2× the CSS display size to appear sharp. If an image is displayed at 400px wide in your CSS layout, serve an 800px image. The browser displays it at 400px but with double the pixel density, which is what makes it crisp on high-resolution screens.</p>
+  <p>A common mistake: uploading a 6000×4000px photo and setting <code>max-width: 800px</code> in CSS. The CSS controls how the image is <em>displayed</em> — but the browser still downloads every pixel of the 6000px file and scales it down in memory before rendering. The file might be 5–8MB instead of 18MB raw, but it's still many times larger than necessary. Resize the file to 1600px wide (2× the 800px display width) before upload, then compress. That same image becomes approximately 150–200KB — a 40× reduction in what the visitor's browser actually downloads.</p>
+
+  <h2>Resizing for email</h2>
+  <p>Email is a distinct environment with stricter constraints than the web:</p>
+  <p><strong>Width limit:</strong> Most email clients render content in a column 500–700px wide. Images wider than 600px will be scaled down by the email client, sometimes gracefully and sometimes with visible quality degradation depending on the client's rendering engine. The safest maximum image width for email is <strong>600px</strong>, scaled so it displays at 600px with no additional CSS scaling needed.</p>
+  <p><strong>File size:</strong> Large images in email create two problems. First, Gmail clips messages above approximately 102KB of total HTML and inline content — clipped messages hide everything below the fold behind a "View entire message" link, which most recipients never click. Second, emails with large image weights are more likely to land in spam filters. Target under 500KB total across all images in an email, and under 150KB for any single banner or hero image.</p>
+  <p><strong>Retina in email:</strong> Many email clients on mobile render at 2× density. The practical approach is to size images at 2× their display width (so a 600px-wide email uses a 1200px image in the HTML but sets <code>width="600"</code> in the img tag), then compress aggressively to keep file size manageable at the larger pixel count.</p>
+  <p><strong>Product images in email grids:</strong> For product grids with multiple images per row, 400×400px per image is standard for a 2-column grid in a 600px email. Compress to under 80KB each.</p>
+
+  <h2>Resizing for print</h2>
+  <p>Print is where screen-oriented designers most often get caught out. Screen resolution and print resolution are measured differently, and the numbers are very far apart.</p>
+  <p><strong>DPI (dots per inch)</strong> describes how many ink dots a printer lays down per linear inch of paper. More dots means finer detail. The professional standard for crisp, detailed print is <strong>300 DPI</strong>. Below 150 DPI, prints start looking noticeably soft at typical reading distances.</p>
+  <p>Screen images are typically saved at 72 PPI (pixels per inch) — which reflects how many pixels a screen displays per inch of its surface. A 72 PPI image printed at 72 DPI would look sharp, but at 300 DPI it would be tiny. The confusion arises because people try to print 72 PPI images at large sizes, which requires the printer to stretch far too few pixels across too many inches.</p>
+  <p>The formula to calculate required pixel dimensions for print is: <strong>print size in inches × DPI = pixels needed</strong>.</p>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr><th>Print size</th><th>At 300 DPI</th><th>At 150 DPI</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>4 × 6 inch</td><td>1200 × 1800 px</td><td>600 × 900 px</td></tr>
+        <tr><td>5 × 7 inch</td><td>1500 × 2100 px</td><td>750 × 1050 px</td></tr>
+        <tr><td>8 × 10 inch</td><td>2400 × 3000 px</td><td>1200 × 1500 px</td></tr>
+        <tr><td>A4 (8.27 × 11.69 inch)</td><td>2481 × 3508 px</td><td>1240 × 1754 px</td></tr>
+        <tr><td>16 × 20 inch poster</td><td>4800 × 6000 px</td><td>2400 × 3000 px</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>This is why modern 12–48MP smartphone cameras produce excellent 4×6 prints (their pixel counts work out to 300+ DPI at that size) but only marginal quality at large poster sizes. A 12MP image (4032×3024px) runs out of resolution at roughly 13×10 inches at 300 DPI. For large-format print, source the highest-resolution original available and don't scale up.</p>
+
+  <h2>Resizing for social media</h2>
+  <p>Social media platforms apply their own compression when you upload an image. If your image is already slightly off-spec or over-compressed before uploading, the platform's recompression multiplies the quality loss. Uploading at exact target dimensions prevents the platform from needing to scale your image, which minimizes what the platform's encoder has to change.</p>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr><th>Platform &amp; format</th><th>Recommended dimensions</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Instagram square post</td><td>1080 × 1080 px</td></tr>
+        <tr><td>Instagram portrait post</td><td>1080 × 1350 px (4:5 ratio)</td></tr>
+        <tr><td>Instagram Stories / Reels</td><td>1080 × 1920 px (9:16)</td></tr>
+        <tr><td>Facebook post image</td><td>1200 × 630 px</td></tr>
+        <tr><td>Facebook cover photo</td><td>851 × 315 px</td></tr>
+        <tr><td>Twitter/X in-stream image</td><td>1600 × 900 px (16:9)</td></tr>
+        <tr><td>Twitter/X profile picture</td><td>400 × 400 px</td></tr>
+        <tr><td>LinkedIn post image</td><td>1200 × 627 px</td></tr>
+        <tr><td>YouTube thumbnail</td><td>1280 × 720 px</td></tr>
+        <tr><td>YouTube channel art</td><td>2560 × 1440 px</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The Instagram portrait post ratio (4:5 — taller than square, shorter than Stories) is worth highlighting. A 4:5 post occupies more vertical screen space in the feed than a square post, which means more of the viewer's attention before they scroll past. For photography and product shots that suit a portrait composition, 1080×1350px outperforms the square format on most accounts.</p>
+
+  <h2>How to resize with InkTools</h2>
+  <p>inktools.tech/image-resizer/ provides a straightforward browser-based resizing tool with no account sign-up and no file size restrictions for typical photos:</p>
+  <ol class="steps-list">
+    <li>Go to /image-resizer/ and click "Upload Image" or drag your file onto the drop zone</li>
+    <li>Set your target width or height in the dimension fields — the tool shows you the original dimensions for reference</li>
+    <li>The "Lock Aspect Ratio" toggle is on by default — leave it on to scale proportionally, or turn it off if you specifically need a non-proportional resize</li>
+    <li>Choose your output format: JPG for photographs (smallest file), PNG for anything requiring lossless quality or transparency, WebP for the best combination of small size and quality for web use</li>
+    <li>Click "Resize" and download your resized file</li>
+  </ol>
+  <p>The tool shows you the original and output file size before you download, so you can verify the savings before committing to the result. If you're also planning to compress the image — reducing the JPG or WebP quality further — always resize first, then compress. Running compression on an oversized image wastes compression effort on pixels you're going to discard anyway.</p>
+
+  <h2>The resize + compress workflow</h2>
+  <p>Resizing and compression are two separate operations that work best together, in a specific order. This combined workflow is the single most impactful image optimization step available for most people.</p>
+  <p><strong>Why order matters:</strong> If you compress a 6000×4000px photo at 80% JPG quality, you get a smaller file — but it's still a 24 megapixel image. When the browser renders it at 1200×800px, it downloads all 24MP of data, decodes it in memory, and then scales it down. The file might be 3MB instead of 18MB raw, but it's still 15–20× larger than necessary. Resizing first eliminates those pixels before any compression is applied.</p>
+  <p><strong>The correct workflow:</strong></p>
+  <ol class="steps-list">
+    <li>Start with the full-resolution source file — never work from an already-compressed version if you can avoid it</li>
+    <li>Resize to the target display dimensions — for example, 1200×800px for a blog image, 1080×1080px for an Instagram post</li>
+    <li>Compress to the appropriate quality level — 80% JPG or WebP for most web images, 75% for thumbnails where file size is especially important</li>
+    <li>Check the file size — a 1200×800px blog image should land around 60–150KB as WebP at 80% quality</li>
+    <li>Upload the resized, compressed file — never upload the original camera file</li>
+  </ol>
+
+  <div class="tip-box">
+    <p><strong>Real numbers:</strong> A 6000×4000px photo from a modern smartphone is typically 18–25MB as a raw file or 5–8MB as a camera JPEG. Resized to 1200×800px and saved as WebP at 80% quality, it becomes approximately 70–90KB. That is a 95–99% reduction in file weight, with no perceptible quality loss at the size the image is displayed at. This is the resize + compress workflow working as intended.</p>
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">Does resizing reduce image quality?</div>
+      <div class="faq-a">Scaling down reduces the pixel count, but when done with a good algorithm (bicubic or Lanczos), it produces sharp, clean results that look excellent at the new size. You're discarding pixels that won't be visible at the display size anyway. What you lose is the ability to scale back up without quality loss — so always keep your original high-resolution source file and distribute only the resized copies. Scaling up is where quality visibly suffers, because the software has to invent pixel information that doesn't exist in the original.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How do I resize without distorting the image?</div>
+      <div class="faq-a">Always lock the aspect ratio when resizing — most tools include a padlock icon between the width and height fields that links them proportionally. If you need an image at a specific width and height that doesn't match the original's proportions, you need to crop first to establish the target shape, then resize to the exact pixel dimensions. Never stretch both dimensions independently to fit a different ratio unless distortion is intentional — it always looks wrong in practice.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What resolution do I need for printing?</div>
+      <div class="faq-a">300 DPI is the professional standard for sharp print output. To calculate the pixel dimensions needed, multiply the print width in inches by 300 to get the required pixel width, and the height by 300 for the pixel height. A 4×6 inch print at 300 DPI needs 1200×1800 pixels. An 8×10 inch print needs 2400×3000 pixels. For less critical print uses — posters viewed from a distance, internal documents — 150 DPI is acceptable minimum. Below that, visible softness becomes apparent at reading distance.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I make a small image larger without losing quality?</div>
+      <div class="faq-a">Standard resampling always introduces some softness when scaling up significantly, because the software must invent pixels that don't exist. AI-powered upscaling tools — such as Adobe Photoshop's Super Resolution feature (Photo → Enhance → Super Resolution) or dedicated tools like Topaz Gigapixel AI — produce notably better results by using neural networks trained on millions of images to predict plausible detail in the added pixels. They can push the safe upscaling limit considerably further than conventional bicubic interpolation. That said, for critical work, sourcing a higher-resolution original will always outperform any upscaling approach.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What's the difference between DPI and PPI?</div>
+      <div class="faq-a">DPI (dots per inch) describes the output resolution of a physical printer — how many ink dots it places per linear inch of paper. PPI (pixels per inch) describes the pixel density of a digital image or display. In everyday design and photography workflows, the terms are used interchangeably: when a print shop asks for "300 DPI", they mean 300 pixels per inch in the file, which the printer will render at 300 dots per inch. Technically they measure different things (one is physical ink, one is digital pixels), but for purposes of preparing files for print, treating them as equivalent is correct.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How do I resize multiple images at once?</div>
+      <div class="faq-a">In Photoshop, record a resize action (Window → Actions → Record, then resize an image and stop recording), then run it as a batch via File → Automate → Batch on any folder. On macOS, Preview lets you select multiple images, open them together, and use Tools → Adjust Size to resize all at once. On Windows, Microsoft PowerToys includes an Image Resizer extension that adds resize options to the right-click context menu on any image or group of images. For command-line processing of large batches, ImageMagick's mogrify command handles folder-wide resizing efficiently.</div>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <p>Resize images to any dimensions free — right in your browser, no sign-up needed.</p>
+    <a href="/image-resizer/" class="cta-btn">Resize images free →</a>
+  </div>
+
+</div>
+
+<div class="ad-slot" style="margin-bottom:24px;">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<footer class="site-footer">
+  <span class="footer-copy">© 2026 InkTools — Free Online Image Utilities</span>
+  <div class="footer-links">
+    <a href="/">Home</a><a href="/blog/">Blog</a>
+    <a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a>
+  </div>
+</footer>
+</body>
+</html>
