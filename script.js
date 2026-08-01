@@ -137,9 +137,21 @@ function setupTool(config) {
 
     showLoader(true);
 
+    // Cancel button
+    let cancelled = false;
+    const cancelBtn = document.createElement("button");
+    cancelBtn.textContent = "Stop conversion";
+    cancelBtn.style.cssText = "width:100%;padding:10px;margin-top:8px;border-radius:10px;border:0.5px solid rgba(255,255,255,0.12);background:transparent;color:#8C8880;font-family:inherit;font-size:13px;cursor:pointer;transition:color 0.15s,border-color 0.15s;";
+    cancelBtn.onmouseover = () => { cancelBtn.style.color = "#E8E4DC"; cancelBtn.style.borderColor = "rgba(255,255,255,0.25)"; };
+    cancelBtn.onmouseout  = () => { cancelBtn.style.color = "#8C8880"; cancelBtn.style.borderColor = "rgba(255,255,255,0.12)"; };
+    cancelBtn.onclick = () => { cancelled = true; cancelBtn.textContent = "Stopping…"; cancelBtn.disabled = true; cancelBtn.style.opacity = "0.5"; };
+    loader.parentNode.insertBefore(cancelBtn, loader.nextSibling);
+
     const failed = [];
+    let converted = 0;
 
     for (const file of files) {
+      if (cancelled) break;
       try {
         const result = await config.convert(file);
         const url = URL.createObjectURL(result);
@@ -147,14 +159,18 @@ function setupTool(config) {
         a.href = url;
         a.download = config.getFileName(file.name);
         a.click();
+        converted++;
       } catch (err) {
         console.error(file.name, err);
         failed.push(file.name);
       }
     }
 
-    if (failed.length) {
-      const converted = files.length - failed.length;
+    cancelBtn.remove();
+
+    if (cancelled && converted < files.length) {
+      // silent stop — user chose to stop, no alert needed
+    } else if (failed.length) {
       const names = failed.slice(0, 5).join("\n• ");
       const more = failed.length > 5 ? `\n…and ${failed.length - 5} more` : "";
       alert(
