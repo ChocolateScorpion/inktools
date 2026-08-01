@@ -137,33 +137,31 @@ function setupTool(config) {
 
     showLoader(true);
 
-    try {
+    const failed = [];
 
-      for (const file of files) {
-
+    for (const file of files) {
+      try {
         const result = await config.convert(file);
-
         const url = URL.createObjectURL(result);
-
         const a = document.createElement("a");
-
         a.href = url;
-
         a.download = config.getFileName(file.name);
-
         a.click();
+      } catch (err) {
+        console.error(file.name, err);
+        failed.push(file.name);
       }
+    }
 
-    } catch (err) {
-
-      console.error(err);
-
-      const isLibheif = err && (err.code === 2 || (err.message && err.message.includes('LIBHEIF')) || (err.message && err.message.includes('could not be decoded')));
-      if (isLibheif) {
-        alert("This HEIC file uses a format that couldn't be decoded in your browser.\n\nTry one of these:\n• Open the file on your iPhone or Mac and export it as JPG\n• Take a screenshot of the image and convert that instead\n• Use Safari on Mac, which has full HEIC support");
-      } else {
-        alert("Conversion failed. Please try a different file.");
-      }
+    if (failed.length) {
+      const converted = files.length - failed.length;
+      const names = failed.slice(0, 5).join("\n• ");
+      const more = failed.length > 5 ? `\n…and ${failed.length - 5} more` : "";
+      alert(
+        `Converted ${converted} of ${files.length} file(s).\n\n` +
+        `${failed.length} file(s) could not be decoded in your browser:\n• ${names}${more}\n\n` +
+        `For these files, try:\n• Open on iPhone or Mac and export as JPG\n• Use Safari on Mac`
+      );
     }
 
     btn.style.display = "block";
