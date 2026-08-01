@@ -246,6 +246,59 @@
     <p><strong>Remember:</strong> The generated image is a reference, not the final design. Show it to your artist as a direction — "something like this but in your style" — not as the artwork itself. The tattoo design is always the artist's work.</p>
   </div>
 
+  <h2>Understanding AI art parameters</h2>
+  <p>When you use the Midjourney prompt output, you'll see parameters appended at the end — flags that control how the AI interprets and renders the image. Understanding what these do helps you get better results without guessing.</p>
+  <p><strong>--ar</strong> (aspect ratio) controls the shape of the output image. <strong>--ar 1:1</strong> produces a square, which works well for stencil-style references and chest or back placement concepts. <strong>--ar 2:3</strong> gives a portrait orientation, ideal for arm and leg pieces where you want to see how the design fills a vertical space.</p>
+  <p><strong>--v 7</strong> specifies the Midjourney version. Version 7 is the current model and produces the most coherent tattoo-style imagery. Older versions behave differently and may give inconsistent results with tattoo prompts.</p>
+  <p><strong>--style raw</strong> reduces Midjourney's built-in "beautification" and produces a more literal interpretation of your prompt. For tattoo references, this is usually preferable — you want the AI to follow your specific brief rather than apply a general artistic veneer on top of it.</p>
+  <p><strong>--stylize</strong> controls how creatively the AI interprets the prompt versus how literally it follows it. The range is 0–1000. At <strong>--stylize 0</strong>, the output follows the prompt very literally — what you write is what you get, with minimal creative embellishment. At <strong>--stylize 100</strong>, the AI adds more of its own interpretation while still respecting the general direction. Most useful tattoo references come from stylize values between 0 and 200.</p>
+  <div class="tip-box">
+    <p><strong>Recommended defaults:</strong> Start with <code style="background:var(--surface2);padding:2px 5px;border-radius:4px;font-size:13px;">--ar 1:1 --v 7 --style raw --stylize 50</code> for most tattoo reference work. Lower --stylize toward 0 if you want the AI to stay closer to your exact prompt wording. Raise it toward 200 if the results feel too mechanical.</p>
+  </div>
+
+  <h2>How to refine your prompt for better results</h2>
+  <p>The first prompt you generate is rarely the final one you use. Getting useful tattoo references from AI is an iterative process — knowing what to adjust makes each pass faster and more productive.</p>
+  <p><strong>Be specific about style.</strong> Don't just say "tattoo" — say "American traditional tattoo style" or "single needle fine line tattoo." The more precisely you name the style, the more accurately the AI matches it. Vague style descriptors produce generic output that isn't useful as a consultation reference.</p>
+  <p><strong>Use real tattoo terminology.</strong> Words like "linework," "shading," "negative space," "stippling," "blackwork fill," and "flash design" are part of the AI's training data in a tattooing context. Using them pulls the output in the right direction in a way that generic art terms don't.</p>
+  <p><strong>Describe the mood explicitly.</strong> "Dark and moody," "clean and minimal," "bold and graphic," "soft and delicate" — mood descriptors have a strong effect on composition, line weight, and overall feel. They often make more difference than adding more subject detail.</p>
+  <p><strong>Include what you don't want.</strong> Exclusions actively steer the AI away from common defaults. "No text, no color, clean black lines only" is a simple exclusion clause that prevents a lot of unwanted output. "No watercolor effects, no color splashes, no gradient fills" is useful when you want pure linework and the AI keeps adding painterly effects.</p>
+  <p><strong>Change one thing per iteration.</strong> If you change style, mood, elements, and detail level all at once, you won't know which change improved the result. Adjust one variable at a time and compare. This takes more iterations but converges on a strong reference much faster than wholesale prompt rewrites.</p>
+
+  <h2>Using generated images with your tattoo artist</h2>
+  <p>AI-generated images work best as a conversation starter, not a final brief. The way you present them to your artist affects how useful the consultation ends up being.</p>
+  <p><strong>Print 2–3 variations and bring them to the consultation.</strong> Digital references on a phone screen are easy to scroll past. Printed references get laid out on the counter, pointed at, and talked about in detail. If you've generated multiple variations exploring different moods or compositions, printing the two or three strongest gives the artist concrete material to react to.</p>
+  <p><strong>Highlight specific elements you like from each.</strong> Rather than pointing at one image and saying "I want this," go through each reference and mark what works. "I like the line weight in this one, the composition in that one, and the negative space usage in the third." This gives the artist genuine creative input rather than a design to replicate.</p>
+  <p><strong>Let the artist know it's an AI reference.</strong> Most tattoo artists appreciate this transparency and many are now familiar with AI-generated imagery. Knowing it's AI helps them understand why certain elements may not be technically realistic — AI images sometimes suggest impossible linework or shading that wouldn't hold on skin — and lets them bring their expertise to those decisions.</p>
+  <p><strong>The artist will redraw in their own style anyway.</strong> An AI reference is not a stencil-ready design. A good artist will take the concept, adapt it to work on skin with proper line weights and composition, and produce an original piece informed by — not copied from — the reference. AI references work especially well for conveying a general aesthetic, showing rough size and placement concepts, and explaining abstract ideas that are hard to find real photo references for.</p>
+  <div class="tip-box">
+    <p><strong>What to say in the consultation:</strong> "I generated this as a direction reference — I like the overall feel and composition, but I know it'll need to be redrawn for tattooing. What's your take?" This opens a collaborative conversation rather than presenting a design to be copied.</p>
+  </div>
+
+  <h2>Best practices by tattoo style</h2>
+  <p>Different tattoo styles respond differently to AI prompting. Here's what to add to your generated prompts to sharpen results for each style.</p>
+  <div class="style-cards">
+    <div class="style-card">
+      <div class="sc-name">Fine Line</div>
+      <div class="sc-settings">Add: <span>"single needle fine line, delicate linework, minimal shading, black ink only"</span></div>
+    </div>
+    <div class="style-card">
+      <div class="sc-name">Traditional</div>
+      <div class="sc-settings">Add: <span>"American traditional, bold black outlines, flat colors, vintage tattoo aesthetic"</span></div>
+    </div>
+    <div class="style-card">
+      <div class="sc-name">Geometric</div>
+      <div class="sc-settings">Add: <span>"sacred geometry, precise lines, symmetrical, dotwork shading, mandala elements"</span></div>
+    </div>
+    <div class="style-card">
+      <div class="sc-name">Realism</div>
+      <div class="sc-settings">Add: <span>"photorealistic tattoo design, detailed shading, high contrast, grayscale"</span></div>
+    </div>
+    <div class="style-card">
+      <div class="sc-name">Blackwork</div>
+      <div class="sc-settings">Add: <span>"blackwork tattoo, solid black fills, bold graphic design, negative space"</span></div>
+    </div>
+  </div>
+
   <div class="faq-section">
     <h2>Frequently asked questions</h2>
     <div class="faq-item">

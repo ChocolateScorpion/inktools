@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="google-adsense-account" content="ca-pub-7189936182708078">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7189936182708078" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image compression: the complete guide to lossy vs lossless | InkTools Blog</title>
+  <meta name="description" content="Everything you need to know about image compression — how lossy and lossless compression work, which formats use each, and how to choose the right settings.">
+  <link rel="canonical" href="https://inktools.tech/blog/image-compression-complete-guide.html">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4568JEMSW"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-R4568JEMSW');</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Image compression: the complete guide to lossy vs lossless",
+    "description": "Everything you need to know about image compression — how lossy and lossless compression work, which formats use each, and how to choose the right settings.",
+    "url": "https://inktools.tech/blog/image-compression-complete-guide.html",
+    "datePublished": "2026-07-08",
+    "dateModified": "2026-08-01",
+    "author": {"@type": "Organization", "name": "InkTools"},
+    "publisher": {
+      "@type": "Organization",
+      "name": "InkTools",
+      "logo": {"@type": "ImageObject", "url": "https://inktools.tech/favicon.ico"}
+    }
+  }
+  </script>
+  <style>
+    :root{--gold:#B8862A;--gold-light:#EF9F27;--gold-subtle:rgba(184,134,42,0.09);--gold-border:rgba(184,134,42,0.22);--bg:#0C0C0B;--surface:#161614;--surface2:#1E1E1B;--border:rgba(255,255,255,0.07);--cream:#E8E4DC;--muted:#8C8880;--faint:#47453F;--max-w:860px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    a{text-decoration:none;color:inherit;}
+    body{font-family:'DM Sans',Arial,sans-serif;background-color:var(--bg);background-image:radial-gradient(ellipse 70% 45% at 50% 0%,rgba(184,134,42,0.06) 0%,transparent 65%);background-attachment:fixed;color:var(--cream);display:flex;flex-direction:column;align-items:center;min-height:100vh;-webkit-font-smoothing:antialiased;}
+    .site-header{width:100%;max-width:var(--max-w);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--border);}
+    .site-logo{display:flex;align-items:center;gap:9px;}
+    .logo-ink{font-size:15px;font-weight:700;letter-spacing:2px;color:var(--cream);-webkit-text-stroke:0.5px var(--gold);text-transform:uppercase;}
+    .logo-tools{font-size:15px;font-weight:300;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;}
+    .site-nav{display:flex;gap:22px;}
+    .site-nav a{font-size:13px;color:var(--muted);transition:color 0.15s;}
+    .site-nav a:hover{color:var(--cream);}
+    .article-wrap{width:100%;max-width:680px;padding:56px 24px 64px;}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+    .article-tag{font-size:11px;color:#C9973A;text-transform:uppercase;letter-spacing:0.1em;background:var(--gold-subtle);border:0.5px solid var(--gold-border);border-radius:20px;padding:3px 10px;}
+    .article-date{font-size:12px;color:var(--faint);}
+    .article-wrap h1{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(26px,4vw,36px);font-weight:400;color:var(--cream);line-height:1.2;letter-spacing:-0.3px;margin-bottom:20px;}
+    .article-intro{font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:36px;padding-bottom:36px;border-bottom:0.5px solid var(--border);}
+    .article-wrap h2{font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;color:var(--cream);margin:36px 0 14px;}
+    .article-wrap p{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:16px;}
+    .article-wrap p strong{color:var(--cream);font-weight:500;}
+    .article-wrap ul,.article-wrap ol{padding-left:20px;color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:16px;}
+    .tip-box{background:var(--surface);border-left:2px solid var(--gold);border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;}
+    .tip-box p{font-size:14px;color:var(--muted);margin:0;line-height:1.65;}
+    .tip-box strong{color:#C9973A;}
+    .steps-list{counter-reset:steps;list-style:none;padding-left:0;display:flex;flex-direction:column;gap:16px;margin-bottom:16px;}
+    .steps-list li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--muted);line-height:1.65;}
+    .steps-list li::before{counter-increment:steps;content:counter(steps);min-width:26px;height:26px;border-radius:50%;background:var(--gold-subtle);border:0.5px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:12px;color:#C9973A;font-weight:500;flex-shrink:0;}
+    .cta-box{background:var(--gold-subtle);border:0.5px solid var(--gold-border);border-radius:14px;padding:24px;margin:32px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+    .cta-box p{font-size:14px;color:#C9973A;margin:0;}
+    .cta-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;background:var(--gold);color:#0C0C0B;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;transition:background 0.15s;}
+    .cta-btn:hover{background:var(--gold-light);}
+    .back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin-bottom:32px;transition:color 0.15s;}
+    .back-link:hover{color:var(--cream);}
+    .site-footer{width:100%;max-width:var(--max-w);padding:24px;margin-top:auto;border-top:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .footer-copy{font-size:12px;color:var(--faint);}
+    .footer-links{display:flex;gap:18px;}
+    .footer-links a{font-size:12px;color:var(--faint);transition:color 0.15s;}
+    .footer-links a:hover{color:var(--gold);}
+    .ad-slot{width:100%;max-width:var(--max-w);padding:0 24px;margin:8px 0 24px;}
+    .faq-section{margin:48px 0 40px;}
+    .faq-section h2{font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;color:var(--cream);margin-bottom:24px;}
+    .faq-item{border-bottom:0.5px solid var(--border);padding:18px 0;}
+    .faq-item:last-child{border-bottom:none;}
+    .faq-q{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:8px;}
+    .faq-a{font-size:14px;color:var(--muted);line-height:1.7;}
+    .article-figure{margin:32px 0;}
+    .article-figure figcaption{font-size:12px;color:var(--faint);text-align:center;margin-top:10px;}
+    .article-wrap code{background:var(--surface);border:0.5px solid var(--border);border-radius:3px;padding:1px 5px;font-size:13px;color:var(--cream);font-family:monospace;}
+    .format-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:14px;overflow-x:auto;display:block;}
+    .format-table th{text-align:left;color:var(--cream);font-weight:500;padding:10px 14px;border-bottom:0.5px solid var(--gold-border);font-size:13px;white-space:nowrap;}
+    .format-table td{padding:10px 14px;color:var(--muted);border-bottom:0.5px solid var(--border);vertical-align:top;white-space:nowrap;}
+    .format-table tr:last-child td{border-bottom:none;}
+    .format-table tr:hover td{background:var(--surface);}
+    .tag-lossy{color:#EF9F27;font-weight:500;}
+    .tag-lossless{color:#6DBF8A;font-weight:500;}
+    .tag-both{color:#C9973A;font-weight:500;}
+    @media(max-width:640px){.site-nav{display:none;}.site-footer{flex-direction:column;align-items:flex-start;}}
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo">
+    <svg width="16" height="28" viewBox="0 0 16 28" fill="none"><rect x="4" y="1" width="8" height="17" rx="4" fill="#0C0C0B" stroke="#B8862A" stroke-width="1"/><polygon points="8,18 5.5,26 8,24 10.5,26" fill="#B8862A"/><ellipse cx="8" cy="27.2" rx="2.2" ry="1.1" fill="#B8862A" opacity="0.38"/></svg>
+    <span class="logo-ink">INK</span><span class="logo-tools">TOOLS</span>
+  </a>
+  <nav class="site-nav">
+    <a href="/">Tools</a>
+    <a href="/blog/">Blog</a>
+    <a href="/about.html">About</a>
+  </nav>
+</header>
+
+<div class="ad-slot">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="3707669770"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="article-wrap">
+
+  <a href="/blog/" class="back-link">&#8592; Back to Blog</a>
+
+  <div class="article-meta">
+    <span class="article-tag">Technical Guide</span>
+    <span class="article-date">July 2026 &middot; 10 min read</span>
+  </div>
+
+  <h1>Image compression: the complete guide to lossy vs lossless</h1>
+
+  <p class="article-intro">Every digital image you see online has been compressed. The photo on the news article you just read, the product image you zoomed in on, the avatar in someone's comment — all compressed. Compression is what makes it economically and technically feasible to serve billions of images across the web every day. Understanding how it works helps you make better decisions about file formats, quality settings, and when compression artefacts are acceptable versus damaging.</p>
+
+  <figure class="article-figure">
+    <svg viewBox="0 0 600 148" width="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:10px;overflow:hidden;">
+      <defs>
+        <linearGradient id="quality-grad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#3A3830"/>
+          <stop offset="48%" stop-color="#B8862A"/>
+          <stop offset="100%" stop-color="#EF9F27" stop-opacity="0.45"/>
+        </linearGradient>
+      </defs>
+      <rect width="600" height="148" fill="#161614"/>
+      <!-- Top labels: quality levels -->
+      <text x="72" y="22" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="12" font-weight="500" fill="#8C8880">Quality 100</text>
+      <text x="300" y="22" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="12" font-weight="600" fill="#EF9F27">Quality 85</text>
+      <text x="528" y="22" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="12" font-weight="500" fill="#8C8880">Quality 50</text>
+      <!-- File sizes -->
+      <text x="72" y="40" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="13" font-weight="500" fill="#E8E4DC">5 MB</text>
+      <text x="300" y="40" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="13" font-weight="600" fill="#EF9F27">800 KB</text>
+      <text x="528" y="40" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="13" font-weight="500" fill="#E8E4DC">200 KB</text>
+      <!-- Gradient bar -->
+      <rect x="36" y="52" width="528" height="32" rx="8" fill="url(#quality-grad)"/>
+      <!-- Sweet spot highlight box -->
+      <rect x="234" y="52" width="132" height="32" rx="6" fill="none" stroke="#EF9F27" stroke-width="1.5" stroke-dasharray="4 2"/>
+      <!-- Tick lines -->
+      <line x1="72" y1="50" x2="72" y2="88" stroke="#47453F" stroke-width="1"/>
+      <line x1="300" y1="48" x2="300" y2="88" stroke="#EF9F27" stroke-width="1.5"/>
+      <line x1="528" y1="50" x2="528" y2="88" stroke="#47453F" stroke-width="1"/>
+      <!-- Bottom labels -->
+      <text x="72" y="104" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="12" fill="#8C8880">Perfect quality</text>
+      <text x="72" y="120" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="11" fill="#47453F">Very large file</text>
+      <text x="300" y="104" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="12" font-weight="600" fill="#EF9F27">Sweet spot</text>
+      <text x="300" y="120" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="11" fill="#C9973A">Web recommended</text>
+      <text x="528" y="104" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="12" fill="#8C8880">Artefacts visible</text>
+      <text x="528" y="120" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="11" fill="#47453F">Very small file</text>
+      <!-- Arrow -->
+      <line x1="44" y1="138" x2="556" y2="138" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+      <text x="300" y="145" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="10" fill="#47453F" letter-spacing="0.06em">QUALITY SETTING SPECTRUM (JPG / WEBP)</text>
+    </svg>
+    <figcaption>Quality 85 is the recommended sweet spot for web images: file sizes roughly 80–85% smaller than quality 100 with no perceptible quality difference at normal viewing sizes.</figcaption>
+  </figure>
+
+  <h2>What is image compression?</h2>
+  <p>An uncompressed image stores every pixel as a fixed number of bits — typically 24 bits (8 bits per colour channel for red, green, and blue). A 1920×1080 photograph at 24 bits per pixel contains roughly 6.2 million pixels, which works out to approximately 186 million bits, or about 22 MB. That's the raw, uncompressed data that lives in memory when an image is open on your screen.</p>
+  <p>Image compression is the process of reducing that 22 MB down to something practical for storage and transmission — typically 200 KB to 2 MB for a web photograph — by encoding the pixel data more cleverly. There are two fundamentally different approaches: <strong>lossy compression</strong>, which achieves smaller sizes by permanently discarding some image data, and <strong>lossless compression</strong>, which reduces file size without discarding any information at all.</p>
+  <p>Understanding the difference between these two approaches — and knowing which formats use which — is the foundation of making good decisions about image quality and file size for any project.</p>
+
+  <h2>Lossy compression explained</h2>
+  <p>Lossy compression works by exploiting weaknesses and biases in human visual perception. The idea is that the eye and brain do not perceive all visual information equally — we are far more sensitive to <strong>changes in brightness</strong> than to changes in colour, we are more sensitive to broad gradients than to fine high-frequency detail, and we are better at detecting changes in large uniform areas than at detecting subtle texture variations in complex scenes.</p>
+  <p>JPG — the most widely used lossy format — uses a technique called DCT (Discrete Cosine Transform). The image is divided into 8×8 pixel blocks. Each block is transformed from pixel values into a mathematical representation of its frequency content — essentially, how much the block contains of large-scale gradients versus fine detail. High-frequency components (fine detail) are then quantised more aggressively than low-frequency components (broad gradients), because the human eye is less sensitive to high-frequency variations. The quality setting controls how aggressively this quantisation is applied.</p>
+  <p>Here is what a 5 MB RAW photograph becomes at various JPG quality settings:</p>
+  <ul>
+    <li><strong>Quality 100 (maximum):</strong> approximately 5 MB — nearly the full data, minimal compression</li>
+    <li><strong>Quality 90:</strong> approximately 1.8 MB — excellent quality, barely distinguishable from 100</li>
+    <li><strong>Quality 85:</strong> approximately 1.2 MB — recommended for high-quality web use</li>
+    <li><strong>Quality 75:</strong> approximately 600 KB — very good quality, minor artefacts only visible at 100% zoom</li>
+    <li><strong>Quality 60:</strong> approximately 300 KB — noticeable artefacts, especially on smooth gradients and edges</li>
+    <li><strong>Quality 50:</strong> approximately 150–200 KB — visible blocking, smearing, and colour banding</li>
+  </ul>
+  <p>The key characteristic of lossy compression is that it is <strong>irreversible</strong>. Once you save a JPG at quality 80, the data that was discarded is gone forever. If you later save that same file again at quality 80, you're compressing an already-degraded image — the quality loss compounds, and the result is worse than the original quality-80 save. This is why you should always keep the original high-quality source file and only export the compressed version for use.</p>
+
+  <h2>Lossless compression explained</h2>
+  <p>Lossless compression reduces file size without discarding any image data whatsoever. The output is mathematically identical to the input — decode a losslessly compressed image a thousand times, and you get the exact same pixel values every single time. There are no artefacts, no quality degradation, no trade-offs in visual fidelity.</p>
+  <p>Lossless algorithms work by finding and exploiting redundancies in the data itself. Several techniques are commonly used:</p>
+  <ul>
+    <li><strong>Run-length encoding (RLE):</strong> Replaces repeated sequences with a count and a single value. A row of 500 white pixels becomes "500 × white" rather than 500 separate values — a huge saving for simple graphics.</li>
+    <li><strong>LZW (Lempel–Ziv–Welch):</strong> Builds a dictionary of repeated data patterns and replaces them with shorter codes. Used in GIF and TIFF.</li>
+    <li><strong>DEFLATE:</strong> Combines LZ77 compression with Huffman coding. Used in PNG and ZIP files. Extremely efficient for images with large areas of identical or similar colour.</li>
+    <li><strong>Prediction coding:</strong> Predicts each pixel's value based on neighbouring pixels, then encodes only the difference (the "residual"). Used in PNG and lossless WebP.</li>
+  </ul>
+  <p>The trade-off is that lossless compression has a ceiling. Natural photographs contain enormous amounts of apparent randomness — variations in colour, texture, and detail at every scale — that don't compress well under lossless algorithms. A photographic PNG is often 3–5× larger than the equivalent quality-85 JPG. This is why PNG is not the right choice for photographs on the web, and why JPG exists at all.</p>
+  <p>Lossless compression is ideal for images that <em>do</em> have large areas of identical or predictable data: logos, icons, illustrations, screenshots, UI mockups, and images containing text. These compress extremely well losslessly and would look terrible with lossy compression because the sharp edges and flat colours are exactly the features JPG's 8×8 block structure handles worst.</p>
+
+  <div class="tip-box">
+    <p><strong>Simple rule:</strong> Photographs → lossy (JPG or WebP lossy). Graphics, logos, screenshots, text → lossless (PNG or WebP lossless). When in doubt: if an image came from a camera, use lossy. If it came from a design tool, use lossless.</p>
+  </div>
+
+  <h2>Which formats use which type?</h2>
+  <p>Different image formats are tied to specific compression approaches — some support only one type, others offer both:</p>
+  <div style="overflow-x:auto;margin:16px 0 24px;">
+    <table class="format-table">
+      <thead>
+        <tr>
+          <th>Format</th>
+          <th>Compression type</th>
+          <th>Transparency</th>
+          <th>Best for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>JPG / JPEG</td>
+          <td><span class="tag-lossy">Lossy only</span></td>
+          <td>No</td>
+          <td>Photographs, complex images</td>
+        </tr>
+        <tr>
+          <td>PNG</td>
+          <td><span class="tag-lossless">Lossless only</span></td>
+          <td>Yes (8-bit alpha)</td>
+          <td>Graphics, logos, screenshots, transparency</td>
+        </tr>
+        <tr>
+          <td>WebP</td>
+          <td><span class="tag-both">Both modes</span></td>
+          <td>Yes (8-bit alpha)</td>
+          <td>All web images — replaces both JPG and PNG</td>
+        </tr>
+        <tr>
+          <td>AVIF</td>
+          <td><span class="tag-both">Both modes</span></td>
+          <td>Yes (full alpha)</td>
+          <td>Modern web images, HDR content, fine photography</td>
+        </tr>
+        <tr>
+          <td>GIF</td>
+          <td><span class="tag-lossless">Lossless</span></td>
+          <td>Yes (1-bit, binary)</td>
+          <td>Simple animations only (256 colour limit)</td>
+        </tr>
+        <tr>
+          <td>HEIC / HEIF</td>
+          <td><span class="tag-both">Both modes</span></td>
+          <td>Yes</td>
+          <td>iOS photography; limited web support</td>
+        </tr>
+        <tr>
+          <td>SVG</td>
+          <td>Vector (no raster compression)</td>
+          <td>Yes</td>
+          <td>Icons, logos, illustrations — infinitely scalable</td>
+        </tr>
+        <tr>
+          <td>RAW (CR3, NEF, ARW…)</td>
+          <td>Effectively lossless</td>
+          <td>N/A</td>
+          <td>Camera source files; not for web delivery</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The rise of WebP and AVIF as dual-mode formats is significant: they eliminate the historical trade-off between "lossy for photos" and "lossless for graphics." A single format can now handle both cases with better compression than the legacy formats it replaces, which simplifies image pipelines considerably.</p>
+
+  <h2>The quality setting in JPG compression</h2>
+  <p>Most image editors and compression tools expose a quality slider for JPG and WebP, typically on a scale of 1–100 (or sometimes 0–100). This number controls how aggressively the DCT coefficients are quantised — essentially, how much fine detail is discarded in the name of a smaller file.</p>
+  <p>The relationship between quality setting and file size is not linear. Moving from quality 100 to quality 90 can cut file size in half with almost no visible impact. Moving from quality 70 to quality 60 produces a much smaller incremental size saving but may introduce clearly visible artefacts. The relationship is roughly logarithmic: each step down the quality scale produces diminishing returns in file size savings but accelerating quality damage.</p>
+  <p>A practical breakdown for web use:</p>
+  <ul>
+    <li><strong>Quality 90–95:</strong> Near-lossless appearance. Still substantially smaller than quality 100. Use when image quality is paramount and file size is secondary — photography portfolios, print-quality proofs.</li>
+    <li><strong>Quality 80–85:</strong> The standard recommendation for web images. Files are 60–70% smaller than quality 100 with differences that are essentially imperceptible at normal display sizes on standard screens. This is the sweet spot for most use cases.</li>
+    <li><strong>Quality 70–79:</strong> Noticeably smaller files. Artefacts are visible on close inspection at 100% zoom but typically invisible at normal web display sizes. Acceptable for thumbnails, image previews, and low-priority background images.</li>
+    <li><strong>Quality 60–69:</strong> Aggressive compression. Blocking artefacts become visible at normal display sizes, especially on smooth colour gradients, skin tones, blue skies, and areas with high contrast edges. Generally avoid for anything the viewer is meant to engage with.</li>
+    <li><strong>Below quality 60:</strong> Heavy artefacts. Obvious 8×8 pixel blocking, colour smearing, and loss of fine detail. Only appropriate when file size is extremely constrained and quality is genuinely secondary — icon thumbnails, low-bandwidth previews for progressive loading.</li>
+  </ul>
+  <div class="tip-box">
+    <p><strong>Important:</strong> The quality number is not standardised across tools. Quality 80 in Photoshop does not produce the same output as quality 80 in GIMP, ImageMagick, or a browser canvas export. Always evaluate the actual output visually rather than relying solely on the quality number as a cross-tool comparison.</p>
+  </div>
+
+  <h2>Chroma subsampling — the hidden compression most people miss</h2>
+  <p>Beyond the quality slider, JPG (and some WebP and HEIC encodings) apply a second, largely hidden form of compression called chroma subsampling. This technique exploits a fundamental property of human vision: our eyes are much more sensitive to variations in brightness (luminance) than to variations in colour (chrominance).</p>
+  <p>JPG separates image data into one luminance channel (Y) and two colour channels (Cb and Cr). Chroma subsampling reduces the resolution of the colour channels independently of the luminance channel. Three subsampling ratios are commonly used:</p>
+  <ul>
+    <li><strong>4:4:4 (no subsampling):</strong> Full colour resolution is preserved. The colour channels are stored at the same resolution as the luminance channel. File sizes are largest, colour accuracy is highest. Used when colour fidelity is critical.</li>
+    <li><strong>4:2:2 (horizontal subsampling):</strong> Colour channels are stored at half the horizontal resolution. Barely visible in most images, but can affect images with fine horizontal colour transitions — for example, a red text character on a green background rendered at small sizes.</li>
+    <li><strong>4:2:0 (full subsampling):</strong> Colour channels are stored at half resolution in both horizontal and vertical directions — one quarter of full resolution. This is the default for most consumer JPEG encoders and many web compression tools. It produces the smallest files but can cause visible colour smearing around sharp colour transitions, fine red or blue details, and text with colour.</li>
+  </ul>
+  <p>For most photographs, 4:2:0 subsampling is completely invisible in practice. Where it matters is for images with text, logos, or sharp colour boundaries at small sizes. If you're compressing an image that contains coloured text or fine colour detail, switching to 4:4:4 or 4:2:2 subsampling will improve colour accuracy at the cost of a slightly larger file.</p>
+
+  <h2>Compression artefacts — what to look for</h2>
+  <p>Artefacts are the visual defects introduced by lossy compression. Knowing what to look for helps you calibrate your quality settings more confidently.</p>
+  <p><strong>JPG blocking:</strong> The most recognisable JPG artefact. Because JPG compresses in 8×8 pixel blocks, aggressive compression makes those block boundaries visible as a grid of subtle rectangles, particularly in smooth areas like blue skies, skin, and gradients. Increasing quality to 75+ typically eliminates visible blocking at normal screen sizes.</p>
+  <p><strong>Ringing (or "mosquito noise"):</strong> Appears as a bright or dark halo or fringe around sharp edges — most visible around text, logo outlines, and high-contrast transitions. Caused by the DCT transformation over-representing high-frequency edge content. Particularly problematic for screenshots containing text compressed as JPG rather than PNG.</p>
+  <p><strong>Colour banding:</strong> Appears in gradients as a stepped, posterised effect instead of a smooth transition. Can be caused by both lossy compression and by saving gradients with too few colours (common with GIF or low-colour PNG).</p>
+  <p><strong>Colour smearing:</strong> Caused primarily by 4:2:0 chroma subsampling — fine colour details bleed into surrounding areas, making sharp red, blue, or cyan details look softer or shifted.</p>
+  <p>WebP artefacts at similar quality settings tend to look softer and less blocky than JPG artefacts — more like blur than rectangular blocking. AVIF artefacts at heavy compression are even more natural-looking, degrading as smooth smearing rather than geometric patterns. This is part of why both newer formats are preferred over JPG at aggressive compression settings.</p>
+
+  <h2>Practical compression recommendations</h2>
+  <p>Cutting through the theory, here are the practical settings that work for the most common web image use cases in 2026:</p>
+  <ul>
+    <li><strong>Photographs for blog posts and articles:</strong> WebP at quality 80–85. Target under 150 KB per image. This gives excellent visual quality with substantial bandwidth savings.</li>
+    <li><strong>Hero images and banner photos:</strong> WebP at quality 80–85, resized to a maximum of 1920 px wide. Target under 300 KB. Apply lazy loading to hero images below the fold.</li>
+    <li><strong>Product images (e-commerce):</strong> WebP at quality 85–90. Slightly higher quality is worth the extra file size when the image is the primary decision factor for purchase. Consider AVIF with WebP fallback for further savings at the same quality.</li>
+    <li><strong>Thumbnails and card images:</strong> WebP at quality 75–80. These are displayed small, so slightly more aggressive compression is acceptable. Target under 50 KB.</li>
+    <li><strong>Logos, icons, illustrations with flat colour:</strong> PNG (lossless) or SVG. Never JPG. The blocking and ringing artefacts from lossy compression on flat-colour graphics are very obvious.</li>
+    <li><strong>Screenshots containing text:</strong> PNG. The lossless encoding preserves text sharpness. WebP lossless is a smaller alternative if PNG is too large.</li>
+    <li><strong>Backgrounds and decorative images:</strong> WebP at quality 70–75. These receive less visual scrutiny. Push compression harder here to save bandwidth.</li>
+  </ul>
+
+  <h2>How to compress images without visible quality loss</h2>
+  <p>Getting good compression results is as much about workflow as about settings. Here are the practices that produce consistently clean results:</p>
+  <ol class="steps-list">
+    <li><strong>Always start from the original source file.</strong> Never compress an already-compressed image if you can avoid it. Each lossy compression step compounds quality loss. If you have to re-export, start from the highest-quality version you have.</li>
+    <li><strong>Resize to display dimensions before compressing.</strong> Compressing a 4000 px image down to 200 KB is wasteful — you're encoding millions of pixels that will never be displayed. Resize to 1200–1400 px wide first, then compress. The file size difference is enormous.</li>
+    <li><strong>Convert to WebP for better results at any given file size.</strong> At quality 80, WebP consistently produces smaller files than JPG at equivalent or better quality. If you're currently exporting JPGs, switching to WebP alone often reduces file sizes by 30–35% with no quality change.</li>
+    <li><strong>Evaluate the output visually at 100% zoom.</strong> A quality number tells you the encoder setting, not the actual output quality, which varies by image content. Look at the output at full size before committing to a setting.</li>
+    <li><strong>Keep originals in a separate, uncompressed archive.</strong> Once you've set up a compression workflow, keep the full-resolution original files completely separate from your compressed web exports.</li>
+  </ol>
+
+  <h2>Compression and Core Web Vitals</h2>
+  <p>Image compression has a direct, measurable impact on Google's Core Web Vitals metrics, which are used as search ranking signals. The most affected metric is <strong>Largest Contentful Paint (LCP)</strong>, which measures how quickly the largest visible element on the page — usually a hero image or banner — loads and becomes visible to the user.</p>
+  <p>Google's threshold for a "good" LCP score is under 2.5 seconds. A 3 MB unoptimised JPG hero image on a typical mobile connection (averaging around 10–15 Mbps in practice) will take 1.5–3 seconds just for the image alone, without accounting for DNS, TLS handshake, HTML parsing, and CSS rendering. A properly compressed WebP version of the same image at 150–200 KB loads in under 0.15 seconds — a 10–20× difference.</p>
+  <p>Practical file size targets for Core Web Vitals:</p>
+  <ul>
+    <li><strong>Hero / LCP images:</strong> Target under 200 KB. This is the single highest-impact optimisation for most websites' LCP scores.</li>
+    <li><strong>Inline blog and article images:</strong> Target under 100 KB.</li>
+    <li><strong>Thumbnails and card images:</strong> Target under 50 KB.</li>
+    <li><strong>Icons and small UI imagery:</strong> Target under 20 KB; use SVG where possible.</li>
+  </ul>
+  <p>LCP is also affected by whether the browser discovers the image early. Ensure hero images are referenced directly in the HTML (not loaded via JavaScript or CSS background-image) and add a <code>&lt;link rel="preload"&gt;</code> tag in the document head to prompt the browser to start fetching the image as early as possible in the loading sequence.</p>
+
+  <div class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">What is the best image compression for websites?</div>
+      <div class="faq-a">WebP at quality 80–85 is the best all-round choice for most web images in 2026. It delivers 30–35% smaller files than equivalent-quality JPG, supports both lossy and lossless modes, handles transparency, and is supported by essentially all modern browsers. For the absolute best compression on a modern stack, use AVIF (with WebP as a fallback) — AVIF achieves another 15–20% reduction over WebP at comparable quality. For logos and screenshots, use PNG or lossless WebP rather than a lossy format.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Does compressing a JPG twice reduce quality?</div>
+      <div class="faq-a">Yes. Each lossy compression step permanently discards image data, and quality loss compounds across multiple saves. A JPG saved at quality 80, then re-opened and saved again at quality 80, will be noticeably worse than a single quality-80 save from the original. The damage accelerates with each re-save. This is why you should always keep your original source file untouched and only export compressed versions when needed — never treat a compressed file as a new "master" from which further exports will be made.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I compress a PNG without losing quality?</div>
+      <div class="faq-a">Yes, using lossless compression. PNG files can be re-compressed using more efficient encoders (like pngquant, oxipng, or zopflipng) that produce smaller files with identical pixel content. You can also safely convert a PNG to lossless WebP and get a smaller file with no quality change. However, if you convert a PNG to a lossy format like JPG or lossy WebP, you will introduce quality loss — so the answer depends entirely on which compression you apply. Lossless → no quality change. Lossy → permanent quality reduction.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What quality setting should I use for JPG?</div>
+      <div class="faq-a">Quality 80–85 is the standard recommendation for web use. At quality 85, file sizes are typically 60–70% smaller than quality 100, and the difference in image quality is essentially invisible at normal display sizes on any standard screen. For images that are the primary focus of a page — portfolio photography, product images — you might use quality 85–90. For thumbnails and secondary images, quality 75–80 is fine. Avoid going below quality 70 for anything the viewer is meant to closely examine, as blocking artefacts start becoming visible around curved lines and gradients.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Why are my compressed images blurry?</div>
+      <div class="faq-a">The most common causes are: compressing with too aggressive a quality setting (try quality 80–85 instead of lower settings); upscaling a small image before compressing (never scale up — always start from a large source and scale down); or using a tool that applies additional resampling during compression. Another common culprit is exporting at the wrong dimensions and letting the browser or platform scale the image up at display time. Always compress at or above the display size, never below. If you're seeing blocky 8×8 squares rather than blur, the quality setting is too low rather than a resize issue.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is WebP better compressed than JPG?</div>
+      <div class="faq-a">Yes. At the same quality setting, WebP typically produces files 25–35% smaller than JPG with equal or slightly better visual quality. WebP uses more modern compression algorithms (derived from the VP8 video codec) that handle complex image content more efficiently than JPG's Discrete Cosine Transform. Additionally, WebP supports both lossy and lossless modes in a single format, handles transparency natively, and supports animation — capabilities that required separate JPG and PNG files in older workflows. For new web projects, WebP is unambiguously the better choice over JPG.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How do I compress images in bulk?</div>
+      <div class="faq-a">InkTools' image compressor supports batch processing — drop multiple files and compress them all in one step, entirely in your browser with no uploads. For automated pipelines, command-line tools like cwebp (for WebP) and ImageMagick support batch conversion via shell scripts. Build tools like Vite, webpack, and Next.js have image optimisation plugins that automatically compress images during the build process, which is ideal for codebases where images are committed alongside code. For very large-scale batch jobs — thousands of images — consider a dedicated image processing service with queue support.</div>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <p>Compress your images for free — no upload, no account, runs entirely in your browser.</p>
+    <a href="/image-compressor/" class="cta-btn">Compress images free &#8594;</a>
+  </div>
+
+</div>
+
+<div class="ad-slot" style="margin-bottom:24px;">
+  <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7189936182708078" data-ad-slot="8603238385"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<footer class="site-footer">
+  <span class="footer-copy">&#169; 2026 InkTools &#8212; Free Online Image Utilities</span>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/privacy.html">Privacy</a>
+  </div>
+</footer>
+</body>
+</html>
